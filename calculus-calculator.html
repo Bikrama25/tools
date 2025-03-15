@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fully responsive scientific calculator with calculus functionality">
+    <meta name="keywords" content="scientific calculator, calculus, differentiation, integration, math tool">
+    <meta name="author" content="Your Name">
+    <title>Scientific Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-color: #f4f4f4;
+        }
+        .calculator {
+            width: 350px;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+        input, button {
+            width: 90%;
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .ad-space {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"></script>
+</head>
+<body>
+    <h2>Scientific Calculator</h2>
+    <div class="calculator">
+        <input type="text" id="expression" placeholder="Enter expression e.g., sin(30)">
+        <button onclick="calculate()">Calculate</button>
+        <p id="result"></p>
+
+        <h3>Definite Integration</h3>
+        <input type="text" id="integralExp" placeholder="Enter function e.g., x^2">
+        <input type="number" id="lowerLimit" placeholder="Lower limit">
+        <input type="number" id="upperLimit" placeholder="Upper limit">
+        <button onclick="calculateIntegral()">Integrate</button>
+        <p id="integralResult"></p>
+
+        <h3>Definite Differentiation</h3>
+        <input type="text" id="diffExp" placeholder="Enter function e.g., x^3">
+        <input type="number" id="diffPoint" placeholder="Point at which to differentiate">
+        <button onclick="calculateDerivative()">Differentiate</button>
+        <p id="derivativeResult"></p>
+    </div>
+    
+    <div class="ad-space">
+        <!-- Google AdSense Ad Unit -->
+        <p>Advertisement Space</p>
+    </div>
+
+    <script>
+        function calculate() {
+            try {
+                let expr = document.getElementById("expression").value;
+                let result = math.evaluate(expr);
+                document.getElementById("result").innerText = "Result: " + result;
+            } catch (e) {
+                document.getElementById("result").innerText = "Error: Invalid Expression";
+            }
+        }
+        
+        function calculateIntegral() {
+            try {
+                let expr = document.getElementById("integralExp").value;
+                let lower = parseFloat(document.getElementById("lowerLimit").value);
+                let upper = parseFloat(document.getElementById("upperLimit").value);
+                let compiled = math.compile(expr);
+                
+                let n = 1000; // Number of intervals
+                let h = (upper - lower) / n;
+                let sum = 0.5 * (compiled.evaluate({x: lower}) + compiled.evaluate({x: upper}));
+                
+                for (let i = 1; i < n; i++) {
+                    let x = lower + i * h;
+                    sum += compiled.evaluate({x: x});
+                }
+                
+                let result = sum * h;
+                document.getElementById("integralResult").innerText = "Integral: " + result.toFixed(5);
+            } catch (e) {
+                document.getElementById("integralResult").innerText = "Error: Invalid Input";
+            }
+        }
+        
+        function calculateDerivative() {
+            try {
+                let expr = document.getElementById("diffExp").value;
+                let point = parseFloat(document.getElementById("diffPoint").value);
+                let derivative = math.derivative(expr, 'x').evaluate({ x: point });
+                document.getElementById("derivativeResult").innerText = "Derivative: " + derivative.toFixed(5);
+            } catch (e) {
+                document.getElementById("derivativeResult").innerText = "Error: Invalid Input";
+            }
+        }
+    </script>
+</body>
+</html>
