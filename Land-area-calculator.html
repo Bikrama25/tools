@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Land area unit converter tool for various units like decimal, katha, acre, biga, square feet, and more.">
+    <meta name="keywords" content="land area, area unit converter, decimal, katha, acre, biga, square feet, cent, chhatak, square yard, square inch, square cm">
+    <meta name="author" content="Your Name">
+    <title>Land Area Unit Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #34495e;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .col {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .adsense {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ecf0f1;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #2c3e50;
+            color: #fff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Land Area Unit Converter</h1>
+        <p style="text-align:center; font-size: 18px; color: #7f8c8d;">Convert between various land area units like decimal, katha, acre, biga, square feet, cent, chhatak, and more.</p>
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="amount">Enter Value:</label>
+                    <input type="number" id="amount" placeholder="Enter area in any unit" oninput="convertUnits()">
+                </div>
+
+                <div class="form-group">
+                    <label for="fromUnit">From Unit:</label>
+                    <select id="fromUnit" onchange="convertUnits()">
+                        <option value="decimal">Decimal</option>
+                        <option value="katha">Katha</option>
+                        <option value="acre">Acre</option>
+                        <option value="biga">Biga</option>
+                        <option value="sqFeet">Square Feet</option>
+                        <option value="cent">Cent</option>
+                        <option value="chhatak">Chhatak</option>
+                        <option value="sqYard">Square Yard</option>
+                        <option value="sqInch">Square Inch</option>
+                        <option value="sqCm">Square Cm</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group">
+                    <label for="toUnit">To Unit:</label>
+                    <select id="toUnit" onchange="convertUnits()">
+                        <option value="decimal">Decimal</option>
+                        <option value="katha">Katha</option>
+                        <option value="acre">Acre</option>
+                        <option value="biga">Biga</option>
+                        <option value="sqFeet">Square Feet</option>
+                        <option value="cent">Cent</option>
+                        <option value="chhatak">Chhatak</option>
+                        <option value="sqYard">Square Yard</option>
+                        <option value="sqInch">Square Inch</option>
+                        <option value="sqCm">Square Cm</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="result">Converted Value:</label>
+                    <input type="text" id="result" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="adsense">
+            <p>Advertisements go here</p>
+            <!-- Google AdSense code (insert your AdSense unit ID here) -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <ins class="adsbygoogle"
+                 style="display:block; text-align:center;"
+                 data-ad-client="YOUR-AD-CLIENT-ID"
+                 data-ad-slot="YOUR-AD-SLOT-ID"
+                 data-ad-format="auto"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Land Area Converter | All rights reserved.</p>
+    </footer>
+
+    <script>
+        const conversionRates = {
+            decimal: 1,
+            katha: 0.04,
+            acre: 0.00404686,
+            biga: 0.0202343,
+            sqFeet: 435.6,
+            cent: 1,
+            chhatak: 72,
+            sqYard: 144,
+            sqInch: 6272.56,
+            sqCm: 4045.64
+        };
+
+        function convertUnits() {
+            let amount = parseFloat(document.getElementById("amount").value);
+            let fromUnit = document.getElementById("fromUnit").value;
+            let toUnit = document.getElementById("toUnit").value;
+
+            if (!amount || isNaN(amount)) {
+                document.getElementById("result").value = "Please enter a valid number.";
+                return;
+            }
+
+            let convertedValue = (amount * conversionRates[fromUnit]) / conversionRates[toUnit];
+            document.getElementById("result").value = convertedValue.toFixed(4);
+        }
+    </script>
+</body>
+</html>
