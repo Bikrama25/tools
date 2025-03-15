@@ -1,0 +1,17 @@
+Develop a fully responsive image and pdf compression tool in HTML with dynamic functionality.
+The tool should allow users to select the compression level and optimize images accordingly.
+Also, please make sure the website is SEO optimized for better visibility and performance.
+Include designated spaces for advertisements and integrate Google AdSense ad code.
+allowing easy insertion of the AdSense ad unit ID for monetization
+
+
+Combine all code
+
+Make the ui look good and responsive.
+
+Please add a file drag and drop option, too
+
+Create a homepage for my tools website. I will have lots of image and pdf tools. Please make the homepage responsive and the UI attractive.
+
+add hyperlink
+
