@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compressify - A free online tool to compress images and PDFs. Optimize your files for web use with ease.">
+  <meta name="keywords" content="image compression, PDF compression, file optimizer, compress images, compress PDF">
+  <meta name="author" content="Compressify">
+  <title>Compressify - Image and PDF Compression Tool</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4CAF50, #45a049);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Upload Section */
+    #upload-section {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    #upload-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #4CAF50;
+    }
+
+    .drag-drop-area {
+      border: 2px dashed #4CAF50;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      background: #f9f9f9;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .drag-drop-area.dragover {
+      background: #e0f7e0;
+      border-color: #45a049;
+    }
+
+    .drag-drop-area p {
+      margin: 0;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .drag-drop-area span {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+
+    input[type="file"], select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input[type="file"]:hover, select:hover, button:hover {
+      border-color: #4CAF50;
+    }
+
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+
+    /* Ad Unit */
+    #ad-unit {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    /* Output Section */
+    #output-section {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    #output-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #4CAF50;
+    }
+
+    #output-container img, #output-container embed {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #download-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    #download-link:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      main {
+        padding: 10px;
+      }
+
+      #upload-section, #output-section {
+        padding: 15px;
+      }
+
+      #upload-section h2, #output-section h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_CLIENT_ID" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>Compressify</h1>
+    <p>Optimize your images and PDFs for faster web performance.</p>
+  </header>
+
+  <main>
+    <!-- File Upload Section -->
+    <section id="upload-section">
+      <h2>Upload Your File</h2>
+      <div class="drag-drop-area" id="drag-drop-area">
+        <p>Drag and drop your file here or <span>click to upload</span>.</p>
+      </div>
+      <input type="file" id="file-input" accept="image/*, application/pdf" style="display: none;">
+      <label for="compression-level">Compression Level:</label>
+      <select id="compression-level">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+      <button id="compress-btn">Compress File</button>
+    </section>
+
+    <!-- Ad Unit -->
+    <section id="ad-unit">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="YOUR_ADSENSE_CLIENT_ID"
+           data-ad-slot="YOUR_AD_UNIT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </section>
+
+    <!-- Output Section -->
+    <section id="output-section">
+      <h2>Compressed File</h2>
+      <div id="output-container"></div>
+      <a id="download-link" style="display:none;">Download Compressed File</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Compressify. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript for Drag-and-Drop and Compression Functionality
+    const dragDropArea = document.getElementById('drag-drop-area');
+    const fileInput = document.getElementById('file-input');
+    const compressBtn = document.getElementById('compress-btn');
+    const outputContainer = document.getElementById('output-container');
+    const downloadLink = document.getElementById('download-link');
+
+    // Drag-and-Drop Functionality
+    dragDropArea.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      handleFile(file);
+    });
+
+    dragDropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dragDropArea.classList.add('dragover');
+    });
+
+    dragDropArea.addEventListener('dragleave', () => {
+      dragDropArea.classList.remove('dragover');
+    });
+
+    dragDropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dragDropArea.classList.remove('dragover');
+      const file = e.dataTransfer.files[0];
+      handleFile(file);
+    });
+
+    // Handle File Upload
+    function handleFile(file) {
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const fileData = event.target.result;
+          outputContainer.innerHTML = `<p>File ready for compression: <strong>${file.name}</strong></p>`;
+          compressBtn.disabled = false;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Compression Functionality
+    compressBtn.addEventListener('click', () => {
+      const file = fileInput.files[0];
+      const compressionLevel = document.getElementById('compression-level').value;
+
+      if (!file) {
+        alert('Please select a file to compress.');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const fileData = event.target.result;
+
+        // Simulate compression (replace with actual compression logic)
+        const compressedFile = simulateCompression(fileData, compressionLevel);
+
+        // Display compressed file
+        if (file.type.startsWith('image')) {
+          outputContainer.innerHTML = `<img src="${compressedFile}" alt="Compressed Image" style="max-width:100%;">`;
+        } else if (file.type === 'application/pdf') {
+          outputContainer.innerHTML = `<embed src="${compressedFile}" type="application/pdf" width="100%" height="600px">`;
+        }
+
+        // Enable download link
+        downloadLink.href = compressedFile;
+        downloadLink.download = `compressed_${file.name}`;
+        downloadLink.style.display = 'inline-block';
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function simulateCompression(fileData, level) {
+      // Simulate compression by reducing quality (replace with actual logic)
+      if (level === 'low') {
+        return fileData; // No compression
+      } else if (level === 'medium') {
+        return fileData; // Medium compression
+      } else if (level === 'high') {
+        return fileData; // High compression
+      }
+    }
+  </script>
+</body>
+</html>
