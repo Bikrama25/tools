@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Convert images to different formats like JPG, PNG, GIF, and more with our online Image Converter Tool. Optimize your images for better performance and sharing.">
+  <meta name="keywords" content="image converter, convert images, JPG to PNG, PNG to JPG, online tools">
+  <meta name="author" content="Image Converter Tool">
+  <title>Image Converter Tool - Convert Images Online</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #4CAF50, #45a049);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Main Content */
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Drag-and-Drop Area */
+    .drag-drop-area {
+      border: 2px dashed #4CAF50;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      background: #f9f9f9;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .drag-drop-area.dragover {
+      background: #e0f7e0;
+      border-color: #45a049;
+    }
+
+    .drag-drop-area p {
+      margin: 0;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    .drag-drop-area span {
+      color: #4CAF50;
+      font-weight: bold;
+    }
+
+    /* File Input */
+    input[type="file"] {
+      display: none;
+    }
+
+    /* Output Format Selection */
+    #output-format {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    #output-format:hover {
+      border-color: #4CAF50;
+    }
+
+    /* Convert Button */
+    #convert-btn {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #convert-btn:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+
+    /* Output Section */
+    #output-section {
+      margin-top: 20px;
+    }
+
+    #output-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #4CAF50;
+    }
+
+    #output-container {
+      text-align: center;
+    }
+
+    #output-container img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border-radius: 5px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    #download-link {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    #download-link:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+
+    /* Ad Unit */
+    #ad-unit {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .drag-drop-area p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_CLIENT_ID" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Image Converter Tool</h1>
+    <p>Convert images to different formats like JPG, PNG, GIF, and more.</p>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Drag-and-Drop Area -->
+    <div class="drag-drop-area" id="drag-drop-area">
+      <p>Drag and drop your image here or <span>click to upload</span>.</p>
+    </div>
+    <input type="file" id="file-input" accept="image/*" style="display: none;">
+
+    <!-- Output Format Selection -->
+    <label for="output-format">Output Format:</label>
+    <select id="output-format">
+      <option value="jpg">JPG</option>
+      <option value="png">PNG</option>
+      <option value="gif">GIF</option>
+      <option value="webp">WebP</option>
+    </select>
+
+    <!-- Convert Button -->
+    <button id="convert-btn">Convert Image</button>
+
+    <!-- Ad Unit -->
+    <div id="ad-unit">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="YOUR_ADSENSE_CLIENT_ID"
+           data-ad-slot="YOUR_AD_UNIT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Output Section -->
+    <section id="output-section">
+      <h2>Converted Image</h2>
+      <div id="output-container"></div>
+      <a id="download-link" style="display: none;">Download Converted Image</a>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Image Converter Tool. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript for Drag-and-Drop and Conversion Functionality
+    const dragDropArea = document.getElementById('drag-drop-area');
+    const fileInput = document.getElementById('file-input');
+    const convertBtn = document.getElementById('convert-btn');
+    const outputContainer = document.getElementById('output-container');
+    const downloadLink = document.getElementById('download-link');
+
+    let file = null;
+
+    // Drag-and-Drop Functionality
+    dragDropArea.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', (e) => {
+      file = e.target.files[0];
+      updateDragDropArea();
+    });
+
+    dragDropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dragDropArea.classList.add('dragover');
+    });
+
+    dragDropArea.addEventListener('dragleave', () => {
+      dragDropArea.classList.remove('dragover');
+    });
+
+    dragDropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dragDropArea.classList.remove('dragover');
+      file = e.dataTransfer.files[0];
+      updateDragDropArea();
+    });
+
+    // Update Drag-and-Drop Area
+    function updateDragDropArea() {
+      if (file) {
+        dragDropArea.innerHTML = `<p>File selected: <strong>${file.name}</strong>. <span>Click to change</span>.</p>`;
+      } else {
+        dragDropArea.innerHTML = `<p>Drag and drop your image here or <span>click to upload</span>.</p>`;
+      }
+    }
+
+    // Convert Image
+    convertBtn.addEventListener('click', () => {
+      if (!file) {
+        alert('Please select an image to convert.');
+        return;
+      }
+
+      const outputFormat = document.getElementById('output-format').value;
+
+      // Simulate conversion (replace with actual conversion logic)
+      const convertedImage = simulateConversion(file, outputFormat);
+
+      // Display converted image
+      outputContainer.innerHTML = `<img src="${convertedImage.url}" alt="Converted Image" style="max-width:100%;">`;
+
+      // Enable download link
+      downloadLink.href = convertedImage.url;
+      downloadLink.download = `converted_image.${outputFormat}`;
+      downloadLink.style.display = 'inline-block';
+    });
+
+    // Simulate Conversion (Replace with Actual Logic)
+    function simulateConversion(file, format) {
+      // Simulate conversion by creating a new Blob (replace with actual logic)
+      const convertedImage = {
+        url: URL.createObjectURL(new Blob([file], { type: `image/${format}` })),
+        type: `image/${format}`,
+      };
+      return convertedImage;
+    }
+  </script>
+</body>
+</html>
