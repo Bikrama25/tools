@@ -1,232 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Land area unit converter tool for various units like Square Meter, Square Feet, Acre, Hectare, Katha, Bigha, Chatak and more.">
-    <meta name="keywords" content="land area, area unit converter, square meter, square feet, acre, hectare, biga, katha, chatak, square mile, square yard">
-    <meta name="author" content="Your Name">
-    <title>Land Area Unit Converter</title>
-    <style>
-        /* General reset and body styling */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Convert land area units for West Bengal, India with our online Land Area Unit Converter Tool. Easily convert between Hectare, Acre, Bigha, Katha, Gunta, Decimal (Shatak), Cent, Chatak, Square Mile, Square Yard, Square Feet, Square Inch, Square Meter, and Square Centimeter.">
+  <meta name="keywords" content="land area converter, unit converter, hectare, acre, bigha, katha, gunta, decimal, cent, chatak, square mile, square yard, square feet, square inch, square meter, square centimeter, West Bengal, India, online tools">
+  <meta name="author" content="Land Area Unit Converter Tool">
+  <title>Land Area Unit Converter Tool - Convert Land Area Units for West Bengal, India</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 30px auto;
-            background-color: #fff;
-            padding: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
 
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #4CAF50, #45a049);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        label {
-            font-size: 16px;
-            font-weight: bold;
-            color: #34495e;
-            margin-bottom: 5px;
-            display: block;
-        }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
 
-        input[type="number"], select {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-sizing: border-box;
-        }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
 
-        .btn {
-            background-color: #2980b9;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
+    /* Main Content */
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
-        .btn:hover {
-            background-color: #3498db;
-        }
+    /* Converter Form */
+    .converter-form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        .row {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
+    .converter-form label {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 5px;
+      color: #666;
+    }
 
-        .col {
-            flex: 1;
-            min-width: 270px;
-        }
+    .converter-form input,
+    .converter-form select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
 
-        .adsense {
-            text-align: center;
-            margin-top: 30px;
-            padding: 10px;
-            background-color: #ecf0f1;
-            border-radius: 8px;
-        }
+    .converter-form input:hover,
+    .converter-form select:hover {
+      border-color: #4CAF50;
+    }
 
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            padding: 15px;
-            background-color: #34495e;
-            color: white;
-            font-size: 14px;
-        }
+    .converter-form button {
+      width: 100%;
+      padding: 12px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-            }
-        }
-    </style>
+    .converter-form button:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+
+    /* Result Section */
+    #result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      color: #4CAF50;
+    }
+
+    /* Ad Unit */
+    #ad-unit {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .converter-form input,
+      .converter-form select {
+        font-size: 0.9rem;
+      }
+
+      #result {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=YOUR_ADSENSE_CLIENT_ID" crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- Header -->
+  <header>
+    <h1>Land Area Unit Converter Tool</h1>
+    <p>Convert land area units for West Bengal, India with ease.</p>
+  </header>
 
-    <div class="container">
-        <h1>Land Area Unit Converter</h1>
-        <p style="text-align:center; font-size: 18px; color: #7f8c8d;">Convert between various land area units like Square Meter, Square Feet, Acre, Hectare, Katha, Bigha, Chatak, and more.</p>
+  <!-- Main Content -->
+  <main>
+    <!-- Converter Form -->
+    <form class="converter-form" id="converter-form">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" placeholder="Enter amount" required>
 
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="amount">Enter Value:</label>
-                    <input type="number" id="amount" placeholder="Enter area value" oninput="convertUnits()">
-                </div>
+      <label for="from-unit">From Unit:</label>
+      <select id="from-unit" required>
+        <option value="hectare">Hectare</option>
+        <option value="acre">Acre</option>
+        <option value="bighaWB">Bigha (West Bengal)</option>
+        <option value="kathaWB">Katha (West Bengal)</option>
+        <option value="gunta">Gunta</option>
+        <option value="decimal">Decimal (Shatak)</option>
+        <option value="cent">Cent</option>
+        <option value="chatak">Chatak</option>
+        <option value="squareMile">Square Mile</option>
+        <option value="squareYard">Square Yard</option>
+        <option value="squareFeet">Square Feet</option>
+        <option value="squareInch">Square Inch</option>
+        <option value="squareMeter">Square Meter</option>
+        <option value="squareCentimeter">Square Centimeter</option>
+      </select>
 
-                <div class="form-group">
-                    <label for="fromUnit">From Unit:</label>
-                    <select id="fromUnit" onchange="convertUnits()">
-                        <option value="sqMeter">Square Meter</option>
-                        <option value="sqFeet">Square Feet</option>
-                        <option value="acre">Acre</option>
-                        <option value="hectare">Hectare</option>
-                        <option value="bigha">Bigha</option>
-                        <option value="kathaWB">Katha (WB)</option>
-                        <option value="decimal">Decimal</option>
-                        <option value="cent">Cent</option>
-                        <option value="chhatak">Chatak</option>
-                        <option value="sqYard">Square Yard</option>
-                        <option value="sqInch">Square Inch</option>
-                        <option value="sqCm">Square Centimeter</option>
-                        <option value="sqMile">Square Mile</option>
-                    </select>
-                </div>
-            </div>
+      <label for="to-unit">To Unit:</label>
+      <select id="to-unit" required>
+        <option value="hectare">Hectare</option>
+        <option value="acre">Acre</option>
+        <option value="bighaWB">Bigha (West Bengal)</option>
+        <option value="kathaWB">Katha (West Bengal)</option>
+        <option value="gunta">Gunta</option>
+        <option value="decimal">Decimal (Shatak)</option>
+        <option value="cent">Cent</option>
+        <option value="chatak">Chatak</option>
+        <option value="squareMile">Square Mile</option>
+        <option value="squareYard">Square Yard</option>
+        <option value="squareFeet">Square Feet</option>
+        <option value="squareInch">Square Inch</option>
+        <option value="squareMeter">Square Meter</option>
+        <option value="squareCentimeter">Square Centimeter</option>
+      </select>
 
-            <div class="col">
-                <div class="form-group">
-                    <label for="toUnit">To Unit:</label>
-                    <select id="toUnit" onchange="convertUnits()">
-                        <option value="sqMeter">Square Meter</option>
-                        <option value="sqFeet">Square Feet</option>
-                        <option value="acre">Acre</option>
-                        <option value="hectare">Hectare</option>
-                        <option value="bigha">Bigha</option>
-                        <option value="kathaWB">Katha (WB)</option>
-                        <option value="decimal">Decimal</option>
-                        <option value="cent">Cent</option>
-                        <option value="chhatak">Chatak</option>
-                        <option value="sqYard">Square Yard</option>
-                        <option value="sqInch">Square Inch</option>
-                        <option value="sqCm">Square Centimeter</option>
-                        <option value="sqMile">Square Mile</option>
-                    </select>
-                </div>
+      <button type="submit">Convert</button>
+    </form>
 
-                <div class="form-group">
-                    <label for="result">Converted Value:</label>
-                    <input type="text" id="result" disabled>
-                </div>
+    <!-- Result Section -->
+    <div id="result"></div>
 
-                <button class="btn" onclick="convertUnits()">Convert</button>
-            </div>
-        </div>
-
-        <div class="adsense">
-            <p>Advertisements go here</p>
-            <!-- Google AdSense code (insert your AdSense unit ID here) -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <ins class="adsbygoogle"
-                 style="display:block; text-align:center;"
-                 data-ad-client="YOUR-AD-CLIENT-ID"
-                 data-ad-slot="YOUR-AD-SLOT-ID"
-                 data-ad-format="auto"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
+    <!-- Ad Unit -->
+    <div id="ad-unit">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="YOUR_ADSENSE_CLIENT_ID"
+           data-ad-slot="YOUR_AD_UNIT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
+  </main>
 
-    <footer>
-        <p>&copy; 2025 Land Area Converter | All rights reserved.</p>
-    </footer>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 Land Area Unit Converter Tool. All rights reserved.</p>
+  </footer>
 
-    <script>
-        const conversionRates = {
-            sqMeter: 1,
-            sqFeet: 10.7639,
-            acre: 0.000247105,
-            hectare: 0.0001,
-            bigha: 0.0049,
-            kathaWB: 720,
-            decimal: 1,
-            cent: 1,
-            chhatak: 0.103315319,
-            sqYard: 1.19599,
-            sqInch: 1550.0031,
-            sqCm: 10000,
-            sqMile: 3.861e-7
-        };
+  <script>
+    // JavaScript for Land Area Conversion
+    const converterForm = document.getElementById('converter-form');
+    const resultDiv = document.getElementById('result');
 
-        function convertUnits() {
-            let amount = parseFloat(document.getElementById("amount").value);
-            let fromUnit = document.getElementById("fromUnit").value;
-            let toUnit = document.getElementById("toUnit").value;
+    // Conversion Factors (based on Square Meter)
+    const conversionFactors = {
+      hectare: 10000, // 1 Hectare = 10,000 Square Meters
+      acre: 4046.86, // 1 Acre = 4046.86 Square Meters
+      bighaWB: 1337.8, // 1 Bigha (West Bengal) = 1337.8 Square Meters
+      kathaWB: 66.89, // 1 Katha (West Bengal) = 66.89 Square Meters
+      gunta: 101.17, // 1 Gunta = 101.17 Square Meters
+      decimal: 40.4686, // 1 Decimal (Shatak) = 40.4686 Square Meters
+      cent: 40.4686, // 1 Cent = 40.4686 Square Meters
+      chatak: 4.18064, // 1 Chatak = 4.18064 Square Meters
+      squareMile: 2589988.11, // 1 Square Mile = 2,589,988.11 Square Meters
+      squareYard: 0.836127, // 1 Square Yard = 0.836127 Square Meters
+      squareFeet: 0.092903, // 1 Square Feet = 0.092903 Square Meters
+      squareInch: 0.00064516, // 1 Square Inch = 0.00064516 Square Meters
+      squareMeter: 1, // Base unit
+      squareCentimeter: 0.0001, // 1 Square Centimeter = 0.0001 Square Meters
+    };
 
-            if (!amount || isNaN(amount)) {
-                document.getElementById("result").value = "Please enter a valid number.";
-                return;
-            }
+    // Handle Form Submission
+    converterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-            // Specific handling for Katha (WB) to Square Feet conversion (1 Katha WB = 720 Square Feet)
-            if (fromUnit === "kathaWB") amount = amount * conversionRates.sqFeet;
-            if (toUnit === "kathaWB") amount = amount / conversionRates.sqFeet;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const fromUnit = document.getElementById('from-unit').value;
+      const toUnit = document.getElementById('to-unit').value;
 
-            // Specific handling for Bigha (WB) to Katha (WB) conversion (1 Bigha WB = 20 Katha WB)
-            if (fromUnit === "bigha") amount = amount * 20;
-            if (toUnit === "bigha") amount = amount / 20;
+      if (isNaN(amount)) {
+        alert('Please enter a valid amount.');
+        return;
+      }
 
-            let convertedValue = (amount * conversionRates[fromUnit]) / conversionRates[toUnit];
-            document.getElementById("result").value = convertedValue.toFixed(4);
-        }
-    </script>
+      // Perform Conversion
+      const convertedAmount = convertLandArea(amount, fromUnit, toUnit);
 
+      // Display Result
+      resultDiv.innerHTML = `${amount} ${fromUnit} = ${convertedAmount.toFixed(4)} ${toUnit}`;
+    });
+
+    // Convert Land Area
+    function convertLandArea(amount, fromUnit, toUnit) {
+      // Convert to square meters first
+      const amountInSquareMeters = amount * conversionFactors[fromUnit];
+
+      // Convert to the target unit
+      return amountInSquareMeters / conversionFactors[toUnit];
+    }
+  </script>
 </body>
 </html>
