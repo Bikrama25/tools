@@ -2,7 +2,7 @@ Develop a fully responsive image and pdf compression tool in HTML with dynamic f
 The tool should allow users to select the compression level and optimize images accordingly.
 Also, please make sure the website is SEO optimized for better visibility and performance.
 Include designated spaces for advertisements and integrate Google AdSense ad code.
-allowing easy insertion of the AdSense ad unit ID for monetization
+allowing easy insertion of the AdSense ad unit ID for monetization -- DeepSeek
 
 
 Combine all code
@@ -14,4 +14,13 @@ Please add a file drag and drop option, too
 Create a homepage for my tools website. I will have lots of image and pdf tools. Please make the homepage responsive and the UI attractive.
 
 add hyperlink
+
+Develop a fully responsive image converter tool in HTML with dynamic functionality. The tool should allow users to select the types of files and optimize the image accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. Please add a file drag-and-drop option, too. -- DeepSeek
+
+Develop a currency converter tool in HTML with dynamic functionality. The tool should allow users to enter values and 20+ types of currency accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. Please add a file drag and drop option, too -- ChatGPT
+
+Develop a fully responsive scientific calculator tool in HTML with dynamic functionality. The tool should allow users to use calculus of definite differentiations and definite integrations (using numerical integration - trapezoidal rule, etc) and optimize answers accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. -- ChatGPT
+
+Develop a fully responsive land area unit converter tool for west bengal, india ( include Hectare, Acre, Bigha, Katha, Gunta, Decimal(Shatak), Cent, Chatak, Square Mile, Square Yard, Square Feet, Square Inch, Square Meter, Square Centimeter etc, additionally include  1 decimal (satak) = 436 sft., 1 katha_WB = 720 Square feet, 1 bigha_WB = 20 katha_WB = 33 decimals, 1 acre = 100 decimals ) in HTML with dynamic functionality.  The tool should allow users to select different units and optimize answers accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. --Deepseek
+
 
