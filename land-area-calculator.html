@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Land area unit converter tool for various units like decimal, katha, acre, biga, square feet, and more.">
-    <meta name="keywords" content="land area, area unit converter, decimal, katha, acre, biga, square feet, cent, chhatak, square yard, square inch, square cm">
+    <meta name="description" content="Land area unit converter tool for various units like square meter, square feet, acre, hectare, biga, katha, chatak, and more.">
+    <meta name="keywords" content="land area, area unit converter, square meter, square feet, acre, hectare, biga, katha, chatak, square mile, square yard">
     <meta name="author" content="Your Name">
     <title>Land Area Unit Converter</title>
     <style>
@@ -110,7 +110,7 @@
 
     <div class="container">
         <h1>Land Area Unit Converter</h1>
-        <p style="text-align:center; font-size: 18px; color: #7f8c8d;">Convert between various land area units like decimal, katha, acre, biga, square feet, cent, chhatak, and more.</p>
+        <p style="text-align:center; font-size: 18px; color: #7f8c8d;">Convert between various land area units like square meter, square feet, acre, hectare, biga, katha, chatak, and more.</p>
 
         <div class="row">
             <div class="col">
@@ -122,16 +122,19 @@
                 <div class="form-group">
                     <label for="fromUnit">From Unit:</label>
                     <select id="fromUnit" onchange="convertUnits()">
-                        <option value="decimal">Decimal</option>
-                        <option value="katha">Katha</option>
-                        <option value="acre">Acre</option>
-                        <option value="biga">Biga</option>
+                        <option value="sqMeter">Square Meter</option>
                         <option value="sqFeet">Square Feet</option>
+                        <option value="acre">Acre</option>
+                        <option value="hectare">Hectare</option>
+                        <option value="biga">Biga</option>
+                        <option value="katha">Katha</option>
+                        <option value="decimal">Decimal</option>
                         <option value="cent">Cent</option>
                         <option value="chhatak">Chhatak</option>
                         <option value="sqYard">Square Yard</option>
                         <option value="sqInch">Square Inch</option>
                         <option value="sqCm">Square Centimeter</option>
+                        <option value="sqMile">Square Mile</option>
                     </select>
                 </div>
             </div>
@@ -140,16 +143,19 @@
                 <div class="form-group">
                     <label for="toUnit">To Unit:</label>
                     <select id="toUnit" onchange="convertUnits()">
-                        <option value="decimal">Decimal</option>
-                        <option value="katha">Katha</option>
-                        <option value="acre">Acre</option>
-                        <option value="biga">Biga</option>
+                        <option value="sqMeter">Square Meter</option>
                         <option value="sqFeet">Square Feet</option>
+                        <option value="acre">Acre</option>
+                        <option value="hectare">Hectare</option>
+                        <option value="biga">Biga</option>
+                        <option value="katha">Katha</option>
+                        <option value="decimal">Decimal</option>
                         <option value="cent">Cent</option>
                         <option value="chhatak">Chhatak</option>
                         <option value="sqYard">Square Yard</option>
                         <option value="sqInch">Square Inch</option>
                         <option value="sqCm">Square Centimeter</option>
+                        <option value="sqMile">Square Mile</option>
                     </select>
                 </div>
 
@@ -184,16 +190,19 @@
 
     <script>
         const conversionRates = {
+            sqMeter: 1,
+            sqFeet: 10.7639,
+            acre: 0.000247105,
+            hectare: 0.0001,
+            biga: 0.0049,
+            katha: 720,
             decimal: 1,
-            katha: 0.04,
-            acre: 0.00404686,
-            biga: 0.0202343,
-            sqFeet: 435.6,
             cent: 1,
-            chhatak: 0.103315319,  // Updated Chhatak conversion
-            sqYard: 144,
-            sqInch: 6272.56,
-            sqCm: 0.0001
+            chhatak: 0.103315319,
+            sqYard: 1.19599,
+            sqInch: 1550.0031,
+            sqCm: 10000,
+            sqMile: 3.861e-7
         };
 
         function convertUnits() {
