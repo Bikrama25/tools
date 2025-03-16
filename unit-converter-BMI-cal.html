@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free online unit converter and BMI calculator. Convert length, weight, and temperature units easily. Calculate your BMI instantly.">
+  <meta name="keywords" content="unit converter, BMI calculator, length converter, weight converter, temperature converter, online tools">
+  <meta name="author" content="Your Name">
+  <title>Unit Converter & BMI Calculator</title>
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_SENSE_ID" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+    }
+    .converter, .bmi-calculator, .size-chart, .bmi-range {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .converter h2, .bmi-calculator h2, .size-chart h2, .bmi-range h2 {
+      margin-top: 0;
+      color: #4CAF50;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .input-group input:focus, .input-group select:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+    .ads {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .ads ins {
+      display: block;
+      margin: 0 auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f4f4f9;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      .input-group input, .input-group select {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Unit Converter & BMI Calculator</h1>
+
+    <!-- Ad Unit -->
+    <div class="ads">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_SENSE_ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Unit Converter -->
+    <div class="converter">
+      <h2>Unit Converter</h2>
+      <div class="input-group">
+        <label for="value">Enter Value:</label>
+        <input type="number" id="value" placeholder="Enter value">
+      </div>
+      <div class="input-group">
+        <label for="fromUnit">From Unit:</label>
+        <select id="fromUnit">
+          <option value="meter">Meter</option>
+          <option value="kilometer">Kilometer</option>
+          <option value="centimeter">Centimeter</option>
+          <option value="millimeter">Millimeter</option>
+          <option value="inch">Inch</option>
+          <option value="foot">Foot</option>
+          <option value="yard">Yard</option>
+          <option value="mile">Mile</option>
+          <option value="gram">Gram</option>
+          <option value="kilogram">Kilogram</option>
+          <option value="milligram">Milligram</option>
+          <option value="pound">Pound</option>
+          <option value="ounce">Ounce</option>
+          <option value="celsius">Celsius</option>
+          <option value="fahrenheit">Fahrenheit</option>
+          <option value="kelvin">Kelvin</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="toUnit">To Unit:</label>
+        <select id="toUnit">
+          <option value="meter">Meter</option>
+          <option value="kilometer">Kilometer</option>
+          <option value="centimeter">Centimeter</option>
+          <option value="millimeter">Millimeter</option>
+          <option value="inch">Inch</option>
+          <option value="foot">Foot</option>
+          <option value="yard">Yard</option>
+          <option value="mile">Mile</option>
+          <option value="gram">Gram</option>
+          <option value="kilogram">Kilogram</option>
+          <option value="milligram">Milligram</option>
+          <option value="pound">Pound</option>
+          <option value="ounce">Ounce</option>
+          <option value="celsius">Celsius</option>
+          <option value="fahrenheit">Fahrenheit</option>
+          <option value="kelvin">Kelvin</option>
+        </select>
+      </div>
+      <button onclick="convertUnits()">Convert</button>
+      <div class="result" id="conversionResult"></div>
+    </div>
+
+    <!-- BMI Calculator -->
+    <div class="bmi-calculator">
+      <h2>BMI Calculator</h2>
+      <div class="input-group">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter weight in kg">
+      </div>
+      <div class="input-group">
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" placeholder="Enter height in cm">
+      </div>
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <div class="result" id="bmiResult"></div>
+    </div>
+
+    <!-- Dress Size Chart -->
+    <div class="size-chart">
+      <h2>Dress Length Size Chart</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Length (inches)</th>
+            <th>Length (cm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Small (S)</td>
+            <td>26-28</td>
+            <td>66-71</td>
+          </tr>
+          <tr>
+            <td>Medium (M)</td>
+            <td>28-30</td>
+            <td>71-76</td>
+          </tr>
+          <tr>
+            <td>Large (L)</td>
+            <td>30-32</td>
+            <td>76-81</td>
+          </tr>
+          <tr>
+            <td>Extra Large (XL)</td>
+            <td>32-34</td>
+            <td>81-86</td>
+          </tr>
+          <tr>
+            <td>XX Large (XXL)</td>
+            <td>34-36</td>
+            <td>86-91</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- BMI Range and Suggestions -->
+    <div class="bmi-range">
+      <h2>BMI Range and Suggestions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>BMI Range</th>
+            <th>Category</th>
+            <th>Suggestion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Below 18.5</td>
+            <td>Underweight</td>
+            <td>Eat more nutritious food and consult a doctor.</td>
+          </tr>
+          <tr>
+            <td>18.5 - 24.9</td>
+            <td>Healthy</td>
+            <td>Maintain your diet and exercise regularly.</td>
+          </tr>
+          <tr>
+            <td>25 - 29.9</td>
+            <td>Overweight</td>
+            <td>Focus on a balanced diet and increase physical activity.</td>
+          </tr>
+          <tr>
+            <td>30 and above</td>
+            <td>Obese</td>
+            <td>Consult a doctor and follow a weight-loss plan.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Ad Unit -->
+    <div class="ads">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_SENSE_ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <script>
+    // Unit Conversion Logic
+    const unitConversions = {
+      length: {
+        meter: 1,
+        kilometer: 0.001,
+        centimeter: 100,
+        millimeter: 1000,
+        inch: 39.3701,
+        foot: 3.28084,
+        yard: 1.09361,
+        mile: 0.000621371
+      },
+      weight: {
+        gram: 1,
+        kilogram: 0.001,
+        milligram: 1000,
+        pound: 0.00220462,
+        ounce: 0.035274
+      },
+      temperature: {
+        celsius: {
+          toCelsius: (val) => val,
+          toFahrenheit: (val) => (val * 9/5) + 32,
+          toKelvin: (val) => val + 273.15
+        },
+        fahrenheit: {
+          toCelsius: (val) => (val - 32) * 5/9,
+          toFahrenheit: (val) => val,
+          toKelvin: (val) => (val - 32) * 5/9 + 273.15
+        },
+        kelvin: {
+          toCelsius: (val) => val - 273.15,
+          toFahrenheit: (val) => (val - 273.15) * 9/5 + 32,
+          toKelvin: (val) => val
+        }
+      }
+    };
+
+    function convertUnits() {
+      const value = parseFloat(document.getElementById('value').value);
+      const fromUnit = document.getElementById('fromUnit').value;
+      const toUnit = document.getElementById('toUnit').value;
+
+      let result;
+      if (['celsius', 'fahrenheit', 'kelvin'].includes(fromUnit)) {
+        const tempConversion = unitConversions.temperature[fromUnit][`to${toUnit.charAt(0).toUpperCase() + toUnit.slice(1)}`];
+        result = tempConversion(value);
+      } else {
+        const category = ['meter', 'kilometer', 'centimeter', 'millimeter', 'inch', 'foot', 'yard', 'mile'].includes(fromUnit) ? 'length' : 'weight';
+        result = value * (unitConversions[category][toUnit] / unitConversions[category][fromUnit]);
+      }
+
+      document.getElementById('conversionResult').innerText = `Result: ${result.toFixed(2)} ${toUnit}`;
+    }
+
+    // BMI Calculation Logic
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value) / 100; // Convert cm to meters
+      const bmi = (weight / (height * height)).toFixed(2);
+      document.getElementById('bmiResult').innerText = `Your BMI: ${bmi}`;
+    }
+  </script>
+</body>
+</html>
