@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free online volume unit converter. Convert between liters, milliliters, gallons, quarts, pints, and more easily.">
+  <meta name="keywords" content="volume converter, unit converter, liters to gallons, milliliters to liters, online tools">
+  <meta name="author" content="Your Name">
+  <title>Volume Unit Converter</title>
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_SENSE_ID" crossorigin="anonymous"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+    }
+    .converter {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .converter h2 {
+      margin-top: 0;
+      color: #4CAF50;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .input-group input:focus, .input-group select:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #4CAF50;
+    }
+    .ads {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .ads ins {
+      display: block;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      .input-group input, .input-group select {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Volume Unit Converter</h1>
+
+    <!-- Ad Unit -->
+    <div class="ads">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_SENSE_ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Volume Converter -->
+    <div class="converter">
+      <h2>Volume Converter</h2>
+      <div class="input-group">
+        <label for="value">Enter Value:</label>
+        <input type="number" id="value" placeholder="Enter value">
+      </div>
+      <div class="input-group">
+        <label for="fromUnit">From Unit:</label>
+        <select id="fromUnit">
+          <option value="liter">Liter (L)</option>
+          <option value="milliliter">Milliliter (mL)</option>
+          <option value="gallon">Gallon (gal)</option>
+          <option value="quart">Quart (qt)</option>
+          <option value="pint">Pint (pt)</option>
+          <option value="cup">Cup (c)</option>
+          <option value="fluidOunce">Fluid Ounce (fl oz)</option>
+          <option value="cubicMeter">Cubic Meter (m³)</option>
+          <option value="cubicCentimeter">Cubic Centimeter (cm³)</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="toUnit">To Unit:</label>
+        <select id="toUnit">
+          <option value="liter">Liter (L)</option>
+          <option value="milliliter">Milliliter (mL)</option>
+          <option value="gallon">Gallon (gal)</option>
+          <option value="quart">Quart (qt)</option>
+          <option value="pint">Pint (pt)</option>
+          <option value="cup">Cup (c)</option>
+          <option value="fluidOunce">Fluid Ounce (fl oz)</option>
+          <option value="cubicMeter">Cubic Meter (m³)</option>
+          <option value="cubicCentimeter">Cubic Centimeter (cm³)</option>
+        </select>
+      </div>
+      <button onclick="convertVolume()">Convert</button>
+      <div class="result" id="conversionResult"></div>
+    </div>
+
+    <!-- Ad Unit -->
+    <div class="ads">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_SENSE_ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <script>
+    // Volume Conversion Logic
+    const volumeConversions = {
+      liter: 1,
+      milliliter: 1000,
+      gallon: 0.264172,
+      quart: 1.05669,
+      pint: 2.11338,
+      cup: 4.22675,
+      fluidOunce: 33.814,
+      cubicMeter: 0.001,
+      cubicCentimeter: 1000
+    };
+
+    function convertVolume() {
+      const value = parseFloat(document.getElementById('value').value);
+      const fromUnit = document.getElementById('fromUnit').value;
+      const toUnit = document.getElementById('toUnit').value;
+
+      if (isNaN(value)) {
+        document.getElementById('conversionResult').innerText = "Please enter a valid number.";
+        return;
+      }
+
+      const result = value * (volumeConversions[toUnit] / volumeConversions[fromUnit]);
+      document.getElementById('conversionResult').innerText = `Result: ${result.toFixed(2)} ${toUnit}`;
+    }
+  </script>
+</body>
+</html>
