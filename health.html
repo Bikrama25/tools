@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Personalized weekly food plans with Indian alternatives, exercise charts, and sleep recommendations for BMI categories, diabetics, high/low blood pressure, gallbladder removed, and heart stented individuals.">
+  <meta name="keywords" content="Indian food plans, exercise charts, sleep recommendations, BMI, diabetes, high blood pressure, low blood pressure, gallbladder, heart stents">
+  <meta name="author" content="Your Name">
+  <title>Health & Wellness Planner</title>
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_CLIENT_ID" crossorigin="anonymous"></script>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    #user-selection, #plan-display, #advertisement {
+      margin-bottom: 20px;
+    }
+
+    select, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    button {
+      background: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #555;
+    }
+
+    #plan-content {
+      background: white;
+      padding: 20px;
+      border: 1px solid #ddd;
+    }
+
+    .plan-item {
+      margin-bottom: 20px;
+    }
+
+    .plan-item h3 {
+      color: #4CAF50;
+    }
+
+    .ads {
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Health & Wellness Planner</h1>
+    <p>Your personalized weekly guide for Indian food plans, exercise, and sleep.</p>
+  </header>
+
+  <main>
+    <!-- User Selection Section -->
+    <section id="user-selection">
+      <h2>Select Your Health Category</h2>
+      <select id="health-category">
+        <option value="underweight">Underweight BMI</option>
+        <option value="healthy">Healthy BMI</option>
+        <option value="overweight">Overweight BMI</option>
+        <option value="obese">Obese BMI</option>
+        <option value="diabetic">Diabetic</option>
+        <option value="high-bp">High Blood Pressure</option>
+        <option value="low-bp">Low Blood Pressure</option>
+        <option value="gallbladder-removed">Gallbladder Removed</option>
+        <option value="heart-stent">Heart Stent</option>
+      </select>
+      <button id="generate-plan">Generate Weekly Plan</button>
+    </section>
+
+    <!-- Dynamic Plan Display Section -->
+    <section id="plan-display">
+      <h2>Your Weekly Plan</h2>
+      <div id="plan-content">
+        <!-- Dynamic content will be inserted here -->
+      </div>
+    </section>
+
+    <!-- AdSense Ad Unit -->
+    <section id="advertisement">
+      <h3>Advertisement</h3>
+      <div class="ads">
+        <!-- Insert AdSense Ad Unit ID here -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_AD_CLIENT_ID"
+             data-ad-slot="YOUR_AD_SLOT_ID"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2023 Health & Wellness Planner. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('generate-plan').addEventListener('click', function () {
+      const category = document.getElementById('health-category').value;
+      const planContent = document.getElementById('plan-content');
+      let plan = '';
+
+      switch (category) {
+        case 'underweight':
+          plan = `
+            <div class="plan-item">
+              <h3>Morning Breakfast</h3>
+              <p>Poha with peanuts and vegetables, or Upma with carrots and peas.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Lunch</h3>
+              <p>Chapati with dal, sabzi (e.g., bhindi or lauki), and a side of curd.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Afternoon Snack</h3>
+              <p>Mixed nuts and a banana, or a bowl of sprouted moong chaat.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Dinner</h3>
+              <p>Khichdi with ghee, and a side of steamed vegetables.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Exercise</h3>
+              <p>30 minutes of strength training and 20 minutes of cardio.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Sleep</h3>
+              <p>Minimum 7-8 hours per night.</p>
+            </div>
+          `;
+          break;
+        case 'healthy':
+          plan = `
+            <div class="plan-item">
+              <h3>Morning Breakfast</h3>
+              <p>Idli with sambar and coconut chutney, or Paratha with curd.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Lunch</h3>
+              <p>Brown rice with rajma curry, and a side of salad.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Afternoon Snack</h3>
+              <p>Roasted chana or a fruit smoothie.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Dinner</h3>
+              <p>Chapati with palak paneer and a side of raita.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Exercise</h3>
+              <p>30 minutes of yoga and 20 minutes of brisk walking.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Sleep</h3>
+              <p>Minimum 7-8 hours per night.</p>
+            </div>
+          `;
+          break;
+        case 'overweight':
+          plan = `
+            <div class="plan-item">
+              <h3>Morning Breakfast</h3>
+              <p>Vegetable oats upma or Moong dal chilla.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Lunch</h3>
+              <p>Chapati with mixed vegetable curry and a side of salad.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Afternoon Snack</h3>
+              <p>Fruit salad or a handful of roasted makhana.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Dinner</h3>
+              <p>Quinoa khichdi with a side of steamed vegetables.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Exercise</h3>
+              <p>30 minutes of cardio and 15 minutes of strength training.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Sleep</h3>
+              <p>Minimum 7-8 hours per night.</p>
+            </div>
+          `;
+          break;
+        case 'obese':
+          plan = `
+            <div class="plan-item">
+              <h3>Morning Breakfast</h3>
+              <p>Besan chilla with mint chutney, or Ragi dosa.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Lunch</h3>
+              <p>Chapati with lauki curry and a side of salad.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Afternoon Snack</h3>
+              <p>Cucumber slices with lemon and chaat masala.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Dinner</h3>
+              <p>Moong dal khichdi with a side of steamed vegetables.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Exercise</h3>
+              <p>45 minutes of low-impact cardio (e.g., swimming or cycling).</p>
+            </div>
+            <div class="plan-item">
+              <h3>Sleep</h3>
+              <p>Minimum 7-8 hours per night.</p>
+            </div>
+          `;
+          break;
+        case 'diabetic':
+          plan = `
+            <div class="plan-item">
+              <h3>Morning Breakfast</h3>
+              <p>Vegetable oats upma or Moong dal chilla.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Lunch</h3>
+              <p>Chapati with methi dal and a side of salad.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Afternoon Snack</h3>
+              <p>Handful of roasted chana or a small apple.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Dinner</h3>
+              <p>Quinoa khichdi with a side of steamed vegetables.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Exercise</h3>
+              <p>30 minutes of brisk walking and 15 minutes of stretching.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Sleep</h3>
+              <p>Minimum 7-8 hours per night.</p>
+            </div>
+          `;
+          break;
+        case 'high-bp':
+          plan = `
+            <div class="plan-item">
+              <h3>Morning Breakfast</h3>
+              <p>Poha with vegetables and a handful of peanuts.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Lunch</h3>
+              <p>Chapati with lauki curry and a side of salad.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Afternoon Snack</h3>
+              <p>Fruit salad or a handful of roasted makhana.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Dinner</h3>
+              <p>Moong dal khichdi with a side of steamed vegetables.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Exercise</h3>
+              <p>30 minutes of yoga and 20 minutes of walking.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Sleep</h3>
+              <p>Minimum 7-8 hours per night.</p>
+            </div>
+          `;
+          break;
+        case 'low-bp':
+          plan = `
+            <div class="plan-item">
+              <h3>Morning Breakfast</h3>
+              <p>Upma with vegetables and a side of coconut chutney.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Lunch</h3>
+              <p>Chapati with rajma curry and a side of salad.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Afternoon Snack</h3>
+              <p>Handful of salted nuts and a small orange.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Dinner</h3>
+              <p>Quinoa khichdi with a side of steamed vegetables.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Exercise</h3>
+              <p>30 minutes of light cardio and 15 minutes of stretching.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Sleep</h3>
+              <p>Minimum 7-8 hours per night.</p>
+            </div>
+          `;
+          break;
+        case 'gallbladder-removed':
+          plan = `
+            <div class="plan-item">
+              <h3>Morning Breakfast</h3>
+              <p>Vegetable oats upma or Moong dal chilla.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Lunch</h3>
+              <p>Chapati with lauki curry and a side of salad.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Afternoon Snack</h3>
+              <p>Fruit salad or a handful of roasted makhana.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Dinner</h3>
+              <p>Moong dal khichdi with a side of steamed vegetables.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Exercise</h3>
+              <p>30 minutes of light walking and 15 minutes of stretching.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Sleep</h3>
+              <p>Minimum 7-8 hours per night.</p>
+            </div>
+          `;
+          break;
+        case 'heart-stent':
+          plan = `
+            <div class="plan-item">
+              <h3>Morning Breakfast</h3>
+              <p>Poha with vegetables and a handful of peanuts.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Lunch</h3>
+              <p>Chapati with lauki curry and a side of salad.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Afternoon Snack</h3>
+              <p>Fruit salad or a handful of roasted makhana.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Dinner</h3>
+              <p>Moong dal khichdi with a side of steamed vegetables.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Exercise</h3>
+              <p>30 minutes of yoga and 20 minutes of walking.</p>
+            </div>
+            <div class="plan-item">
+              <h3>Sleep</h3>
+              <p>Minimum 7-8 hours per night.</p>
+            </div>
+          `;
+          break;
+        default:
+          plan = `<p>Please select a valid health category.</p>`;
+      }
+
+      planContent.innerHTML = plan;
+    });
+  </script>
+</body>
+</html>
