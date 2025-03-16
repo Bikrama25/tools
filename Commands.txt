@@ -15,6 +15,8 @@ Create a homepage for my tools website. I will have lots of image and pdf tools.
 
 add hyperlink
 
+Develop a fully responsive PDF merger tool in HTML with dynamic functionality. The tool should allow users to select or drag and drop the files. Optimize the merged file, accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. --DeepSeek
+
 Develop a fully responsive image converter tool in HTML with dynamic functionality. The tool should allow users to select the types of files and optimize the image accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. Please add a file drag-and-drop option, too. -- DeepSeek
 
 Develop a currency converter tool in HTML with dynamic functionality. The tool should allow users to enter values and 20+ types of currency accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. Please add a file drag and drop option, too -- ChatGPT
@@ -28,3 +30,4 @@ one-time lump-sum investment is not SIP. Please correct the calculation.
 Testing failed..not giving any answer
 --DeepSeek
 
+Develop a fully responsive age calculator and date subtraction tool in HTML with dynamic functionality. Give output in Year Month Day Format. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Make the ui look good and responsive. Combine all codes into one. --DeepSeek
