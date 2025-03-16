@@ -31,3 +31,6 @@ Testing failed..not giving any answer
 --DeepSeek
 
 Develop a fully responsive age calculator and date subtraction tool in HTML with dynamic functionality. Give output in Year Month Day Format. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Make the ui look good and responsive. Combine all codes into one. --DeepSeek
+
+Develop a fully responsive all-popular social media and The Hindu and Anandnabazar patrika links tool in HTML with dynamic functionality. Add hyperlinks to the icons. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Make the ui look good and responsive. Combine all codes into one.
+-- DeepSeek
