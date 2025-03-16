@@ -23,4 +23,8 @@ Develop a fully responsive scientific calculator tool in HTML with dynamic funct
 
 Develop a fully responsive land area unit converter tool for west bengal, india ( include Hectare, Acre, Bigha, Katha, Gunta, Decimal(Shatak), Cent, Chatak, Square Mile, Square Yard, Square Feet, Square Inch, Square Meter, Square Centimeter etc, additionally include  1 decimal (satak) = 436 sft., 1 katha_WB = 720 Square feet, 1 bigha_WB = 20 katha_WB = 33 decimals, 1 acre = 100 decimals ) in HTML with dynamic functionality.  The tool should allow users to select different units and optimize answers accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. --Deepseek
 
+Develop a fully responsive SIP Calculator tool in both directions for HTML with dynamic functionality.  The tool should allow users to select daily, monthly, quarterly, yearly, and one-time lump-sum investments, show the total amount invested, and then optimize answers accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. check that it's giving output correctly.
+one-time lump-sum investment is not SIP. Please correct the calculation.
+Testing failed..not giving any answer
+--DeepSeek
 
