@@ -43,3 +43,13 @@ Develop a fully responsive length, weight, temperature unit converter, BMI calcu
 --DeepSeek
 
 Develop a fully responsive volume unit converter tool in HTML with dynamic functionality. Optimize answers accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. --DeepSeek
+
+Develop a fully responsive career path selection tool for different branches. in next branching, show different lucrative Jobs, starting from class X to post PhD and all jobs in HTML with dynamic functionality. Optimize answers accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive.
+Combine all codes into one
+Add more job opportunities, including average salaries and required selection processes in India and worldwide.
+Defence jobs, Administration jobs, Clerical jobs, Teaching jobs, Political positions, pilot, air hostess etc more specific job qualifications are missing
+No jobs found for the selected criteria. Please try another combination. -- this is not correct . many combinations which has jobs but missing here. please, add those and increase the capacity.
+please restart from where it stopped.
+please, add company names whereever available
+No jobs found for the selected criteria. Please try another combination. -- this is not correct . many combinations which has jobs but missing here. please, add those and increase the capacity.
+restart from where it stopped.
