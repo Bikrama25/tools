@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate your home loan EMI with our responsive EMI Calculator. Supports daily, monthly, quarterly, yearly, and one-time lump-sum payments.">
+  <meta name="keywords" content="EMI Calculator, Home Loan EMI, Loan Calculator, SIP Calculator, Loan Interest Calculator">
+  <meta name="author" content="Your Name">
+  <title>Home Loan EMI Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #555;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #e9f5ff;
+      border-radius: 5px;
+    }
+    .ad-container {
+      margin: 20px 0;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 10px;
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Home Loan EMI Calculator</h1>
+    <label for="principal">Loan Amount (₹):</label>
+    <input type="number" id="principal" placeholder="Enter loan amount">
+
+    <label for="interest">Annual Interest Rate (%):</label>
+    <input type="number" id="interest" placeholder="Enter interest rate">
+
+    <label for="tenure">Loan Tenure (Years):</label>
+    <input type="number" id="tenure" placeholder="Enter tenure">
+
+    <label for="paymentFrequency">Payment Frequency:</label>
+    <select id="paymentFrequency">
+      <option value="daily">Daily</option>
+      <option value="monthly">Monthly</option>
+      <option value="quarterly">Quarterly</option>
+      <option value="yearly">Yearly</option>
+      <option value="lump-sum">One-Time Lump-Sum</option>
+    </select>
+
+    <button onclick="calculateEMI()">Calculate EMI</button>
+
+    <div class="result" id="result">
+      <p>EMI Amount: <span id="emiAmount">₹0</span></p>
+      <p>Total Amount Invested: <span id="totalInvested">₹0</span></p>
+      <p>Total Interest Paid: <span id="totalInterest">₹0</span></p>
+      <p>Total Value: <span id="totalValue">₹0</span></p>
+    </div>
+
+    <!-- AdSense Ad Container -->
+    <div class="ad-container">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_SENSE_ID" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_SENSE_ID"
+           data-ad-slot="YOUR_AD_SLOT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <script>
+    function calculateEMI() {
+      const principal = parseFloat(document.getElementById('principal').value);
+      const interest = parseFloat(document.getElementById('interest').value);
+      const tenure = parseFloat(document.getElementById('tenure').value);
+      const paymentFrequency = document.getElementById('paymentFrequency').value;
+
+      if (isNaN(principal) || isNaN(interest) || isNaN(tenure)) {
+        alert("Please enter valid inputs.");
+        return;
+      }
+
+      const annualInterestRate = interest / 100;
+      let numberOfPayments, totalInvested, totalInterest, totalValue, emiAmount;
+
+      switch (paymentFrequency) {
+        case 'daily':
+          numberOfPayments = tenure * 365;
+          break;
+        case 'monthly':
+          numberOfPayments = tenure * 12;
+          break;
+        case 'quarterly':
+          numberOfPayments = tenure * 4;
+          break;
+        case 'yearly':
+          numberOfPayments = tenure;
+          break;
+        case 'lump-sum':
+          numberOfPayments = 1;
+          break;
+        default:
+          numberOfPayments = tenure * 12;
+      }
+
+      if (paymentFrequency === 'lump-sum') {
+        totalInvested = principal;
+        totalInterest = principal * Math.pow(1 + annualInterestRate, tenure) - principal;
+        totalValue = principal + totalInterest;
+        emiAmount = totalValue;
+      } else {
+        const monthlyInterestRate = annualInterestRate / 12;
+        const emi = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, numberOfPayments) / (Math.pow(1 + monthlyInterestRate, numberOfPayments) - 1);
+        totalInvested = emi * numberOfPayments;
+        totalInterest = totalInvested - principal;
+        totalValue = totalInvested;
+
+        // Calculate EMI amount based on frequency
+        switch (paymentFrequency) {
+          case 'daily':
+            emiAmount = emi / 30; // Approximate daily payment
+            break;
+          case 'monthly':
+            emiAmount = emi;
+            break;
+          case 'quarterly':
+            emiAmount = emi * 3;
+            break;
+          case 'yearly':
+            emiAmount = emi * 12;
+            break;
+        }
+      }
+
+      document.getElementById('emiAmount').innerText = `₹${emiAmount.toFixed(2)}`;
+      document.getElementById('totalInvested').innerText = `₹${totalInvested.toFixed(2)}`;
+      document.getElementById('totalInterest').innerText = `₹${totalInterest.toFixed(2)}`;
+      document.getElementById('totalValue').innerText = `₹${totalValue.toFixed(2)}`;
+    }
+  </script>
+</body>
+</html>
