@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personality Type Analyzer and Strategy Tool for Corporate and Political World">
+    <meta name="keywords" content="personality, traits, corporate, political, strategy, Art of Seduction, Sun Tzu, Chanakya">
+    <meta name="author" content="Your Name">
+    <title>Personality Type Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        select, button {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        #strategy-output {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Personality Type Analyzer</h1>
+    </header>
+    <main>
+        <section id="personality-selection">
+            <h2>Select Personality Traits</h2>
+            <form id="personality-form">
+                <label for="trait">Select Trait:</label>
+                <select id="trait" name="trait">
+                    <option value="extrovert">Extrovert</option>
+                    <option value="introvert">Introvert</option>
+                    <option value="thinker">Thinker</option>
+                    <option value="feeler">Feeler</option>
+                    <option value="leader">Leader</option>
+                    <option value="strategist">Strategist</option>
+                </select>
+                <label for="character">Select Character:</label>
+                <select id="character" name="character">
+                    <option value="friend">Friend</option>
+                    <option value="peer">Peer</option>
+                    <option value="toxic_coworker">Toxic Coworker</option>
+                    <option value="bully">Bully</option>
+                    <option value="secret_enemy">Secret Enemy</option>
+                    <option value="wicked">Wicked</option>
+                </select>
+                <button type="button" onclick="generateStrategy()">Generate Strategy</button>
+            </form>
+        </section>
+        <section id="strategy-output">
+            <h2>Strategy</h2>
+            <p id="strategy-text"></p>
+        </section>
+        <section id="advertisement">
+            <h2>Advertisement</h2>
+            <!-- Google AdSense Ad Unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+            <!-- Ad Unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Personality Type Analyzer. All rights reserved.</p>
+    </footer>
+    <script>
+        function generateStrategy() {
+            const trait = document.getElementById('trait').value;
+            const character = document.getElementById('character').value;
+            let strategy = '';
+
+            switch (trait) {
+                case 'extrovert':
+                    strategy = character === 'friend' ? "Engage in social activities to strengthen the bond." :
+                               character === 'peer' ? "Collaborate on projects to leverage their energy." :
+                               character === 'toxic_coworker' ? "Set clear boundaries and avoid unnecessary interactions." :
+                               character === 'bully' ? "Confront them assertively and seek support from superiors." :
+                               character === 'secret_enemy' ? "Maintain a professional demeanor and document interactions." :
+                               character === 'wicked' ? "Limit exposure and avoid sharing sensitive information." : "";
+                    break;
+                case 'introvert':
+                    strategy = character === 'friend' ? "Respect their need for solitude and engage in meaningful one-on-one conversations." :
+                               character === 'peer' ? "Provide them with space and encourage their ideas in a non-threatening environment." :
+                               character === 'toxic_coworker' ? "Avoid confrontations and communicate through written channels." :
+                               character === 'bully' ? "Seek support from HR and avoid direct confrontations." :
+                               character === 'secret_enemy' ? "Observe their actions discreetly and gather evidence." :
+                               character === 'wicked' ? "Maintain a low profile and avoid sharing personal information." : "";
+                    break;
+                case 'thinker':
+                    strategy = character === 'friend' ? "Engage in intellectual discussions and respect their logical approach." :
+                               character === 'peer' ? "Present well-reasoned arguments and data to gain their support." :
+                               character === 'toxic_coworker' ? "Avoid emotional appeals and stick to facts." :
+                               character === 'bully' ? "Use logic to counter their arguments and seek mediation." :
+                               character === 'secret_enemy' ? "Anticipate their moves and prepare counter-arguments." :
+                               character === 'wicked' ? "Avoid revealing your strategies and stay one step ahead." : "";
+                    break;
+                case 'feeler':
+                    strategy = character === 'friend' ? "Show empathy and emotional support to strengthen the relationship." :
+                               character === 'peer' ? "Appeal to their emotions and values to gain cooperation." :
+                               character === 'toxic_coworker' ? "Avoid triggering their emotions and stay neutral." :
+                               character === 'bully' ? "Seek mediation and focus on emotional reconciliation." :
+                               character === 'secret_enemy' ? "Understand their emotional triggers and use them to your advantage." :
+                               character === 'wicked' ? "Avoid emotional manipulation and stay objective." : "";
+                    break;
+                case 'leader':
+                    strategy = character === 'friend' ? "Support their vision and contribute to their goals." :
+                               character === 'peer' ? "Align your goals with theirs and demonstrate initiative." :
+                               character === 'toxic_coworker' ? "Avoid challenging their authority directly and seek allies." :
+                               character === 'bully' ? "Stand your ground and seek support from higher authorities." :
+                               character === 'secret_enemy' ? "Monitor their actions and prepare for power struggles." :
+                               character === 'wicked' ? "Avoid direct confrontation and work behind the scenes." : "";
+                    break;
+                case 'strategist':
+                    strategy = character === 'friend' ? "Engage in strategic discussions and share insights." :
+                               character === 'peer' ? "Collaborate on long-term plans and demonstrate foresight." :
+                               character === 'toxic_coworker' ? "Avoid revealing your strategies and stay guarded." :
+                               character === 'bully' ? "Outmaneuver them with superior planning and alliances." :
+                               character === 'secret_enemy' ? "Anticipate their strategies and prepare countermeasures." :
+                               character === 'wicked' ? "Stay vigilant and avoid falling into their traps." : "";
+                    break;
+                default:
+                    strategy = "Please select a valid trait and character.";
+            }
+
+            document.getElementById('strategy-text').innerText = strategy;
+        }
+    </script>
+</body>
+</html>
