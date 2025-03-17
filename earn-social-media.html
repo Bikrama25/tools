@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover how to earn money through social media. Calculate your potential earnings, required investment, and time commitment based on your chosen work type.">
+  <meta name="keywords" content="earn money, social media, investment, time commitment, SEO, Google AdSense">
+  <meta name="author" content="Your Name">
+  <title>Social Media Earnings Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #444;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+    select, .output {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    .output {
+      background-color: #f9f9f9;
+      margin-top: 10px;
+      padding: 15px;
+    }
+    .output h3 {
+      margin-top: 0;
+      color: #555;
+    }
+    .output ul {
+      padding-left: 20px;
+    }
+    .output ul li {
+      margin-bottom: 10px;
+    }
+    .ad-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .ad-container iframe {
+      margin: 0 auto;
+    }
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Social Media Earnings Calculator</h1>
+    <div class="form-group">
+      <label for="work-type">Select Type of Work:</label>
+      <select id="work-type">
+        <option value="content-creation">Content Creation (YouTube, TikTok)</option>
+        <option value="affiliate-marketing">Affiliate Marketing</option>
+        <option value="social-media-management">Social Media Management</option>
+        <option value="influencer-marketing">Influencer Marketing</option>
+        <option value="freelance-services">Freelance Services (Graphic Design, Writing)</option>
+      </select>
+    </div>
+    <div class="output" id="output">
+      <!-- Dynamic output will appear here -->
+    </div>
+    <div class="ad-container">
+      <!-- Google AdSense Ad Unit -->
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_SENSE_ID" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_SENSE_ID"
+           data-ad-slot="YOUR_AD_SLOT_ID"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2023 Social Media Earnings Calculator. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const workTypeSelect = document.getElementById('work-type');
+    const outputDiv = document.getElementById('output');
+
+    const data = {
+      "content-creation": {
+        earning: "$500 - $10,000 per month",
+        investment: "$100 - $1,000 (equipment, software)",
+        time: "20 - 40 hours per week",
+        steps: [
+          "Choose a niche (e.g., tech, fashion, gaming).",
+          "Invest in basic equipment (camera, microphone, lighting).",
+          "Create and upload high-quality content consistently.",
+          "Engage with your audience and grow your following.",
+          "Monetize through ads, sponsorships, and merchandise."
+        ],
+        skills: ["Video editing", "Scriptwriting", "SEO", "Social media marketing"],
+        courses: [
+          "YouTube Creator Academy (free)",
+          "Skillshare: Video Production Courses",
+          "Udemy: Social Media Marketing Mastery"
+        ],
+        investmentAreas: ["Camera equipment", "Editing software", "Lighting setup"],
+        tasks: [
+          "Plan and script videos.",
+          "Record and edit content.",
+          "Upload and optimize videos for SEO.",
+          "Engage with viewers in comments."
+        ],
+        personalities: [
+          "MrBeast (YouTube)",
+          "Emma Chamberlain (YouTube)",
+          "Zach King (TikTok)"
+        ]
+      },
+      "affiliate-marketing": {
+        earning: "$200 - $5,000 per month",
+        investment: "$50 - $500 (website, ads)",
+        time: "10 - 20 hours per week",
+        steps: [
+          "Choose a niche (e.g., health, tech, travel).",
+          "Create a blog or website.",
+          "Join affiliate programs (e.g., Amazon Associates, ShareASale).",
+          "Promote products through content and ads.",
+          "Earn commissions on sales."
+        ],
+        skills: ["Content writing", "SEO", "Digital marketing", "Analytics"],
+        courses: [
+          "Coursera: Affiliate Marketing Basics",
+          "Udemy: Affiliate Marketing Mastery",
+          "HubSpot: Content Marketing Certification"
+        ],
+        investmentAreas: ["Website hosting", "Ads", "Content creation tools"],
+        tasks: [
+          "Write product reviews and guides.",
+          "Promote affiliate links on social media.",
+          "Analyze performance and optimize strategies."
+        ],
+        personalities: [
+          "Pat Flynn (Smart Passive Income)",
+          "Michelle Schroeder-Gardner (Making Sense of Cents)",
+          "Graham Cochrane (The Recording Revolution)"
+        ]
+      },
+      "social-media-management": {
+        earning: "$300 - $8,000 per month",
+        investment: "$0 - $200 (tools, subscriptions)",
+        time: "15 - 30 hours per week",
+        steps: [
+          "Learn social media platforms (Instagram, Facebook, LinkedIn).",
+          "Offer services to small businesses or individuals.",
+          "Create and schedule posts.",
+          "Engage with followers and analyze performance.",
+          "Scale by managing multiple accounts."
+        ],
+        skills: ["Content creation", "Analytics", "Customer engagement", "Scheduling tools"],
+        courses: [
+          "Hootsuite Academy: Social Media Marketing",
+          "Coursera: Social Media Management",
+          "LinkedIn Learning: Social Media Strategy"
+        ],
+        investmentAreas: ["Social media tools (e.g., Hootsuite, Buffer)", "Ads"],
+        tasks: [
+          "Create content calendars.",
+          "Schedule and publish posts.",
+          "Respond to comments and messages.",
+          "Analyze engagement metrics."
+        ],
+        personalities: [
+          "Gary Vaynerchuk (VaynerMedia)",
+          "Amy Porterfield (Online Marketing Expert)",
+          "Neil Patel (Digital Marketing Guru)"
+        ]
+      },
+      "influencer-marketing": {
+        earning: "$1,000 - $50,000 per month",
+        investment: "$0 - $500 (content creation)",
+        time: "20 - 40 hours per week",
+        steps: [
+          "Choose a niche and build a personal brand.",
+          "Grow your following on platforms like Instagram or TikTok.",
+          "Collaborate with brands for sponsored posts.",
+          "Engage with your audience regularly.",
+          "Diversify income streams (e.g., merchandise, courses)."
+        ],
+        skills: ["Content creation", "Negotiation", "Branding", "Audience engagement"],
+        courses: [
+          "Influence.co: Influencer Marketing Guide",
+          "Udemy: Becoming an Influencer",
+          "Coursera: Personal Branding"
+        ],
+        investmentAreas: ["Content creation tools", "Photography equipment", "Ads"],
+        tasks: [
+          "Create and post engaging content.",
+          "Collaborate with brands.",
+          "Engage with followers.",
+          "Track performance metrics."
+        ],
+        personalities: [
+          "Kylie Jenner (Instagram)",
+          "Charli D'Amelio (TikTok)",
+          "Huda Kattan (Huda Beauty)"
+        ]
+      },
+      "freelance-services": {
+        earning: "$300 - $7,000 per month",
+        investment: "$0 - $300 (software, training)",
+        time: "10 - 30 hours per week",
+        steps: [
+          "Choose a skill (e.g., graphic design, writing).",
+          "Create a portfolio showcasing your work.",
+          "Join freelance platforms (e.g., Upwork, Fiverr).",
+          "Market your services on social media.",
+          "Deliver high-quality work to build a client base."
+        ],
+        skills: ["Graphic design", "Writing", "Communication", "Time management"],
+        courses: [
+          "Skillshare: Freelance Essentials",
+          "Udemy: Freelance Writing Mastery",
+          "Coursera: Graphic Design Specialization"
+        ],
+        investmentAreas: ["Software (e.g., Adobe Creative Cloud)", "Portfolio website"],
+        tasks: [
+          "Find and bid on projects.",
+          "Communicate with clients.",
+          "Deliver projects on time.",
+          "Request testimonials and reviews."
+        ],
+        personalities: [
+          "Chris Do (The Futur)",
+          "Paula Pant (Afford Anything)",
+          "Austin Kleon (Author and Artist)"
+        ]
+      }
+    };
+
+    function updateOutput() {
+      const selectedWork = workTypeSelect.value;
+      const workData = data[selectedWork];
+      outputDiv.innerHTML = `
+        <h3>Earning Potential:</h3>
+        <p>${workData.earning}</p>
+        <h3>Required Investment:</h3>
+        <p>${workData.investment}</p>
+        <h3>Time Commitment:</h3>
+        <p>${workData.time}</p>
+        <h3>Steps to Start:</h3>
+        <ul>${workData.steps.map(step => `<li>${step}</li>`).join('')}</ul>
+        <h3>Required Skills:</h3>
+        <ul>${workData.skills.map(skill => `<li>${skill}</li>`).join('')}</ul>
+        <h3>Recommended Courses:</h3>
+        <ul>${workData.courses.map(course => `<li>${course}</li>`).join('')}</ul>
+        <h3>Where to Invest:</h3>
+        <ul>${workData.investmentAreas.map(area => `<li>${area}</li>`).join('')}</ul>
+        <h3>Regular Tasks:</h3>
+        <ul>${workData.tasks.map(task => `<li>${task}</li>`).join('')}</ul>
+        <h3>Successful Personalities to Follow:</h3>
+        <ul>${workData.personalities.map(person => `<li>${person}</li>`).join('')}</ul>
+      `;
+    }
+
+    workTypeSelect.addEventListener('change', updateOutput);
+    updateOutput(); // Initial call to display default output
+  </script>
+</body>
+</html>
