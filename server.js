@@ -7,7 +7,7 @@ const fs = require('fs');
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
-app.post('/convert', upload.single('file'), (req, res) => {
+app.post('/pdf-word-convert.html', upload.single('file'), (req, res) => {
     if (!req.file) {
         return res.status(400).send('No file uploaded.');
     }
