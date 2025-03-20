@@ -4,6 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Opportunities</title>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Dropdown Styles */
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: 100%;
+    max-width: 300px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Button Styles */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Job List Styles */
+#job-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+#job-list li {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#job-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.job-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.job-details {
+    font-size: 14px;
+    color: #555;
+}
+
+.job-details strong {
+    color: #333;
+}
+
+.no-jobs {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    select, button {
+        width: 100%;
+    }
+
+    #job-list li {
+        padding: 10px;
+    }
+
+    .job-title {
+        font-size: 16px;
+    }
+
+    .job-details {
+        font-size: 12px;
+    }
+}
     <style>
         /* General Styles */
         body {
