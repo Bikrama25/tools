@@ -1,522 +1,542 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Career Path Selection Tool - Explore lucrative jobs from Class X to Post PhD in various branches.">
-    <meta name="keywords" content="career, jobs, education, career path, lucrative jobs, Class X, Post PhD">
-    <meta name="author" content="Your Name">
-    <title>Career Path Selection Tool</title>
-    <style>
-        /* Your CSS styles remain unchanged */
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Career Path Selection Tool</h1>
-    </header>
-    <main>
-        <section id="career-path">
-            <div class="container">
-                <label for="education-level">Select Your Education Level:</label>
-                <select id="education-level">
-                    <option value="classX">Class X</option>
-                    <option value="classXII">Class XII</option>
-                    <option value="bachelors">Bachelors</option>
-                    <option value="masters">Masters</option>
-                    <option value="phd">PhD</option>
-                    <option value="postPhd">Post-PhD</option>
-                </select>
+const jobs = {
+    classX: {
+        science: [
+            { title: 'Lab Assistant', salary: '₹1.5-3 LPA (India), $20,000-$30,000 (Worldwide)', process: 'Diploma in Science', company: 'Research Labs, Schools' },
+            { title: 'Science Tutor', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Teaching Certification', company: 'Private Tutoring Centers' },
+            { title: 'Pharmacy Assistant', salary: '₹2-3.5 LPA (India), $22,000-$32,000 (Worldwide)', process: 'Diploma in Pharmacy', company: 'Pharmacies, Hospitals' },
+            { title: 'Science Journalist', salary: '₹2.5-5 LPA (India), $30,000-$45,000 (Worldwide)', process: 'Science Communication Course', company: 'Media Houses, Science Magazines' },
+            { title: 'Environmental Technician', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Environmental Science Diploma', company: 'NGOs, Environmental Agencies' }
+        ],
+        arts: [
+            { title: 'Content Writer', salary: '₹2-5 LPA (India), $30,000-$45,000 (Worldwide)', process: 'Freelancing, Portfolio Building', company: 'Upwork, Fiverr' },
+            { title: 'Graphic Designer', salary: '₹2.5-6 LPA (India), $35,000-$50,000 (Worldwide)', process: 'Diploma in Graphic Design', company: 'Canva, Adobe' },
+            { title: 'Social Media Manager', salary: '₹3-6 LPA (India), $35,000-$55,000 (Worldwide)', process: 'Social Media Marketing Course', company: 'Digital Marketing Agencies' },
+            { title: 'Photographer', salary: '₹2.5-5 LPA (India), $30,000-$45,000 (Worldwide)', process: 'Photography Diploma, Portfolio', company: 'Freelance, Media Houses' },
+            { title: 'Event Planner', salary: '₹3-7 LPA (India), $35,000-$60,000 (Worldwide)', process: 'Event Management Course', company: 'Event Management Firms' }
+        ],
+        commerce: [
+            { title: 'Accountant', salary: '₹2-5 LPA (India), $30,000-$45,000 (Worldwide)', process: 'Diploma in Accounting', company: 'Small Businesses, CA Firms' },
+            { title: 'Sales Executive', salary: '₹2.5-6 LPA (India), $35,000-$50,000 (Worldwide)', process: 'On-the-Job Training', company: 'Retail Stores, E-commerce' },
+            { title: 'Bank Clerk', salary: '₹2.5-4.5 LPA (India), $30,000-$40,000 (Worldwide)', process: 'Bank Exams', company: 'Public and Private Banks' },
+            { title: 'Tax Consultant', salary: '₹3-6 LPA (India), $35,000-$55,000 (Worldwide)', process: 'GST Training, Tax Knowledge', company: 'CA Firms, Tax Agencies' },
+            { title: 'Inventory Manager', salary: '₹3-5 LPA (India), $35,000-$50,000 (Worldwide)', process: 'Diploma in Supply Chain Management', company: 'Retail Chains, Warehouses' }
+        ]
+    },
+    classXII: {
+        science: {
+            physicsHons: [
+                { title: 'Research Assistant', salary: '₹3-6 LPA (India), $40,000-$60,000 (Worldwide)', process: 'B.Sc in Physics, Internships', company: 'ISRO, DRDO' },
+                { title: 'Lab Technician', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Diploma in Lab Technology', company: 'Research Labs' },
+                { title: 'Physics Tutor', salary: '₹3-5 LPA (India), $35,000-$50,000 (Worldwide)', process: 'Teaching Certification', company: 'Coaching Centers, Schools' },
+                { title: 'Data Analyst', salary: '₹4-8 LPA (India), $50,000-$70,000 (Worldwide)', process: 'Data Analysis Skills', company: 'Tech Companies, Research Labs' },
+                { title: 'Astronomy Researcher', salary: '₹5-10 LPA (India), $60,000-$90,000 (Worldwide)', process: 'M.Sc in Astronomy, Research Projects', company: 'ISRO, NASA' }
+            ],
+            chemistryHons: [
+                { title: 'Chemist', salary: '₹3-7 LPA (India), $40,000-$70,000 (Worldwide)', process: 'B.Sc in Chemistry, Research Projects', company: 'Pharmaceutical Companies' },
+                { title: 'Quality Control Analyst', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'Quality Control Certification', company: 'Biocon, Serum Institute' },
+                { title: 'Chemical Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Chemical Engineering', company: 'Reliance Industries, Dow Chemical' },
+                { title: 'Pharmaceutical Researcher', salary: '₹4-9 LPA (India), $50,000-$85,000 (Worldwide)', process: 'M.Sc in Chemistry, Research', company: 'Pharma Companies' },
+                { title: 'Environmental Chemist', salary: '₹3.5-7 LPA (India), $45,000-$75,000 (Worldwide)', process: 'Environmental Science Degree', company: 'Environmental Agencies' }
+            ],
+            mathematicsHons: [
+                { title: 'Data Analyst', salary: '₹5-10 LPA (India), $60,000-$90,000 (Worldwide)', process: 'B.Sc in Mathematics, Coding Skills', company: 'TCS, Wipro' },
+                { title: 'Actuary', salary: '₹7-15 LPA (India), $80,000-$130,000 (Worldwide)', process: 'Actuarial Science Certification', company: 'Insurance Companies' },
+                { title: 'Statistician', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'Statistics Degree, Data Analysis', company: 'Research Firms, Government' },
+                { title: 'Financial Analyst', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'Finance Degree, Analytical Skills', company: 'Banks, Financial Institutions' },
+                { title: 'Cryptographer', salary: '₹6-14 LPA (India), $70,000-$120,000 (Worldwide)', process: 'Mathematics Degree, Coding Skills', company: 'Tech Companies, Government' }
+            ],
+            computerScienceHons: [
+                { title: 'Software Developer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'B.Sc in Computer Science, Coding Skills', company: 'Google, Microsoft' },
+                { title: 'Web Developer', salary: '₹4-10 LPA (India), $50,000-$90,000 (Worldwide)', process: 'Frontend/Backend Development Skills', company: 'Infosys, TCS' },
+                { title: 'Data Scientist', salary: '₹8-20 LPA (India), $90,000-$150,000 (Worldwide)', process: 'Data Science Degree, Coding Skills', company: 'Amazon, Flipkart' },
+                { title: 'Cybersecurity Analyst', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'Cybersecurity Certification', company: 'Tech Companies, Banks' },
+                { title: 'AI Engineer', salary: '₹7-18 LPA (India), $80,000-$140,000 (Worldwide)', process: 'AI/ML Degree, Coding Skills', company: 'Google, IBM' }
+            ],
+            bioscienceHons: [
+                { title: 'Biotechnologist', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'B.Sc in Bioscience, Research Projects', company: 'Biocon, Serum Institute' },
+                { title: 'Environmental Scientist', salary: '₹3-7 LPA (India), $40,000-$70,000 (Worldwide)', process: 'Degree in Environmental Science', company: 'TERI, Greenpeace' },
+                { title: 'Microbiologist', salary: '₹4-9 LPA (India), $50,000-$85,000 (Worldwide)', process: 'M.Sc in Microbiology, Research', company: 'Pharma Companies, Research Labs' },
+                { title: 'Genetic Counselor', salary: '₹5-10 LPA (India), $60,000-$90,000 (Worldwide)', process: 'Genetics Degree, Counseling Skills', company: 'Hospitals, Research Labs' },
+                { title: 'Wildlife Biologist', salary: '₹3.5-7 LPA (India), $45,000-$75,000 (Worldwide)', process: 'Wildlife Biology Degree, Fieldwork', company: 'Wildlife Reserves, NGOs' }
+            ],
+            passCourse: [
+                { title: 'Lab Technician', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Diploma in Lab Technology', company: 'Research Labs' },
+                { title: 'Science Tutor', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Teaching Certification', company: 'Private Tutoring Centers' },
+                { title: 'Science Journalist', salary: '₹2.5-5 LPA (India), $30,000-$45,000 (Worldwide)', process: 'Science Communication Course', company: 'Media Houses, Science Magazines' },
+                { title: 'Environmental Technician', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Environmental Science Diploma', company: 'NGOs, Environmental Agencies' },
+                { title: 'Pharmacy Assistant', salary: '₹2-3.5 LPA (India), $22,000-$32,000 (Worldwide)', process: 'Diploma in Pharmacy', company: 'Pharmacies, Hospitals' }
+            ],
+            engineering: {
+                it: [
+                    { title: 'Software Engineer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'B.Tech in IT, Coding Interviews', company: 'Google, Microsoft' },
+                    { title: 'Web Developer', salary: '₹4-10 LPA (India), $50,000-$90,000 (Worldwide)', process: 'Frontend/Backend Development Skills', company: 'Infosys, TCS' },
+                    { title: 'Data Scientist', salary: '₹8-20 LPA (India), $90,000-$150,000 (Worldwide)', process: 'Data Science Degree, Coding Skills', company: 'Amazon, Flipkart' },
+                    { title: 'Cybersecurity Analyst', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'Cybersecurity Certification', company: 'Tech Companies, Banks' },
+                    { title: 'AI Engineer', salary: '₹7-18 LPA (India), $80,000-$140,000 (Worldwide)', process: 'AI/ML Degree, Coding Skills', company: 'Google, IBM' }
+                ],
+                // Other engineering fields remain the same...
+            }
+        },
+        // Other education levels and branches follow the same pattern...
+    },
+    // Continue for other education levels (bachelors, masters, phd, postPhd)...
+};
 
-                <!-- Branch Selection -->
-                <div id="branch-selection">
-                    <!-- Class X Branches -->
-                    <div id="classX-branch" style="display: none;">
-                        <label for="classX-field">Select Your Branch:</label>
-                        <select id="classX-field">
-                            <option value="science">Science</option>
-                            <option value="arts">Arts</option>
-                            <option value="commerce">Commerce</option>
-                        </select>
-                    </div>
 
-                    <!-- Class XII Branches -->
-                    <div id="classXII-branch" style="display: none;">
-                        <label for="classXII-field">Select Your Branch:</label>
-                        <select id="classXII-field">
-                            <option value="science">Science</option>
-                            <option value="arts">Arts</option>
-                            <option value="commerce">Commerce</option>
-                        </select>
-                    </div>
+    bachelors: {
+        softwareEngineering: [
+            { title: 'Software Engineer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'B.Tech in CSE, Coding Interviews', company: 'Google, Microsoft' },
+            { title: 'Web Developer', salary: '₹4-10 LPA (India), $50,000-$90,000 (Worldwide)', process: 'Frontend/Backend Development Skills', company: 'Infosys, TCS' },
+            { title: 'Data Scientist', salary: '₹8-20 LPA (India), $90,000-$150,000 (Worldwide)', process: 'Data Science Degree, Coding Skills', company: 'Amazon, Flipkart' },
+            { title: 'Cybersecurity Analyst', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'Cybersecurity Certification', company: 'Tech Companies, Banks' },
+            { title: 'AI Engineer', salary: '₹7-18 LPA (India), $80,000-$140,000 (Worldwide)', process: 'AI/ML Degree, Coding Skills', company: 'Google, IBM' }
+        ],
+        electricalEngineering: [
+            { title: 'Electrical Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Electrical, GATE Exam', company: 'Siemens, ABB' },
+            { title: 'Power Systems Engineer', salary: '₹6-14 LPA (India), $70,000-$110,000 (Worldwide)', process: 'Specialization in Power Systems', company: 'NTPC, Power Grid Corporation' },
+            { title: 'Electronics Design Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'Electronics Design Skills', company: 'Intel, Samsung' },
+            { title: 'Renewable Energy Engineer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'Renewable Energy Specialization', company: 'Suzlon, Tata Power' },
+            { title: 'Control Systems Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'Control Systems Specialization', company: 'Honeywell, Bosch' }
+        ],
+        mechanicalEngineering: [
+            { title: 'Mechanical Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Mechanical, GATE Exam', company: 'L&T, Tata Motors' },
+            { title: 'Automotive Engineer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'Specialization in Automotive Engineering', company: 'Maruti Suzuki, Hyundai' },
+            { title: 'Aerospace Engineer', salary: '₹7-18 LPA (India), $80,000-$140,000 (Worldwide)', process: 'Aerospace Engineering Degree', company: 'ISRO, Boeing' },
+            { title: 'Robotics Engineer', salary: '₹6-14 LPA (India), $70,000-$120,000 (Worldwide)', process: 'Robotics Specialization', company: 'ABB, KUKA' },
+            { title: 'HVAC Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'HVAC Design Skills', company: 'Voltas, Blue Star' }
+        ],
+        physicsHons: [
+            { title: 'Research Scientist', salary: '₹6-12 LPA (India), $70,000-$110,000 (Worldwide)', process: 'B.Sc in Physics, Research Projects', company: 'ISRO, DRDO' },
+            { title: 'Data Analyst', salary: '₹5-10 LPA (India), $60,000-$90,000 (Worldwide)', process: 'Data Analysis Skills, Python/R Programming', company: 'TCS, Wipro' },
+            { title: 'Astronomy Researcher', salary: '₹5-10 LPA (India), $60,000-$90,000 (Worldwide)', process: 'M.Sc in Astronomy, Research Projects', company: 'ISRO, NASA' },
+            { title: 'Physics Tutor', salary: '₹3-5 LPA (India), $35,000-$50,000 (Worldwide)', process: 'Teaching Certification', company: 'Coaching Centers, Schools' },
+            { title: 'Quantum Computing Researcher', salary: '₹7-15 LPA (India), $80,000-$130,000 (Worldwide)', process: 'Quantum Physics Degree, Research', company: 'IBM, Google' }
+        ],
+        chemistryHons: [
+            { title: 'Chemist', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Sc in Chemistry, Research Projects', company: 'Pharmaceutical Companies' },
+            { title: 'Quality Control Analyst', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'Quality Control Certification', company: 'Biocon, Serum Institute' },
+            { title: 'Chemical Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Chemical Engineering', company: 'Reliance Industries, Dow Chemical' },
+            { title: 'Pharmaceutical Researcher', salary: '₹4-9 LPA (India), $50,000-$85,000 (Worldwide)', process: 'M.Sc in Chemistry, Research', company: 'Pharma Companies' },
+            { title: 'Environmental Chemist', salary: '₹3.5-7 LPA (India), $45,000-$75,000 (Worldwide)', process: 'Environmental Science Degree', company: 'Environmental Agencies' }
+        ],
+        mathematicsHons: [
+            { title: 'Data Scientist', salary: '₹8-20 LPA (India), $90,000-$150,000 (Worldwide)', process: 'B.Sc in Mathematics, Coding Skills', company: 'Google, Amazon' },
+            { title: 'Actuary', salary: '₹7-15 LPA (India), $80,000-$130,000 (Worldwide)', process: 'Actuarial Science Certification', company: 'Insurance Companies' },
+            { title: 'Statistician', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'Statistics Degree, Data Analysis', company: 'Research Firms, Government' },
+            { title: 'Financial Analyst', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'Finance Degree, Analytical Skills', company: 'Banks, Financial Institutions' },
+            { title: 'Cryptographer', salary: '₹6-14 LPA (India), $70,000-$120,000 (Worldwide)', process: 'Mathematics Degree, Coding Skills', company: 'Tech Companies, Government' }
+        ],
+        computerScienceHons: [
+            { title: 'Software Developer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'B.Sc in Computer Science, Coding Skills', company: 'Google, Microsoft' },
+            { title: 'Web Developer', salary: '₹4-10 LPA (India), $50,000-$90,000 (Worldwide)', process: 'Frontend/Backend Development Skills', company: 'Infosys, TCS' },
+            { title: 'Data Scientist', salary: '₹8-20 LPA (India), $90,000-$150,000 (Worldwide)', process: 'Data Science Degree, Coding Skills', company: 'Amazon, Flipkart' },
+            { title: 'Cybersecurity Analyst', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'Cybersecurity Certification', company: 'Tech Companies, Banks' },
+            { title: 'AI Engineer', salary: '₹7-18 LPA (India), $80,000-$140,000 (Worldwide)', process: 'AI/ML Degree, Coding Skills', company: 'Google, IBM' }
+        ],
+        bioscienceHons: [
+            { title: 'Biotechnologist', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'B.Sc in Bioscience, Research Projects', company: 'Biocon, Serum Institute' },
+            { title: 'Environmental Scientist', salary: '₹3-7 LPA (India), $40,000-$70,000 (Worldwide)', process: 'Degree in Environmental Science', company: 'TERI, Greenpeace' },
+            { title: 'Microbiologist', salary: '₹4-9 LPA (India), $50,000-$85,000 (Worldwide)', process: 'M.Sc in Microbiology, Research', company: 'Pharma Companies, Research Labs' },
+            { title: 'Genetic Counselor', salary: '₹5-10 LPA (India), $60,000-$90,000 (Worldwide)', process: 'Genetics Degree, Counseling Skills', company: 'Hospitals, Research Labs' },
+            { title: 'Wildlife Biologist', salary: '₹3.5-7 LPA (India), $45,000-$75,000 (Worldwide)', process: 'Wildlife Biology Degree, Fieldwork', company: 'Wildlife Reserves, NGOs' }
+        ],
+        ca: [
+            { title: 'Chartered Accountant', salary: '₹8-20 LPA (India), $100,000-$200,000 (Worldwide)', process: 'CA Certification, Articleship', company: 'EY, Deloitte' },
+            { title: 'Tax Consultant', salary: '₹6-12 LPA (India), $70,000-$120,000 (Worldwide)', process: 'GST Training, Tax Knowledge', company: 'PwC, KPMG' },
+            { title: 'Auditor', salary: '₹5-10 LPA (India), $60,000-$90,000 (Worldwide)', process: 'CA Certification, Auditing Skills', company: 'Big 4 Firms' },
+            { title: 'Financial Advisor', salary: '₹7-15 LPA (India), $80,000-$130,000 (Worldwide)', process: 'Finance Degree, Analytical Skills', company: 'Banks, Financial Institutions' },
+            { title: 'Investment Banker', salary: '₹10-25 LPA (India), $120,000-$200,000 (Worldwide)', process: 'Finance Degree, Networking', company: 'Goldman Sachs, Morgan Stanley' }
+        ],
+        management: [
+            { title: 'Business Analyst', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'MBA, Analytical Skills', company: 'McKinsey, BCG' },
+            { title: 'Marketing Manager', salary: '₹7-18 LPA (India), $80,000-$140,000 (Worldwide)', process: 'MBA in Marketing, Networking', company: 'Hindustan Unilever, Procter & Gamble' },
+            { title: 'HR Manager', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'MBA in HR, People Skills', company: 'Tech Companies, MNCs' },
+            { title: 'Operations Manager', salary: '₹6-14 LPA (India), $70,000-$120,000 (Worldwide)', process: 'MBA in Operations, Supply Chain Knowledge', company: 'Amazon, Flipkart' },
+            { title: 'Entrepreneur', salary: 'Varies', process: 'Business Plan, Networking', company: 'Startups, Self-Employed' }
+        ],
+        arts: [
+            { title: 'Journalist', salary: '₹3-7 LPA (India), $40,000-$70,000 (Worldwide)', process: 'Degree in Journalism, Internships', company: 'Times of India, NDTV' },
+            { title: 'Photographer', salary: '₹2.5-6 LPA (India), $35,000-$60,000 (Worldwide)', process: 'Portfolio Building, Freelancing', company: 'Getty Images, Shutterstock' },
+            { title: 'Content Writer', salary: '₹2-5 LPA (India), $30,000-$45,000 (Worldwide)', process: 'Freelancing, Portfolio Building', company: 'Upwork, Fiverr' },
+            { title: 'Graphic Designer', salary: '₹2.5-6 LPA (India), $35,000-$50,000 (Worldwide)', process: 'Diploma in Graphic Design', company: 'Canva, Adobe' },
+            { title: 'Event Planner', salary: '₹3-7 LPA (India), $35,000-$60,000 (Worldwide)', process: 'Event Management Course', company: 'Event Management Firms' }
+        ],
+        commerce: [
+            { title: 'Accountant', salary: '₹2-5 LPA (India), $30,000-$45,000 (Worldwide)', process: 'Diploma in Accounting', company: 'Small Businesses, CA Firms' },
+            { title: 'Sales Executive', salary: '₹2.5-6 LPA (India), $35,000-$50,000 (Worldwide)', process: 'On-the-Job Training', company: 'Retail Stores, E-commerce' },
+            { title: 'Bank Clerk', salary: '₹2.5-4.5 LPA (India), $30,000-$40,000 (Worldwide)', process: 'Bank Exams', company: 'Public and Private Banks' },
+            { title: 'Tax Consultant', salary: '₹3-6 LPA (India), $35,000-$55,000 (Worldwide)', process: 'GST Training, Tax Knowledge', company: 'CA Firms, Tax Agencies' },
+            { title: 'Inventory Manager', salary: '₹3-5 LPA (India), $35,000-$50,000 (Worldwide)', process: 'Diploma in Supply Chain Management', company: 'Retail Chains, Warehouses' }
+        ]
+    },
+    // Continue for Masters, PhD, and Post-PhD...
+};
 
-                    <!-- Class XII Science Sub-Branches -->
-                    <div id="classXII-science" style="display: none;">
-                        <label for="classXII-science-field">Select Your Field:</label>
-                        <select id="classXII-science-field">
-                            <option value="physicsHons">Physics (Hons)</option>
-                            <option value="chemistryHons">Chemistry (Hons)</option>
-                            <option value="mathematicsHons">Mathematics (Hons)</option>
-                            <option value="computerScienceHons">Computer Science (Hons)</option>
-                            <option value="bioscienceHons">Bioscience (Hons)</option>
-                            <option value="passCourse">Pass Course</option>
-                            <option value="engineering">Engineering</option>
-                            <option value="management">Management</option>
-                        </select>
-                    </div>
 
-                    <!-- Class XII Engineering Sub-Branches -->
-                    <div id="classXII-engineering" style="display: none;">
-                        <label for="classXII-engineering-field">Select Your Engineering Field:</label>
-                        <select id="classXII-engineering-field">
-                            <option value="it">IT</option>
-                            <option value="electrical">Electrical</option>
-                            <option value="electronics">Electronics</option>
-                            <option value="mechanical">Mechanical</option>
-                            <option value="civil">Civil</option>
-                            <option value="architecture">Architecture</option>
-                            <option value="chemical">Chemical</option>
-                            <option value="hydrology">Hydrology</option>
-                        </select>
-                    </div>
 
-                    <!-- Bachelors Branches -->
-                    <div id="bachelors-branch" style="display: none;">
-                        <label for="bachelors-field">Select Your Field:</label>
-                        <select id="bachelors-field">
-                            <option value="softwareEngineering">Software Engineering</option>
-                            <option value="electricalEngineering">Electrical Engineering</option>
-                            <option value="mechanicalEngineering">Mechanical Engineering</option>
-                            <option value="physicsHons">Physics (Hons)</option>
-                            <option value="chemistryHons">Chemistry (Hons)</option>
-                            <option value="mathematicsHons">Mathematics (Hons)</option>
-                            <option value="computerScienceHons">Computer Science (Hons)</option>
-                            <option value="bioscienceHons">Bioscience (Hons)</option>
-                            <option value="ca">Chartered Accountancy (CA)</option>
-                            <option value="management">Management</option>
-                        </select>
-                    </div>
+    masters: {
+        engineering: [
+            { title: 'Senior Engineer', salary: '₹10-25 LPA (India), $100,000-$150,000 (Worldwide)', process: 'M.Tech, GATE Exam, Experience', company: 'L&T, Tata Projects' },
+            { title: 'Project Manager', salary: '₹12-30 LPA (India), $120,000-$180,000 (Worldwide)', process: 'MBA, PMP Certification', company: 'Infosys, Wipro' },
+            { title: 'Research Scientist', salary: '₹10-20 LPA (India), $100,000-$150,000 (Worldwide)', process: 'M.Tech, Research Publications', company: 'ISRO, DRDO' },
+            { title: 'Consultant', salary: '₹12-25 LPA (India), $120,000-$180,000 (Worldwide)', process: 'M.Tech, Industry Experience', company: 'Accenture, Capgemini' },
+            { title: 'Technical Lead', salary: '₹15-30 LPA (India), $150,000-$200,000 (Worldwide)', process: 'M.Tech, Leadership Skills', company: 'Google, Microsoft' }
+        ],
+        medical: [
+            { title: 'Surgeon', salary: '₹15-40 LPA (India), $200,000-$400,000 (Worldwide)', process: 'MS in Surgery, Residency', company: 'Apollo Hospitals, Fortis Healthcare' },
+            { title: 'Specialist Doctor', salary: '₹12-30 LPA (India), $150,000-$300,000 (Worldwide)', process: 'MD, Licensing Exam', company: 'Max Healthcare, Manipal Hospitals' },
+            { title: 'Medical Researcher', salary: '₹10-25 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Clinical Trials', company: 'AIIMS, Apollo Hospitals' },
+            { title: 'Public Health Specialist', salary: '₹8-18 LPA (India), $100,000-$150,000 (Worldwide)', process: 'MPH Degree, Public Health Projects', company: 'WHO, NGOs' },
+            { title: 'Hospital Administrator', salary: '₹10-20 LPA (India), $120,000-$180,000 (Worldwide)', process: 'MBA in Healthcare Management', company: 'Hospitals, Healthcare Firms' }
+        ],
+        arts: [
+            { title: 'Professor', salary: '₹10-20 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD, NET Exam', company: 'University of Delhi, JNU' },
+            { title: 'Curator', salary: '₹8-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'MA in Art History, Internships', company: 'National Museum, Art Galleries' },
+            { title: 'Art Director', salary: '₹10-25 LPA (India), $100,000-$180,000 (Worldwide)', process: 'MA in Fine Arts, Portfolio', company: 'Advertising Agencies, Film Industry' },
+            { title: 'Cultural Anthropologist', salary: '₹8-18 LPA (India), $80,000-$150,000 (Worldwide)', process: 'MA in Anthropology, Fieldwork', company: 'Research Institutions, NGOs' },
+            { title: 'Museum Educator', salary: '₹6-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'MA in Education, Museum Studies', company: 'Museums, Educational Institutions' }
+        ],
+        commerce: [
+            { title: 'Financial Manager', salary: '₹12-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'MBA in Finance, CFA Certification', company: 'Goldman Sachs, Morgan Stanley' },
+            { title: 'Business Consultant', salary: '₹10-25 LPA (India), $100,000-$180,000 (Worldwide)', process: 'MBA, Networking', company: 'McKinsey, BCG' },
+            { title: 'Investment Banker', salary: '₹15-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'MBA in Finance, Networking', company: 'Goldman Sachs, JP Morgan' },
+            { title: 'Tax Advisor', salary: '₹10-20 LPA (India), $120,000-$180,000 (Worldwide)', process: 'CA/CS Certification, GST Training', company: 'EY, PwC' },
+            { title: 'Risk Analyst', salary: '₹8-18 LPA (India), $100,000-$150,000 (Worldwide)', process: 'MBA in Finance, Risk Management', company: 'Banks, Financial Institutions' }
+        ],
+        science: [
+            { title: 'Research Scientist', salary: '₹10-25 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD, Research Publications', company: 'ISRO, DRDO' },
+            { title: 'Biochemist', salary: '₹8-20 LPA (India), $90,000-$140,000 (Worldwide)', process: 'M.Sc in Biochemistry, Research Projects', company: 'Biocon, Serum Institute' },
+            { title: 'Data Scientist', salary: '₹12-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'M.Sc in Data Science, Coding Skills', company: 'Google, Amazon' },
+            { title: 'Environmental Scientist', salary: '₹8-18 LPA (India), $100,000-$150,000 (Worldwide)', process: 'M.Sc in Environmental Science, Research', company: 'TERI, Greenpeace' },
+            { title: 'Astrophysicist', salary: '₹10-25 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Astrophysics, Research', company: 'ISRO, NASA' }
+        ],
+        defence: [
+            { title: 'Army Colonel', salary: '₹15-30 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Army' },
+            { title: 'Air Force Wing Commander', salary: '₹15-30 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Air Force' },
+            { title: 'Naval Officer', salary: '₹15-30 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Navy' },
+            { title: 'Defence Analyst', salary: '₹10-20 LPA (India), $120,000-$180,000 (Worldwide)', process: 'Defence Studies Degree, Research', company: 'Think Tanks, Government' },
+            { title: 'Military Scientist', salary: '₹12-25 LPA (India), $150,000-$200,000 (Worldwide)', process: 'PhD in Defence Technology, Research', company: 'DRDO, ISRO' }
+        ],
+        administration: [
+            { title: 'IAS Officer', salary: '₹12-30 LPA (India)', process: 'UPSC Civil Services Exam, Interview', company: 'Government of India' },
+            { title: 'State Administrative Officer', salary: '₹10-25 LPA (India)', process: 'State PSC Exam, Interview', company: 'State Governments' },
+            { title: 'Policy Analyst', salary: '₹8-18 LPA (India), $100,000-$150,000 (Worldwide)', process: 'Public Policy Degree, Research', company: 'NITI Aayog, IMF' },
+            { title: 'Public Administrator', salary: '₹10-20 LPA (India), $120,000-$180,000 (Worldwide)', process: 'MPA Degree, Government Exams', company: 'Government Agencies' },
+            { title: 'Urban Planner', salary: '₹8-15 LPA (India), $100,000-$150,000 (Worldwide)', process: 'Urban Planning Degree, Projects', company: 'Municipal Corporations, NGOs' }
+        ],
+        teaching: [
+            { title: 'University Professor', salary: '₹12-25 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD, NET Exam', company: 'IITs, IIMs' },
+            { title: 'Research Guide', salary: '₹10-20 LPA (India), $70,000-$120,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Institutions' },
+            { title: 'Curriculum Developer', salary: '₹8-15 LPA (India), $80,000-$120,000 (Worldwide)', process: 'Education Degree, Curriculum Design', company: 'Educational Boards, NGOs' },
+            { title: 'Education Consultant', salary: '₹10-20 LPA (India), $100,000-$150,000 (Worldwide)', process: 'MBA in Education, Networking', company: 'Educational Firms' },
+            { title: 'Online Educator', salary: '₹6-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'Teaching Certification, Online Platforms', company: 'Byju’s, Unacademy' }
+        ],
+        politics: [
+            { title: 'Member of Parliament (MP)', salary: '₹15-30 LPA (India)', process: 'Elections, Political Networking', company: 'Government of India' },
+            { title: 'Policy Advisor', salary: '₹10-20 LPA (India), $80,000-$150,000 (Worldwide)', process: 'Degree in Political Science, Networking', company: 'Think Tanks, NGOs' },
+            { title: 'Political Analyst', salary: '₹8-15 LPA (India), $80,000-$120,000 (Worldwide)', process: 'Political Science Degree, Research', company: 'Media Houses, Research Firms' },
+            { title: 'Diplomat', salary: '₹12-25 LPA (India), $120,000-$180,000 (Worldwide)', process: 'UPSC Exam, Foreign Service Training', company: 'Ministry of External Affairs' },
+            { title: 'Public Relations Officer', salary: '₹8-18 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PR Degree, Networking', company: 'Political Parties, Government' }
+        ],
+        aviation: [
+            { title: 'Senior Commercial Pilot', salary: '₹15-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'Experience, Advanced Flight Training', company: 'Indigo, Air India' },
+            { title: 'Aviation Manager', salary: '₹12-25 LPA (India), $100,000-$180,000 (Worldwide)', process: 'MBA in Aviation Management, Experience', company: 'Airport Authority of India, SpiceJet' },
+            { title: 'Aircraft Engineer', salary: '₹10-20 LPA (India), $120,000-$180,000 (Worldwide)', process: 'B.Tech in Aeronautics, Certification', company: 'Boeing, Airbus' },
+            { title: 'Air Traffic Controller', salary: '₹8-15 LPA (India), $100,000-$150,000 (Worldwide)', process: 'ATC Training, Certification', company: 'Airport Authority of India' },
+            { title: 'Flight Instructor', salary: '₹10-18 LPA (India), $120,000-$160,000 (Worldwide)', process: 'Flight Training Certification', company: 'Flying Schools, Airlines' }
+        ]
+    },
+    phd: {
+        engineering: [
+            { title: 'Research Scientist', salary: '₹15-40 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Publications', company: 'ISRO, DRDO' },
+            { title: 'University Professor', salary: '₹12-30 LPA (India), $100,000-$180,000 (Worldwide)', process: 'PhD, NET Exam', company: 'IITs, NITs' },
+            { title: 'Principal Engineer', salary: '₹20-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Industry Experience', company: 'Google, Microsoft' },
+            { title: 'R&D Head', salary: '₹25-60 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Leadership Skills', company: 'Tech Companies, Research Labs' },
+            { title: 'Consultant', salary: '₹18-40 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD, Industry Experience', company: 'Accenture, Capgemini' }
+        ],
+        medical: [
+            { title: 'Medical Researcher', salary: '₹15-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD, Clinical Trials', company: 'AIIMS, Apollo Hospitals' },
+            { title: 'Clinical Scientist', salary: '₹12-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Licensing Exam', company: 'Fortis Healthcare, Max Healthcare' },
+            { title: 'Professor of Medicine', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Teaching Experience', company: 'Medical Colleges' },
+            { title: 'Biomedical Researcher', salary: '₹18-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Labs, Pharma Companies' },
+            { title: 'Public Health Expert', salary: '₹15-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Public Health, Research', company: 'WHO, NGOs' }
+        ],
+        arts: [
+            { title: 'University Professor', salary: '₹10-25 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD, NET Exam', company: 'University of Delhi, JNU' },
+            { title: 'Historian', salary: '₹8-20 LPA (India), $70,000-$120,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Institutions' },
+            { title: 'Art Historian', salary: '₹10-25 LPA (India), $100,000-$180,000 (Worldwide)', process: 'PhD in Art History, Research', company: 'Museums, Universities' },
+            { title: 'Cultural Anthropologist', salary: '₹12-25 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Anthropology, Fieldwork', company: 'Research Institutions, NGOs' },
+            { title: 'Literary Critic', salary: '₹8-18 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD in Literature, Research', company: 'Publishing Houses, Universities' }
+        ],
+        commerce: [
+            { title: 'Economist', salary: '₹12-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Publications', company: 'RBI, World Bank' },
+            { title: 'Policy Analyst', salary: '₹10-25 LPA (India), $100,000-$180,000 (Worldwide)', process: 'PhD, Government Exams', company: 'NITI Aayog, IMF' },
+            { title: 'Financial Consultant', salary: '₹15-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Finance, Industry Experience', company: 'Goldman Sachs, Morgan Stanley' },
+            { title: 'Tax Policy Expert', salary: '₹12-25 LPA (India), $120,000-$180,000 (Worldwide)', process: 'PhD in Economics, Research', company: 'Government, Think Tanks' },
+            { title: 'Investment Strategist', salary: '₹18-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD in Finance, Analytical Skills', company: 'Investment Firms, Banks' }
+        ],
+        science: [
+            { title: 'Principal Scientist', salary: '₹15-40 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'ISRO, CSIR' },
+            { title: 'Lead Researcher', salary: '₹12-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Publications', company: 'DRDO, BARC' },
+            { title: 'Astrophysicist', salary: '₹15-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Astrophysics, Research', company: 'ISRO, NASA' },
+            { title: 'Biotechnologist', salary: '₹12-25 LPA (India), $120,000-$180,000 (Worldwide)', process: 'PhD in Biotechnology, Research', company: 'Biocon, Serum Institute' },
+            { title: 'Environmental Scientist', salary: '₹10-20 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD in Environmental Science, Research', company: 'TERI, Greenpeace' }
+        ],
+        defence: [
+            { title: 'Army General', salary: '₹20-40 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Army' },
+            { title: 'Air Force Marshal', salary: '₹20-40 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Air Force' },
+            { title: 'Naval Admiral', salary: '₹20-40 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Navy' },
+            { title: 'Defence
 
-                    <!-- Masters Branches -->
-                    <div id="masters-branch" style="display: none;">
-                        <label for="masters-field">Select Your Field:</label>
-                        <select id="masters-field">
-                            <option value="engineering">Engineering</option>
-                            <option value="medical">Medical</option>
-                            <option value="arts">Arts</option>
-                            <option value="commerce">Commerce</option>
-                            <option value="science">Science</option>
-                            <option value="defence">Defence</option>
-                            <option value="administration">Administration</option>
-                            <option value="teaching">Teaching</option>
-                            <option value="politics">Politics</option>
-                            <option value="aviation">Aviation</option>
-                        </select>
-                    </div>
 
-                    <!-- PhD and Post-PhD Branches -->
-                    <div id="phd-branch" style="display: none;">
-                        <label for="phd-field">Select Your Field:</label>
-                        <select id="phd-field">
-                            <option value="engineering">Engineering</option>
-                            <option value="medical">Medical</option>
-                            <option value="arts">Arts</option>
-                            <option value="commerce">Commerce</option>
-                            <option value="science">Science</option>
-                            <option value="defence">Defence</option>
-                            <option value="administration">Administration</option>
-                            <option value="teaching">Teaching</option>
-                            <option value="politics">Politics</option>
-                            <option value="aviation">Aviation</option>
-                        </select>
-                    </div>
+                        { title: 'Defence Analyst', salary: '₹15-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Defence Studies, Research', company: 'Think Tanks, Government' },
+            { title: 'Military Scientist', salary: '₹18-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Defence Technology, Research', company: 'DRDO, ISRO' }
+        ],
+        administration: [
+            { title: 'Cabinet Secretary', salary: '₹25-50 LPA (India)', process: 'Promotion from IAS, Experience', company: 'Government of India' },
+            { title: 'Chief Secretary', salary: '₹20-40 LPA (India)', process: 'Promotion from State Administrative Services, Experience', company: 'State Governments' },
+            { title: 'Policy Director', salary: '₹18-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Public Policy, Research', company: 'NITI Aayog, IMF' },
+            { title: 'Public Administrator', salary: '₹15-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Public Administration, Research', company: 'Government Agencies' },
+            { title: 'Urban Development Expert', salary: '₹12-25 LPA (India), $100,000-$180,000 (Worldwide)', process: 'PhD in Urban Planning, Research', company: 'Municipal Corporations, NGOs' }
+        ],
+        teaching: [
+            { title: 'University Vice-Chancellor', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'Central Universities' },
+            { title: 'Research Director', salary: '₹20-40 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'Research Institutions' },
+            { title: 'Curriculum Developer', salary: '₹15-25 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD in Education, Curriculum Design', company: 'Educational Boards, NGOs' },
+            { title: 'Education Consultant', salary: '₹18-35 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Education, Networking', company: 'Educational Firms' },
+            { title: 'Online Educator', salary: '₹10-20 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD, Teaching Certification', company: 'Byju’s, Unacademy' }
+        ],
+        politics: [
+            { title: 'Prime Minister', salary: '₹30-60 LPA (India)', process: 'Elections, Political Leadership', company: 'Government of India' },
+            { title: 'Chief Minister', salary: '₹25-50 LPA (India)', process: 'Elections, Political Leadership', company: 'State Governments' },
+            { title: 'Political Strategist', salary: '₹20-40 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Political Science, Networking', company: 'Political Parties, Think Tanks' },
+            { title: 'Diplomat', salary: '₹18-35 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in International Relations, Foreign Service Training', company: 'Ministry of External Affairs' },
+            { title: 'Public Relations Officer', salary: '₹15-30 LPA (India), $100,000-$180,000 (Worldwide)', process: 'PhD in Communication, Networking', company: 'Political Parties, Government' }
+        ],
+        aviation: [
+            { title: 'Chief Pilot', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'Experience, Advanced Flight Training', company: 'Indigo, Air India' },
+            { title: 'Aviation Director', salary: '₹20-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Aviation Management, Experience', company: 'Airport Authority of India, SpiceJet' },
+            { title: 'Aircraft Engineer', salary: '₹18-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Aeronautics, Certification', company: 'Boeing, Airbus' },
+            { title: 'Air Traffic Controller', salary: '₹15-25 LPA (India), $120,000-$180,000 (Worldwide)', process: 'PhD in Aviation, Certification', company: 'Airport Authority of India' },
+            { title: 'Flight Instructor', salary: '₹12-20 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD in Aviation, Flight Training Certification', company: 'Flying Schools, Airlines' }
+        ]
+    },
+    postPhd: {
+        engineering: [
+            { title: 'Principal Research Scientist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'ISRO, DRDO' },
+            { title: 'University Dean', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'IITs, NITs' },
+            { title: 'R&D Head', salary: '₹30-60 LPA (India), $250,000-$500,000 (Worldwide)', process: 'PhD, Industry Experience', company: 'Tech Companies, Research Labs' },
+            { title: 'Consultant', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Industry Experience', company: 'Accenture, Capgemini' },
+            { title: 'Innovation Strategist', salary: '₹30-60 LPA (India), $250,000-$500,000 (Worldwide)', process: 'PhD, Leadership Skills', company: 'Google, Microsoft' }
+        ],
+        medical: [
+            { title: 'Medical Director', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Clinical Leadership', company: 'AIIMS, Apollo Hospitals' },
+            { title: 'Chief Medical Officer', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Licensing Exam', company: 'Fortis Healthcare, Max Healthcare' },
+            { title: 'Professor of Medicine', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Teaching Experience', company: 'Medical Colleges' },
+            { title: 'Biomedical Researcher', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Labs, Pharma Companies' },
+            { title: 'Public Health Expert', salary: '₹18-35 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Public Health, Research', company: 'WHO, NGOs' }
+        ],
+        arts: [
+            { title: 'University Chancellor', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'Central Universities' },
+            { title: 'Senior Historian', salary: '₹18-35 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Institutions' },
+            { title: 'Art Historian', salary: '₹20-40 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Art History, Research', company: 'Museums, Universities' },
+            { title: 'Cultural Anthropologist', salary: '₹18-35 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Anthropology, Fieldwork', company: 'Research Institutions, NGOs' },
+            { title: 'Literary Critic', salary: '₹15-30 LPA (India), $100,000-$180,000 (Worldwide)', process: 'PhD in Literature, Research', company: 'Publishing Houses, Universities' }
+        ],
+        commerce: [
+            { title: 'Chief Economist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'RBI, World Bank' },
+            { title: 'Policy Director', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Government Exams', company: 'NITI Aayog, IMF' },
+            { title: 'Financial Consultant', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD in Finance, Industry Experience', company: 'Goldman Sachs, Morgan Stanley' },
+            { title: 'Tax Policy Expert', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD in Economics, Research', company: 'Government, Think Tanks' },
+            { title: 'Investment Strategist', salary: '₹25-60 LPA (India), $200,000-$500,000 (Worldwide)', process: 'PhD in Finance, Analytical Skills', company: 'Investment Firms, Banks' }
+        ],
+        science: [
+            { title: 'Chief Scientist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'ISRO, CSIR' },
+            { title: 'Research Head', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Research Publications', company: 'DRDO, BARC' },
+            { title: 'Astrophysicist', salary: '₹20-50 LPA (India), $150,000-$350,000 (Worldwide)', process: 'PhD in Astrophysics, Research', company: 'ISRO, NASA' },
+            { title: 'Biotechnologist', salary: '₹18-35 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Biotechnology, Research', company: 'Biocon, Serum Institute' },
+            { title: 'Environmental Scientist', salary: '₹15-30 LPA (India), $100,000-$200,000 (Worldwide)', process: 'PhD in Environmental Science, Research', company: 'TERI, Greenpeace' }
+        ],
+        defence: [
+            { title: 'Chief of Army Staff', salary: '₹30-60 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Army' },
+            { title: 'Chief of Air Staff', salary: '₹30-60 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Air Force' },
+            { title: 'Chief of Naval Staff', salary: '₹30-60 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Navy' },
+            { title: 'Defence Analyst', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD in Defence Studies, Research', company: 'Think Tanks, Government' },
+            { title: 'Military Scientist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD in Defence Technology, Research', company: 'DRDO, ISRO' }
+        ],
+        administration: [
+            { title: 'Cabinet Secretary', salary: '₹30-60 LPA (India)', process: 'Promotion from IAS, Experience', company: 'Government of India' },
+            { title: 'Chief Secretary', salary: '₹25-50 LPA (India)', process: 'Promotion from State Administrative Services, Experience', company: 'State Governments' },
+            { title: 'Policy Director', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD in Public Policy, Research', company: 'NITI Aayog, IMF' },
+            { title: 'Public Administrator', salary: '₹18-35 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Public Administration, Research', company: 'Government Agencies' },
+            { title: 'Urban Development Expert', salary: '₹15-30 LPA (India), $100,000-$200,000 (Worldwide)', process: 'PhD in Urban Planning, Research', company: 'Municipal Corporations, NGOs' }
+        ],
+        teaching: [
+            { title: 'University Chancellor', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'Central Universities' },
+            { title: 'Research Director', salary: '₹20-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'Research Institutions' },
+            { title: 'Curriculum Developer', salary: '₹15-25 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD in Education, Curriculum Design', company: 'Educational Boards, NGOs' },
+            { title: 'Education Consultant', salary: '₹18-35 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Education, Networking', company: 'Educational Firms' },
+            { title: 'Online Educator', salary: '₹10-20 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD, Teaching Certification', company: 'Byju’s, Unacademy' }
+        ],
+        politics: [
+            { title: 'Prime Minister', salary: '₹30-60 LPA (India)', process: 'Elections, Political Leadership', company: 'Government of India' },
+            { title: 'Chief Minister', salary: '₹25-50 LPA (India)', process: 'Elections, Political Leadership', company: 'State Governments' },
+            { title: 'Political Strategist', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD in Political Science, Networking', company: 'Political Parties, Think Tanks' },
+            { title: 'Diplomat', salary: '₹18-35 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in International Relations, Foreign Service Training', company: 'Ministry of External Affairs' },
+            { title: 'Public Relations Officer', salary: '₹15-30 LPA (India), $100,000-$200,000 (Worldwide)', process: 'PhD in Communication, Networking', company: 'Political Parties, Government' }
+        ],
+        aviation: [
+            { title: 'Chief Pilot', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'Experience, Advanced Flight Training', company: 'Indigo, Air India' },
+            { title: 'Aviation Director', salary: '₹20-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Aviation Management, Experience', company: 'Airport Authority of India, SpiceJet' },
+            { title: 'Aircraft Engineer', salary: '₹18-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Aeronautics, Certification', company: 'Boeing, Airbus' },
+            { title: 'Air Traffic Controller', salary: '₹15-25 LPA (India), $120,000-$180,000 (Worldwide)', process: 'PhD in Aviation, Certification', company: 'Airport Authority of India' },
+            { title: 'Flight Instructor', salary: '₹12-20 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD in Aviation, Flight Training Certification', company: 'Flying Schools, Airlines' }
+        ]
+    }
+};
+
+        aviation: [
+            { title: 'Chief Pilot', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'Experience, Advanced Flight Training', company: 'Indigo, Air India' },
+            { title: 'Aviation Director', salary: '₹20-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Aviation Management, Experience', company: 'Airport Authority of India, SpiceJet' },
+            { title: 'Aircraft Engineer', salary: '₹18-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Aeronautics, Certification', company: 'Boeing, Airbus' },
+            { title: 'Air Traffic Controller', salary: '₹15-25 LPA (India), $120,000-$180,000 (Worldwide)', process: 'PhD in Aviation, Certification', company: 'Airport Authority of India' },
+            { title: 'Flight Instructor', salary: '₹12-20 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD in Aviation, Flight Training Certification', company: 'Flying Schools, Airlines' }
+        ]
+    },
+    postPhd: {
+        engineering: [
+            { title: 'Principal Research Scientist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'ISRO, DRDO' },
+            { title: 'University Dean', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'IITs, NITs' },
+            { title: 'R&D Head', salary: '₹30-60 LPA (India), $250,000-$500,000 (Worldwide)', process: 'PhD, Industry Experience', company: 'Tech Companies, Research Labs' },
+            { title: 'Consultant', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Industry Experience', company: 'Accenture, Capgemini' },
+            { title: 'Innovation Strategist', salary: '₹30-60 LPA (India), $250,000-$500,000 (Worldwide)', process: 'PhD, Leadership Skills', company: 'Google, Microsoft' }
+        ],
+        medical: [
+            { title: 'Medical Director', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Clinical Leadership', company: 'AIIMS, Apollo Hospitals' },
+            { title: 'Chief Medical Officer', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Licensing Exam', company: 'Fortis Healthcare, Max Healthcare' },
+            { title: 'Professor of Medicine', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Teaching Experience', company: 'Medical Colleges' },
+            { title: 'Biomedical Researcher', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Labs, Pharma Companies' },
+            { title: 'Public Health Expert', salary: '₹18-35 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Public Health, Research', company: 'WHO, NGOs' }
+        ],
+        arts: [
+            { title: 'University Chancellor', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'Central Universities' },
+            { title: 'Senior Historian', salary: '₹18-35 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Institutions' },
+            { title: 'Art Historian', salary: '₹20-40 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Art History, Research', company: 'Museums, Universities' },
+            { title: 'Cultural Anthropologist', salary: '₹18-35 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Anthropology, Fieldwork', company: 'Research Institutions, NGOs' },
+            { title: 'Literary Critic', salary: '₹15-30 LPA (India), $100,000-$180,000 (Worldwide)', process: 'PhD in Literature, Research', company: 'Publishing Houses, Universities' }
+        ],
+        commerce: [
+            { title: 'Chief Economist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'RBI, World Bank' },
+            { title: 'Policy Director', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Government Exams', company: 'NITI Aayog, IMF' },
+            { title: 'Financial Consultant', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD in Finance, Industry Experience', company: 'Goldman Sachs, Morgan Stanley' },
+            { title: 'Tax Policy Expert', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD in Economics, Research', company: 'Government, Think Tanks' },
+            { title: 'Investment Strategist', salary: '₹25-60 LPA (India), $200,000-$500,000 (Worldwide)', process: 'PhD in Finance, Analytical Skills', company: 'Investment Firms, Banks' }
+        ],
+        science: [
+            { title: 'Chief Scientist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'ISRO, CSIR' },
+            { title: 'Research Head', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Research Publications', company: 'DRDO, BARC' },
+            { title: 'Astrophysicist', salary: '₹20-50 LPA (India), $150,000-$350,000 (Worldwide)', process: 'PhD in Astrophysics, Research', company: 'ISRO, NASA' },
+            { title: 'Biotechnologist', salary: '₹18-35 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Biotechnology, Research', company: 'Biocon, Serum Institute' },
+            { title: 'Environmental Scientist', salary: '₹15-30 LPA (India), $100,000-$200,000 (Worldwide)', process: 'PhD in Environmental Science, Research', company: 'TERI, Greenpeace' }
+        ],
+        defence: [
+            { title: 'Chief of Army Staff', salary: '₹30-60 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Army' },
+            { title: 'Chief of Air Staff', salary: '₹30-60 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Air Force' },
+            { title: 'Chief of Naval Staff', salary: '₹30-60 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Navy' },
+            { title: 'Defence Analyst', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD in Defence Studies, Research', company: 'Think Tanks, Government' },
+            { title: 'Military Scientist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD in Defence Technology, Research', company: 'DRDO, ISRO' }
+        ],
+        administration: [
+            { title: 'Cabinet Secretary', salary: '₹30-60 LPA (India)', process: 'Promotion from IAS, Experience', company: 'Government of India' },
+            { title: 'Chief Secretary', salary: '₹25-50 LPA (India)', process: 'Promotion from State Administrative Services, Experience', company: 'State Governments' },
+            { title: 'Policy Director', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD in Public Policy, Research', company: 'NITI Aayog, IMF' },
+            { title: 'Public Administrator', salary: '₹18-35 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Public Administration, Research', company: 'Government Agencies' },
+            { title: 'Urban Development Expert', salary: '₹15-30 LPA (India), $100,000-$200,000 (Worldwide)', process: 'PhD in Urban Planning, Research', company: 'Municipal Corporations, NGOs' }
+        ],
+        teaching: [
+            { title: 'University Chancellor', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'Central Universities' },
+            { title: 'Research Director', salary: '₹20-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'Research Institutions' },
+            { title: 'Curriculum Developer', salary: '₹15-25 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD in Education, Curriculum Design', company: 'Educational Boards, NGOs' },
+            { title: 'Education Consultant', salary: '₹18-35 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD in Education, Networking', company: 'Educational Firms' },
+            { title: 'Online Educator', salary: '₹10-20 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD, Teaching Certification', company: 'Byju’s, Unacademy' }
+        ],
+        politics: [
+            { title: 'Prime Minister', salary: '₹30-60 LPA (India)', process: 'Elections, Political Leadership', company: 'Government of India' },
+            { title: 'Chief Minister', salary: '₹25-50 LPA (India)', process: 'Elections, Political Leadership', company: 'State Governments' },
+            { title: 'Political Strategist', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD in Political Science, Networking', company: 'Political Parties, Think Tanks' },
+            { title: 'Diplomat', salary: '₹18-35 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in International Relations, Foreign Service Training', company: 'Ministry of External Affairs' },
+            { title: 'Public Relations Officer', salary: '₹15-30 LPA (India), $100,000-$200,000 (Worldwide)', process: 'PhD in Communication, Networking', company: 'Political Parties, Government' }
+        ],
+        aviation: [
+            { title: 'Chief Pilot', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'Experience, Advanced Flight Training', company: 'Indigo, Air India' },
+            { title: 'Aviation Director', salary: '₹20-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Aviation Management, Experience', company: 'Airport Authority of India, SpiceJet' },
+            { title: 'Aircraft Engineer', salary: '₹18-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Aeronautics, Certification', company: 'Boeing, Airbus' },
+            { title: 'Air Traffic Controller', salary: '₹15-25 LPA (India), $120,000-$180,000 (Worldwide)', process: 'PhD in Aviation, Certification', company: 'Airport Authority of India' },
+            { title: 'Flight Instructor', salary: '₹12-20 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD in Aviation, Flight Training Certification', company: 'Flying Schools, Airlines' }
+        ]
+    }
+};
+
+
+        aviation: [
+            { title: 'Chief Pilot', salary: '₹25-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'Experience, Advanced Flight Training', company: 'Indigo, Air India' },
+            { title: 'Aviation Director', salary: '₹20-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'PhD in Aviation Management, Experience', company: 'Airport Authority of India, SpiceJet' },
+            { title: 'Aircraft Engineer', salary: '₹18-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD in Aeronautics, Certification', company: 'Boeing, Airbus' },
+            { title: 'Air Traffic Controller', salary: '₹15-25 LPA (India), $120,000-$180,000 (Worldwide)', process: 'PhD in Aviation, Certification', company: 'Airport Authority of India' },
+            { title: 'Flight Instructor', salary: '₹12-20 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD in Aviation, Flight Training Certification', company: 'Flying Schools, Airlines' }
+        ]
+    }
+};
+
+// Function to show jobs based on selection
+document.getElementById('show-jobs').addEventListener('click', function() {
+    const educationLevel = document.getElementById('education-level').value;
+    const jobList = document.getElementById('job-list');
+
+    // Clear previous results
+    jobList.innerHTML = '';
+
+    // Get jobs based on selection
+    let selectedJobs;
+    if (educationLevel === 'classX') {
+        selectedJobs = jobs[educationLevel]?.[document.getElementById('classX-field').value];
+    } else if (educationLevel === 'classXII') {
+        const classXIIField = document.getElementById('classXII-field').value;
+        if (classXIIField === 'science') {
+            const scienceField = document.getElementById('classXII-science-field').value;
+            if (scienceField === 'engineering') {
+                selectedJobs = jobs[educationLevel]?.science?.engineering?.[document.getElementById('classXII-engineering-field').value];
+            } else {
+                selectedJobs = jobs[educationLevel]?.science?.[scienceField];
+            }
+        } else {
+            selectedJobs = jobs[educationLevel]?.[classXIIField];
+        }
+    } else if (educationLevel === 'bachelors') {
+        selectedJobs = jobs[educationLevel]?.[document.getElementById('bachelors-field').value];
+    } else if (educationLevel === 'masters') {
+        selectedJobs = jobs[educationLevel]?.[document.getElementById('masters-field').value];
+    } else if (educationLevel === 'phd' || educationLevel === 'postPhd') {
+        selectedJobs = jobs[educationLevel]?.[document.getElementById('phd-field').value];
+    }
+
+    // Display jobs or a message if no jobs are found
+    if (selectedJobs && selectedJobs.length > 0) {
+        selectedJobs.forEach(job => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="job-title">${job.title}</div>
+                <div class="job-details">
+                    <strong>Salary:</strong> ${job.salary}<br>
+                    <strong>Selection Process:</strong> ${job.process}<br>
+                    <strong>Companies:</strong> ${job.company || 'Not specified'}
                 </div>
-
-                <button id="show-jobs">Show Jobs</button>
-            </div>
-        </section>
-
-        <section id="job-results">
-            <div class="container">
-                <h2>Job Opportunities</h2>
-                <ul id="job-list"></ul>
-            </div>
-        </section>
-
-        <section id="advertisement">
-            <div class="container">
-                <h2>Advertisements</h2>
-                <!-- Google AdSense Ad Unit -->
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_SENSE_ID"
-                        crossorigin="anonymous"></script>
-                <!-- Ad Unit -->
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-YOUR_AD_SENSE_ID"
-                     data-ad-slot="YOUR_AD_SLOT_ID"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2023 Career Path Selection Tool. All rights reserved.</p>
-    </footer>
-    <script>
-        // Function to show relevant branch selection based on education level
-        function updateBranchSelection() {
-            const educationLevel = document.getElementById('education-level').value;
-            const branches = ['classX', 'classXII', 'bachelors', 'masters', 'phd'];
-            branches.forEach(branch => {
-                document.getElementById(`${branch}-branch`).style.display = 'none';
-            });
-
-            if (educationLevel === 'classX') {
-                document.getElementById('classX-branch').style.display = 'block';
-            } else if (educationLevel === 'classXII') {
-                document.getElementById('classXII-branch').style.display = 'block';
-            } else if (educationLevel === 'bachelors') {
-                document.getElementById('bachelors-branch').style.display = 'block';
-            } else if (educationLevel === 'masters') {
-                document.getElementById('masters-branch').style.display = 'block';
-            } else if (educationLevel === 'phd' || educationLevel === 'postPhd') {
-                document.getElementById('phd-branch').style.display = 'block';
-            }
-        }
-
-        // Function to show Class XII Science and Engineering sub-branches
-        function updateClassXIISubBranches() {
-            const classXIIField = document.getElementById('classXII-field').value;
-            const classXIIScience = document.getElementById('classXII-science');
-            const classXIIEngineering = document.getElementById('classXII-engineering');
-
-            if (classXIIField === 'science') {
-                classXIIScience.style.display = 'block';
-                classXIIEngineering.style.display = 'none';
-            } else if (classXIIField === 'engineering') {
-                classXIIScience.style.display = 'none';
-                classXIIEngineering.style.display = 'block';
-            } else {
-                classXIIScience.style.display = 'none';
-                classXIIEngineering.style.display = 'none';
-            }
-        }
-
-        // Event listeners
-        document.getElementById('education-level').addEventListener('change', updateBranchSelection);
-        document.getElementById('classXII-field').addEventListener('change', updateClassXIISubBranches);
-
-        // Show jobs based on selection
-        document.getElementById('show-jobs').addEventListener('click', function() {
-            const educationLevel = document.getElementById('education-level').value;
-            const jobList = document.getElementById('job-list');
-
-            // Clear previous results
-            jobList.innerHTML = '';
-
-            // Define job data with salaries, selection processes, and company names
-            const jobs = {
-                classX: {
-                    science: [
-                        { title: 'Lab Assistant', salary: '₹1.5-3 LPA (India), $20,000-$30,000 (Worldwide)', process: 'Diploma in Science', company: 'Research Labs, Schools' },
-                        { title: 'Science Tutor', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Teaching Certification', company: 'Private Tutoring Centers' }
-                    ],
-                    arts: [
-                        { title: 'Content Writer', salary: '₹2-5 LPA (India), $30,000-$45,000 (Worldwide)', process: 'Freelancing, Portfolio Building', company: 'Upwork, Fiverr' },
-                        { title: 'Graphic Designer', salary: '₹2.5-6 LPA (India), $35,000-$50,000 (Worldwide)', process: 'Diploma in Graphic Design', company: 'Canva, Adobe' }
-                    ],
-                    commerce: [
-                        { title: 'Accountant', salary: '₹2-5 LPA (India), $30,000-$45,000 (Worldwide)', process: 'Diploma in Accounting', company: 'Small Businesses, CA Firms' },
-                        { title: 'Sales Executive', salary: '₹2.5-6 LPA (India), $35,000-$50,000 (Worldwide)', process: 'On-the-Job Training', company: 'Retail Stores, E-commerce' }
-                    ]
-                },
-                classXII: {
-                    science: {
-                        physicsHons: [
-                            { title: 'Research Assistant', salary: '₹3-6 LPA (India), $40,000-$60,000 (Worldwide)', process: 'B.Sc in Physics, Internships', company: 'ISRO, DRDO' },
-                            { title: 'Lab Technician', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Diploma in Lab Technology', company: 'Research Labs' }
-                        ],
-                        chemistryHons: [
-                            { title: 'Chemist', salary: '₹3-7 LPA (India), $40,000-$70,000 (Worldwide)', process: 'B.Sc in Chemistry, Research Projects', company: 'Pharmaceutical Companies' },
-                            { title: 'Quality Control Analyst', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'Quality Control Certification', company: 'Biocon, Serum Institute' }
-                        ],
-                        mathematicsHons: [
-                            { title: 'Data Analyst', salary: '₹5-10 LPA (India), $60,000-$90,000 (Worldwide)', process: 'B.Sc in Mathematics, Coding Skills', company: 'TCS, Wipro' },
-                            { title: 'Actuary', salary: '₹7-15 LPA (India), $80,000-$130,000 (Worldwide)', process: 'Actuarial Science Certification', company: 'Insurance Companies' }
-                        ],
-                        computerScienceHons: [
-                            { title: 'Software Developer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'B.Sc in Computer Science, Coding Skills', company: 'Google, Microsoft' },
-                            { title: 'Web Developer', salary: '₹4-10 LPA (India), $50,000-$90,000 (Worldwide)', process: 'Frontend/Backend Development Skills', company: 'Infosys, TCS' }
-                        ],
-                        bioscienceHons: [
-                            { title: 'Biotechnologist', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'B.Sc in Bioscience, Research Projects', company: 'Biocon, Serum Institute' },
-                            { title: 'Environmental Scientist', salary: '₹3-7 LPA (India), $40,000-$70,000 (Worldwide)', process: 'Degree in Environmental Science', company: 'TERI, Greenpeace' }
-                        ],
-                        passCourse: [
-                            { title: 'Lab Technician', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Diploma in Lab Technology', company: 'Research Labs' },
-                            { title: 'Science Tutor', salary: '₹2-4 LPA (India), $25,000-$35,000 (Worldwide)', process: 'Teaching Certification', company: 'Private Tutoring Centers' }
-                        ],
-                        engineering: {
-                            it: [
-                                { title: 'Software Engineer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'B.Tech in IT, Coding Interviews', company: 'Google, Microsoft' },
-                                { title: 'Web Developer', salary: '₹4-10 LPA (India), $50,000-$90,000 (Worldwide)', process: 'Frontend/Backend Development Skills', company: 'Infosys, TCS' }
-                            ],
-                            electrical: [
-                                { title: 'Electrical Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Electrical, GATE Exam', company: 'Siemens, ABB' },
-                                { title: 'Power Systems Engineer', salary: '₹6-14 LPA (India), $70,000-$110,000 (Worldwide)', process: 'Specialization in Power Systems', company: 'NTPC, Power Grid Corporation' }
-                            ],
-                            electronics: [
-                                { title: 'Electronics Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Electronics, GATE Exam', company: 'Intel, Samsung' },
-                                { title: 'Embedded Systems Engineer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'Specialization in Embedded Systems', company: 'Texas Instruments, Qualcomm' }
-                            ],
-                            mechanical: [
-                                { title: 'Mechanical Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Mechanical, GATE Exam', company: 'L&T, Tata Motors' },
-                                { title: 'Automotive Engineer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'Specialization in Automotive Engineering', company: 'Maruti Suzuki, Hyundai' }
-                            ],
-                            civil: [
-                                { title: 'Civil Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Civil, GATE Exam', company: 'L&T, Shapoorji Pallonji' },
-                                { title: 'Structural Engineer', salary: '₹6-14 LPA (India), $70,000-$110,000 (Worldwide)', process: 'Specialization in Structural Engineering', company: 'AECOM, Jacobs Engineering' }
-                            ],
-                            architecture: [
-                                { title: 'Architect', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'B.Arch, Internships', company: 'Architectural Firms' },
-                                { title: 'Interior Designer', salary: '₹4-10 LPA (India), $50,000-$90,000 (Worldwide)', process: 'Diploma in Interior Design', company: 'Design Firms' }
-                            ],
-                            chemical: [
-                                { title: 'Chemical Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Chemical, GATE Exam', company: 'Reliance Industries, Dow Chemical' },
-                                { title: 'Process Engineer', salary: '₹6-14 LPA (India), $70,000-$110,000 (Worldwide)', process: 'Specialization in Process Engineering', company: 'Shell, BASF' }
-                            ],
-                            hydrology: [
-                                { title: 'Hydrologist', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Hydrology, GATE Exam', company: 'Government Water Departments' },
-                                { title: 'Environmental Engineer', salary: '₹6-14 LPA (India), $70,000-$110,000 (Worldwide)', process: 'Specialization in Environmental Engineering', company: 'TERI, Greenpeace' }
-                            ]
-                        }
-                    },
-                    arts: [
-                        { title: 'Journalist', salary: '₹3-7 LPA (India), $40,000-$70,000 (Worldwide)', process: 'Degree in Journalism, Internships', company: 'Times of India, NDTV' },
-                        { title: 'Photographer', salary: '₹2.5-6 LPA (India), $35,000-$60,000 (Worldwide)', process: 'Portfolio Building, Freelancing', company: 'Getty Images, Shutterstock' }
-                    ],
-                    commerce: [
-                        { title: 'Financial Analyst', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'Degree in Finance, CFA Certification', company: 'Goldman Sachs, Morgan Stanley' },
-                        { title: 'Tax Consultant', salary: '₹3-7 LPA (India), $40,000-$70,000 (Worldwide)', process: 'CA/CS Certification, GST Training', company: 'EY, PwC' }
-                    ]
-                },
-                bachelors: {
-                    softwareEngineering: [
-                        { title: 'Software Engineer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'B.Tech in CSE, Coding Interviews', company: 'Google, Microsoft' },
-                        { title: 'Web Developer', salary: '₹4-10 LPA (India), $50,000-$90,000 (Worldwide)', process: 'Frontend/Backend Development Skills', company: 'Infosys, TCS' }
-                    ],
-                    electricalEngineering: [
-                        { title: 'Electrical Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Electrical, GATE Exam', company: 'Siemens, ABB' },
-                        { title: 'Power Systems Engineer', salary: '₹6-14 LPA (India), $70,000-$110,000 (Worldwide)', process: 'Specialization in Power Systems', company: 'NTPC, Power Grid Corporation' }
-                    ],
-                    mechanicalEngineering: [
-                        { title: 'Mechanical Engineer', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Tech in Mechanical, GATE Exam', company: 'L&T, Tata Motors' },
-                        { title: 'Automotive Engineer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'Specialization in Automotive Engineering', company: 'Maruti Suzuki, Hyundai' }
-                    ],
-                    physicsHons: [
-                        { title: 'Research Scientist', salary: '₹6-12 LPA (India), $70,000-$110,000 (Worldwide)', process: 'B.Sc in Physics, Research Projects', company: 'ISRO, DRDO' },
-                        { title: 'Data Analyst', salary: '₹5-10 LPA (India), $60,000-$90,000 (Worldwide)', process: 'Data Analysis Skills, Python/R Programming', company: 'TCS, Wipro' }
-                    ],
-                    chemistryHons: [
-                        { title: 'Chemist', salary: '₹5-12 LPA (India), $60,000-$100,000 (Worldwide)', process: 'B.Sc in Chemistry, Research Projects', company: 'Biocon, Serum Institute' },
-                        { title: 'Quality Control Analyst', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'Quality Control Certification', company: 'Pharmaceutical Companies' }
-                    ],
-                    mathematicsHons: [
-                        { title: 'Data Scientist', salary: '₹8-20 LPA (India), $90,000-$150,000 (Worldwide)', process: 'B.Sc in Mathematics, Coding Skills', company: 'Google, Amazon' },
-                        { title: 'Actuary', salary: '₹7-15 LPA (India), $80,000-$130,000 (Worldwide)', process: 'Actuarial Science Certification', company: 'Insurance Companies' }
-                    ],
-                    computerScienceHons: [
-                        { title: 'Software Developer', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'B.Sc in Computer Science, Coding Skills', company: 'Google, Microsoft' },
-                        { title: 'Web Developer', salary: '₹4-10 LPA (India), $50,000-$90,000 (Worldwide)', process: 'Frontend/Backend Development Skills', company: 'Infosys, TCS' }
-                    ],
-                    bioscienceHons: [
-                        { title: 'Biotechnologist', salary: '₹4-8 LPA (India), $50,000-$80,000 (Worldwide)', process: 'B.Sc in Bioscience, Research Projects', company: 'Biocon, Serum Institute' },
-                        { title: 'Environmental Scientist', salary: '₹3-7 LPA (India), $40,000-$70,000 (Worldwide)', process: 'Degree in Environmental Science', company: 'TERI, Greenpeace' }
-                    ],
-                    ca: [
-                        { title: 'Chartered Accountant', salary: '₹8-20 LPA (India), $100,000-$200,000 (Worldwide)', process: 'CA Certification, Articleship', company: 'EY, Deloitte' },
-                        { title: 'Tax Consultant', salary: '₹6-12 LPA (India), $70,000-$120,000 (Worldwide)', process: 'GST Training, Tax Knowledge', company: 'PwC, KPMG' }
-                    ],
-                    management: [
-                        { title: 'Business Analyst', salary: '₹6-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'MBA, Analytical Skills', company: 'McKinsey, BCG' },
-                        { title: 'Marketing Manager', salary: '₹7-18 LPA (India), $80,000-$140,000 (Worldwide)', process: 'MBA in Marketing, Networking', company: 'Hindustan Unilever, Procter & Gamble' }
-                    ]
-                },
-                masters: {
-                    engineering: [
-                        { title: 'Senior Engineer', salary: '₹10-25 LPA (India), $100,000-$150,000 (Worldwide)', process: 'M.Tech, GATE Exam, Experience', company: 'L&T, Tata Projects' },
-                        { title: 'Project Manager', salary: '₹12-30 LPA (India), $120,000-$180,000 (Worldwide)', process: 'MBA, PMP Certification', company: 'Infosys, Wipro' }
-                    ],
-                    medical: [
-                        { title: 'Surgeon', salary: '₹15-40 LPA (India), $200,000-$400,000 (Worldwide)', process: 'MS in Surgery, Residency', company: 'Apollo Hospitals, Fortis Healthcare' },
-                        { title: 'Specialist Doctor', salary: '₹12-30 LPA (India), $150,000-$300,000 (Worldwide)', process: 'MD, Licensing Exam', company: 'Max Healthcare, Manipal Hospitals' }
-                    ],
-                    arts: [
-                        { title: 'Professor', salary: '₹10-20 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD, NET Exam', company: 'University of Delhi, JNU' },
-                        { title: 'Curator', salary: '₹8-15 LPA (India), $70,000-$120,000 (Worldwide)', process: 'MA in Art History, Internships', company: 'National Museum, Art Galleries' }
-                    ],
-                    commerce: [
-                        { title: 'Financial Manager', salary: '₹12-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'MBA in Finance, CFA Certification', company: 'Goldman Sachs, Morgan Stanley' },
-                        { title: 'Business Consultant', salary: '₹10-25 LPA (India), $100,000-$180,000 (Worldwide)', process: 'MBA, Networking', company: 'McKinsey, BCG' }
-                    ],
-                    science: [
-                        { title: 'Research Scientist', salary: '₹10-25 LPA (India), $100,000-$150,000 (Worldwide)', process: 'PhD, Research Publications', company: 'ISRO, DRDO' },
-                        { title: 'Biochemist', salary: '₹8-20 LPA (India), $90,000-$140,000 (Worldwide)', process: 'M.Sc in Biochemistry, Research Projects', company: 'Biocon, Serum Institute' }
-                    ],
-                    defence: [
-                        { title: 'Army Colonel', salary: '₹15-30 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Army' },
-                        { title: 'Air Force Wing Commander', salary: '₹15-30 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Air Force' }
-                    ],
-                    administration: [
-                        { title: 'IAS Officer', salary: '₹12-30 LPA (India)', process: 'UPSC Civil Services Exam, Interview', company: 'Government of India' },
-                        { title: 'State Administrative Officer', salary: '₹10-25 LPA (India)', process: 'State PSC Exam, Interview', company: 'State Governments' }
-                    ],
-                    teaching: [
-                        { title: 'University Professor', salary: '₹12-25 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD, NET Exam', company: 'IITs, IIMs' },
-                        { title: 'Research Guide', salary: '₹10-20 LPA (India), $70,000-$120,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Institutions' }
-                    ],
-                    politics: [
-                        { title: 'Member of Parliament (MP)', salary: '₹15-30 LPA (India)', process: 'Elections, Political Networking', company: 'Government of India' },
-                        { title: 'Policy Advisor', salary: '₹10-20 LPA (India), $80,000-$150,000 (Worldwide)', process: 'Degree in Political Science, Networking', company: 'Think Tanks, NGOs' }
-                    ],
-                    aviation: [
-                        { title: 'Senior Commercial Pilot', salary: '₹15-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'Experience, Advanced Flight Training', company: 'Indigo, Air India' },
-                        { title: 'Aviation Manager', salary: '₹12-25 LPA (India), $100,000-$180,000 (Worldwide)', process: 'MBA in Aviation Management, Experience', company: 'Airport Authority of India, SpiceJet' }
-                    ]
-                },
-                phd: {
-                    engineering: [
-                        { title: 'Research Scientist', salary: '₹15-40 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Publications', company: 'ISRO, DRDO' },
-                        { title: 'University Professor', salary: '₹12-30 LPA (India), $100,000-$180,000 (Worldwide)', process: 'PhD, NET Exam', company: 'IITs, NITs' }
-                    ],
-                    medical: [
-                        { title: 'Medical Researcher', salary: '₹15-35 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD, Clinical Trials', company: 'AIIMS, Apollo Hospitals' },
-                        { title: 'Clinical Scientist', salary: '₹12-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Licensing Exam', company: 'Fortis Healthcare, Max Healthcare' }
-                    ],
-                    arts: [
-                        { title: 'University Professor', salary: '₹10-25 LPA (India), $80,000-$150,000 (Worldwide)', process: 'PhD, NET Exam', company: 'University of Delhi, JNU' },
-                        { title: 'Historian', salary: '₹8-20 LPA (India), $70,000-$120,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Institutions' }
-                    ],
-                    commerce: [
-                        { title: 'Economist', salary: '₹12-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Publications', company: 'RBI, World Bank' },
-                        { title: 'Policy Analyst', salary: '₹10-25 LPA (India), $100,000-$180,000 (Worldwide)', process: 'PhD, Government Exams', company: 'NITI Aayog, IMF' }
-                    ],
-                    science: [
-                        { title: 'Principal Scientist', salary: '₹15-40 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'ISRO, CSIR' },
-                        { title: 'Lead Researcher', salary: '₹12-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Publications', company: 'DRDO, BARC' }
-                    ],
-                    defence: [
-                        { title: 'Army General', salary: '₹20-40 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Army' },
-                        { title: 'Air Force Marshal', salary: '₹20-40 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Air Force' }
-                    ],
-                    administration: [
-                        { title: 'Cabinet Secretary', salary: '₹20-40 LPA (India)', process: 'Promotion from IAS, Experience', company: 'Government of India' },
-                        { title: 'Chief Secretary', salary: '₹18-35 LPA (India)', process: 'Promotion from State Administrative Services, Experience', company: 'State Governments' }
-                    ],
-                    teaching: [
-                        { title: 'University Vice-Chancellor', salary: '₹20-40 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'Central Universities' },
-                        { title: 'Research Director', salary: '₹15-30 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'Research Institutions' }
-                    ],
-                    politics: [
-                        { title: 'Prime Minister', salary: '₹20-50 LPA (India)', process: 'Elections, Political Leadership', company: 'Government of India' },
-                        { title: 'Chief Minister', salary: '₹18-40 LPA (India)', process: 'Elections, Political Leadership', company: 'State Governments' }
-                    ],
-                    aviation: [
-                        { title: 'Chief Pilot', salary: '₹20-50 LPA (India), $150,000-$300,000 (Worldwide)', process: 'Experience, Advanced Flight Training', company: 'Indigo, Air India' },
-                        { title: 'Aviation Director', salary: '₹18-40 LPA (India), $120,000-$250,000 (Worldwide)', process: 'MBA in Aviation Management, Experience', company: 'Airport Authority of India, SpiceJet' }
-                    ]
-                },
-                postPhd: {
-                    engineering: [
-                        { title: 'Principal Research Scientist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'ISRO, DRDO' },
-                        { title: 'University Dean', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'IITs, NITs' }
-                    ],
-                    medical: [
-                        { title: 'Medical Director', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Clinical Leadership', company: 'AIIMS, Apollo Hospitals' },
-                        { title: 'Chief Medical Officer', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Licensing Exam', company: 'Fortis Healthcare, Max Healthcare' }
-                    ],
-                    arts: [
-                        { title: 'University Chancellor', salary: '₹20-40 LPA (India), $150,000-$250,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'Central Universities' },
-                        { title: 'Senior Historian', salary: '₹18-35 LPA (India), $120,000-$200,000 (Worldwide)', process: 'PhD, Research Publications', company: 'Research Institutions' }
-                    ],
-                    commerce: [
-                        { title: 'Chief Economist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'RBI, World Bank' },
-                        { title: 'Policy Director', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Government Exams', company: 'NITI Aayog, IMF' }
-                    ],
-                    science: [
-                        { title: 'Chief Scientist', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'ISRO, CSIR' },
-                        { title: 'Research Head', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Research Publications', company: 'DRDO, BARC' }
-                    ],
-                    defence: [
-                        { title: 'Chief of Army Staff', salary: '₹30-60 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Army' },
-                        { title: 'Chief of Air Staff', salary: '₹30-60 LPA (India)', process: 'Promotion from Lower Ranks, Experience', company: 'Indian Air Force' }
-                    ],
-                    administration: [
-                        { title: 'Cabinet Secretary', salary: '₹25-50 LPA (India)', process: 'Promotion from IAS, Experience', company: 'Government of India' },
-                        { title: 'Chief Secretary', salary: '₹20-40 LPA (India)', process: 'Promotion from State Administrative Services, Experience', company: 'State Governments' }
-                    ],
-                    teaching: [
-                        { title: 'University Chancellor', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'PhD, Academic Leadership', company: 'Central Universities' },
-                        { title: 'Research Director', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'PhD, Research Leadership', company: 'Research Institutions' }
-                    ],
-                    politics: [
-                        { title: 'Prime Minister', salary: '₹30-60 LPA (India)', process: 'Elections, Political Leadership', company: 'Government of India' },
-                        { title: 'Chief Minister', salary: '₹25-50 LPA (India)', process: 'Elections, Political Leadership', company: 'State Governments' }
-                    ],
-                    aviation: [
-                        { title: 'Chief Pilot', salary: '₹25-50 LPA (India), $200,000-$400,000 (Worldwide)', process: 'Experience, Advanced Flight Training', company: 'Indigo, Air India' },
-                        { title: 'Aviation Director', salary: '₹20-40 LPA (India), $150,000-$300,000 (Worldwide)', process: 'MBA in Aviation Management, Experience', company: 'Airport Authority of India, SpiceJet' }
-                    ]
-                }
-            };
-
-            // Get jobs based on selection
-            let selectedJobs;
-            if (educationLevel === 'classX') {
-                selectedJobs = jobs[educationLevel]?.[document.getElementById('classX-field').value];
-            } else if (educationLevel === 'classXII') {
-                const classXIIField = document.getElementById('classXII-field').value;
-                if (classXIIField === 'science') {
-                    const scienceField = document.getElementById('classXII-science-field').value;
-                    if (scienceField === 'engineering') {
-                        selectedJobs = jobs[educationLevel]?.science?.engineering?.[document.getElementById('classXII-engineering-field').value];
-                    } else {
-                        selectedJobs = jobs[educationLevel]?.science?.[scienceField];
-                    }
-                } else {
-                    selectedJobs = jobs[educationLevel]?.[classXIIField];
-                }
-            } else if (educationLevel === 'bachelors') {
-                selectedJobs = jobs[educationLevel]?.[document.getElementById('bachelors-field').value];
-            } else if (educationLevel === 'masters') {
-                selectedJobs = jobs[educationLevel]?.[document.getElementById('masters-field').value];
-            } else if (educationLevel === 'phd' || educationLevel === 'postPhd') {
-                selectedJobs = jobs[educationLevel]?.[document.getElementById('phd-field').value];
-            }
-
-            // Display jobs or a message if no jobs are found
-            if (selectedJobs && selectedJobs.length > 0) {
-                selectedJobs.forEach(job => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <div class="job-title">${job.title}</div>
-                        <div class="job-details">
-                            <strong>Salary:</strong> ${job.salary}<br>
-                            <strong>Selection Process:</strong> ${job.process}<br>
-                            <strong>Companies:</strong> ${job.company || 'Not specified'}
-                        </div>
-                    `;
-                    jobList.appendChild(li);
-                });
-            } else {
-                const li = document.createElement('li');
-                li.innerHTML = `<div class="no-jobs">No jobs found for the selected criteria. Please try another combination.</div>`;
-                jobList.appendChild(li);
-            }
+            `;
+            jobList.appendChild(li);
         });
-    </script>
-</body>
-</html>
+    } else {
+        const li = document.createElement('li');
+        li.innerHTML = `<div class="no-jobs">No jobs found for the selected criteria. Please try another combination.</div>`;
+        jobList.appendChild(li);
+    }
+});
