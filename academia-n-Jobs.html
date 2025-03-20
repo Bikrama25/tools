@@ -1,3 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Career Path Selection Tool - Explore lucrative jobs from Class X to Post PhD in various branches.">
+    <meta name="keywords" content="career, jobs, education, career path, lucrative jobs, Class X, Post PhD">
+    <meta name="author" content="Your Name">
+    <title>Career Path Selection Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        #job-results {
+            margin-top: 20px;
+        }
+
+        #job-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #job-list li {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .job-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .job-details {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        .no-jobs {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        .adsbygoogle {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Career Path Selection Tool</h1>
+    </header>
+    <main>
+        <section id="career-path">
+            <div class="container">
+                <label for="education-level">Select Your Education Level:</label>
+                <select id="education-level">
+                    <option value="classX">Class X</option>
+                    <option value="classXII">Class XII</option>
+                    <option value="bachelors">Bachelors</option>
+                    <option value="masters">Masters</option>
+                    <option value="phd">PhD</option>
+                    <option value="postPhd">Post-PhD</option>
+                </select>
+
+                <!-- Branch Selection -->
+                <div id="branch-selection">
+                    <!-- Class X Branches -->
+                    <div id="classX-branch" style="display: none;">
+                        <label for="classX-field">Select Your Branch:</label>
+                        <select id="classX-field">
+                            <option value="science">Science</option>
+                            <option value="arts">Arts</option>
+                            <option value="commerce">Commerce</option>
+                        </select>
+                    </div>
+
+                    <!-- Class XII Branches -->
+                    <div id="classXII-branch" style="display: none;">
+                        <label for="classXII-field">Select Your Branch:</label>
+                        <select id="classXII-field">
+                            <option value="science">Science</option>
+                            <option value="arts">Arts</option>
+                            <option value="commerce">Commerce</option>
+                        </select>
+                    </div>
+
+                    <!-- Class XII Science Sub-Branches -->
+                    <div id="classXII-science" style="display: none;">
+                        <label for="classXII-science-field">Select Your Field:</label>
+                        <select id="classXII-science-field">
+                            <option value="physicsHons">Physics (Hons)</option>
+                            <option value="chemistryHons">Chemistry (Hons)</option>
+                            <option value="mathematicsHons">Mathematics (Hons)</option>
+                            <option value="computerScienceHons">Computer Science (Hons)</option>
+                            <option value="bioscienceHons">Bioscience (Hons)</option>
+                            <option value="passCourse">Pass Course</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="management">Management</option>
+                        </select>
+                    </div>
+
+                    <!-- Class XII Engineering Sub-Branches -->
+                    <div id="classXII-engineering" style="display: none;">
+                        <label for="classXII-engineering-field">Select Your Engineering Field:</label>
+                        <select id="classXII-engineering-field">
+                            <option value="it">IT</option>
+                            <option value="electrical">Electrical</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="mechanical">Mechanical</option>
+                            <option value="civil">Civil</option>
+                            <option value="architecture">Architecture</option>
+                            <option value="chemical">Chemical</option>
+                            <option value="hydrology">Hydrology</option>
+                        </select>
+                    </div>
+
+                    <!-- Bachelors Branches -->
+                    <div id="bachelors-branch" style="display: none;">
+                        <label for="bachelors-field">Select Your Field:</label>
+                        <select id="bachelors-field">
+                            <option value="softwareEngineering">Software Engineering</option>
+                            <option value="electricalEngineering">Electrical Engineering</option>
+                            <option value="mechanicalEngineering">Mechanical Engineering</option>
+                            <option value="physicsHons">Physics (Hons)</option>
+                            <option value="chemistryHons">Chemistry (Hons)</option>
+                            <option value="mathematicsHons">Mathematics (Hons)</option>
+                            <option value="computerScienceHons">Computer Science (Hons)</option>
+                            <option value="bioscienceHons">Bioscience (Hons)</option>
+                            <option value="ca">Chartered Accountancy (CA)</option>
+                            <option value="management">Management</option>
+                        </select>
+                    </div>
+
+                    <!-- Masters Branches -->
+                    <div id="masters-branch" style="display: none;">
+                        <label for="masters-field">Select Your Field:</label>
+                        <select id="masters-field">
+                            <option value="engineering">Engineering</option>
+                            <option value="medical">Medical</option>
+                            <option value="arts">Arts</option>
+                            <option value="commerce">Commerce</option>
+                            <option value="science">Science</option>
+                            <option value="defence">Defence</option>
+                            <option value="administration">Administration</option>
+                            <option value="teaching">Teaching</option>
+                            <option value="politics">Politics</option>
+                            <option value="aviation">Aviation</option>
+                        </select>
+                    </div>
+
+                    <!-- PhD and Post-PhD Branches -->
+                    <div id="phd-branch" style="display: none;">
+                        <label for="phd-field">Select Your Field:</label>
+                        <select id="phd-field">
+                            <option value="engineering">Engineering</option>
+                            <option value="medical">Medical</option>
+                            <option value="arts">Arts</option>
+                            <option value="commerce">Commerce</option>
+                            <option value="science">Science</option>
+                            <option value="defence">Defence</option>
+                            <option value="administration">Administration</option>
+                            <option value="teaching">Teaching</option>
+                            <option value="politics">Politics</option>
+                            <option value="aviation">Aviation</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="show-jobs">Show Jobs</button>
+            </div>
+        </section>
+
+        <section id="job-results">
+            <div class="container">
+                <h2>Job Opportunities</h2>
+                <ul id="job-list"></ul>
+            </div>
+        </section>
+
+        <section id="advertisement">
+            <div class="container">
+                <h2>Advertisements</h2>
+                <!-- Google AdSense Ad Unit -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_SENSE_ID"
+                        crossorigin="anonymous"></script>
+                <!-- Ad Unit -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-YOUR_AD_SENSE_ID"
+                     data-ad-slot="YOUR_AD_SLOT_ID"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Career Path Selection Tool. All rights reserved.</p>
+    </footer>
+    <script>
+        // Show relevant branch selection based on education level
+        document.getElementById('education-level').addEventListener('change', function() {
+            const educationLevel = this.value;
+            const classXBranch = document.getElementById('classX-branch');
+            const classXIIBranch = document.getElementById('classXII-branch');
+            const classXIIScience = document.getElementById('classXII-science');
+            const classXIIEngineering = document.getElementById('classXII-engineering');
+            const bachelorsBranch = document.getElementById('bachelors-branch');
+            const mastersBranch = document.getElementById('masters-branch');
+            const phdBranch = document.getElementById('phd-branch');
+
+            // Hide all branch selections initially
+            classXBranch.style.display = 'none';
+            classXIIBranch.style.display = 'none';
+            classXIIScience.style.display = 'none';
+            classXIIEngineering.style.display = 'none';
+            bachelorsBranch.style.display = 'none';
+            mastersBranch.style.display = 'none';
+            phdBranch.style.display = 'none';
+
+            // Show relevant branch selection
+            if (educationLevel === 'classX') {
+                classXBranch.style.display = 'block';
+            } else if (educationLevel === 'classXII') {
+                classXIIBranch.style.display = 'block';
+            } else if (educationLevel === 'bachelors') {
+                bachelorsBranch.style.display = 'block';
+            } else if (educationLevel === 'masters') {
+                mastersBranch.style.display = 'block';
+            } else if (educationLevel === 'phd' || educationLevel === 'postPhd') {
+                phdBranch.style.display = 'block';
+            }
+        });
+
+        // Show Class XII Science and Engineering sub-branches
+        document.getElementById('classXII-field').addEventListener('change', function() {
+            const classXIIScience = document.getElementById('classXII-science');
+            const classXIIEngineering = document.getElementById('classXII-engineering');
+
+            if (this.value === 'science') {
+                classXIIScience.style.display = 'block';
+                classXIIEngineering.style.display = 'none';
+            } else if (this.value === 'engineering') {
+                classXIIScience.style.display = 'none';
+                classXIIEngineering.style.display = 'block';
+            } else {
+                classXIIScience.style.display = 'none';
+                classXIIEngineering.style.display = 'none';
+            }
+        });
 document.getElementById('education-level').addEventListener('change', function() {
     const educationLevel = this.value;
     const classXBranch = document.getElementById('classX-branch');
