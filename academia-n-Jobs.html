@@ -1,4 +1,239 @@
-const jobs = {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Opportunities</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        /* Dropdown Styles */
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 300px;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        /* Button Styles */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        /* Job List Styles */
+        #job-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        #job-list li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #job-list li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .job-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .job-details {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .job-details strong {
+            color: #333;
+        }
+
+        .no-jobs {
+            text-align: center;
+            color: #e74c3c;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            select, button {
+                width: 100%;
+            }
+
+            #job-list li {
+                padding: 10px;
+            }
+
+            .job-title {
+                font-size: 16px;
+            }
+
+            .job-details {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Job Opportunities</h1>
+
+    <!-- Education Level Dropdown -->
+    <label for="education-level">Select Education Level:</label>
+    <select id="education-level">
+        <option value="classX">Class X</option>
+        <option value="classXII">Class XII</option>
+        <option value="bachelors">Bachelors</option>
+        <option value="masters">Masters</option>
+        <option value="phd">PhD</option>
+        <option value="postPhd">Post-PhD</option>
+    </select>
+
+    <!-- Class X Field Dropdown -->
+    <div id="classX-fields" class="field-group">
+        <label for="classX-field">Select Field:</label>
+        <select id="classX-field">
+            <option value="science">Science</option>
+            <option value="arts">Arts</option>
+            <option value="commerce">Commerce</option>
+        </select>
+    </div>
+
+    <!-- Class XII Field Dropdown -->
+    <div id="classXII-fields" class="field-group">
+        <label for="classXII-field">Select Field:</label>
+        <select id="classXII-field">
+            <option value="science">Science</option>
+            <option value="arts">Arts</option>
+            <option value="commerce">Commerce</option>
+        </select>
+
+        <!-- Class XII Science Subfields -->
+        <div id="classXII-science-fields" class="subfield-group">
+            <label for="classXII-science-field">Select Science Field:</label>
+            <select id="classXII-science-field">
+                <option value="physicsHons">Physics (Hons)</option>
+                <option value="chemistryHons">Chemistry (Hons)</option>
+                <option value="mathematicsHons">Mathematics (Hons)</option>
+                <option value="computerScienceHons">Computer Science (Hons)</option>
+                <option value="bioscienceHons">Bioscience (Hons)</option>
+                <option value="passCourse">Pass Course</option>
+                <option value="engineering">Engineering</option>
+            </select>
+
+            <!-- Class XII Engineering Subfields -->
+            <div id="classXII-engineering-fields" class="subfield-group">
+                <label for="classXII-engineering-field">Select Engineering Field:</label>
+                <select id="classXII-engineering-field">
+                    <option value="it">Information Technology</option>
+                    <!-- Add other engineering fields here -->
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bachelors Field Dropdown -->
+    <div id="bachelors-fields" class="field-group">
+        <label for="bachelors-field">Select Field:</label>
+        <select id="bachelors-field">
+            <option value="softwareEngineering">Software Engineering</option>
+            <option value="electricalEngineering">Electrical Engineering</option>
+            <option value="mechanicalEngineering">Mechanical Engineering</option>
+            <option value="physicsHons">Physics (Hons)</option>
+            <option value="chemistryHons">Chemistry (Hons)</option>
+            <option value="mathematicsHons">Mathematics (Hons)</option>
+            <option value="computerScienceHons">Computer Science (Hons)</option>
+            <option value="bioscienceHons">Bioscience (Hons)</option>
+            <option value="ca">Chartered Accountancy (CA)</option>
+            <option value="management">Management</option>
+            <option value="arts">Arts</option>
+            <option value="commerce">Commerce</option>
+        </select>
+    </div>
+
+    <!-- Masters Field Dropdown -->
+    <div id="masters-fields" class="field-group">
+        <label for="masters-field">Select Field:</label>
+        <select id="masters-field">
+            <option value="engineering">Engineering</option>
+            <option value="medical">Medical</option>
+            <option value="arts">Arts</option>
+            <option value="commerce">Commerce</option>
+            <option value="science">Science</option>
+            <option value="defence">Defence</option>
+            <option value="administration">Administration</option>
+            <option value="teaching">Teaching</option>
+            <option value="politics">Politics</option>
+            <option value="aviation">Aviation</option>
+        </select>
+    </div>
+
+    <!-- PhD/Post-PhD Field Dropdown -->
+    <div id="phd-fields" class="field-group">
+        <label for="phd-field">Select Field:</label>
+        <select id="phd-field">
+            <option value="engineering">Engineering</option>
+            <option value="medical">Medical</option>
+            <option value="arts">Arts</option>
+            <option value="commerce">Commerce</option>
+            <option value="science">Science</option>
+            <option value="defence">Defence</option>
+            <option value="administration">Administration</option>
+            <option value="teaching">Teaching</option>
+            <option value="politics">Politics</option>
+            <option value="aviation">Aviation</option>
+        </select>
+    </div>
+
+    <!-- Show Jobs Button -->
+    <button id="show-jobs">Show Jobs</button>
+
+    <!-- Job List -->
+    <ul id="job-list"></ul>
+
+    <script>
+        // JavaScript code (as provided earlier)
+        const jobs = {
     classX: {
         science: [
             { title: 'Lab Assistant', salary: '₹1.5-3 LPA (India), $20,000-$30,000 (Worldwide)', process: 'Diploma in Science', company: 'Research Labs, Schools' },
@@ -540,3 +775,13 @@ document.getElementById('show-jobs').addEventListener('click', function() {
         jobList.appendChild(li);
     }
 });
+
+        document.getElementById('show-jobs').addEventListener('click', function() {
+            // JavaScript logic (as provided earlier)
+        });
+    </script>
+</body>
+</html>
+
+
+
