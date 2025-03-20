@@ -53,6 +53,9 @@ please restart from where it stopped.
 please, add company names whereever available
 No jobs found for the selected criteria. Please try another combination. -- this is not correct . many combinations which has jobs but missing here. please, add those and increase the capacity.
 restart from where it stopped.
+Need thorough modification for branching - After class X branches are Science, Arts and Commerce. Then after XII, science branches are hons in Physics, Chemistry, Mathematics, Computer Science,  Bioscience, pass courses, Engineering in IT, Electrical, Electronics, Mechanical, Civil, Architechture, Chemical, Hydrology, then Management courses, After Bachelor please, add different previous branches, Then after Masters degree add previous all branches in each field. Similarly add PhD and Post PhD possibilities.
+
+
 
 Develop a fully responsive tool for 1. human personality type with traits (include extrovert, introvert, thinker, feeler, leader, strategist, ), character, (include friends, peers, toxic coworkers, bully, secret enemy, wicked) how do they form perspectives on others, 2.how to deal with them (following Art of seduction by Robert green or San tzu's book or chanakya niti) in the corporate / political world using HTML with dynamic functionality.  The tool should allow users to select types of personality trait, and then optimize answers accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the ui look good and responsive. check that it's giving output correctly. --DeepSeek
 
