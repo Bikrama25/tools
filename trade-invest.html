@@ -233,9 +233,9 @@
         psychology: "Forex traders must manage emotions like fear and greed, as currency markets are highly volatile.",
         strategy: "Use technical analysis and economic indicators. Focus on major currency pairs like EUR/USD and USD/JPY.",
         transactionCharges: {
-          spread: "Varies by broker (typically 1-2 pips)",
+          spread: "1-2 pips (varies by broker)",
           gst: "18% on brokerage",
-          swapFee: "Overnight holding charges apply"
+          swapFee: "Overnight holding charges"
         }
       },
       crypto: {
@@ -275,7 +275,7 @@
         psychology: "Derivatives traders must manage risk carefully and avoid over-leveraging.",
         strategy: "Use hedging strategies and focus on volatility indicators like the VIX.",
         transactionCharges: {
-          stt: "0.017% (on sell side for futures) or 0.05% (on sell side for options)",
+          stt: "0.017% (futures) / 0.05% (options)",
           gst: "18% on brokerage",
           stampDuty: "0.003% to 0.015% (varies by state)",
           exchangeCharge: "0.002% to 0.003%",
@@ -346,9 +346,7 @@
             ${Object.entries(workData.transactionCharges).map(([charge, rate]) => `
               <tr>
                 <td>${charge.toUpperCase()}</td>
-                <td>${
-                <td>${rate}</td>
-              </tr>
+                <td>${rate}</</tr>
             `).join('')}
           </tbody>
         </table>
