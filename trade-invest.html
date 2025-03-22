@@ -50,6 +50,21 @@
       margin-top: 0;
       color: #2c3e50;
     }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f8f9fa;
+    }
     .ads {
       text-align: center;
       margin: 20px 0;
@@ -117,7 +132,14 @@
         skills: "Quick decision-making, technical analysis, discipline",
         courses: "Scalping Mastery by Adam Khoo",
         nonIndianExamples: ["Adam Khoo", "Linda Raschke"],
-        indianExamples: ["Rakesh Jhunjhunwala (early career)", "Rajat Sharma (Founder of Sana Securities)", "Anant Ladha"]
+        indianExamples: ["Rakesh Jhunjhunwala (early career)", "Rajat Sharma (Founder of Sana Securities)", "Anant Ladha"],
+        taxFiling: {
+          percentage: "30% (plus cess)",
+          process: "Tax on scalping profits is treated as business income. File ITR-3 or ITR-4. Maintain detailed records of all trades. GST may apply if turnover exceeds ₹20 lakhs (₹10 lakhs for special category states).",
+          itrMonth: "July 31"
+        },
+        psychology: "Scalping requires high focus, emotional control, and the ability to handle stress. Traders must act quickly and avoid overthinking.",
+        strategy: "Use technical indicators like moving averages, RSI, and Bollinger Bands. Focus on liquid stocks with tight bid-ask spreads."
       },
       "day-trade": {
         description: "Day trading involves buying and selling securities within the same day.",
@@ -126,7 +148,14 @@
         skills: "Technical analysis, risk management, emotional control",
         courses: "Day Trading Academy by Marcello Arrambide",
         nonIndianExamples: ["Marcello Arrambide", "Paul Rotter"],
-        indianExamples: ["Sudarshan Sukhani", "Mitesh Patel", "Ashwani Gujral"]
+        indianExamples: ["Sudarshan Sukhani", "Mitesh Patel", "Ashwani Gujral"],
+        taxFiling: {
+          percentage: "30% (plus cess)",
+          process: "Day trading profits are considered business income. File ITR-3 or ITR-4. Maintain a profit and loss statement. GST registration is required if turnover exceeds ₹20 lakhs (₹10 lakhs for special category states).",
+          itrMonth: "July 31"
+        },
+        psychology: "Day traders must remain calm under pressure and avoid emotional decision-making. Patience and discipline are key.",
+        strategy: "Focus on high-volume stocks. Use candlestick patterns, support/resistance levels, and breakout strategies."
       },
       swing: {
         description: "Swing trading involves holding positions for several days to capture short-term gains.",
@@ -135,7 +164,14 @@
         skills: "Technical analysis, patience, trend identification",
         courses: "Swing Trading Strategies by Urban Forex",
         nonIndianExamples: ["Raoul Pal", "Mark Minervini"],
-        indianExamples: ["Porinju Veliyath", "Rakesh Jhunjhunwala", "Vijay Kedia"]
+        indianExamples: ["Porinju Veliyath", "Rakesh Jhunjhunwala", "Vijay Kedia"],
+        taxFiling: {
+          percentage: "15% (for equity) or as per slab rates (for non-equity)",
+          process: "Swing trading profits are treated as short-term capital gains (STCG). File ITR-2 or ITR-3. For equity, STCG is taxed at 15%. For non-equity, it is taxed as per slab rates.",
+          itrMonth: "July 31"
+        },
+        psychology: "Swing traders need patience to wait for the right entry and exit points. Avoid greed and fear-driven decisions.",
+        strategy: "Use trend-following indicators like MACD and moving averages. Focus on stocks with strong momentum."
       },
       "long-term": {
         description: "Long-term investing focuses on holding assets for years to benefit from compounding.",
@@ -144,7 +180,14 @@
         skills: "Fundamental analysis, patience, long-term vision",
         courses: "The Intelligent Investor by Benjamin Graham",
         nonIndianExamples: ["Warren Buffett", "Charlie Munger"],
-        indianExamples: ["Rakesh Jhunjhunwala", "Radhakishan Damani", "Ramesh Damani"]
+        indianExamples: ["Rakesh Jhunjhunwala", "Radhakishan Damani", "Ramesh Damani"],
+        taxFiling: {
+          percentage: "10% (above ₹1 lakh exemption for equity) or 20% with indexation (for non-equity)",
+          process: "Long-term capital gains (LTCG) on equity are taxed at 10% (above ₹1 lakh exemption). For non-equity, LTCG is taxed at 20% with indexation. File ITR-2.",
+          itrMonth: "July 31"
+        },
+        psychology: "Long-term investors must stay committed to their strategy and avoid reacting to short-term market fluctuations.",
+        strategy: "Focus on fundamentally strong companies with a competitive advantage. Diversify across sectors and geographies."
       },
       forex: {
         description: "Forex trading involves trading currencies in the foreign exchange market.",
@@ -153,7 +196,14 @@
         skills: "Currency analysis, economic indicators, risk management",
         courses: "Forex Trading A-Z by Kirill Eremenko",
         nonIndianExamples: ["Kathy Lien", "George Soros"],
-        indianExamples: ["Raghuram Rajan (economist)", "Amarjit Singh (forex trader)", "Prakash Gaba"]
+        indianExamples: ["Raghuram Rajan (economist)", "Amarjit Singh (forex trader)", "Prakash Gaba"],
+        taxFiling: {
+          percentage: "30% (plus cess)",
+          process: "Forex trading profits are treated as business income. File ITR-3 or ITR-4. GST may apply if turnover exceeds ₹20 lakhs (₹10 lakhs for special category states). TDS under Section 194N applies if cash withdrawals exceed ₹1 crore.",
+          itrMonth: "July 31"
+        },
+        psychology: "Forex traders must manage emotions like fear and greed, as currency markets are highly volatile.",
+        strategy: "Use technical analysis and economic indicators. Focus on major currency pairs like EUR/USD and USD/JPY."
       },
       crypto: {
         description: "Crypto trading involves buying and selling cryptocurrencies for short-term profits.",
@@ -162,7 +212,14 @@
         skills: "Blockchain knowledge, technical analysis, risk management",
         courses: "Cryptocurrency Investment Course by 365 Careers",
         nonIndianExamples: ["Andreas Antonopoulos", "Changpeng Zhao (CZ)"],
-        indianExamples: ["Nischal Shetty (WazirX)", "Sumit Gupta (CoinDCX)", "Sandeep Nailwal (Polygon)"]
+        indianExamples: ["Nischal Shetty (WazirX)", "Sumit Gupta (CoinDCX)", "Sandeep Nailwal (Polygon)"],
+        taxFiling: {
+          percentage: "30% (plus cess)",
+          process: "Crypto profits are taxed at 30% under Section 115BBH. Losses cannot be offset against other income. TDS of 1% applies on transactions above ₹10,000. File ITR-2 or ITR-3.",
+          itrMonth: "July 31"
+        },
+        psychology: "Crypto traders must handle extreme volatility and avoid FOMO (Fear of Missing Out).",
+        strategy: "Use technical analysis and follow market sentiment. Diversify across major cryptocurrencies like Bitcoin and Ethereum."
       },
       derivatives: {
         description: "Derivatives trading involves options, futures, and other financial instruments.",
@@ -171,9 +228,62 @@
         skills: "Options strategies, volatility analysis, risk management",
         courses: "Options Trading for Beginners by Udemy",
         nonIndianExamples: ["Tom Sosnoff", "Nassim Taleb"],
-        indianExamples: ["Premji and Associates", "Rakesh Jhunjhunwala", "Mukul Agrawal"]
+        indianExamples: ["Premji and Associates", "Rakesh Jhunjhunwala", "Mukul Agrawal"],
+        taxFiling: {
+          percentage: "15% (for equity derivatives) or as per slab rates (for non-equity derivatives)",
+          process: "Derivatives trading profits are treated as business income. File ITR-3 or ITR-4. STCG on equity derivatives is taxed at 15%. GST applies if turnover exceeds ₹20 lakhs (₹10 lakhs for special category states).",
+          itrMonth: "July 31"
+        },
+        psychology: "Derivatives traders must manage risk carefully and avoid over-leveraging.",
+        strategy: "Use hedging strategies and focus on volatility indicators like the VIX."
       }
     };
+
+    const taxComparisonTable = `
+      <h3>Short-Term vs Long-Term Transaction Taxes</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Aspect</th>
+            <th>Short-Term Transactions</th>
+            <th>Long-Term Transactions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Holding Period</td>
+            <td>- Equity: Less than 12 months <br> - Non-equity: Less than 36 months</td>
+            <td>- Equity: More than 12 months <br> - Non-equity: More than 36 months</td>
+          </tr>
+          <tr>
+            <td>Tax Rate</td>
+            <td>- Equity: 15% <br> - Non-equity: As per slab rates (up to 30%)</td>
+            <td>- Equity: 10% (above ₹1 lakh exemption) <br> - Non-equity: 20% with indexation</td>
+          </tr>
+          <tr>
+            <td>Tax Type</td>
+            <td>Short-Term Capital Gains (STCG)</td>
+            <td>Long-Term Capital Gains (LTCG)</td>
+          </tr>
+          <tr>
+            <td>Indexation Benefit</td>
+            <td>Not applicable</td>
+            <td>Applicable for non-equity assets</td>
+          </tr>
+        </tbody>
+      </table>
+    `;
+
+    const lossFilingConsequences = `
+      <h3>Consequences of Not Filing ITR When at a Loss</h3>
+      <ul>
+        <li><strong>Losses Cannot Be Carried Forward:</strong> You lose the opportunity to carry forward losses to offset future gains.</li>
+        <li><strong>Penalty for Not Filing ITR:</strong> A penalty of up to ₹5,000 may be imposed.</li>
+        <li><strong>No Proof of Loss:</strong> You cannot prove your losses to the Income Tax Department.</li>
+        <li><strong>Missed Deductions and Exemptions:</strong> You may miss out on claiming deductions or exemptions.</li>
+        <li><strong>Impact on Future Transactions:</strong> You cannot offset future gains with current losses.</li>
+      </ul>
+    `;
 
     workTypeSelect.addEventListener('change', (e) => {
       const selectedWork = e.target.value;
@@ -187,6 +297,16 @@
         <p><strong>Recommended Courses:</strong> ${workData.courses}</p>
         <p><strong>Non-Indian Examples:</strong> ${workData.nonIndianExamples.join(", ")}</p>
         <p><strong>Indian Examples:</strong> ${workData.indianExamples.join(", ")}</p>
+        <p><strong>Tax Percentage:</strong> ${workData.taxFiling.percentage}</p>
+        <p><strong>Tax Filing Process:</strong> ${workData.taxFiling.process}</p>
+        <p><strong>ITR Filing Month:</strong> ${workData.taxFiling.itrMonth}</p>
+        <p><strong>Is Tax on Profit Only?</strong> Yes, tax is applied only on profits (capital gains or business income).</p>
+        <h3>Psychology</h3>
+        <p>${workData.psychology}</p>
+        <h3>Strategy</h3>
+        <p>${workData.strategy}</p>
+        ${taxComparisonTable}
+        ${lossFilingConsequences}
       `;
     });
   </script>
