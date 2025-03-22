@@ -116,7 +116,8 @@
         timeRequired: "6-8 hours/day",
         skills: "Quick decision-making, technical analysis, discipline",
         courses: "Scalping Mastery by Adam Khoo",
-        person: "Adam Khoo"
+        nonIndianExamples: ["Adam Khoo", "Linda Raschke"],
+        indianExamples: ["Rakesh Jhunjhunwala (early career)", "Rajat Sharma (Founder of Sana Securities)", "Anant Ladha"]
       },
       "day-trade": {
         description: "Day trading involves buying and selling securities within the same day.",
@@ -124,7 +125,8 @@
         timeRequired: "4-6 hours/day",
         skills: "Technical analysis, risk management, emotional control",
         courses: "Day Trading Academy by Marcello Arrambide",
-        person: "Marcello Arrambide"
+        nonIndianExamples: ["Marcello Arrambide", "Paul Rotter"],
+        indianExamples: ["Sudarshan Sukhani", "Mitesh Patel", "Ashwani Gujral"]
       },
       swing: {
         description: "Swing trading involves holding positions for several days to capture short-term gains.",
@@ -132,7 +134,8 @@
         timeRequired: "1-2 hours/day",
         skills: "Technical analysis, patience, trend identification",
         courses: "Swing Trading Strategies by Urban Forex",
-        person: "Raoul Pal"
+        nonIndianExamples: ["Raoul Pal", "Mark Minervini"],
+        indianExamples: ["Porinju Veliyath", "Rakesh Jhunjhunwala", "Vijay Kedia"]
       },
       "long-term": {
         description: "Long-term investing focuses on holding assets for years to benefit from compounding.",
@@ -140,7 +143,8 @@
         timeRequired: "Minimal (weekly check-ins)",
         skills: "Fundamental analysis, patience, long-term vision",
         courses: "The Intelligent Investor by Benjamin Graham",
-        person: "Warren Buffett"
+        nonIndianExamples: ["Warren Buffett", "Charlie Munger"],
+        indianExamples: ["Rakesh Jhunjhunwala", "Radhakishan Damani", "Ramesh Damani"]
       },
       forex: {
         description: "Forex trading involves trading currencies in the foreign exchange market.",
@@ -148,7 +152,8 @@
         timeRequired: "2-4 hours/day",
         skills: "Currency analysis, economic indicators, risk management",
         courses: "Forex Trading A-Z by Kirill Eremenko",
-        person: "Kathy Lien"
+        nonIndianExamples: ["Kathy Lien", "George Soros"],
+        indianExamples: ["Raghuram Rajan (economist)", "Amarjit Singh (forex trader)", "Prakash Gaba"]
       },
       crypto: {
         description: "Crypto trading involves buying and selling cryptocurrencies for short-term profits.",
@@ -156,7 +161,8 @@
         timeRequired: "2-4 hours/day",
         skills: "Blockchain knowledge, technical analysis, risk management",
         courses: "Cryptocurrency Investment Course by 365 Careers",
-        person: "Andreas Antonopoulos"
+        nonIndianExamples: ["Andreas Antonopoulos", "Changpeng Zhao (CZ)"],
+        indianExamples: ["Nischal Shetty (WazirX)", "Sumit Gupta (CoinDCX)", "Sandeep Nailwal (Polygon)"]
       },
       derivatives: {
         description: "Derivatives trading involves options, futures, and other financial instruments.",
@@ -164,7 +170,8 @@
         timeRequired: "3-5 hours/day",
         skills: "Options strategies, volatility analysis, risk management",
         courses: "Options Trading for Beginners by Udemy",
-        person: "Tom Sosnoff"
+        nonIndianExamples: ["Tom Sosnoff", "Nassim Taleb"],
+        indianExamples: ["Premji and Associates", "Rakesh Jhunjhunwala", "Mukul Agrawal"]
       }
     };
 
@@ -178,7 +185,8 @@
         <p><strong>Time Required:</strong> ${workData.timeRequired}</p>
         <p><strong>Required Skills:</strong> ${workData.skills}</p>
         <p><strong>Recommended Courses:</strong> ${workData.courses}</p>
-        <p><strong>Successful Person to Follow:</strong> ${workData.person}</p>
+        <p><strong>Non-Indian Examples:</strong> ${workData.nonIndianExamples.join(", ")}</p>
+        <p><strong>Indian Examples:</strong> ${workData.indianExamples.join(", ")}</p>
       `;
     });
   </script>
