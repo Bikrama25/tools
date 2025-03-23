@@ -77,6 +77,7 @@ please, add a clear button of the saved data.
 
 Develop a fully responsive iOS App for daily trade Journaling for all types of elements  - equity, commodity, forex, crypto, derivatives (Options and future) for different types of trade, Allow the user to enter - the date, time, why is the day special, the name of the entity, type of the entity, number of entity, buy price, sell price, calculate the profit, type of exit (hit target / hit SL), emotional state, followed Market, Trends, Risk-reward, Entry-exit, No overtrade, Done for the day, Save earned profit or not, and lessons, calculate total investment, total profit, brokerage, and other charges and payable taxes. The screen should be scrollable. Let the user save his journal. Then optimize it accordingly. Additionally, ensure the App is SEO optimized for better visibility and performance. Make the UI look good and responsive. name the downloadable Excel file starting with the date.
 please, add a save, export and clear button of the saved data.
+In the present code, buy and sell price, Investment and Profit are not calculated and shown, Taxes and charges are not visible. please, correct these. Take help from @Apple UI Design tips and improve the design. Use @Codespace for better coding and @Apple developer page for development. help me to paste in the xcode.
 
 
 
