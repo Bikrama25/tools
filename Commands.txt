@@ -72,7 +72,8 @@ save botton and export to excel both not working
 please, test and correct before delivering
 save it into a downloadable excel file
 Profit is not calculated. calculate it too
-
+name the downloadable Excel file starting with the date.
+please, add a clear button of the saved data.
 
 
 
