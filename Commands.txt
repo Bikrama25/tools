@@ -65,6 +65,14 @@ include the transaction charges other than brokerage charges for each trade.
 continue from where it stopped.
 -- DeepSeek
 
+Develop a fully responsive tool for daily trade Journaling for all types of elements equity, commodity, forex, crypto, derivatives (Option buy/sell)) for different types of trade, which should allow to attach a file or create a new editable Excel file, alert every day twice (at 9.00 AM every weekday and 7.30 PM every day), Allow the user to enter - the date, time, why is the day special, the name of the entity, type of the entity, number of entity, buy price, sell price, calculate profit, type of exit (hit target / hit SL), emotional state, followed Market, Trends, Risk-reward, Entry-exit, No overtrade, Done for the day, Save earned profit or not, and lessons, calculate total investment, total profit, brokerage and other charges and payable taxes. Let the user save his journal. Then optimize it accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the UI look good and responsive. check that it's giving output correctly.
+please, combine all codes into one without back end etc but in workable condition with good UI
+Allow the user to enter - the date, time, why is the day special, the name of the entity, type of the entity, number of entity, buy price, sell price, calculate profit, type of exit (hit target / hit SL), emotional state, followed Market, Trends, Risk-reward, Entry-exit, No overtrade, Done for the day, Save earned profit or not, and lessons, and save in excel fie
+save botton and export to excel both not working
+please, test and correct before delivering
+save it into a downloadable excel file
+Profit is not calculated. calculate it too
+
 
 
 
