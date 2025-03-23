@@ -1,157 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Daily Trade Journal for tracking equity, commodity, forex, crypto, and derivatives trades." />
-    <title>Daily Trade Journal</title>
-    <!-- Load React and Babel -->
-    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Load XLSX for Excel export -->
-    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
-    <!-- Load React Toastify for notifications -->
-    <script src="https://unpkg.com/react-toastify/dist/ReactToastify.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/react-toastify/dist/ReactToastify.css" />
-    <!-- Load Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-      body { font-family: 'Arial', sans-serif; background-color: #f3f4f6; }
-      input, select, textarea { outline: none; }
-      button { transition: background-color 0.3s ease; }
-      button:hover { opacity: 0.9; }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="text/babel">
-      const { useState, useEffect } = React;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Track and optimize your trades with our daily trade journaling tool. Perfect for equity, forex, crypto, and more.">
+  <meta name="keywords" content="trade journal, forex, crypto, equity, derivatives, trading tools">
+  <meta name="author" content="Trade Journal Pro">
+  <title>Trade Journal Pro</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
 
-      const TradeJournal = () => {
-        const [journals, setJournals] = useState([]);
-        const [formData, setFormData] = useState({
-          date: '',
-          entityName: '',
-          entityType: 'equity',
-          buyPrice: 0,
-          sellPrice: 0,
-          emotionalState: '',
-          lessons: '',
-        });
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
 
-        // Load journals from local storage on component mount
-        useEffect(() => {
-          const savedJournals = JSON.parse(localStorage.getItem('tradeJournals')) || [];
-          setJournals(savedJournals);
-        }, []);
+    h1 {
+      text-align: center;
+      color: #007BFF;
+    }
 
-        // Save journals to local storage
-        useEffect(() => {
-          localStorage.setItem('tradeJournals', JSON.stringify(journals));
-        }, [journals]);
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
 
-        const handleSubmit = (e) => {
-          e.preventDefault();
-          const profit = (formData.sellPrice - formData.buyPrice).toFixed(2);
-          const newJournal = { ...formData, profit, id: Date.now() };
-          setJournals([...journals, newJournal]);
-          toast.success('Journal saved successfully!');
-          setFormData({
-            date: '',
-            entityName: '',
-            entityType: 'equity',
-            buyPrice: 0,
-            sellPrice: 0,
-            emotionalState: '',
-            lessons: '',
-          });
-        };
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
 
-        const exportToExcel = () => {
-          const ws = XLSX.utils.json_to_sheet(journals);
-          const wb = XLSX.utils.book_new();
-          XLSX.utils.book_append_sheet(wb, ws, 'Trade Journals');
-          XLSX.writeFile(wb, 'trade_journals.xlsx');
-        };
+    button {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-right: 10px;
+    }
 
-        // Daily Alerts
-        useEffect(() => {
-          const notify = (message) => {
-            if (Notification.permission === 'granted') {
-              new Notification(message);
-            } else if (Notification.permission !== 'denied') {
-              Notification.requestPermission().then((permission) => {
-                if (permission === 'granted') {
-                  new Notification(message);
-                }
-              });
-            }
-          };
+    button:hover {
+      background-color: #0056b3;
+    }
 
-          const morningAlert = setInterval(() => {
-            const now = new Date();
-            if (now.getHours() === 9 && now.getMinutes() === 0 && now.getDay() !== 0 && now.getDay() !== 6) {
-              notify('Good morning! Time to log your trades.');
-            }
-          }, 60000);
+    .journal-entry {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: #f9f9f9;
+    }
 
-          const eveningAlert = setInterval(() => {
-            const now = new Date();
-            if (now.getHours() === 19 && now.getMinutes() === 30) {
-              notify('Good evening! Time to log your trades.');
-            }
-          }, 60000);
+    .ads {
+      margin: 20px 0;
+      text-align: center;
+    }
 
-          return () => {
-            clearInterval(morningAlert);
-            clearInterval(eveningAlert);
-          };
-        }, []);
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
 
-        return (
-          <div className="p-6 bg-gray-100 min-h-screen">
-            <h1 className="text-3xl font-bold text-center mb-6">Daily Trade Journal</h1>
-            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} className="p-2 border rounded" required />
-                <input type="text" placeholder="Entity Name" value={formData.entityName} onChange={(e) => setFormData({ ...formData, entityName: e.target.value })} className="p-2 border rounded" required />
-                <select value={formData.entityType} onChange={(e) => setFormData({ ...formData, entityType: e.target.value })} className="p-2 border rounded" required>
-                  <option value="equity">Equity</option>
-                  <option value="commodity">Commodity</option>
-                  <option value="forex">Forex</option>
-                  <option value="crypto">Crypto</option>
-                  <option value="derivatives">Derivatives</option>
-                </select>
-                <input type="number" placeholder="Buy Price" value={formData.buyPrice} onChange={(e) => setFormData({ ...formData, buyPrice: parseFloat(e.target.value) })} className="p-2 border rounded" required />
-                <input type="number" placeholder="Sell Price" value={formData.sellPrice} onChange={(e) => setFormData({ ...formData, sellPrice: parseFloat(e.target.value) })} className="p-2 border rounded" required />
-                <textarea placeholder="Emotional State" value={formData.emotionalState} onChange={(e) => setFormData({ ...formData, emotionalState: e.target.value })} className="p-2 border rounded" />
-                <textarea placeholder="Lessons Learned" value={formData.lessons} onChange={(e) => setFormData({ ...formData, lessons: e.target.value })} className="p-2 border rounded" />
-              </div>
-              <button type="submit" className="mt-4 bg-blue-500 text-white p-2 rounded w-full">Save Journal</button>
-            </form>
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+  <!-- SheetJS Library for Excel Export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Trade Journal Pro</h1>
 
-            <div className="mt-6">
-              <button onClick={exportToExcel} className="bg-green-500 text-white p-2 rounded">Export to Excel</button>
-              <div className="mt-4">
-                <h2 className="text-xl font-bold">Saved Journals</h2>
-                {journals.map((journal) => (
-                  <div key={journal.id} className="bg-white p-4 rounded-lg shadow-md mt-2">
-                    <p><strong>Date:</strong> {journal.date}</p>
-                    <p><strong>Entity:</strong> {journal.entityName} ({journal.entityType})</p>
-                    <p><strong>Profit:</strong> ${journal.profit}</p>
-                    <p><strong>Emotional State:</strong> {journal.emotionalState}</p>
-                    <p><strong>Lessons:</strong> {journal.lessons}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <ToastContainer />
-          </div>
-        );
+    <!-- Trade Journal Form -->
+    <form id="tradeForm">
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="time">Time:</label>
+      <input type="time" id="time" name="time" required>
+
+      <label for="specialDay">Why is the day special?</label>
+      <textarea id="specialDay" name="specialDay" rows="3"></textarea>
+
+      <label for="entityName">Entity Name:</label>
+      <input type="text" id="entityName" name="entityName" required>
+
+      <label for="entityType">Entity Type:</label>
+      <select id="entityType" name="entityType">
+        <option value="equity">Equity</option>
+        <option value="commodity">Commodity</option>
+        <option value="forex">Forex</option>
+        <option value="crypto">Crypto</option>
+        <option value="derivatives">Derivatives</option>
+      </select>
+
+      <label for="quantity">Number of Entity:</label>
+      <input type="number" id="quantity" name="quantity" required>
+
+      <label for="buyPrice">Buy Price:</label>
+      <input type="number" id="buyPrice" name="buyPrice" required>
+
+      <label for="sellPrice">Sell Price:</label>
+      <input type="number" id="sellPrice" name="sellPrice" required>
+
+      <label for="exitType">Type of Exit:</label>
+      <select id="exitType" name="exitType">
+        <option value="hitTarget">Hit Target</option>
+        <option value="hitSL">Hit SL</option>
+      </select>
+
+      <label for="emotionalState">Emotional State:</label>
+      <textarea id="emotionalState" name="emotionalState" rows="3"></textarea>
+
+      <label for="marketTrend">Followed Market Trends:</label>
+      <textarea id="marketTrend" name="marketTrend" rows="3"></textarea>
+
+      <label for="riskReward">Risk-Reward:</label>
+      <input type="text" id="riskReward" name="riskReward">
+
+      <label for="entryExit">Entry-Exit Strategy:</label>
+      <textarea id="entryExit" name="entryExit" rows="3"></textarea>
+
+      <label for="overtrade">No Overtrade:</label>
+      <select id="overtrade" name="overtrade">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <label for="doneForDay">Done for the Day:</label>
+      <select id="doneForDay" name="doneForDay">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <label for="saveProfit">Save Earned Profit:</label>
+      <select id="saveProfit" name="saveProfit">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <label for="lessons">Lessons Learned:</label>
+      <textarea id="lessons" name="lessons" rows="3"></textarea>
+
+      <button type="submit">Save Journal</button>
+      <button type="button" id="exportExcel">Export to Excel</button>
+    </form>
+
+    <!-- Display Saved Journals -->
+    <div id="journalEntries"></div>
+
+    <!-- AdSense Ad Unit -->
+    <div class="ads">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_AD_ID" crossorigin="anonymous"></script>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_AD_ID"
+           data-ad-slot="1234567890"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <script>
+    let journals = [];
+
+    // Load saved journals from local storage
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedJournals = JSON.parse(localStorage.getItem('tradeJournals')) || [];
+      journals = savedJournals;
+      const journalEntries = document.getElementById('journalEntries');
+      savedJournals.forEach(journal => {
+        journalEntries.appendChild(createJournalEntry(journal));
+      });
+    });
+
+    // Handle form submission
+    document.getElementById('tradeForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const buyPrice = parseFloat(document.getElementById('buyPrice').value);
+      const sellPrice = parseFloat(document.getElementById('sellPrice').value);
+      const quantity = parseFloat(document.getElementById('quantity').value);
+
+      // Calculate profit
+      const profit = (sellPrice - buyPrice) * quantity;
+
+      const journal = {
+        date: document.getElementById('date').value,
+        time: document.getElementById('time').value,
+        specialDay: document.getElementById('specialDay').value,
+        entityName: document.getElementById('entityName').value,
+        entityType: document.getElementById('entityType').value,
+        quantity: quantity,
+        buyPrice: buyPrice,
+        sellPrice: sellPrice,
+        profit: profit, // Added profit calculation
+        exitType: document.getElementById('exitType').value,
+        emotionalState: document.getElementById('emotionalState').value,
+        marketTrend: document.getElementById('marketTrend').value,
+        riskReward: document.getElementById('riskReward').value,
+        entryExit: document.getElementById('entryExit').value,
+        overtrade: document.getElementById('overtrade').value,
+        doneForDay: document.getElementById('doneForDay').value,
+        saveProfit: document.getElementById('saveProfit').value,
+        lessons: document.getElementById('lessons').value
       };
 
-      ReactDOM.render(<TradeJournal />, document.getElementById('root'));
-    </script>
-  </body>
+      // Save to local storage
+      journals.push(journal);
+      localStorage.setItem('tradeJournals', JSON.stringify(journals));
+
+      // Display the new journal entry
+      document.getElementById('journalEntries').appendChild(createJournalEntry(journal));
+
+      // Reset the form
+      document.getElementById('tradeForm').reset();
+    });
+
+    // Create a journal entry element
+    function createJournalEntry(journal) {
+      const entry = document.createElement('div');
+      entry.className = 'journal-entry';
+      entry.innerHTML = `
+        <p><strong>Date:</strong> ${journal.date}</p>
+        <p><strong>Time:</strong> ${journal.time}</p>
+        <p><strong>Why is the day special?</strong> ${journal.specialDay}</p>
+        <p><strong>Entity Name:</strong> ${journal.entityName}</p>
+        <p><strong>Entity Type:</strong> ${journal.entityType}</p>
+        <p><strong>Quantity:</strong> ${journal.quantity}</p>
+        <p><strong>Buy Price:</strong> $${journal.buyPrice.toFixed(2)}</p>
+        <p><strong>Sell Price:</strong> $${journal.sellPrice.toFixed(2)}</p>
+        <p><strong>Profit:</strong> $${journal.profit.toFixed(2)}</p>
+        <p><strong>Type of Exit:</strong> ${journal.exitType}</p>
+        <p><strong>Emotional State:</strong> ${journal.emotionalState}</p>
+        <p><strong>Market Trends:</strong> ${journal.marketTrend}</p>
+        <p><strong>Risk-Reward:</strong> ${journal.riskReward}</p>
+        <p><strong>Entry-Exit Strategy:</strong> ${journal.entryExit}</p>
+        <p><strong>No Overtrade:</strong> ${journal.overtrade}</p>
+        <p><strong>Done for the Day:</strong> ${journal.doneForDay}</p>
+        <p><strong>Save Earned Profit:</strong> ${journal.saveProfit}</p>
+        <p><strong>Lessons Learned:</strong> ${journal.lessons}</p>
+      `;
+      return entry;
+    }
+
+    // Export to Excel
+    document.getElementById('exportExcel').addEventListener('click', () => {
+      const ws = XLSX.utils.json_to_sheet(journals);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Trade Journals');
+      XLSX.writeFile(wb, 'Trade_Journal.xlsx');
+    });
+  </script>
+</body>
 </html>
