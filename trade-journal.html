@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Daily Trade Journal for tracking equity, commodity, forex, crypto, and derivatives trades." />
+    <title>Daily Trade Journal</title>
+    <!-- Load React and Babel -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Load XLSX for Excel export -->
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <!-- Load React Toastify for notifications -->
+    <script src="https://unpkg.com/react-toastify/dist/ReactToastify.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/react-toastify/dist/ReactToastify.css" />
+    <!-- Load Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+      body { font-family: 'Arial', sans-serif; background-color: #f3f4f6; }
+      input, select, textarea { outline: none; }
+      button { transition: background-color 0.3s ease; }
+      button:hover { opacity: 0.9; }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      const TradeJournal = () => {
+        const [journals, setJournals] = useState([]);
+        const [formData, setFormData] = useState({
+          date: '',
+          entityName: '',
+          entityType: 'equity',
+          buyPrice: 0,
+          sellPrice: 0,
+          emotionalState: '',
+          lessons: '',
+        });
+
+        // Load journals from local storage on component mount
+        useEffect(() => {
+          const savedJournals = JSON.parse(localStorage.getItem('tradeJournals')) || [];
+          setJournals(savedJournals);
+        }, []);
+
+        // Save journals to local storage
+        useEffect(() => {
+          localStorage.setItem('tradeJournals', JSON.stringify(journals));
+        }, [journals]);
+
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          const profit = (formData.sellPrice - formData.buyPrice).toFixed(2);
+          const newJournal = { ...formData, profit, id: Date.now() };
+          setJournals([...journals, newJournal]);
+          toast.success('Journal saved successfully!');
+          setFormData({
+            date: '',
+            entityName: '',
+            entityType: 'equity',
+            buyPrice: 0,
+            sellPrice: 0,
+            emotionalState: '',
+            lessons: '',
+          });
+        };
+
+        const exportToExcel = () => {
+          const ws = XLSX.utils.json_to_sheet(journals);
+          const wb = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(wb, ws, 'Trade Journals');
+          XLSX.writeFile(wb, 'trade_journals.xlsx');
+        };
+
+        // Daily Alerts
+        useEffect(() => {
+          const notify = (message) => {
+            if (Notification.permission === 'granted') {
+              new Notification(message);
+            } else if (Notification.permission !== 'denied') {
+              Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
+                  new Notification(message);
+                }
+              });
+            }
+          };
+
+          const morningAlert = setInterval(() => {
+            const now = new Date();
+            if (now.getHours() === 9 && now.getMinutes() === 0 && now.getDay() !== 0 && now.getDay() !== 6) {
+              notify('Good morning! Time to log your trades.');
+            }
+          }, 60000);
+
+          const eveningAlert = setInterval(() => {
+            const now = new Date();
+            if (now.getHours() === 19 && now.getMinutes() === 30) {
+              notify('Good evening! Time to log your trades.');
+            }
+          }, 60000);
+
+          return () => {
+            clearInterval(morningAlert);
+            clearInterval(eveningAlert);
+          };
+        }, []);
+
+        return (
+          <div className="p-6 bg-gray-100 min-h-screen">
+            <h1 className="text-3xl font-bold text-center mb-6">Daily Trade Journal</h1>
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} className="p-2 border rounded" required />
+                <input type="text" placeholder="Entity Name" value={formData.entityName} onChange={(e) => setFormData({ ...formData, entityName: e.target.value })} className="p-2 border rounded" required />
+                <select value={formData.entityType} onChange={(e) => setFormData({ ...formData, entityType: e.target.value })} className="p-2 border rounded" required>
+                  <option value="equity">Equity</option>
+                  <option value="commodity">Commodity</option>
+                  <option value="forex">Forex</option>
+                  <option value="crypto">Crypto</option>
+                  <option value="derivatives">Derivatives</option>
+                </select>
+                <input type="number" placeholder="Buy Price" value={formData.buyPrice} onChange={(e) => setFormData({ ...formData, buyPrice: parseFloat(e.target.value) })} className="p-2 border rounded" required />
+                <input type="number" placeholder="Sell Price" value={formData.sellPrice} onChange={(e) => setFormData({ ...formData, sellPrice: parseFloat(e.target.value) })} className="p-2 border rounded" required />
+                <textarea placeholder="Emotional State" value={formData.emotionalState} onChange={(e) => setFormData({ ...formData, emotionalState: e.target.value })} className="p-2 border rounded" />
+                <textarea placeholder="Lessons Learned" value={formData.lessons} onChange={(e) => setFormData({ ...formData, lessons: e.target.value })} className="p-2 border rounded" />
+              </div>
+              <button type="submit" className="mt-4 bg-blue-500 text-white p-2 rounded w-full">Save Journal</button>
+            </form>
+
+            <div className="mt-6">
+              <button onClick={exportToExcel} className="bg-green-500 text-white p-2 rounded">Export to Excel</button>
+              <div className="mt-4">
+                <h2 className="text-xl font-bold">Saved Journals</h2>
+                {journals.map((journal) => (
+                  <div key={journal.id} className="bg-white p-4 rounded-lg shadow-md mt-2">
+                    <p><strong>Date:</strong> {journal.date}</p>
+                    <p><strong>Entity:</strong> {journal.entityName} ({journal.entityType})</p>
+                    <p><strong>Profit:</strong> ${journal.profit}</p>
+                    <p><strong>Emotional State:</strong> {journal.emotionalState}</p>
+                    <p><strong>Lessons:</strong> {journal.lessons}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <ToastContainer />
+          </div>
+        );
+      };
+
+      ReactDOM.render(<TradeJournal />, document.getElementById('root'));
+    </script>
+  </body>
+</html>
