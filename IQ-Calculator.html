@@ -3,626 +3,813 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional IQ Test</title>
+    <title>Comprehensive IQ Test (50 Questions)</title>
     <style>
-        :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #166088;
-            --accent-color: #4fc3f7;
-            --background-color: #f8f9fa;
-            --text-color: #333;
-            --light-text: #666;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--background-color);
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1200px;
+            color: #333;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            background-color: #f9f9f9;
         }
-
-        header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 1.5rem 0;
+        
+        h1, h2 {
+            color: #2c3e50;
             text-align: center;
-            margin-bottom: 2rem;
         }
-
-        .iq-test-container {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 2rem;
+        
+        .test-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
         }
-
-        .question-container {
-            display: block;
-            opacity: 1;
-            animation: fadeIn 0.5s ease;
-        }
-
+        
         .question {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            color: var(--secondary-color);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
         }
-
+        
+        .question:last-child {
+            border-bottom: none;
+        }
+        
         .options {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            margin-left: 20px;
         }
-
-        @media (min-width: 768px) {
-            .options {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .option {
-            padding: 1rem;
-            border: 2px solid #ddd;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition);
-            background: white;
-        }
-
-        .option:hover {
-            border-color: var(--accent-color);
-            background: #f0f8ff;
-        }
-
-        .option.selected {
-            border-color: var(--primary-color);
-            background: #e3f2fd;
-        }
-
-        .navigation {
+        
+        .shape-options {
             display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
         }
-
+        
+        .shape {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin: 15px 0;
+        }
+        
+        .matrix-cell {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            font-size: 24px;
+        }
+        
         button {
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: var(--border-radius);
-            background-color: var(--primary-color);
+            display: block;
+            margin: 30px auto;
+            padding: 12px 25px;
+            background-color: #3498db;
             color: white;
-            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: background-color 0.3s;
         }
-
+        
         button:hover {
-            background-color: var(--secondary-color);
+            background-color: #2980b9;
         }
-
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .progress-container {
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: var(--border-radius);
-            margin-bottom: 2rem;
-            height: 10px;
-        }
-
-        .progress-bar {
-            height: 100%;
-            border-radius: var(--border-radius);
-            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
-            width: 0%;
-            transition: width 0.4s ease;
-        }
-
-        #intro-screen, #test-screen, #result-screen {
+        
+        .result {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
             display: none;
         }
-
-        #intro-screen {
-            display: block;
-        }
-
-        .result-details {
-            margin-top: 2rem;
-            text-align: left;
-            padding: 1rem;
-            background: #f5f5f5;
-            border-radius: var(--border-radius);
-        }
-
-        .iq-scale {
-            display: flex;
-            justify-content: space-between;
-            margin: 2rem 0;
-            position: relative;
-            height: 20px;
-            background: linear-gradient(90deg, #f44336, #ffeb3b, #4caf50);
-            border-radius: var(--border-radius);
-        }
-
-        .iq-marker {
-            position: absolute;
-            bottom: -25px;
-            transform: translateX(-50%);
-            font-size: 0.9rem;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        .timer {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #e74c3c;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Professional IQ Test</h1>
-            <p>30 questions to accurately measure your cognitive abilities</p>
-        </div>
-    </header>
-
-    <main class="container">
-        <div class="iq-test-container">
-            <div id="intro-screen">
-                <h2>Welcome to the IQ Test</h2>
-                <p>This comprehensive test includes 30 questions covering verbal, mathematical, and spatial reasoning.</p>
-                <p>Average completion time: 20-30 minutes</p>
-                <button id="start-test-btn">Begin Test</button>
-            </div>
-
-            <div id="test-screen">
-                <div class="progress-container">
-                    <div class="progress-bar" id="progress-bar"></div>
-                </div>
-                <div id="question-container" class="question-container"></div>
-                <div class="navigation">
-                    <button id="prev-btn" disabled>Previous</button>
-                    <button id="next-btn">Next</button>
-                </div>
-            </div>
-
-            <div id="result-screen">
-                <h2>Your IQ Test Results</h2>
-                <div id="iq-score" style="font-size: 2rem; font-weight: bold; margin: 1rem 0;"></div>
-                <div id="iq-description" class="result-details"></div>
-                <div class="iq-scale">
-                    <div class="iq-marker" style="left: 0%;">70</div>
-                    <div class="iq-marker" style="left: 25%;">85</div>
-                    <div class="iq-marker" style="left: 50%;">100</div>
-                    <div class="iq-marker" style="left: 75%;">115</div>
-                    <div class="iq-marker" style="left: 100%;">130+</div>
-                </div>
-                <button id="restart-btn">Retake Test</button>
+    <h1>Comprehensive IQ Test</h1>
+    <div class="timer">Time remaining: <span id="time">60:00</span></div>
+    
+    <div class="test-container">
+        <h2>Verbal Comprehension</h2>
+        
+        <!-- Questions 1-10 -->
+        <div class="question">
+            <p>1. Which word does not belong with the others?</p>
+            <div class="options">
+                <input type="radio" name="q1" value="a"> Apple<br>
+                <input type="radio" name="q1" value="b"> Banana<br>
+                <input type="radio" name="q1" value="c"> Carrot<br>
+                <input type="radio" name="q1" value="d"> Orange<br>
             </div>
         </div>
-    </main>
+        
+        <div class="question">
+            <p>2. Complete the analogy: Book is to reading as fork is to _____.</p>
+            <div class="options">
+                <input type="radio" name="q2" value="a"> Cutting<br>
+                <input type="radio" name="q2" value="b"> Eating<br>
+                <input type="radio" name="q2" value="c"> Stabbing<br>
+                <input type="radio" name="q2" value="d"> Cooking<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>3. Rearrange the letters "S A F E T Y" to form a meaningful word. What is the second letter of that word?</p>
+            <div class="options">
+                <input type="radio" name="q3" value="a"> A<br>
+                <input type="radio" name="q3" value="b"> E<br>
+                <input type="radio" name="q3" value="c"> F<br>
+                <input type="radio" name="q3" value="d"> S<br>
+                <input type="radio" name="q3" value="e"> T<br>
+                <input type="radio" name="q3" value="f"> Y<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>4. Which word is the opposite of "Benevolent"?</p>
+            <div class="options">
+                <input type="radio" name="q4" value="a"> Kind<br>
+                <input type="radio" name="q4" value="b"> Malevolent<br>
+                <input type="radio" name="q4" value="c"> Generous<br>
+                <input type="radio" name="q4" value="d"> Friendly<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>5. If all Bloops are Razzies and all Razzies are Lazzies, then all Bloops are definitely Lazzies.</p>
+            <div class="options">
+                <input type="radio" name="q5" value="a"> True<br>
+                <input type="radio" name="q5" value="b"> False<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>6. Which of these is not a synonym for "Intelligent"?</p>
+            <div class="options">
+                <input type="radio" name="q6" value="a"> Astute<br>
+                <input type="radio" name="q6" value="b"> Shrewd<br>
+                <input type="radio" name="q6" value="c"> Obtuse<br>
+                <input type="radio" name="q6" value="d"> Perceptive<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>7. Complete the word pair: Peace is to war as love is to _____.</p>
+            <div class="options">
+                <input type="radio" name="q7" value="a"> Hate<br>
+                <input type="radio" name="q7" value="b"> Joy<br>
+                <input type="radio" name="q7" value="c"> Emotion<br>
+                <input type="radio" name="q7" value="d"> Life<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>8. Which word can be formed from these letters: R, E, A, D, I, N, G?</p>
+            <div class="options">
+                <input type="radio" name="q8" value="a"> Daring<br>
+                <input type="radio" name="q8" value="b"> Garden<br>
+                <input type="radio" name="q8" value="c"> Grained<br>
+                <input type="radio" name="q8" value="d"> All of the above<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>9. Which of these proverbs has a different meaning from the others?</p>
+            <div class="options">
+                <input type="radio" name="q9" value="a"> Look before you leap<br>
+                <input type="radio" name="q9" value="b"> Fools rush in where angels fear to tread<br>
+                <input type="radio" name="q9" value="c"> He who hesitates is lost<br>
+                <input type="radio" name="q9" value="d"> Measure twice, cut once<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>10. Which word is misspelled?</p>
+            <div class="options">
+                <input type="radio" name="q10" value="a"> Accommodate<br>
+                <input type="radio" name="q10" value="b"> Definitely<br>
+                <input type="radio" name="q10" value="c"> Seperate<br>
+                <input type="radio" name="q10" value="d"> Privilege<br>
+            </div>
+        </div>
+        
+        <h2>Numerical Ability</h2>
+        
+        <!-- Questions 11-20 -->
+        <div class="question">
+            <p>11. Which number comes next in this sequence: 2, 6, 12, 20, 30, ?</p>
+            <div class="options">
+                <input type="radio" name="q11" value="a"> 38<br>
+                <input type="radio" name="q11" value="b"> 42<br>
+                <input type="radio" name="q11" value="c"> 44<br>
+                <input type="radio" name="q11" value="d"> 40<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>12. If 3x + 7 = 22, what is the value of x?</p>
+            <div class="options">
+                <input type="radio" name="q12" value="a"> 4<br>
+                <input type="radio" name="q12" value="b"> 5<br>
+                <input type="radio" name="q12" value="c"> 6<br>
+                <input type="radio" name="q12" value="d"> 7<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>13. A train travels 300 miles in 5 hours. How far will it travel in 7 hours at the same speed?</p>
+            <div class="options">
+                <input type="radio" name="q13" value="a"> 400 miles<br>
+                <input type="radio" name="q13" value="b"> 420 miles<br>
+                <input type="radio" name="q13" value="c"> 450 miles<br>
+                <input type="radio" name="q13" value="d"> 490 miles<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>14. What is 25% of 1/5 of 200?</p>
+            <div class="options">
+                <input type="radio" name="q14" value="a"> 5<br>
+                <input type="radio" name="q14" value="b"> 10<br>
+                <input type="radio" name="q14" value="c"> 15<br>
+                <input type="radio" name="q14" value="d"> 20<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>15. If a shirt costs $20 after a 20% discount, what was its original price?</p>
+            <div class="options">
+                <input type="radio" name="q15" value="a"> $22<br>
+                <input type="radio" name="q15" value="b"> $24<br>
+                <input type="radio" name="q15" value="c"> $25<br>
+                <input type="radio" name="q15" value="d"> $28<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>16. What is the missing number: 8, 16, 32, 64, ?</p>
+            <div class="options">
+                <input type="radio" name="q16" value="a"> 96<br>
+                <input type="radio" name="q16" value="b"> 112<br>
+                <input type="radio" name="q16" value="c"> 128<br>
+                <input type="radio" name="q16" value="d"> 144<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>17. A farmer has 17 sheep and all but 9 die. How many are left?</p>
+            <div class="options">
+                <input type="radio" name="q17" value="a"> 8<br>
+                <input type="radio" name="q17" value="b"> 9<br>
+                <input type="radio" name="q17" value="c"> 17<br>
+                <input type="radio" name="q17" value="d"> 26<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>18. What is the sum of the first 10 prime numbers?</p>
+            <div class="options">
+                <input type="radio" name="q18" value="a"> 101<br>
+                <input type="radio" name="q18" value="b"> 112<br>
+                <input type="radio" name="q18" value="c"> 129<br>
+                <input type="radio" name="q18" value="d"> 158<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>19. If 5 workers can build 5 houses in 5 days, how many days would it take 10 workers to build 10 houses?</p>
+            <div class="options">
+                <input type="radio" name="q19" value="a"> 5 days<br>
+                <input type="radio" name="q19" value="b"> 10 days<br>
+                <input type="radio" name="q19" value="c"> 15 days<br>
+                <input type="radio" name="q19" value="d"> 20 days<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>20. What is the next number in this sequence: 1, 1, 2, 3, 5, 8, 13, ?</p>
+            <div class="options">
+                <input type="radio" name="q20" value="a"> 18<br>
+                <input type="radio" name="q20" value="b"> 19<br>
+                <input type="radio" name="q20" value="c"> 20<br>
+                <input type="radio" name="q20" value="d"> 21<br>
+            </div>
+        </div>
+        
+        <h2>Logical Reasoning</h2>
+        
+        <!-- Questions 21-30 -->
+        <div class="question">
+            <p>21. If some doctors are scientists and all scientists are researchers, then which statement must be true?</p>
+            <div class="options">
+                <input type="radio" name="q21" value="a"> All doctors are researchers<br>
+                <input type="radio" name="q21" value="b"> Some doctors are researchers<br>
+                <input type="radio" name="q21" value="c"> No doctors are researchers<br>
+                <input type="radio" name="q21" value="d"> Some researchers are doctors<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>22. All roses are flowers. Some flowers fade quickly. Therefore:</p>
+            <div class="options">
+                <input type="radio" name="q22" value="a"> All roses fade quickly<br>
+                <input type="radio" name="q22" value="b"> Some roses fade quickly<br>
+                <input type="radio" name="q22" value="c"> No roses fade quickly<br>
+                <input type="radio" name="q22" value="d"> Some flowers that fade quickly are roses<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>23. If today is Saturday, what day will it be in 30 days?</p>
+            <div class="options">
+                <input type="radio" name="q23" value="a"> Sunday<br>
+                <input type="radio" name="q23" value="b"> Monday<br>
+                <input type="radio" name="q23" value="c"> Tuesday<br>
+                <input type="radio" name="q23" value="d"> Wednesday<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>24. A clock loses 10 minutes every hour. If the clock is set correctly at noon, what time will it show at 6 PM?</p>
+            <div class="options">
+                <input type="radio" name="q24" value="a"> 4:00 PM<br>
+                <input type="radio" name="q24" value="b"> 4:30 PM<br>
+                <input type="radio" name="q24" value="c"> 5:00 PM<br>
+                <input type="radio" name="q24" value="d"> 5:30 PM<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>25. If A is taller than B, and B is taller than C, which statement must be true?</p>
+            <div class="options">
+                <input type="radio" name="q25" value="a"> C is the shortest<br>
+                <input type="radio" name="q25" value="b"> A is the tallest<br>
+                <input type="radio" name="q25" value="c"> B is in the middle<br>
+                <input type="radio" name="q25" value="d"> All of the above<br>
+            </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const questions = [
-                // Verbal Questions (1-10)
-                {
-                    question: "Which word does not belong: eloquent, articulate, verbose, taciturn?",
-                    options: ["eloquent", "articulate", "verbose", "taciturn"],
-                    correct: 3,
-                    difficulty: 2,
-                    type: "verbal"
-                },
-                {
-                    question: "Complete the analogy: Book is to reading as fork is to ___.",
-                    options: ["drawing", "eating", "writing", "cutting"],
-                    correct: 1,
-                    difficulty: 1,
-                    type: "verbal"
-                },
-                {
-                    question: "Which is the opposite of 'ephemeral'?",
-                    options: ["transient", "permanent", "brief", "fleeting"],
-                    correct: 1,
-                    difficulty: 2,
-                    type: "verbal"
-                },
-                {
-                    question: "Rearrange the letters 'CIFAIPC' to form a:",
-                    options: ["city", "animal", "ocean", "country"],
-                    correct: 3,
-                    difficulty: 3,
-                    type: "verbal"
-                },
-                {
-                    question: "Which word is misspelled?",
-                    options: ["accommodate", "embarrass", "definately", "harass"],
-                    correct: 2,
-                    difficulty: 1,
-                    type: "verbal"
-                },
-                {
-                    question: "What is the next pair in the series: AZ, BY, CX, DW, ___?",
-                    options: ["EV", "FU", "VE", "FV"],
-                    correct: 0,
-                    difficulty: 3,
-                    type: "verbal"
-                },
-                {
-                    question: "Which is not a synonym for 'happy'?",
-                    options: ["jubilant", "ecstatic", "morose", "elated"],
-                    correct: 2,
-                    difficulty: 1,
-                    type: "verbal"
-                },
-                {
-                    question: "If all Zips are Zaps and some Zaps are Zops, then:",
-                    options: ["All Zips are Zops", "Some Zips are Zops", "No Zips are Zops", "None must be true"],
-                    correct: 3,
-                    difficulty: 3,
-                    type: "verbal"
-                },
-                {
-                    question: "Which word means 'fear of heights'?",
-                    options: ["arachnophobia", "acrophobia", "claustrophobia", "agoraphobia"],
-                    correct: 1,
-                    difficulty: 2,
-                    type: "verbal"
-                },
-                {
-                    question: "What is the plural of 'phenomenon'?",
-                    options: ["phenomenons", "phenomena", "phenomenas", "phenomeni"],
-                    correct: 1,
-                    difficulty: 2,
-                    type: "verbal"
-                },
+    <div class="question">
+        <p>26. Which pattern comes next in the sequence: △, ◯, □, △, ◯, □, △, ◯, ?</p>
+        <div class="options">
+            <input type="radio" name="q26" value="a"> △<br>
+            <input type="radio" name="q26" value="b"> ◯<br>
+            <input type="radio" name="q26" value="c"> □<br>
+            <input type="radio" name="q26" value="d"> ◇<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>27. If all Zips are Zaps and some Zaps are Zops, then which statement must be true?</p>
+        <div class="options">
+            <input type="radio" name="q27" value="a"> All Zips are Zops<br>
+            <input type="radio" name="q27" value="b"> Some Zips are Zops<br>
+            <input type="radio" name="q27" value="c"> No Zips are Zops<br>
+            <input type="radio" name="q27" value="d"> Some Zops are Zips<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>28. A man builds a house with all four walls facing south. A bear walks by. What color is the bear?</p>
+        <div class="options">
+            <input type="radio" name="q28" value="a"> Black<br>
+            <input type="radio" name="q28" value="b"> Brown<br>
+            <input type="radio" name="q28" value="c"> White<br>
+            <input type="radio" name="q28" value="d"> Gray<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>29. If red is called blue, blue is called green, green is called yellow, and yellow is called red, what color is grass?</p>
+        <div class="options">
+            <input type="radio" name="q29" value="a"> Red<br>
+            <input type="radio" name="q29" value="b"> Blue<br>
+            <input type="radio" name="q29" value="c"> Green<br>
+            <input type="radio" name="q29" value="d"> Yellow<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>30. Which number is the odd one out: 2, 5, 10, 17, 26, 37, 50, 64</p>
+        <div class="options">
+            <input type="radio" name="q30" value="a"> 2<br>
+            <input type="radio" name="q30" value="b"> 10<br>
+            <input type="radio" name="q30" value="c"> 37<br>
+            <input type="radio" name="q30" value="d"> 64<br>
+        </div>
+    </div>
+    
+    <h2>Spatial Visualization</h2>
+    
+    <!-- Questions 31-40 -->
+    <div class="question">
+        <p>31. Which shape is the odd one out?</p>
+        <div class="shape-options">
+            <span class="shape" style="background-color: red; border-radius: 50%;">◯</span>
+            <span class="shape" style="background-color: blue;">□</span>
+            <span class="shape" style="background-color: green; border-radius: 5px;">▢</span>
+            <span class="shape" style="background-color: yellow; height: 30px;">▭</span>
+        </div>
+        <div class="options">
+            <input type="radio" name="q31" value="a"> Red circle<br>
+            <input type="radio" name="q31" value="b"> Blue square<br>
+            <input type="radio" name="q31" value="c"> Green rounded square<br>
+            <input type="radio" name="q31" value="d"> Yellow rectangle<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>32. Which cube can be made from this net?</p>
+        <div class="shape-options">
+            <span style="font-size: 24px;">+--+<br>|  |<br>+--+--+<br>   |  |<br>   +--+</span>
+        </div>
+        <div class="options">
+            <input type="radio" name="q32" value="a"> Cube with opposite sides same color<br>
+            <input type="radio" name="q32" value="b"> Cube with adjacent sides same color<br>
+            <input type="radio" name="q32" value="c"> Cube with three sides one color, three another<br>
+            <input type="radio" name="q32" value="d"> Impossible to determine<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>33. Which shape comes next in the pattern?</p>
+        <div class="shape-options">
+            <span class="shape">↑</span>
+            <span class="shape">→</span>
+            <span class="shape">↓</span>
+            <span class="shape">?</span>
+        </div>
+        <div class="options">
+            <input type="radio" name="q33" value="a"> ←<br>
+            <input type="radio" name="q33" value="b"> ↑<br>
+            <input type="radio" name="q33" value="c"> ↘<br>
+            <input type="radio" name="q33" value="d"> ↖<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>34. How many cubes are in this figure?</p>
+        <div class="shape-options">
+            <span style="display: inline-block; width: 80px; height: 60px; border: 1px solid #000; position: relative;">
+                <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 0; top: 0;"></span>
+                <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 20px; top: 0;"></span>
+                <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 0; top: 20px;"></span>
+                <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 20px; top: 20px;"></span>
+                <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 0; top: 40px;"></span>
+            </span>
+        </div>
+        <div class="options">
+            <input type="radio" name="q34" value="a"> 4<br>
+            <input type="radio" name="q34" value="b"> 5<br>
+            <input type="radio" name="q34" value="c"> 6<br>
+            <input type="radio" name="q34" value="d"> 7<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>35. Which figure completes the matrix?</p>
+        <div class="matrix">
+            <div class="matrix-cell">△</div>
+            <div class="matrix-cell">□</div>
+            <div class="matrix-cell">◯</div>
+            <div class="matrix-cell">□</div>
+            <div class="matrix-cell">◯</div>
+            <div class="matrix-cell">△</div>
+            <div class="matrix-cell">◯</div>
+            <div class="matrix-cell">△</div>
+            <div class="matrix-cell">?</div>
+        </div>
+        <div class="options">
+            <input type="radio" name="q35" value="a"> △<br>
+            <input type="radio" name="q35" value="b"> □<br>
+            <input type="radio" name="q35" value="c"> ◯<br>
+            <input type="radio" name="q35" value="d"> ◇<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>36. Which 3D shape has 6 faces, 12 edges, and 8 vertices?</p>
+        <div class="options">
+            <input type="radio" name="q36" value="a"> Sphere<br>
+            <input type="radio" name="q36" value="b"> Cylinder<br>
+            <input type="radio" name="q36" value="c"> Cube<br>
+            <input type="radio" name="q36" value="d"> Cone<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>37. If you fold this net into a cube, which face will be opposite the X?</p>
+        <div class="shape-options">
+            <span style="font-size: 24px;">+--+--+<br>|X |  |<br>+--+--+<br>|  |O |<br>+--+--+</span>
+        </div>
+        <div class="options">
+            <input type="radio" name="q37" value="a"> The blank face<br>
+            <input type="radio" name="q37" value="b"> The O face<br>
+            <input type="radio" name="q37" value="c"> The X face<br>
+            <input type="radio" name="q37" value="d"> Cannot be determined<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>38. Which shape is the mirror image of the given shape?</p>
+        <div class="shape-options">
+            <span style="font-size: 24px;">/</span>
+            <span style="font-size: 24px;">\</span>
+            <span style="font-size: 24px;">></span>
+            <span style="font-size: 24px;"><</span>
+        </div>
+        <div class="options">
+            <input type="radio" name="q38" value="a"> /<br>
+            <input type="radio" name="q38" value="b"> \<br>
+            <input type="radio" name="q38" value="c"> ><br>
+            <input type="radio" name="q38" value="d"> <<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>39. How many triangles are in this figure?</p>
+        <div class="shape-options">
+            <span style="font-size: 24px;">▲<br>▲▲</span>
+        </div>
+        <div class="options">
+            <input type="radio" name="q39" value="a"> 3<br>
+            <input type="radio" name="q39" value="b"> 4<br>
+            <input type="radio" name="q39" value="c"> 5<br>
+            <input type="radio" name="q39" value="d"> 6<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>40. Which pattern comes next?</p>
+        <div class="shape-options">
+            <span style="font-size: 24px;">■ □ ■ □ ■ ?</span>
+        </div>
+        <div class="options">
+            <input type="radio" name="q40" value="a"> ■<br>
+            <input type="radio" name="q40" value="b"> □<br>
+            <input type="radio" name="q40" value="c"> ◯<br>
+            <input type="radio" name="q40" value="d"> △<br>
+        </div>
+    </div>
+    
+    <h2>Memory and Processing Speed</h2>
+    
+    <!-- Questions 41-50 -->
+    <div class="question">
+        <p>41. Remember this number: 5829. After answering the next few questions, you'll be asked to recall it.</p>
+        <input type="hidden" name="q41" value="5829">
+    </div>
+    
+    <div class="question">
+        <p>42. Which of these words appeared earlier in this test? (Don't look back!)</p>
+        <div class="options">
+            <input type="radio" name="q42" value="a"> Malevolent<br>
+            <input type="radio" name="q42" value="b"> Obtuse<br>
+            <input type="radio" name="q42" value="c"> Astute<br>
+            <input type="radio" name="q42" value="d"> Perceptive<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>43. What was the answer to question 15?</p>
+        <div class="options">
+            <input type="radio" name="q43" value="a"> $22<br>
+            <input type="radio" name="q43" value="b"> $24<br>
+            <input type="radio" name="q43" value="c"> $25<br>
+            <input type="radio" name="q43" value="d"> $28<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>44. What was the number you were asked to remember in question 41?</p>
+        <div class="options">
+            <input type="radio" name="q44" value="a"> 5289<br>
+            <input type="radio" name="q44" value="b"> 5829<br>
+            <input type="radio" name="q44" value="c"> 5892<br>
+            <input type="radio" name="q44" value="d"> 5298<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>45. How many questions in this test have been about shapes or spatial reasoning so far?</p>
+        <div class="options">
+            <input type="radio" name="q45" value="a"> 5<br>
+            <input type="radio" name="q45" value="b"> 7<br>
+            <input type="radio" name="q45" value="c"> 10<br>
+            <input type="radio" name="q45" value="d"> 12<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>46. Which of these sequences appeared earlier in the test?</p>
+        <div class="options">
+            <input type="radio" name="q46" value="a"> 2, 5, 10, 17, 26<br>
+            <input type="radio" name="q46" value="b"> 1, 1, 2, 3, 5, 8<br>
+            <input type="radio" name="q46" value="c"> 8, 16, 32, 64<br>
+            <input type="radio" name="q46" value="d"> All of the above<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>47. What color was the bear in question 28?</p>
+        <div class="options">
+            <input type="radio" name="q47" value="a"> Black<br>
+            <input type="radio" name="q47" value="b"> Brown<br>
+            <input type="radio" name="q47" value="c"> White<br>
+            <input type="radio" name="q47" value="d"> Gray<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>48. Which question asked about the Fibonacci sequence?</p>
+        <div class="options">
+            <input type="radio" name="q48" value="a"> Question 11<br>
+            <input type="radio" name="q48" value="b"> Question 16<br>
+            <input type="radio" name="q48" value="c"> Question 20<br>
+            <input type="radio" name="q48" value="d"> Question 30<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>49. What was the subject of question 37?</p>
+        <div class="options">
+            <input type="radio" name="q49" value="a"> Mirror images<br>
+            <input type="radio" name="q49" value="b"> Folding a net into a cube<br>
+            <input type="radio" name="q49" value="c"> Counting triangles<br>
+            <input type="radio" name="q49" value="d"> Identifying 3D shapes<br>
+        </div>
+    </div>
+    
+    <div class="question">
+        <p>50. Which of these words has NOT appeared in any previous question?</p>
+        <div class="options">
+            <input type="radio" name="q50" value="a"> Syllogism<br>
+            <input type="radio" name="q50" value="b"> Fibonacci<br>
+            <input type="radio" name="q50" value="c"> Malevolent<br>
+            <input type="radio" name="q50" value="d"> Obtuse<br>
+        </div>
+    </div>
+    
+    <button onclick="calculateScore()">Submit Test</button>
+    <div class="result" id="result"></div>
+</div>
 
-                // Mathematical Questions (11-20)
-                {
-                    question: "What comes next: 2, 4, 8, 16, ___?",
-                    options: ["20", "24", "32", "64"],
-                    correct: 2,
-                    difficulty: 1,
-                    type: "math"
-                },
-                {
-                    question: "If 3 workers build 9 widgets in 6 hours, how many can 5 workers build in 10 hours?",
-                    options: ["15", "20", "25", "30"],
-                    correct: 2,
-                    difficulty: 3,
-                    type: "math"
-                },
-                {
-                    question: "What is the missing number: 3, 7, 15, 31, 63, ___?",
-                    options: ["95", "111", "127", "143"],
-                    correct: 2,
-                    difficulty: 3,
-                    type: "math"
-                },
-                {
-                    question: "If a train travels 300 miles in 5 hours, what is its speed?",
-                    options: ["45 mph", "55 mph", "60 mph", "65 mph"],
-                    correct: 2,
-                    difficulty: 1,
-                    type: "math"
-                },
-                {
-                    question: "What is one-third of one-half of one-fifth of 300?",
-                    options: ["5", "10", "15", "20"],
-                    correct: 1,
-                    difficulty: 2,
-                    type: "math"
-                },
-                {
-                    question: "Solve for x: 2x + 5 = 17",
-                    options: ["5", "6", "7", "8"],
-                    correct: 1,
-                    difficulty: 1,
-                    type: "math"
-                },
-                {
-                    question: "What is 25% of 1/5 of 200?",
-                    options: ["5", "10", "15", "20"],
-                    correct: 1,
-                    difficulty: 2,
-                    type: "math"
-                },
-                {
-                    question: "Which number is odd one out: 10, 25, 45, 72, 100?",
-                    options: ["10", "25", "45", "72"],
-                    correct: 3,
-                    difficulty: 2,
-                    type: "math"
-                },
-                {
-                    question: "What is the next number: 1, 1, 2, 3, 5, 8, ___?",
-                    options: ["11", "12", "13", "14"],
-                    correct: 2,
-                    difficulty: 2,
-                    type: "math"
-                },
-                {
-                    question: "What is the missing number in this grid?\n5 | 10 | 15\n3 | 6 | 9\n7 | ? | 21",
-                    options: ["10", "12", "14", "16"],
-                    correct: 2,
-                    difficulty: 3,
-                    type: "math"
-                },
+<script>
+    // Timer countdown (60 minutes)
+    let timeLeft = 60 * 60;
+    const timer = setInterval(function() {
+        timeLeft--;
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        document.getElementById('time').textContent = 
+            `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                calculateScore();
+            }
+        }, 1000);
 
-                // Spatial/Visual Questions (21-30)
-                {
-                    question: "Which pattern comes next: △, □, ○, △, △, □, ○, △, △, △, □, ○, ___?",
-                    options: ["△", "□", "○", "△△"],
-                    correct: 0,
-                    difficulty: 3,
-                    type: "spatial"
-                },
-                {
-                    question: "If RED is 1854, how is GREEN coded?",
-                    options: ["518554", "718555", "618554", "718554"],
-                    correct: 3,
-                    difficulty: 3,
-                    type: "spatial"
-                },
-                {
-                    question: "Which shape completes the pattern?",
-                    options: ["Option A", "Option B", "Option C", "Option D"],
-                    correct: 1,
-                    difficulty: 2,
-                    type: "spatial"
-                },
-                {
-                    question: "How many cubes are in this 3D figure? (Imagine a 3x3x3 cube)",
-                    options: ["9", "18", "27", "36"],
-                    correct: 2,
-                    difficulty: 2,
-                    type: "spatial"
-                },
-                {
-                    question: "Which net forms a cube when folded?",
-                    options: ["Net A", "Net B", "Net C", "Net D"],
-                    correct: 2,
-                    difficulty: 3,
-                    type: "spatial"
-                },
-                {
-                    question: "What is the mirror image of this shape?",
-                    options: ["Option A", "Option B", "Option C", "Option D"],
-                    correct: 0,
-                    difficulty: 1,
-                    type: "spatial"
-                },
-                {
-                    question: "Which shape is the odd one out?",
-                    options: ["Square", "Triangle", "Circle", "Rectangle"],
-                    correct: 2,
-                    difficulty: 1,
-                    type: "spatial"
-                },
-                {
-                    question: "How many triangles are in this figure?",
-                    options: ["5", "6", "7", "8"],
-                    correct: 3,
-                    difficulty: 3,
-                    type: "spatial"
-                },
-                {
-                    question: "Which shape comes next in this sequence?",
-                    options: ["Shape A", "Shape B", "Shape C", "Shape D"],
-                    correct: 1,
-                    difficulty: 2,
-                    type: "spatial"
-                },
-                {
-                    question: "If you rotate this shape 90° clockwise, what does it look like?",
-                    options: ["Option A", "Option B", "Option C", "Option D"],
-                    correct: 2,
-                    difficulty: 2,
-                    type: "spatial"
+        // Correct answers for all 50 questions
+        const correctAnswers = {
+            q1: "c",  // Carrot (only vegetable)
+            q2: "b",  // Eating
+            q3: "b",  // E (word is "feasty")
+            q4: "b",  // Malevolent
+            q5: "a",  // True
+            q6: "c",  // Obtuse
+            q7: "a",  // Hate
+            q8: "d",  // All of the above
+            q9: "c",  // He who hesitates is lost
+            q10: "c", // Seperate (misspelled)
+            q11: "b", // 42 (n²+n sequence)
+            q12: "b", // 5
+            q13: "b", // 420 miles
+            q14: "b", // 10 (200/5=40, 25% of 40=10)
+            q15: "c", // $25
+            q16: "c", // 128 (doubling sequence)
+            q17: "b", // 9
+            q18: "c", // 129 (2+3+5+7+11+13+17+19+23+29)
+            q19: "a", // 5 days
+            q20: "d", // 21 (Fibonacci sequence)
+            q21: "b", // Some doctors are researchers
+            q22: "d", // Some flowers that fade quickly are roses
+            q23: "b", // Monday (30 days = 4 weeks + 2 days)
+            q24: "c", // 5:00 PM (loses 60 minutes in 6 hours)
+            q25: "d", // All of the above
+            q26: "c", // □ (pattern repeats every 3)
+            q27: "b", // Some Zips are Zops
+            q28: "c", // White (North Pole bear)
+            q29: "d", // Yellow (grass is green, green is called yellow)
+            q30: "d", // 64 (others are n²+1 sequence)
+            q31: "d", // Yellow rectangle (different proportions)
+            q32: "a", // Cube with opposite sides same color
+            q33: "a", // ← (rotating 90° clockwise)
+            q34: "b", // 5 cubes
+            q35: "b", // □ (diagonal pattern)
+            q36: "c", // Cube
+            q37: "b", // The O face
+            q38: "b", // \
+            q39: "c", // 5 triangles
+            q40: "b", // □ (alternating pattern)
+            q41: "b", // 5829 (memory question)
+            q42: "a", // Malevolent
+            q43: "c", // $25
+            q44: "b", // 5829
+            q45: "c", // 10 (questions 31-40)
+            q46: "d", // All of the above
+            q47: "c", // White
+            q48: "c", // Question 20
+            q49: "b", // Folding a net into a cube
+            q50: "a"  // Syllogism (not mentioned before)
+        };
+
+        // Scoring function
+        function calculateScore() {
+            clearInterval(timer);
+            let score = 0;
+            const totalQuestions = 50;
+            
+            // Calculate score
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = "q" + i;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                
+                if (selectedOption && selectedOption.value === correctAnswers[questionName]) {
+                    score++;
                 }
-            ];
-
-            let currentQuestion = 0;
-            let userAnswers = Array(questions.length).fill(null);
-            const totalQuestions = questions.length;
-
-            // DOM elements
-            const introScreen = document.getElementById('intro-screen');
-            const testScreen = document.getElementById('test-screen');
-            const resultScreen = document.getElementById('result-screen');
-            const questionContainer = document.getElementById('question-container');
-            const progressBar = document.getElementById('progress-bar');
-            const startBtn = document.getElementById('start-test-btn');
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const restartBtn = document.getElementById('restart-btn');
-            const iqScore = document.getElementById('iq-score');
-            const iqDescription = document.getElementById('iq-description');
-
-            // Event listeners
-            startBtn.addEventListener('click', startTest);
-            restartBtn.addEventListener('click', startTest);
-            prevBtn.addEventListener('click', showPreviousQuestion);
-            nextBtn.addEventListener('click', showNextQuestion);
-
-            function startTest() {
-                currentQuestion = 0;
-                userAnswers = Array(questions.length).fill(null);
-                
-                introScreen.style.display = 'none';
-                testScreen.style.display = 'block';
-                resultScreen.style.display = 'none';
-                
-                loadQuestion(currentQuestion);
-                updateProgressBar();
-                updateNavigationButtons();
             }
-
-            function loadQuestion(index) {
-                questionContainer.innerHTML = '';
-                
-                const question = questions[index];
-                const questionEl = document.createElement('div');
-                questionEl.className = 'question';
-                questionEl.textContent = `${index + 1}. ${question.question}`;
-                questionContainer.appendChild(questionEl);
-                
-                const optionsEl = document.createElement('div');
-                optionsEl.className = 'options';
-                
-                question.options.forEach((option, i) => {
-                    const optionEl = document.createElement('div');
-                    optionEl.className = 'option';
-                    if (userAnswers[index] === i) {
-                        optionEl.classList.add('selected');
-                    }
-                    optionEl.textContent = option;
-                    optionEl.addEventListener('click', () => selectAnswer(index, i));
-                    optionsEl.appendChild(optionEl);
-                });
-                
-                questionContainer.appendChild(optionsEl);
-            }
-
-            function selectAnswer(questionIndex, optionIndex) {
-                userAnswers[questionIndex] = optionIndex;
-                loadQuestion(questionIndex);
-                updateNavigationButtons();
-            }
-
-            function showNextQuestion() {
-                if (currentQuestion < totalQuestions - 1) {
-                    currentQuestion++;
-                    loadQuestion(currentQuestion);
-                    updateProgressBar();
-                    updateNavigationButtons();
-                } else {
-                    showResults();
-                }
-            }
-
-            function showPreviousQuestion() {
-                if (currentQuestion > 0) {
-                    currentQuestion--;
-                    loadQuestion(currentQuestion);
-                    updateProgressBar();
-                    updateNavigationButtons();
-                }
-            }
-
-            function updateProgressBar() {
-                const progress = ((currentQuestion + 1) / totalQuestions) * 100;
-                progressBar.style.width = `${progress}%`;
-            }
-
-            function updateNavigationButtons() {
-                prevBtn.disabled = currentQuestion === 0;
-                nextBtn.disabled = userAnswers[currentQuestion] === null;
-                nextBtn.textContent = currentQuestion === totalQuestions - 1 ? 'Finish Test' : 'Next';
-            }
-
-            function showResults() {
-                testScreen.style.display = 'none';
-                resultScreen.style.display = 'block';
-                
-                const score = calculateIQScore();
-                iqScore.textContent = `Your IQ Score: ${score}`;
-                iqDescription.innerHTML = getIQDescription(score);
-            }
-
-            function calculateIQScore() {
-                // Calculate raw score weighted by difficulty
-                let rawScore = 0;
-                let maxPossibleScore = 0;
-                
-                questions.forEach((q, i) => {
-                    maxPossibleScore += q.difficulty;
-                    if (userAnswers[i] === q.correct) {
-                        rawScore += q.difficulty;
-                    }
-                });
-                
-                // Convert to IQ score (mean 100, SD 15)
-                const percentage = (rawScore / maxPossibleScore);
-                let iqScore = 70 + (percentage * 60); // Scale from 70 to 130
-                
-                // Add slight variation for realism (±5 points)
-                iqScore += (Math.random() * 10) - 5;
-                
-                // Ensure score stays within reasonable bounds
-                iqScore = Math.max(70, Math.min(145, iqScore));
-                
-                return Math.round(iqScore);
-            }
-
-            function getIQDescription(score) {
-                let description = '';
-                let level = '';
-                
-                if (score < 85) {
-                    level = 'Below Average';
-                    description = `<p>Your score of ${score} places you in the <strong>below average</strong> range of intellectual functioning (16th percentile).</p>
-                    <p>This range typically indicates some cognitive challenges but strong practical skills in other areas.</p>`;
-                } else if (score < 100) {
-                    level = 'Low Average';
-                    description = `<p>Your score of ${score} places you in the <strong>low average</strong> range (34th percentile).</p>
-                    <p>People in this range handle most daily tasks well and can succeed in many careers.</p>`;
-                } else if (score < 115) {
-                    level = 'Average';
-                    description = `<p>Your score of ${score} places you in the <strong>average</strong> range (50th percentile).</p>
-                    <p>This is the most common range, indicating typical cognitive abilities for most adults.</p>`;
-                } else if (score < 130) {
-                    level = 'High Average';
-                    description = `<p>Your score of ${score} places you in the <strong>high average</strong> range (84th percentile).</p>
-                    <p>Individuals in this range often excel academically and professionally.</p>`;
-                } else if (score < 145) {
-                    level = 'Superior';
-                    description = `<p>Your score of ${score} places you in the <strong>superior</strong> range (98th percentile).</p>
-                    <p>This indicates exceptional problem-solving abilities and learning capacity.</p>`;
-                } else {
-                    level = 'Very Superior';
-                    description = `<p>Your score of ${score} places you in the <strong>very superior</strong> range (99.9th percentile).</p>
-                    <p>This range is associated with exceptional abstract reasoning and cognitive abilities.</p>`;
-                }
-                
-                return `<h3>${level} Intelligence</h3>
-                ${description}
-                <p><strong>Test Composition:</strong><br>
-                - Verbal Reasoning: ${calculateCategoryScore('verbal')}% correct<br>
-                - Mathematical Reasoning: ${calculateCategoryScore('math')}% correct<br>
-                - Spatial Reasoning: ${calculateCategoryScore('spatial')}% correct</p>
-                <p><em>Note: This test provides an estimate. Professional IQ tests administered by psychologists are more accurate.</em></p>`;
-            }
-
-            function calculateCategoryScore(category) {
-                const categoryQuestions = questions.filter(q => q.type === category);
-                let correct = 0;
-                
-                categoryQuestions.forEach((q, i) => {
-                    const globalIndex = questions.indexOf(q);
-                    if (userAnswers[globalIndex] === q.correct) {
-                        correct++;
-                    }
-                });
-                
-                return Math.round((correct / categoryQuestions.length) * 100);
-            }
-        });
+            
+            // Calculate IQ estimate (mean 100, SD 15)
+            const iqScore = Math.round(100 + (score - 25) * (15/7.5));
+            
+            // Display results
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.style.backgroundColor = '#e8f4f8';
+            resultDiv.style.border = '1px solid #3498db';
+            
+            resultDiv.innerHTML = `
+                <h3>Your IQ Test Results</h3>
+                <p>You scored ${score} out of ${totalQuestions}.</p>
+                <p>Estimated IQ: <strong>${iqScore}</strong></p>
+                <p>Percentile: ${calculatePercentile(iqScore)}</p>
+                <p>${getIQCategory(iqScore)}</p>
+            `;
+            
+            // Scroll to results
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function calculatePercentile(iq) {
+            // Simplified percentile calculation based on normal distribution
+            if (iq >= 145) return "99.9%";
+            if (iq >= 130) return "98%";
+            if (iq >= 120) return "91%";
+            if (iq >= 115) return "84%";
+            if (iq >= 110) return "75%";
+            if (iq >= 105) return "63%";
+            if (iq >= 100) return "50%";
+            if (iq >= 95) return "37%";
+            if (iq >= 90) return "25%";
+            if (iq >= 85) return "16%";
+            if (iq >= 70) return "2%";
+            return "Below 2%";
+        }
+        
+        function getIQCategory(iq) {
+            if (iq >= 145) return "Genius or near genius";
+            if (iq >= 130) return "Very superior intelligence";
+            if (iq >= 120) return "Superior intelligence";
+            if (iq >= 110) return "High average intelligence";
+            if (iq >= 90) return "Average intelligence";
+            if (iq >= 80) return "Low average intelligence";
+            if (iq >= 70) return "Borderline intelligence";
+            return "Extremely low intelligence";
+        }
     </script>
 </body>
 </html>
