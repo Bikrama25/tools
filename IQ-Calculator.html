@@ -753,22 +753,28 @@
                 
                 if (score < 85) {
                     level = 'Below Average';
-                    description = `<p>Your score of ${score} places you in the <strong>below average</strong> range of intellectual functioning. This range includes about 16% of the population.</p>`;
-                } else if (score < 100) {
+                    description = `<p>Your score of ${score} places you in the <strong>below average</strong> range of intellectual functioning. This range includes about 16% of the population.</p>
+                    <p>Individuals in this range may find some academic and conceptual challenges more difficult, but often develop strong practical skills and talents in other areas.</p>`;
+                } else if (score >= 85 && score < 100) {
                     level = 'Low Average';
-                    description = `<p>Your score of ${score} places you in the <strong>low average</strong> range of intellectual functioning. This range includes about 34% of the population.</p>`;
-                } else if (score < 115) {
+                    description = `<p>Your score of ${score} places you in the <strong>low average</strong> range of intellectual functioning. This range includes about 34% of the population.</p>
+                    <p>People in this range typically handle most daily tasks well and can achieve success in many careers with appropriate support and effort.</p>`;
+                } else if (score >= 100 && score < 115) {
                     level = 'Average';
-                    description = `<p>Your score of ${score} places you in the <strong>average</strong> range of intellectual functioning. This is the most common range, including about 34% of the population.</p>`;
-                } else if (score < 130) {
+                    description = `<p>Your score of ${score} places you in the <strong>average</strong> range of intellectual functioning. This is the most common range, including about 34% of the population.</p>
+                    <p>Individuals with average IQ scores typically succeed in standard educational programs and adapt well to most work environments.</p>`;
+                } else if (score >= 115 && score < 130) {
                     level = 'High Average';
-                    description = `<p>Your score of ${score} places you in the <strong>high average</strong> range of intellectual functioning. This range includes about 14% of the population.</p>`;
-                } else if (score < 145) {
+                    description = `<p>Your score of ${score} places you in the <strong>high average</strong> range of intellectual functioning. This range includes about 14% of the population.</p>
+                    <p>People in this range often excel academically and may find complex problem-solving and abstract thinking easier than most.</p>`;
+                } else if (score >= 130 && score < 145) {
                     level = 'Superior';
-                    description = `<p>Your score of ${score} places you in the <strong>superior</strong> range of intellectual functioning. This range includes about 2% of the population.</p>`;
+                    description = `<p>Your score of ${score} places you in the <strong>superior</strong> range of intellectual functioning. This range includes about 2% of the population.</p>
+                    <p>Individuals with superior IQ scores often demonstrate exceptional problem-solving abilities, quick learning, and high academic achievement.</p>`;
                 } else {
                     level = 'Very Superior';
-                    description = `<p>Your score of ${score} places you in the <strong>very superior</strong> range of intellectual functioning. This range includes less than 1% of the population.</p>`;
+                    description = `<p>Your score of ${score} places you in the <strong>very superior</strong> range of intellectual functioning. This range includes less than 1% of the population.</p>
+                    <p>People with very superior IQ scores typically demonstrate exceptional abstract reasoning, problem-solving skills, and ability to comprehend complex concepts quickly.</p>`;
                 }
                 
                 return `<h3>${level} Intelligence</h3>${description}
