@@ -3,15 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online IQ test with instant results. Take our scientifically designed IQ test to measure your intelligence quotient.">
-    <meta name="keywords" content="IQ test, intelligence quotient, free IQ test, online IQ calculator, cognitive assessment">
-    <meta name="author" content="IQ Test Pro">
-    <meta property="og:title" content="Free Online IQ Test | Instant Results">
-    <meta property="og:description" content="Take our free online IQ test and get your intelligence quotient score instantly.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourwebsite.com/iq-test">
-    <title>Free Online IQ Test | Instant Results | IQ Calculator</title>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+    <title>Professional IQ Test</title>
     <style>
         :root {
             --primary-color: #4a6fa5;
@@ -25,25 +17,19 @@
             --transition: all 0.3s ease;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--background-color);
-            padding: 0;
             margin: 0;
+            padding: 0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
 
         header {
@@ -51,32 +37,7 @@
             color: white;
             padding: 1.5rem 0;
             text-align: center;
-            box-shadow: var(--box-shadow);
             margin-bottom: 2rem;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .ad-container {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .ad-container.top-ad {
-            margin-top: 0;
         }
 
         .iq-test-container {
@@ -84,16 +45,12 @@
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             padding: 2rem;
-            margin-bottom: 2rem;
         }
 
         .question-container {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .question-container.active {
             display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease;
         }
 
         .question {
@@ -154,23 +111,11 @@
 
         button:hover {
             background-color: var(--secondary-color);
-            transform: translateY(-2px);
         }
 
         button:disabled {
             background-color: #ccc;
             cursor: not-allowed;
-            transform: none;
-        }
-
-        button.secondary {
-            background-color: white;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-        }
-
-        button.secondary:hover {
-            background-color: #f0f8ff;
         }
 
         .progress-container {
@@ -189,421 +134,309 @@
             transition: width 0.4s ease;
         }
 
-        .result-container {
+        #intro-screen, #test-screen, #result-screen {
             display: none;
-            text-align: center;
-            padding: 2rem;
-            animation: fadeIn 0.5s ease;
         }
 
-        .result-container h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 2rem;
+        #intro-screen {
+            display: block;
         }
 
-        .iq-score {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: var(--secondary-color);
-            margin: 1rem 0;
-        }
-
-        .iq-description {
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            padding: 1.5rem;
-            background: #f0f8ff;
-            border-radius: var(--border-radius);
+        .result-details {
+            margin-top: 2rem;
             text-align: left;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: var(--border-radius);
         }
 
         .iq-scale {
             display: flex;
             justify-content: space-between;
-            max-width: 800px;
-            margin: 2rem auto;
+            margin: 2rem 0;
             position: relative;
-        }
-
-        .iq-scale::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 8px;
+            height: 20px;
             background: linear-gradient(90deg, #f44336, #ffeb3b, #4caf50);
-            transform: translateY(-50%);
-            border-radius: 4px;
+            border-radius: var(--border-radius);
         }
 
-        .iq-scale-point {
-            position: relative;
-            text-align: center;
-            width: 20%;
-            z-index: 1;
-        }
-
-        .iq-scale-point::after {
-            content: '';
+        .iq-marker {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 12px;
-            height: 12px;
-            background: white;
-            border: 2px solid var(--secondary-color);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .iq-scale-label {
-            position: absolute;
-            top: 100%;
-            left: 50%;
+            bottom: -25px;
             transform: translateX(-50%);
-            margin-top: 0.5rem;
             font-size: 0.9rem;
-            color: var(--light-text);
-        }
-
-        .restart-btn {
-            margin-top: 1rem;
-        }
-
-        footer {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 2rem;
-        }
-
-        footer p {
-            margin-bottom: 0.5rem;
-        }
-
-        footer a {
-            color: white;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Loading spinner */
-        .spinner {
-            display: none;
-            width: 40px;
-            height: 40px;
-            margin: 2rem auto;
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid var(--primary-color);
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
-            }
-            
-            .iq-test-container {
-                padding: 1.5rem;
-            }
-            
-            .question {
-                font-size: 1.1rem;
-            }
-            
-            button {
-                padding: 0.7rem 1.2rem;
-            }
-            
-            .iq-score {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .iq-test-container {
-                padding: 1rem;
-            }
-            
-            .navigation {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            button {
-                width: 100%;
-            }
-        }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Free Online IQ Test</h1>
-            <p>Take our scientifically designed test to measure your intelligence quotient</p>
+            <h1>Professional IQ Test</h1>
+            <p>30 questions to accurately measure your cognitive abilities</p>
         </div>
     </header>
 
     <main class="container">
-        <!-- Top Ad Container -->
-        <div class="ad-container top-ad">
-            <!-- Replace with your AdSense code -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-                 data-ad-slot="YOUR_AD_SLOT_ID"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
         <div class="iq-test-container">
             <div id="intro-screen">
                 <h2>Welcome to the IQ Test</h2>
-                <p>This test consists of 20 questions designed to measure various aspects of your cognitive abilities, including logical reasoning, pattern recognition, and problem-solving skills.</p>
-                <p>The test takes approximately 10-15 minutes to complete. Please answer all questions to the best of your ability.</p>
-                <div class="ad-container">
-                    <!-- Mid-content Ad -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-                         data-ad-slot="YOUR_AD_SLOT_ID"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-                <button id="start-test-btn" class="start-btn">Start IQ Test</button>
+                <p>This comprehensive test includes 30 questions covering verbal, mathematical, and spatial reasoning.</p>
+                <p>Average completion time: 20-30 minutes</p>
+                <button id="start-test-btn">Begin Test</button>
             </div>
 
-            <div id="test-screen" style="display: none;">
+            <div id="test-screen">
                 <div class="progress-container">
                     <div class="progress-bar" id="progress-bar"></div>
                 </div>
-
-                <div id="question-container" class="question-container">
-                    <!-- Questions will be inserted here dynamically -->
-                </div>
-
+                <div id="question-container" class="question-container"></div>
                 <div class="navigation">
-                    <button id="prev-btn" class="secondary" disabled>Previous</button>
+                    <button id="prev-btn" disabled>Previous</button>
                     <button id="next-btn">Next</button>
                 </div>
             </div>
 
-            <div id="loading-screen" style="display: none;">
-                <div class="spinner"></div>
-                <p>Calculating your IQ score...</p>
-            </div>
-
-            <div id="result-screen" class="result-container" style="display: none;">
+            <div id="result-screen">
                 <h2>Your IQ Test Results</h2>
-                <div class="iq-score" id="iq-score">--</div>
-                
-                <div class="iq-description" id="iq-description">
-                    <!-- Description will be inserted here dynamically -->
-                </div>
-                
+                <div id="iq-score" style="font-size: 2rem; font-weight: bold; margin: 1rem 0;"></div>
+                <div id="iq-description" class="result-details"></div>
                 <div class="iq-scale">
-                    <div class="iq-scale-point">
-                        <div class="iq-scale-label">70-85</div>
-                    </div>
-                    <div class="iq-scale-point">
-                        <div class="iq-scale-label">85-100</div>
-                    </div>
-                    <div class="iq-scale-point">
-                        <div class="iq-scale-label">100-115</div>
-                    </div>
-                    <div class="iq-scale-point">
-                        <div class="iq-scale-label">115-130</div>
-                    </div>
-                    <div class="iq-scale-point">
-                        <div class="iq-scale-label">130+</div>
-                    </div>
+                    <div class="iq-marker" style="left: 0%;">70</div>
+                    <div class="iq-marker" style="left: 25%;">85</div>
+                    <div class="iq-marker" style="left: 50%;">100</div>
+                    <div class="iq-marker" style="left: 75%;">115</div>
+                    <div class="iq-marker" style="left: 100%;">130+</div>
                 </div>
-                
-                <p>This test provides an estimate of your IQ score. For a more accurate assessment, consider taking a professionally administered IQ test.</p>
-                
-                <button id="restart-btn" class="restart-btn secondary">Take Test Again</button>
-                
-                <div class="ad-container" style="margin-top: 2rem;">
-                    <!-- Bottom Ad -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-YOUR_ADSENSE_ID"
-                         data-ad-slot="YOUR_AD_SLOT_ID"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
+                <button id="restart-btn">Retake Test</button>
             </div>
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; <span id="current-year"></span> IQ Test Pro. All rights reserved.</p>
-            <p><a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
-        </div>
-    </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Set current year in footer
-            document.getElementById('current-year').textContent = new Date().getFullYear();
-            
-            // IQ Test Questions and Answers
             const questions = [
+                // Verbal Questions (1-10)
                 {
-                    question: "Which number comes next in the sequence: 2, 4, 8, 16, ___?",
+                    question: "Which word does not belong: eloquent, articulate, verbose, taciturn?",
+                    options: ["eloquent", "articulate", "verbose", "taciturn"],
+                    correct: 3,
+                    difficulty: 2,
+                    type: "verbal"
+                },
+                {
+                    question: "Complete the analogy: Book is to reading as fork is to ___.",
+                    options: ["drawing", "eating", "writing", "cutting"],
+                    correct: 1,
+                    difficulty: 1,
+                    type: "verbal"
+                },
+                {
+                    question: "Which is the opposite of 'ephemeral'?",
+                    options: ["transient", "permanent", "brief", "fleeting"],
+                    correct: 1,
+                    difficulty: 2,
+                    type: "verbal"
+                },
+                {
+                    question: "Rearrange the letters 'CIFAIPC' to form a:",
+                    options: ["city", "animal", "ocean", "country"],
+                    correct: 3,
+                    difficulty: 3,
+                    type: "verbal"
+                },
+                {
+                    question: "Which word is misspelled?",
+                    options: ["accommodate", "embarrass", "definately", "harass"],
+                    correct: 2,
+                    difficulty: 1,
+                    type: "verbal"
+                },
+                {
+                    question: "What is the next pair in the series: AZ, BY, CX, DW, ___?",
+                    options: ["EV", "FU", "VE", "FV"],
+                    correct: 0,
+                    difficulty: 3,
+                    type: "verbal"
+                },
+                {
+                    question: "Which is not a synonym for 'happy'?",
+                    options: ["jubilant", "ecstatic", "morose", "elated"],
+                    correct: 2,
+                    difficulty: 1,
+                    type: "verbal"
+                },
+                {
+                    question: "If all Zips are Zaps and some Zaps are Zops, then:",
+                    options: ["All Zips are Zops", "Some Zips are Zops", "No Zips are Zops", "None must be true"],
+                    correct: 3,
+                    difficulty: 3,
+                    type: "verbal"
+                },
+                {
+                    question: "Which word means 'fear of heights'?",
+                    options: ["arachnophobia", "acrophobia", "claustrophobia", "agoraphobia"],
+                    correct: 1,
+                    difficulty: 2,
+                    type: "verbal"
+                },
+                {
+                    question: "What is the plural of 'phenomenon'?",
+                    options: ["phenomenons", "phenomena", "phenomenas", "phenomeni"],
+                    correct: 1,
+                    difficulty: 2,
+                    type: "verbal"
+                },
+
+                // Mathematical Questions (11-20)
+                {
+                    question: "What comes next: 2, 4, 8, 16, ___?",
                     options: ["20", "24", "32", "64"],
                     correct: 2,
-                    difficulty: 1
+                    difficulty: 1,
+                    type: "math"
                 },
                 {
-                    question: "If all Bloops are Razzies and all Razzies are Lazzies, are all Bloops definitely Lazzies?",
-                    options: ["Yes", "No", "Maybe", "Not enough information"],
-                    correct: 0,
-                    difficulty: 2
+                    question: "If 3 workers build 9 widgets in 6 hours, how many can 5 workers build in 10 hours?",
+                    options: ["15", "20", "25", "30"],
+                    correct: 2,
+                    difficulty: 3,
+                    type: "math"
                 },
                 {
-                    question: "Which word does not belong: Apple, Banana, Orange, Carrot?",
-                    options: ["Apple", "Banana", "Orange", "Carrot"],
-                    correct: 3,
-                    difficulty: 1
-                },
-                {
-                    question: "What is the missing number in this sequence: 3, 7, 15, 31, 63, ___?",
+                    question: "What is the missing number: 3, 7, 15, 31, 63, ___?",
                     options: ["95", "111", "127", "143"],
                     correct: 2,
-                    difficulty: 3
+                    difficulty: 3,
+                    type: "math"
                 },
                 {
-                    question: "If a train travels 300 miles in 5 hours, what is its average speed?",
+                    question: "If a train travels 300 miles in 5 hours, what is its speed?",
                     options: ["45 mph", "55 mph", "60 mph", "65 mph"],
                     correct: 2,
-                    difficulty: 1
+                    difficulty: 1,
+                    type: "math"
+                },
+                {
+                    question: "What is one-third of one-half of one-fifth of 300?",
+                    options: ["5", "10", "15", "20"],
+                    correct: 1,
+                    difficulty: 2,
+                    type: "math"
+                },
+                {
+                    question: "Solve for x: 2x + 5 = 17",
+                    options: ["5", "6", "7", "8"],
+                    correct: 1,
+                    difficulty: 1,
+                    type: "math"
+                },
+                {
+                    question: "What is 25% of 1/5 of 200?",
+                    options: ["5", "10", "15", "20"],
+                    correct: 1,
+                    difficulty: 2,
+                    type: "math"
+                },
+                {
+                    question: "Which number is odd one out: 10, 25, 45, 72, 100?",
+                    options: ["10", "25", "45", "72"],
+                    correct: 3,
+                    difficulty: 2,
+                    type: "math"
+                },
+                {
+                    question: "What is the next number: 1, 1, 2, 3, 5, 8, ___?",
+                    options: ["11", "12", "13", "14"],
+                    correct: 2,
+                    difficulty: 2,
+                    type: "math"
+                },
+                {
+                    question: "What is the missing number in this grid?\n5 | 10 | 15\n3 | 6 | 9\n7 | ? | 21",
+                    options: ["10", "12", "14", "16"],
+                    correct: 2,
+                    difficulty: 3,
+                    type: "math"
+                },
+
+                // Spatial/Visual Questions (21-30)
+                {
+                    question: "Which pattern comes next: △, □, ○, △, △, □, ○, △, △, △, □, ○, ___?",
+                    options: ["△", "□", "○", "△△"],
+                    correct: 0,
+                    difficulty: 3,
+                    type: "spatial"
+                },
+                {
+                    question: "If RED is 1854, how is GREEN coded?",
+                    options: ["518554", "718555", "618554", "718554"],
+                    correct: 3,
+                    difficulty: 3,
+                    type: "spatial"
+                },
+                {
+                    question: "Which shape completes the pattern?",
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: 1,
+                    difficulty: 2,
+                    type: "spatial"
+                },
+                {
+                    question: "How many cubes are in this 3D figure? (Imagine a 3x3x3 cube)",
+                    options: ["9", "18", "27", "36"],
+                    correct: 2,
+                    difficulty: 2,
+                    type: "spatial"
+                },
+                {
+                    question: "Which net forms a cube when folded?",
+                    options: ["Net A", "Net B", "Net C", "Net D"],
+                    correct: 2,
+                    difficulty: 3,
+                    type: "spatial"
+                },
+                {
+                    question: "What is the mirror image of this shape?",
+                    options: ["Option A", "Option B", "Option C", "Option D"],
+                    correct: 0,
+                    difficulty: 1,
+                    type: "spatial"
                 },
                 {
                     question: "Which shape is the odd one out?",
                     options: ["Square", "Triangle", "Circle", "Rectangle"],
                     correct: 2,
-                    difficulty: 1
+                    difficulty: 1,
+                    type: "spatial"
                 },
                 {
-                    question: "If today is Monday, what day will it be in 25 days?",
-                    options: ["Tuesday", "Wednesday", "Thursday", "Friday"],
+                    question: "How many triangles are in this figure?",
+                    options: ["5", "6", "7", "8"],
                     correct: 3,
-                    difficulty: 2
+                    difficulty: 3,
+                    type: "spatial"
                 },
                 {
-                    question: "Which number is one-third of one-half of one-fifth of 300?",
-                    options: ["5", "10", "15", "20"],
+                    question: "Which shape comes next in this sequence?",
+                    options: ["Shape A", "Shape B", "Shape C", "Shape D"],
                     correct: 1,
-                    difficulty: 3
+                    difficulty: 2,
+                    type: "spatial"
                 },
                 {
-                    question: "Complete the analogy: Book is to reading as fork is to ___.",
-                    options: ["Drawing", "Eating", "Writing", "Cutting"],
-                    correct: 1,
-                    difficulty: 1
-                },
-                {
-                    question: "What is the next letter in this sequence: A, E, F, H, I, K, L, ___?",
-                    options: ["M", "N", "O", "P"],
-                    correct: 1,
-                    difficulty: 3
-                },
-                {
-                    question: "If 3 workers can build 9 widgets in 6 hours, how many widgets can 5 workers build in 10 hours?",
-                    options: ["15", "20", "25", "30"],
+                    question: "If you rotate this shape 90° clockwise, what does it look like?",
+                    options: ["Option A", "Option B", "Option C", "Option D"],
                     correct: 2,
-                    difficulty: 3
-                },
-                {
-                    question: "Which word is the opposite of 'Ephemeral'?",
-                    options: ["Transient", "Permanent", "Brief", "Fleeting"],
-                    correct: 1,
-                    difficulty: 2
-                },
-                {
-                    question: "If all Zips are Zaps and some Zaps are Zops, then which statement must be true?",
-                    options: ["All Zips are Zops", "Some Zips are Zops", "No Zips are Zops", "None of the above"],
-                    correct: 3,
-                    difficulty: 3
-                },  
-                {
-                    question: "What is the missing number in this grid?\n5 | 10 | 15\n3 | 6 | 9\n7 | ? | 21",
-                    options: ["10", "12", "14", "16"],
-                    correct: 2,
-                    difficulty: 2
-                },
-                {
-                    question: "Which pattern comes next in the sequence: △, □, ○, △, △, □, ○, △, △, △, □, ○, ___?",
-                    options: ["△", "□", "○", "△△"],
-                    correct: 0,
-                    difficulty: 3
-                },
-                {
-                    question: "If RED is coded as 1854, how is GREEN coded?",
-                    options: ["518554", "718555", "618554", "718554"],
-                    correct: 3,
-                    difficulty: 3
-                },
-                {
-                    question: "A farmer has 17 sheep and all but 9 die. How many are left?",
-                    options: ["8", "9", "17", "26"],
-                    correct: 1,
-                    difficulty: 1
-                },
-                {
-                    question: "Which number is the odd one out: 10, 25, 45, 72, 100?",
-                    options: ["10", "25", "45", "72"],
-                    correct: 3,
-                    difficulty: 2
-                },
-                {
-                    question: "If you rearrange the letters 'CIFAIPC', you would get the name of a:",
-                    options: ["City", "Animal", "Ocean", "Country"],
-                    correct: 3,
-                    difficulty: 2
-                },
-                {
-                    question: "What is the next pair of letters in this series: AZ, BY, CX, DW, ___?",
-                    options: ["EV", "FU", "VE", "FV"],
-                    correct: 0,
-                    difficulty: 2
+                    difficulty: 2,
+                    type: "spatial"
                 }
             ];
 
-            // Test variables
             let currentQuestion = 0;
             let userAnswers = Array(questions.length).fill(null);
             const totalQuestions = questions.length;
@@ -611,67 +444,59 @@
             // DOM elements
             const introScreen = document.getElementById('intro-screen');
             const testScreen = document.getElementById('test-screen');
-            const loadingScreen = document.getElementById('loading-screen');
             const resultScreen = document.getElementById('result-screen');
             const questionContainer = document.getElementById('question-container');
             const progressBar = document.getElementById('progress-bar');
+            const startBtn = document.getElementById('start-test-btn');
             const prevBtn = document.getElementById('prev-btn');
             const nextBtn = document.getElementById('next-btn');
-            const startTestBtn = document.getElementById('start-test-btn');
             const restartBtn = document.getElementById('restart-btn');
-            const iqScoreElement = document.getElementById('iq-score');
-            const iqDescriptionElement = document.getElementById('iq-description');
+            const iqScore = document.getElementById('iq-score');
+            const iqDescription = document.getElementById('iq-description');
 
-            // Initialize the test
-            startTestBtn.addEventListener('click', startTest);
+            // Event listeners
+            startBtn.addEventListener('click', startTest);
             restartBtn.addEventListener('click', startTest);
             prevBtn.addEventListener('click', showPreviousQuestion);
             nextBtn.addEventListener('click', showNextQuestion);
 
             function startTest() {
-                // Reset test variables
                 currentQuestion = 0;
                 userAnswers = Array(questions.length).fill(null);
-
-                // Show test screen
+                
                 introScreen.style.display = 'none';
                 testScreen.style.display = 'block';
-                loadingScreen.style.display = 'none';
                 resultScreen.style.display = 'none';
-
-                // Load first question
+                
                 loadQuestion(currentQuestion);
                 updateProgressBar();
                 updateNavigationButtons();
             }
 
             function loadQuestion(index) {
-                // Clear previous question
                 questionContainer.innerHTML = '';
-
-                // Create question element
-                const questionElement = document.createElement('div');
-                questionElement.className = 'question';
-                questionElement.textContent = questions[index].question;
-                questionContainer.appendChild(questionElement);
-
-                // Create options container
-                const optionsContainer = document.createElement('div');
-                optionsContainer.className = 'options';
-
-                // Create option elements
-                questions[index].options.forEach((option, i) => {
-                    const optionElement = document.createElement('div');
-                    optionElement.className = 'option';
+                
+                const question = questions[index];
+                const questionEl = document.createElement('div');
+                questionEl.className = 'question';
+                questionEl.textContent = `${index + 1}. ${question.question}`;
+                questionContainer.appendChild(questionEl);
+                
+                const optionsEl = document.createElement('div');
+                optionsEl.className = 'options';
+                
+                question.options.forEach((option, i) => {
+                    const optionEl = document.createElement('div');
+                    optionEl.className = 'option';
                     if (userAnswers[index] === i) {
-                        optionElement.classList.add('selected');
+                        optionEl.classList.add('selected');
                     }
-                    optionElement.textContent = option;
-                    optionElement.addEventListener('click', () => selectAnswer(index, i));
-                    optionsContainer.appendChild(optionElement);
+                    optionEl.textContent = option;
+                    optionEl.addEventListener('click', () => selectAnswer(index, i));
+                    optionsEl.appendChild(optionEl);
                 });
-
-                questionContainer.appendChild(optionsContainer);
+                
+                questionContainer.appendChild(optionsEl);
             }
 
             function selectAnswer(questionIndex, optionIndex) {
@@ -707,42 +532,40 @@
 
             function updateNavigationButtons() {
                 prevBtn.disabled = currentQuestion === 0;
-                const isAnswered = userAnswers[currentQuestion] !== null;
+                nextBtn.disabled = userAnswers[currentQuestion] === null;
                 nextBtn.textContent = currentQuestion === totalQuestions - 1 ? 'Finish Test' : 'Next';
-                nextBtn.disabled = !isAnswered;
             }
 
             function showResults() {
                 testScreen.style.display = 'none';
-                loadingScreen.style.display = 'block';
+                resultScreen.style.display = 'block';
                 
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                    resultScreen.style.display = 'block';
-                    
-                    const score = calculateIQScore();
-                    iqScoreElement.textContent = score;
-                    iqDescriptionElement.innerHTML = getIQDescription(score);
-                    
-                    resultScreen.scrollIntoView({ behavior: 'smooth' });
-                }, 1500);
+                const score = calculateIQScore();
+                iqScore.textContent = `Your IQ Score: ${score}`;
+                iqDescription.innerHTML = getIQDescription(score);
             }
 
             function calculateIQScore() {
+                // Calculate raw score weighted by difficulty
                 let rawScore = 0;
-                let totalDifficulty = 0;
+                let maxPossibleScore = 0;
                 
-                for (let i = 0; i < questions.length; i++) {
-                    if (userAnswers[i] === questions[i].correct) {
-                        rawScore += questions[i].difficulty;
+                questions.forEach((q, i) => {
+                    maxPossibleScore += q.difficulty;
+                    if (userAnswers[i] === q.correct) {
+                        rawScore += q.difficulty;
                     }
-                    totalDifficulty += questions[i].difficulty;
-                }
+                });
                 
-                const percentage = (rawScore / totalDifficulty) * 100;
-                let iqScore = 70 + (percentage * 0.6);
+                // Convert to IQ score (mean 100, SD 15)
+                const percentage = (rawScore / maxPossibleScore);
+                let iqScore = 70 + (percentage * 60); // Scale from 70 to 130
+                
+                // Add slight variation for realism (±5 points)
                 iqScore += (Math.random() * 10) - 5;
-                iqScore = Math.max(70, Math.min(150, iqScore));
+                
+                // Ensure score stays within reasonable bounds
+                iqScore = Math.max(70, Math.min(145, iqScore));
                 
                 return Math.round(iqScore);
             }
@@ -753,32 +576,51 @@
                 
                 if (score < 85) {
                     level = 'Below Average';
-                    description = `<p>Your score of ${score} places you in the <strong>below average</strong> range of intellectual functioning. This range includes about 16% of the population.</p>
-                    <p>Individuals in this range may find some academic and conceptual challenges more difficult, but often develop strong practical skills and talents in other areas.</p>`;
-                } else if (score >= 85 && score < 100) {
+                    description = `<p>Your score of ${score} places you in the <strong>below average</strong> range of intellectual functioning (16th percentile).</p>
+                    <p>This range typically indicates some cognitive challenges but strong practical skills in other areas.</p>`;
+                } else if (score < 100) {
                     level = 'Low Average';
-                    description = `<p>Your score of ${score} places you in the <strong>low average</strong> range of intellectual functioning. This range includes about 34% of the population.</p>
-                    <p>People in this range typically handle most daily tasks well and can achieve success in many careers with appropriate support and effort.</p>`;
-                } else if (score >= 100 && score < 115) {
+                    description = `<p>Your score of ${score} places you in the <strong>low average</strong> range (34th percentile).</p>
+                    <p>People in this range handle most daily tasks well and can succeed in many careers.</p>`;
+                } else if (score < 115) {
                     level = 'Average';
-                    description = `<p>Your score of ${score} places you in the <strong>average</strong> range of intellectual functioning. This is the most common range, including about 34% of the population.</p>
-                    <p>Individuals with average IQ scores typically succeed in standard educational programs and adapt well to most work environments.</p>`;
-                } else if (score >= 115 && score < 130) {
+                    description = `<p>Your score of ${score} places you in the <strong>average</strong> range (50th percentile).</p>
+                    <p>This is the most common range, indicating typical cognitive abilities for most adults.</p>`;
+                } else if (score < 130) {
                     level = 'High Average';
-                    description = `<p>Your score of ${score} places you in the <strong>high average</strong> range of intellectual functioning. This range includes about 14% of the population.</p>
-                    <p>People in this range often excel academically and may find complex problem-solving and abstract thinking easier than most.</p>`;
-                } else if (score >= 130 && score < 145) {
+                    description = `<p>Your score of ${score} places you in the <strong>high average</strong> range (84th percentile).</p>
+                    <p>Individuals in this range often excel academically and professionally.</p>`;
+                } else if (score < 145) {
                     level = 'Superior';
-                    description = `<p>Your score of ${score} places you in the <strong>superior</strong> range of intellectual functioning. This range includes about 2% of the population.</p>
-                    <p>Individuals with superior IQ scores often demonstrate exceptional problem-solving abilities, quick learning, and high academic achievement.</p>`;
+                    description = `<p>Your score of ${score} places you in the <strong>superior</strong> range (98th percentile).</p>
+                    <p>This indicates exceptional problem-solving abilities and learning capacity.</p>`;
                 } else {
                     level = 'Very Superior';
-                    description = `<p>Your score of ${score} places you in the <strong>very superior</strong> range of intellectual functioning. This range includes less than 1% of the population.</p>
-                    <p>People with very superior IQ scores typically demonstrate exceptional abstract reasoning, problem-solving skills, and ability to comprehend complex concepts quickly.</p>`;
+                    description = `<p>Your score of ${score} places you in the <strong>very superior</strong> range (99.9th percentile).</p>
+                    <p>This range is associated with exceptional abstract reasoning and cognitive abilities.</p>`;
                 }
                 
-                return `<h3>${level} Intelligence</h3>${description}
-                <p><strong>Note:</strong> This online test provides only an estimate of your IQ. Professional IQ tests administered by psychologists are more accurate and comprehensive.</p>`;
+                return `<h3>${level} Intelligence</h3>
+                ${description}
+                <p><strong>Test Composition:</strong><br>
+                - Verbal Reasoning: ${calculateCategoryScore('verbal')}% correct<br>
+                - Mathematical Reasoning: ${calculateCategoryScore('math')}% correct<br>
+                - Spatial Reasoning: ${calculateCategoryScore('spatial')}% correct</p>
+                <p><em>Note: This test provides an estimate. Professional IQ tests administered by psychologists are more accurate.</em></p>`;
+            }
+
+            function calculateCategoryScore(category) {
+                const categoryQuestions = questions.filter(q => q.type === category);
+                let correct = 0;
+                
+                categoryQuestions.forEach((q, i) => {
+                    const globalIndex = questions.indexOf(q);
+                    if (userAnswers[globalIndex] === q.correct) {
+                        correct++;
+                    }
+                });
+                
+                return Math.round((correct / categoryQuestions.length) * 100);
             }
         });
     </script>
