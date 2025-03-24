@@ -558,249 +558,225 @@
                     options: ["All Zips are Zops", "Some Zips are Zops", "No Zips are Zops", "None of the above"],
                     correct: 3,
                     difficulty: 3
-            },
-            {
-                question: "What is the missing number in this grid?\n5 | 10 | 15\n3 | 6 | 9\n7 | ? | 21",
-                options: ["10", "12", "14", "16"],
-                correct: 2,
-                difficulty: 2
-            },
-            {
-                question: "Which pattern comes next in the sequence: △, □, ○, △, △, □, ○, △, △, △, □, ○, ___?",
-                options: ["△", "□", "○", "△△"],
-                correct: 0,
-                difficulty: 3
-            },
-            {
-                question: "If RED is coded as 1854, how is GREEN coded?",
-                options: ["518554", "718555", "618554", "718554"],
-                correct: 3,
-                difficulty: 3
-            },
-            {
-                question: "A farmer has 17 sheep and all but 9 die. How many are left?",
-                options: ["8", "9", "17", "26"],
-                correct: 1,
-                difficulty: 1
-            },
-            {
-                question: "Which number is the odd one out: 10, 25, 45, 72, 100?",
-                options: ["10", "25", "45", "72"],
-                correct: 3,
-                difficulty: 2
-            },
-            {
-                question: "If you rearrange the letters 'CIFAIPC', you would get the name of a:",
-                options: ["City", "Animal", "Ocean", "Country"],
-                correct: 3,
-                difficulty: 2
-            },
-            {
-                question: "What is the next pair of letters in this series: AZ, BY, CX, DW, ___?",
-                options: ["EV", "FU", "VE", "FV"],
-                correct: 0,
-                difficulty: 2
-            }
-        ];
-
-        // Test variables
-        let currentQuestion = 0;
-        let userAnswers = Array(questions.length).fill(null);
-        let testStarted = false;
-        const totalQuestions = questions.length;
-
-        // DOM elements
-        const introScreen = document.getElementById('intro-screen');
-        const testScreen = document.getElementById('test-screen');
-        const loadingScreen = document.getElementById('loading-screen');
-        const resultScreen = document.getElementById('result-screen');
-        const questionContainer = document.getElementById('question-container');
-        const progressBar = document.getElementById('progress-bar');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        const startTestBtn = document.getElementById('start-test-btn');
-        const restartBtn = document.getElementById('restart-btn');
-        const iqScoreElement = document.getElementById('iq-score');
-        const iqDescriptionElement = document.getElementById('iq-description');
-
-        // Start the test
-        startTestBtn.addEventListener('click', startTest);
-        restartBtn.addEventListener('click', startTest);
-
-        // Navigation buttons
-        prevBtn.addEventListener('click', showPreviousQuestion);
-        nextBtn.addEventListener('click', showNextQuestion);
-
-        function startTest() {
-            // Reset test variables
-            currentQuestion = 0;
-            userAnswers = Array(questions.length).fill(null);
-            testStarted = true;
-
-            // Show test screen
-            introScreen.style.display = 'none';
-            testScreen.style.display = 'block';
-            loadingScreen.style.display = 'none';
-            resultScreen.style.display = 'none';
-
-            // Load first question
-            loadQuestion(currentQuestion);
-            updateProgressBar();
-            updateNavigationButtons();
-        }
-
-        function loadQuestion(index) {
-            // Clear previous question
-            questionContainer.innerHTML = '';
-
-            // Create question element
-            const questionElement = document.createElement('div');
-            questionElement.className = 'question';
-            questionElement.textContent = questions[index].question;
-            questionContainer.appendChild(questionElement);
-
-            // Create options container
-            const optionsContainer = document.createElement('div');
-            optionsContainer.className = 'options';
-
-            // Create option elements
-            questions[index].options.forEach((option, i) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                if (userAnswers[index] === i) {
-                    optionElement.classList.add('selected');
+                },
+                {
+                    question: "What is the missing number in this grid
+                {
+                    question: "What is the missing number in this grid?\n5 | 10 | 15\n3 | 6 | 9\n7 | ? | 21",
+                    options: ["10", "12", "14", "16"],
+                    correct: 2,
+                    difficulty: 2
+                },
+                {
+                    question: "Which pattern comes next in the sequence: △, □, ○, △, △, □, ○, △, △, △, □, ○, ___?",
+                    options: ["△", "□", "○", "△△"],
+                    correct: 0,
+                    difficulty: 3
+                },
+                {
+                    question: "If RED is coded as 1854, how is GREEN coded?",
+                    options: ["518554", "718555", "618554", "718554"],
+                    correct: 3,
+                    difficulty: 3
+                },
+                {
+                    question: "A farmer has 17 sheep and all but 9 die. How many are left?",
+                    options: ["8", "9", "17", "26"],
+                    correct: 1,
+                    difficulty: 1
+                },
+                {
+                    question: "Which number is the odd one out: 10, 25, 45, 72, 100?",
+                    options: ["10", "25", "45", "72"],
+                    correct: 3,
+                    difficulty: 2
+                },
+                {
+                    question: "If you rearrange the letters 'CIFAIPC', you would get the name of a:",
+                    options: ["City", "Animal", "Ocean", "Country"],
+                    correct: 3,
+                    difficulty: 2
+                },
+                {
+                    question: "What is the next pair of letters in this series: AZ, BY, CX, DW, ___?",
+                    options: ["EV", "FU", "VE", "FV"],
+                    correct: 0,
+                    difficulty: 2
                 }
-                optionElement.textContent = option;
-                optionElement.addEventListener('click', () => selectAnswer(index, i));
-                optionsContainer.appendChild(optionElement);
-            });
+            ];
 
-            questionContainer.appendChild(optionsContainer);
-        }
+            // Test variables
+            let currentQuestion = 0;
+            let userAnswers = Array(questions.length).fill(null);
+            const totalQuestions = questions.length;
 
-        function selectAnswer(questionIndex, optionIndex) {
-            userAnswers[questionIndex] = optionIndex;
-            loadQuestion(questionIndex);
-            updateNavigationButtons();
-        }
+            // DOM elements
+            const introScreen = document.getElementById('intro-screen');
+            const testScreen = document.getElementById('test-screen');
+            const loadingScreen = document.getElementById('loading-screen');
+            const resultScreen = document.getElementById('result-screen');
+            const questionContainer = document.getElementById('question-container');
+            const progressBar = document.getElementById('progress-bar');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const startTestBtn = document.getElementById('start-test-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const iqScoreElement = document.getElementById('iq-score');
+            const iqDescriptionElement = document.getElementById('iq-description');
 
-        function showNextQuestion() {
-            if (currentQuestion < totalQuestions - 1) {
-                currentQuestion++;
-                loadQuestion(currentQuestion);
-                updateProgressBar();
-                updateNavigationButtons();
-            } else {
-                // Last question - calculate results
-                showResults();
-            }
-        }
+            // Initialize the test
+            startTestBtn.addEventListener('click', startTest);
+            restartBtn.addEventListener('click', startTest);
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            nextBtn.addEventListener('click', showNextQuestion);
 
-        function showPreviousQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                loadQuestion(currentQuestion);
-                updateProgressBar();
-                updateNavigationButtons();
-            }
-        }
+            function startTest() {
+                // Reset test variables
+                currentQuestion = 0;
+                userAnswers = Array(questions.length).fill(null);
 
-        function updateProgressBar() {
-            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
-
-        function updateNavigationButtons() {
-            prevBtn.disabled = currentQuestion === 0;
-            
-            // Check if current question is answered
-            const isAnswered = userAnswers[currentQuestion] !== null;
-            nextBtn.textContent = currentQuestion === totalQuestions - 1 ? 'Finish Test' : 'Next';
-            nextBtn.disabled = !isAnswered && currentQuestion !== totalQuestions - 1;
-        }
-
-        function showResults() {
-            // Show loading screen
-            testScreen.style.display = 'none';
-            loadingScreen.style.display = 'block';
-            
-            // Simulate calculation delay
-            setTimeout(() => {
+                // Show test screen
+                introScreen.style.display = 'none';
+                testScreen.style.display = 'block';
                 loadingScreen.style.display = 'none';
-                resultScreen.style.display = 'block';
-                
-                // Calculate IQ score
-                const score = calculateIQScore();
-                iqScoreElement.textContent = score;
-                
-                // Add description based on score
-                iqDescriptionElement.innerHTML = getIQDescription(score);
-                
-                // Scroll to results
-                resultScreen.scrollIntoView({ behavior: 'smooth' });
-            }, 1500);
-        }
+                resultScreen.style.display = 'none';
 
-        function calculateIQScore() {
-            // Calculate raw score (number of correct answers)
-            let rawScore = 0;
-            let totalDifficulty = 0;
-            
-            for (let i = 0; i < questions.length; i++) {
-                if (userAnswers[i] === questions[i].correct) {
-                    rawScore += questions[i].difficulty;
+                // Load first question
+                loadQuestion(currentQuestion);
+                updateProgressBar();
+                updateNavigationButtons();
+            }
+
+            function loadQuestion(index) {
+                // Clear previous question
+                questionContainer.innerHTML = '';
+
+                // Create question element
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.textContent = questions[index].question;
+                questionContainer.appendChild(questionElement);
+
+                // Create options container
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'options';
+
+                // Create option elements
+                questions[index].options.forEach((option, i) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'option';
+                    if (userAnswers[index] === i) {
+                        optionElement.classList.add('selected');
+                    }
+                    optionElement.textContent = option;
+                    optionElement.addEventListener('click', () => selectAnswer(index, i));
+                    optionsContainer.appendChild(optionElement);
+                });
+
+                questionContainer.appendChild(optionsContainer);
+            }
+
+            function selectAnswer(questionIndex, optionIndex) {
+                userAnswers[questionIndex] = optionIndex;
+                loadQuestion(questionIndex);
+                updateNavigationButtons();
+            }
+
+            function showNextQuestion() {
+                if (currentQuestion < totalQuestions - 1) {
+                    currentQuestion++;
+                    loadQuestion(currentQuestion);
+                    updateProgressBar();
+                    updateNavigationButtons();
+                } else {
+                    showResults();
                 }
-                totalDifficulty += questions[i].difficulty;
             }
-            
-            // Calculate percentage
-            const percentage = (rawScore / totalDifficulty) * 100;
-            
-            // Convert to IQ score (mean 100, SD 15)
-            // This is a simplified conversion for demonstration
-            let iqScore = 70 + (percentage * 0.6);
-            
-            // Add some random variation to make it seem more realistic
-            iqScore += (Math.random() * 10) - 5;
-            
-            // Ensure score is within reasonable bounds
-            iqScore = Math.max(70, Math.min(150, iqScore));
-            
-            return Math.round(iqScore);
-        }
 
-        function getIQDescription(score) {
-            let description = '';
-            let level = '';
-            
-            if (score < 85) {
-                level = 'Below Average';
-                description = `<p>Your score of ${score} places you in the <strong>below average</strong> range of intellectual functioning. This range includes about 16% of the population.</p>
-                <p>Individuals in this range may find some academic and conceptual challenges more difficult, but often develop strong practical skills and talents in other areas.</p>`;
-            } else if (score >= 85 && score < 100) {
-                level = 'Low Average';
-                description = `<p>Your score of ${score} places you in the <strong>low average</strong> range of intellectual functioning. This range includes about 34% of the population.</p>
-                <p>People in this range typically handle most daily tasks well and can achieve success in many careers with appropriate support and effort.</p>`;
-            } else if (score >= 100 && score < 115) {
-                level = 'Average';
-                description = `<p>Your score of ${score} places you in the <strong>average</strong> range of intellectual functioning. This is the most common range, including about 34% of the population.</p>
-                <p>Individuals with average IQ scores typically succeed in standard educational programs and adapt well to most work environments.</p>`;
-            } else if (score >= 115 && score < 130) {
-                level = 'High Average';
-                description = `<p>Your score of ${score} places you in the <strong>high average</strong> range of intellectual functioning. This range includes about 14% of the population.</p>
-                <p>People in this range often excel academically and may find complex problem-solving and abstract thinking easier than most.</p>`;
-            } else if (score >= 130 && score < 145) {
-                level = 'Superior';
-                description = `<p>Your score of ${score} places you in the <strong>superior</strong> range of intellectual functioning. This range includes about 2% of the population.</p>
-                <p>Individuals with superior IQ scores often demonstrate exceptional problem-solving abilities, quick learning, and high academic achievement.</p>`;
-            } else {
-                level = 'Very Superior';
-                description = `<p>Your score of ${score} places you in the <strong>very superior</strong> range of intellectual functioning. This range includes less than 1% of the population.</p>
-                <p>People with very superior IQ scores typically demonstrate exceptional abstract reasoning, problem-solving skills, and ability to comprehend complex concepts quickly.</p>`;
+            function showPreviousQuestion() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    loadQuestion(currentQuestion);
+                    updateProgressBar();
+                    updateNavigationButtons();
+                }
             }
-            
-            return `<h3>${level} Intelligence</h3>${description}
-            <p><strong>Note:</strong> This online test provides only an estimate of your IQ. Professional IQ tests administered by psychologists are more accurate and comprehensive.</p>`;
-        }
-    });
-</script>
+
+            function updateProgressBar() {
+                const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+
+            function updateNavigationButtons() {
+                prevBtn.disabled = currentQuestion === 0;
+                const isAnswered = userAnswers[currentQuestion] !== null;
+                nextBtn.textContent = currentQuestion === totalQuestions - 1 ? 'Finish Test' : 'Next';
+                nextBtn.disabled = !isAnswered;
+            }
+
+            function showResults() {
+                testScreen.style.display = 'none';
+                loadingScreen.style.display = 'block';
+                
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    resultScreen.style.display = 'block';
+                    
+                    const score = calculateIQScore();
+                    iqScoreElement.textContent = score;
+                    iqDescriptionElement.innerHTML = getIQDescription(score);
+                    
+                    resultScreen.scrollIntoView({ behavior: 'smooth' });
+                }, 1500);
+            }
+
+            function calculateIQScore() {
+                let rawScore = 0;
+                let totalDifficulty = 0;
+                
+                for (let i = 0; i < questions.length; i++) {
+                    if (userAnswers[i] === questions[i].correct) {
+                        rawScore += questions[i].difficulty;
+                    }
+                    totalDifficulty += questions[i].difficulty;
+                }
+                
+                const percentage = (rawScore / totalDifficulty) * 100;
+                let iqScore = 70 + (percentage * 0.6);
+                iqScore += (Math.random() * 10) - 5;
+                iqScore = Math.max(70, Math.min(150, iqScore));
+                
+                return Math.round(iqScore);
+            }
+
+            function getIQDescription(score) {
+                let description = '';
+                let level = '';
+                
+                if (score < 85) {
+                    level = 'Below Average';
+                    description = `<p>Your score of ${score} places you in the <strong>below average</strong> range of intellectual functioning. This range includes about 16% of the population.</p>`;
+                } else if (score < 100) {
+                    level = 'Low Average';
+                    description = `<p>Your score of ${score} places you in the <strong>low average</strong> range of intellectual functioning. This range includes about 34% of the population.</p>`;
+                } else if (score < 115) {
+                    level = 'Average';
+                    description = `<p>Your score of ${score} places you in the <strong>average</strong> range of intellectual functioning. This is the most common range, including about 34% of the population.</p>`;
+                } else if (score < 130) {
+                    level = 'High Average';
+                    description = `<p>Your score of ${score} places you in the <strong>high average</strong> range of intellectual functioning. This range includes about 14% of the population.</p>`;
+                } else if (score < 145) {
+                    level = 'Superior';
+                    description = `<p>Your score of ${score} places you in the <strong>superior</strong> range of intellectual functioning. This range includes about 2% of the population.</p>`;
+                } else {
+                    level = 'Very Superior';
+                    description = `<p>Your score of ${score} places you in the <strong>very superior</strong> range of intellectual functioning. This range includes less than 1% of the population.</p>`;
+                }
+                
+                return `<h3>${level} Intelligence</h3>${description}
+                <p><strong>Note:</strong> This online test provides only an estimate of your IQ. Professional IQ tests administered by psychologists are more accurate and comprehensive.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
