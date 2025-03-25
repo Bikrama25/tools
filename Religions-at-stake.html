@@ -3,284 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Test your knowledge about common world religions including Christianity, Islam, Hinduism, Judaism, Sikhism, Buddhism, Jainism, and Taoism.">
-    <meta name="keywords" content="religion test, world religions, Christianity, Islam, Hindu, Judaism, Sikhism, Buddhism, Jainism, Taoism, religious knowledge">
-    <title>World Religions Knowledge Test | Evaluate Your Understanding</title>
+    <meta name="description" content="Test your knowledge on debated aspects of major world religions - Christianity, Islam, Hinduism, Judaism, Sikhism, Buddhism, Jainism, and Taoism.">
+    <meta name="keywords" content="religion quiz, religious debates, Christianity, Islam, Hinduism, Judaism, Sikhism, Buddhism, Jainism, Taoism, interfaith discussions">
+    <meta name="author" content="Religious Debate Quiz">
+    <title>Religious Debate Quiz | Test Your Knowledge on World Religions</title>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
     <style>
         :root {
-            --primary-color: #4a6fa5;
-            --secondary-color: #166088;
-            --accent-color: #4fc3f7;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --success-color: #28a745;
-            --danger-color: #dc3545;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
+        }
+        body {
             background-color: #f5f5f5;
-            padding: 0;
-            margin: 0;
+            color: var(--dark);
+            line-height: 1.6;
         }
-
         .container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
-
         header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 0;
             text-align: center;
-            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
-        header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
-
-        header p {
+        .description {
             font-size: 1.1rem;
             opacity: 0.9;
         }
-
         .ad-container {
-            background-color: white;
-            padding: 15px;
             margin: 20px 0;
-            border-radius: var(--border-radius);
             text-align: center;
-            box-shadow: var(--box-shadow);
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
-
-        .ad-label {
-            font-size: 0.8rem;
-            color: #666;
-            margin-bottom: 5px;
-            text-transform: uppercase;
+        .quiz-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
-
-        main {
-            padding: 2rem 0;
-        }
-
-        .test-container {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 2rem;
-        }
-
-        .progress-container {
-            width: 100%;
-            background-color: #e9ecef;
-            border-radius: var(--border-radius);
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 10px;
-            background-color: var(--primary-color);
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        .question-count {
-            text-align: right;
-            margin-bottom: 1rem;
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-
         .question {
             font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--secondary);
         }
-
-        .options-container {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 2rem;
+        .options {
+            margin-bottom: 25px;
         }
-
         .option {
+            display: block;
+            margin: 10px 0;
             padding: 12px 15px;
-            background-color: var(--light-color);
-            border: 1px solid #dee2e6;
-            border-radius: var(--border-radius);
+            background: var(--light);
+            border: 1px solid #ddd;
+            border-radius: 5px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s;
         }
-
         .option:hover {
-            background-color: #e9ecef;
-            border-color: #ced4da;
+            background: #e9ecef;
+            border-color: var(--accent);
         }
-
         .option.selected {
-            background-color: var(--accent-color);
-            border-color: var(--primary-color);
+            background: var(--accent);
             color: white;
+            border-color: var(--accent);
         }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-
         .btn {
-            padding: 10px 20px;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
             border: none;
-            border-radius: var(--border-radius);
+            border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
-            transition: var(--transition);
+            transition: all 0.3s;
         }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
         }
-
-        .btn-primary:hover {
-            background-color: var(--secondary-color);
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
         }
-
-        .btn-secondary {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        .result-container {
+        .result {
             text-align: center;
-            display: none;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
-
-        .result-container h2 {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
         }
-
-        .score {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin: 1rem 0;
+        .progress {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s;
         }
-
-        .feedback {
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .restart-btn {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-        .restart-btn:hover {
-            background-color: #218838;
-        }
-
         footer {
-            background-color: var(--dark-color);
-            color: white;
             text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
         }
-
-        footer p {
-            margin-bottom: 0.5rem;
+        .answer-feedback {
+            margin-top: 30px;
+            text-align: left;
         }
-
-        footer a {
-            color: var(--accent-color);
-            text-decoration: none;
+        .answer-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f8f9fa;
         }
-
-        footer a:hover {
-            text-decoration: underline;
+        .correct {
+            border-left: 4px solid var(--success);
         }
-
+        .incorrect {
+            border-left: 4px solid var(--danger);
+        }
+        .correct-answer {
+            color: var(--success);
+            font-weight: bold;
+        }
+        .user-answer {
+            color: var(--danger);
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: var(--warning);
+        }
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
+            h1 {
+                font-size: 2rem;
             }
-
+            .quiz-container {
+                padding: 15px;
+            }
             .question {
                 font-size: 1.1rem;
-            }
-
-            .btn {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .test-container {
-                padding: 1.5rem;
-            }
-
-            .question {
-                font-size: 1rem;
-            }
-
-            .option {
-                padding: 10px 12px;
-            }
-
-            .navigation {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .btn {
-                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>World Religions Knowledge Test</h1>
-            <p>Test your understanding of Christianity, Islam, Hinduism, Judaism, Sikhism, Buddhism, Jainism, and Taoism</p>
-        </div>
-    </header>
+    <div class="container">
+        <header>
+            <h1>Religious Debate Quiz</h1>
+            <p class="description">Test your knowledge on debated aspects of major world religions</p>
+        </header>
 
-    <main class="container">
-        <!-- Top Ad Banner -->
+        <!-- AdSense Ad Slot 1 -->
         <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <!-- Replace with your AdSense ad unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-YOUR_ADSENSE_ID"
@@ -292,33 +201,25 @@
             </script>
         </div>
 
-        <div class="test-container">
-            <div class="progress-container">
-                <div class="progress-bar" id="progressBar"></div>
+        <div class="quiz-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
             </div>
-            
-            <div id="quiz">
-                <div class="question-count" id="questionCount"></div>
+            <div id="quiz-content">
                 <div class="question" id="question"></div>
-                <div class="options-container" id="options"></div>
-                <div class="navigation">
-                    <button class="btn btn-secondary" id="prevBtn">Previous</button>
-                    <button class="btn btn-primary" id="nextBtn">Next</button>
-                </div>
+                <div class="options" id="options"></div>
+                <button class="btn" id="next-btn" disabled>Next Question</button>
             </div>
-
-            <div class="result-container" id="resultContainer">
-                <h2>Your Results</h2>
-                <div class="score" id="score"></div>
-                <div class="feedback" id="feedback"></div>
-                <button class="btn restart-btn" id="restartBtn">Take Test Again</button>
+            <div id="results-section" style="display: none;">
+                <div class="result" id="result"></div>
+                <div class="answer-feedback" id="answer-feedback"></div>
+                <button class="btn restart-btn" id="restart-btn">Restart Quiz</button>
             </div>
         </div>
 
-        <!-- Middle Ad Banner -->
+        <!-- AdSense Ad Slot 2 -->
         <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <!-- Replace with your AdSense ad unit -->
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-YOUR_ADSENSE_ID"
@@ -329,246 +230,378 @@
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
-    </main>
+    </div>
 
     <footer>
-        <div class="container">
-            <p>&copy; <span id="year"></span> World Religions Knowledge Test. All rights reserved.</p>
-            <p>This tool is for educational purposes only and aims to promote understanding of world religions.</p>
-            <p><a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
-        </div>
+        <p>© 2024 Religious Debate Quiz | Designed for interfaith discussions and educational purposes.</p>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set copyright year
-            document.getElementById('year').textContent = new Date().getFullYear();
+        const questions = [
+            // Existence of God
+            {
+                question: "If God is all-powerful and all-loving, why does evil and suffering exist?",
+                options: [
+                    "Evil is a test from God",
+                    "Human free will causes suffering",
+                    "Evil is an illusion (as in some Eastern philosophies)",
+                    "There is no God (atheist perspective)"
+                ],
+                correctAnswer: 1,
+                religion: "Theodicy",
+                explanation: "The free will defense is the most widely accepted theological response to the problem of evil in Western religions."
+            },
+            {
+                question: "Can the existence of God be proven through reason and evidence, or is faith necessary?",
+                options: [
+                    "God's existence can be rationally proven",
+                    "Some evidence exists but faith is still required",
+                    "God's existence cannot be proven or disproven",
+                    "The concept of God is beyond human understanding"
+                ],
+                correctAnswer: 2,
+                religion: "Philosophy of Religion",
+                explanation: "Most theologians agree that while arguments for God's existence can be compelling, they don't constitute absolute proof."
+            },
+            {
+                question: "If the universe requires a creator, then who created God?",
+                options: [
+                    "God is uncreated and eternal",
+                    "There is an infinite chain of creators",
+                    "The question is meaningless (as in Buddhism)",
+                    "We cannot know the answer"
+                ],
+                correctAnswer: 0,
+                religion: "Cosmology",
+                explanation: "Classical theism holds that God is the uncaused cause that doesn't require a creator."
+            },
 
-            // Quiz questions and answers
-            const questions = [
-                {
-                    question: "Which religion's holy text is called the Guru Granth Sahib?",
-                    options: ["Christianity", "Sikhism", "Islam", "Jainism"],
-                    answer: 1,
-                    explanation: "The Guru Granth Sahib is the central religious scripture of Sikhism, regarded as the final, sovereign guru of the religion."
-                },
-                {
-                    question: "In Christianity, what is the term for the belief that Jesus will return to Earth at the end of time?",
-                    options: ["Reincarnation", "The Second Coming", "Nirvana", "The Great Return"],
-                    answer: 1,
-                    explanation: "The Second Coming is a Christian belief that Jesus will return to Earth to fulfill the rest of Messianic prophecy."
-                },
-                {
-                    question: "Which of these is NOT one of the Five Pillars of Islam?",
-                    options: ["Shahada (Faith)", "Salah (Prayer)", "Zakat (Charity)", "Pilgrimage to Jerusalem"],
-                    answer: 3,
-                    explanation: "The Five Pillars are Shahada, Salah, Zakat, Sawm (Fasting during Ramadan), and Hajj (Pilgrimage to Mecca, not Jerusalem)."
-                },
-                {
-                    question: "In Hinduism, what is the term for the cycle of birth, death, and rebirth?",
-                    options: ["Karma", "Dharma", "Samsara", "Moksha"],
-                    answer: 2,
-                    explanation: "Samsara refers to the cycle of death and rebirth to which life in the material world is bound in Hinduism."
-                },
-                {
-                    question: "Which Jewish holiday commemorates the liberation of the Israelites from Egyptian slavery?",
-                    options: ["Hanukkah", "Yom Kippur", "Passover", "Rosh Hashanah"],
-                    answer: 2,
-                    explanation: "Passover (Pesach) commemorates the Exodus story of the Israelites leaving slavery in Egypt."
-                },
-                {
-                    question: "What is the central teaching of Buddhism called that outlines the path to liberation from suffering?",
-                    options: ["The Ten Commandments", "The Noble Eightfold Path", "The Five Precepts", "The Four Noble Truths"],
-                    answer: 3,
-                    explanation: "The Four Noble Truths contain the essence of Buddhist teachings about the nature of suffering and how to overcome it."
-                },
-                {
-                    question: "Which principle is central to Jainism and means non-violence towards all living beings?",
-                    options: ["Ahimsa", "Satya", "Asteya", "Aparigraha"],
-                    answer: 0,
-                    explanation: "Ahimsa (non-violence) is a fundamental principle of Jainism that extends to all living beings."
-                },
-                {
-                    question: "In Taoism, what does the Yin-Yang symbol represent?",
-                    options: [
-                        "The balance of opposing but complementary forces in the universe",
-                        "The struggle between good and evil",
-                        "The separation of heaven and earth",
-                        "The cycle of day and night"
-                    ],
-                    answer: 0,
-                    explanation: "The Yin-Yang represents the concept of duality forming a whole - how seemingly opposite forces may actually be complementary and interconnected."
-                },
-                {
-                    question: "Which Christian denomination rejects the doctrine of the Trinity?",
-                    options: ["Catholicism", "Jehovah's Witnesses", "Eastern Orthodoxy", "Anglicanism"],
-                    answer: 1,
-                    explanation: "Jehovah's Witnesses believe that Jesus is God's son but not part of a Trinity, which they view as a pagan doctrine."
-                },
-                {
-                    question: "What is the Islamic concept of 'jihad' most accurately defined as?",
-                    options: [
-                        "Holy war against non-believers",
-                        "Struggle or striving in the way of God",
-                        "Religious conversion by force",
-                        "Martyrdom operations"
-                    ],
-                    answer: 1,
-                    explanation: "While jihad can include armed struggle in defense, it primarily refers to the spiritual struggle within oneself against sin and the effort to be a better Muslim."
-                }
-            ];
+            // Scripture and Interpretation
+            {
+                question: "Are religious texts (Bible, Quran, Vedas, etc.) divinely inspired or human-made?",
+                options: [
+                    "Fully divine and inerrant",
+                    "Divinely inspired but written by humans",
+                    "Human-made with moral wisdom",
+                    "Mythological with no divine origin"
+                ],
+                correctAnswer: 1,
+                religion: "Scriptural Authority",
+                explanation: "Most moderate religious scholars view scriptures as divinely inspired but acknowledge human authorship and historical context."
+            },
+            {
+                question: "How should conflicting passages in sacred scriptures be reconciled?",
+                options: [
+                    "Through literal interpretation",
+                    "Through contextual/historical analysis",
+                    "As different levels of spiritual truth",
+                    "They shouldn't be reconciled - contradictions exist"
+                ],
+                correctAnswer: 1,
+                religion: "Hermeneutics",
+                explanation: "Modern biblical scholarship emphasizes understanding texts in their historical and cultural contexts."
+            },
+            {
+                question: "Is scriptural literalism necessary, or should texts be interpreted allegorically?",
+                options: [
+                    "Complete literalism is essential",
+                    "Some parts literal, some allegorical",
+                    "Mostly allegorical with spiritual truths",
+                    "Texts are human documents to be critically analyzed"
+                ],
+                correctAnswer: 2,
+                religion: "Theology",
+                explanation: "Most major religious traditions have developed sophisticated allegorical interpretation methods alongside literal readings."
+            },
 
-            // Quiz variables
-            let currentQuestion = 0;
-            let score = 0;
-            let selectedOption = null;
-            let userAnswers = new Array(questions.length).fill(null);
+            // Science vs. Religion
+            {
+                question: "Does evolution contradict religious creation accounts?",
+                options: [
+                    "Yes, evolution disproves creationism",
+                    "No, they can coexist (theistic evolution)",
+                    "Religious texts are allegorical, not literal",
+                    "Evolution is just a theory with gaps"
+                ],
+                correctAnswer: 1,
+                religion: "Science & Religion",
+                explanation: "Theistic evolution is the dominant view among mainstream religious groups that accept science."
+            },
+            {
+                question: "Can science explain the origins of the universe without invoking God?",
+                options: [
+                    "Yes, science provides complete explanations",
+                    "Science explains how, religion explains why",
+                    "Science and religion address different questions",
+                    "Ultimate origins require a divine cause"
+                ],
+                correctAnswer: 2,
+                religion: "Cosmology",
+                explanation: "Many scientists and theologians argue that science and religion operate in different domains of explanation."
+            },
+            {
+                question: "Do near-death experiences or consciousness studies prove the existence of the soul?",
+                options: [
+                    "Yes, they provide scientific evidence",
+                    "They suggest but don't prove spiritual reality",
+                    "They have natural neurological explanations",
+                    "The question is beyond scientific study"
+                ],
+                correctAnswer: 2,
+                religion: "Neuroscience",
+                explanation: "Most neuroscientists attribute near-death experiences to brain activity, though some researchers disagree."
+            },
 
-            // DOM elements
-            const quizElement = document.getElementById('quiz');
-            const resultContainer = document.getElementById('resultContainer');
-            const questionElement = document.getElementById('question');
-            const optionsElement = document.getElementById('options');
-            const questionCountElement = document.getElementById('questionCount');
-            const progressBar = document.getElementById('progressBar');
-            const nextBtn = document.getElementById('nextBtn');
-            const prevBtn = document.getElementById('prevBtn');
-            const scoreElement = document.getElementById('score');
-            const feedbackElement = document.getElementById('feedback');
-            const restartBtn = document.getElementById('restartBtn');
+            // Salvation and Exclusivity
+            {
+                question: "Is salvation only possible through one religion (e.g., Christianity's 'only through Jesus')?",
+                options: [
+                    "Yes, exclusivism is true",
+                    "No, multiple paths lead to salvation (pluralism)",
+                    "Salvation is universal (all are saved)",
+                    "Salvation is a human construct"
+                ],
+                correctAnswer: 0,
+                religion: "Soteriology",
+                explanation: "While pluralistic views exist, traditional doctrine in Christianity, Islam, and some other religions maintains exclusivist claims."
+            },
+            {
+                question: "Can morally good people of other faiths (or no faith) attain heaven or enlightenment?",
+                options: [
+                    "No, correct belief is required",
+                    "Yes, if they follow natural law/moral truth",
+                    "Different religions lead to the same ultimate reality",
+                    "Concepts like heaven are metaphorical"
+                ],
+                correctAnswer: 1,
+                religion: "Interfaith",
+                explanation: "Many modern theologians accept that virtuous non-believers can attain salvation through implicit faith or natural law."
+            },
+            {
+                question: "Does the concept of eternal hell conflict with a loving God?",
+                options: [
+                    "No, justice requires eternal punishment",
+                    "Yes, a loving God wouldn't condemn eternally",
+                    "Hell is temporary purification",
+                    "Hell is self-separation from God"
+                ],
+                correctAnswer: 3,
+                religion: "Theodicy",
+                explanation: "Many contemporary theologians view hell as self-exclusion from God's presence rather than active punishment."
+            },
 
-            // Load question
-            function loadQuestion() {
-                const question = questions[currentQuestion];
-                questionElement.textContent = question.question;
-                optionsElement.innerHTML = '';
-                
-                // Update question count
-                questionCountElement.textContent = `Question ${currentQuestion + 1}/${questions.length}`;
-                
-                // Update progress bar
-                progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
-                
-                // Create options
-                question.options.forEach((option, index) => {
-                    const optionElement = document.createElement('div');
-                    optionElement.classList.add('option');
-                    if (userAnswers[currentQuestion] === index) {
-                        optionElement.classList.add('selected');
-                    }
-                    optionElement.textContent = option;
-                    optionElement.addEventListener('click', () => selectOption(optionElement, index));
-                    optionsElement.appendChild(optionElement);
-                });
-                
-                // Update button states
-                prevBtn.disabled = currentQuestion === 0;
-                nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Submit' : 'Next';
+            // Morality and Divine Command
+            {
+                question: "Is morality objective because God commands it, or does God command what is inherently good?",
+                options: [
+                    "Morality comes from God's commands (Divine Command Theory)",
+                    "God commands what is already good (Natural Law)",
+                    "Morality is subjective and cultural",
+                    "Secular ethics can exist without God"
+                ],
+                correctAnswer: 1,
+                religion: "Ethics",
+                explanation: "Natural Law theory avoids the 'Euthyphro Dilemma' by positing that morality exists independently of God's commands."
+            },
+            {
+                question: "Can atheists be moral without belief in God?",
+                options: [
+                    "No, morality requires divine foundation",
+                    "Yes, through reason and human nature",
+                    "Morality is social, not religious",
+                    "Atheists follow God's law unknowingly"
+                ],
+                correctAnswer: 1,
+                religion: "Secular Ethics",
+                explanation: "Most philosophers agree that moral behavior doesn't require religious belief, though religions may provide motivation."
+            },
+            {
+                question: "How do different religions justify ethical stances on issues like abortion, euthanasia, or war?",
+                options: [
+                    "Through absolute scriptural commands",
+                    "Through reasoned application of principles",
+                    "Through evolving tradition and consensus",
+                    "Through individual conscience"
+                ],
+                correctAnswer: 2,
+                religion: "Applied Ethics",
+                explanation: "Most religious traditions develop ethical positions through ongoing interpretation of texts in light of reason and experience."
+            },
+
+            // Miracles and Supernatural Claims
+            {
+                question: "Are miracles (e.g., resurrection, prophecies) historically credible or mythological?",
+                options: [
+                    "Fully historical as recorded",
+                    "Historical core with legendary elements",
+                    "Completely mythological",
+                    "Symbolic truths, not historical"
+                ],
+                correctAnswer: 1,
+                religion: "Historiography",
+                explanation: "Most biblical scholars recognize both historical elements and legendary development in miracle accounts."
+            },
+            {
+                question: "How can we distinguish between genuine miracles and natural events?",
+                options: [
+                    "By religious authority",
+                    "By scientific investigation",
+                    "By personal faith experience",
+                    "The distinction is meaningless"
+                ],
+                correctAnswer: 1,
+                religion: "Philosophy",
+                explanation: "The Catholic Church, for instance, employs scientific investigation when evaluating claimed miracles."
+            },
+            {
+                question: "Do modern-day miracles (e.g., healings, visions) validate specific religions?",
+                options: [
+                    "Yes, they prove religious truth",
+                    "They suggest spiritual reality but not specific doctrines",
+                    "They have psychological explanations",
+                    "They're equally present in all religions"
+                ],
+                correctAnswer: 3,
+                religion: "Comparative Religion",
+                explanation: "Similar miraculous claims appear across different religions, making them poor evidence for any one tradition."
+            },
+
+            // Religious Diversity
+            {
+                question: "Why do so many religions claim exclusive truth if God is one?",
+                options: [
+                    "Only one religion is truly from God",
+                    "Different cultural expressions of one truth",
+                    "Human attempts to understand the divine",
+                    "Religions serve social/political functions"
+                ],
+                correctAnswer: 2,
+                religion: "Philosophy of Religion",
+                explanation: "The 'perennial philosophy' suggests diverse religions are limited human attempts to comprehend ultimate reality."
+            },
+            {
+                question: "Can all religions be partially true (pluralism), or must one be entirely correct?",
+                options: [
+                    "Only one can be fully true",
+                    "All contain partial truths",
+                    "Different valid paths to salvation",
+                    "Truth claims are culturally relative"
+                ],
+                correctAnswer: 1,
+                religion: "Interfaith",
+                explanation: "John Hick's pluralistic hypothesis suggests religions are different culturally-conditioned responses to the Divine."
+            },
+            {
+                question: "How should believers respond to contradictory truth claims between faiths?",
+                options: [
+                    "Defend one's own tradition exclusively",
+                    "Seek common ground while respecting differences",
+                    "Accept that all religions are equally valid",
+                    "Reject all religious claims as equally false"
+                ],
+                correctAnswer: 1, // Seek common ground while respecting differences
+                religion: "Interfaith Dialogue",
+                explanation: "Most modern theologians recommend dialogue that seeks understanding while maintaining one's own convictions, following models like the 1993 Parliament of World Religions."
             }
+        ];
 
-            // Select option
-            function selectOption(optionElement, index) {
-                const options = document.querySelectorAll('.option');
-                options.forEach(opt => opt.classList.remove('selected'));
-                optionElement.classList.add('selected');
-                selectedOption = index;
-                userAnswers[currentQuestion] = index;
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const nextButton = document.getElementById("next-btn");
+        const resultElement = document.getElementById("result");
+        const progressBar = document.getElementById("progress");
+        const quizContent = document.getElementById("quiz-content");
+        const resultsSection = document.getElementById("results-section");
+        const answerFeedback = document.getElementById("answer-feedback");
+        const restartButton = document.getElementById("restart-btn");
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            questionElement.textContent = q.question;
+            optionsElement.innerHTML = "";
+            q.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.classList.add("option");
+                button.addEventListener("click", () => selectOption(button, index));
+                optionsElement.appendChild(button);
+            });
+            progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            nextButton.disabled = true;
+
+            if (currentQuestion === questions.length - 1) {
+                nextButton.textContent = "Finish";
+            } else {
+                nextButton.textContent = "Next Question";
             }
+        }
 
-            // Next question
-            function nextQuestion() {
-                if (selectedOption === null && userAnswers[currentQuestion] === null) {
-                    alert('Please select an option');
-                    return;
-                }
-                
-                if (currentQuestion < questions.length - 1) {
-                    currentQuestion++;
-                    selectedOption = userAnswers[currentQuestion];
-                    loadQuestion();
-                } else {
-                    showResult();
-                }
-            }
+        function selectOption(selectedButton, index) {
+            const options = document.querySelectorAll(".option");
+            options.forEach(button => button.classList.remove("selected"));
+            selectedButton.classList.add("selected");
+            nextButton.disabled = false;
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = index;
+        }
 
-            // Previous question
-            function prevQuestion() {
-                if (currentQuestion > 0) {
-                    currentQuestion--;
-                    selectedOption = userAnswers[currentQuestion];
-                    loadQuestion();
+        function showResults() {
+            quizContent.style.display = "none";
+            resultsSection.style.display = "block";
+            
+            // Calculate score
+            score = 0;
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.correctAnswer) {
+                    score++;
                 }
-            }
+            });
+            
+            resultElement.innerHTML = `You scored <strong>${score} out of ${questions.length}</strong>!`;
+            
+            // Show detailed feedback
+            answerFeedback.innerHTML = "<h3>Question Breakdown:</h3>";
+            questions.forEach((q, index) => {
+                const isCorrect = userAnswers[index] === q.correctAnswer;
+                const userAnswerText = q.options[userAnswers[index]] || "Not answered";
+                const correctAnswerText = q.options[q.correctAnswer];
+                
+                answerFeedback.innerHTML += `
+                    <div class="answer-item ${isCorrect ? 'correct' : 'incorrect'}">
+                        <p><strong>Question ${index + 1}:</strong> ${q.question}</p>
+                        <p>Your answer: <span class="user-answer">${userAnswerText}</span></p>
+                        ${!isCorrect ? `<p>Correct answer: <span class="correct-answer">${correctAnswerText}</span></p>` : ''}
+                        <p><em>${q.explanation}</em></p>
+                        <p class="religion-tag">Category: ${q.religion}</p>
+                    </div>
+                `;
+            });
+        }
 
-            // Show result
-            function showResult() {
-                // Calculate score
-                score = 0;
-                questions.forEach((question, index) => {
-                    if (userAnswers[index] === question.answer) {
-                        score++;
-                    }
-                });
-                
-                // Display result
-                quizElement.style.display = 'none';
-                resultContainer.style.display = 'block';
-                scoreElement.textContent = `${score}/${questions.length}`;
-                
-                // Generate feedback
-                let feedback = '';
-                const percentage = (score / questions.length) * 100;
-                
-                if (percentage >= 80) {
-                    feedback = 'Excellent! You have a deep understanding of world religions.';
-                } else if (percentage >= 60) {
-                    feedback = 'Good job! You have a solid knowledge of world religions.';
-                } else if (percentage >= 40) {
-                    feedback = 'Not bad! You know some basics about world religions.';
-                } else {
-                    feedback = 'Keep learning! Consider exploring more about world religions.';
-                }
-                
-                feedback += '<br><br><strong>Question Review:</strong><br><br>';
-                
-                questions.forEach((question, index) => {
-                    const isCorrect = userAnswers[index] === question.answer;
-                    feedback += `<strong>Q${index + 1}:</strong> ${question.question}<br>`;
-                    feedback += `Your answer: ${question.options[userAnswers[index]] || 'Not answered'}<br>`;
-                    feedback += `Correct answer: ${question.options[question.answer]}<br>`;
-                    feedback += `<em>${question.explanation}</em><br>`;
-                    feedback += isCorrect 
-                        ? '<span style="color: var
-                        feedback += isCorrect 
-                        ? '<span style="color: var(--success-color);">✓ Correct</span><br><br>' 
-                        : '<span style="color: var(--danger-color);">✗ Incorrect</span><br><br>';
-                });
-                
-                feedbackElement.innerHTML = feedback;
-            }
-
-            // Restart quiz
-            function restartQuiz() {
-                currentQuestion = 0;
-                score = 0;
-                selectedOption = null;
-                userAnswers = new Array(questions.length).fill(null);
-                quizElement.style.display = 'block';
-                resultContainer.style.display = 'none';
+        nextButton.addEventListener("click", () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
                 loadQuestion();
+            } else {
+                showResults();
             }
-
-            // Event listeners
-            nextBtn.addEventListener('click', nextQuestion);
-            prevBtn.addEventListener('click', prevQuestion);
-            restartBtn.addEventListener('click', restartQuiz);
-
-            // Initialize quiz
-            loadQuestion();
-
-            // Load AdSense ads (make sure to replace with your actual AdSense code)
-            (adsbygoogle = window.adsbygoogle || []).push({});
         });
+
+        restartButton.addEventListener("click", () => {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = [];
+            quizContent.style.display = "block";
+            resultsSection.style.display = "none";
+            loadQuestion();
+        });
+
+        // Initialize quiz
+        loadQuestion();
     </script>
 </body>
 </html>
