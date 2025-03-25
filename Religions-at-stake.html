@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Test your knowledge about common world religions including Christianity, Islam, Hinduism, Judaism, Sikhism, Buddhism, Jainism, and Taoism.">
+    <meta name="keywords" content="religion test, world religions, Christianity, Islam, Hindu, Judaism, Sikhism, Buddhism, Jainism, Taoism, religious knowledge">
+    <title>World Religions Knowledge Test | Evaluate Your Understanding</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .ad-container {
+            background-color: white;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        .test-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .question-count {
+            text-align: right;
+            margin-bottom: 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .option {
+            padding: 12px 15px;
+            background-color: var(--light-color);
+            border: 1px solid #dee2e6;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .option:hover {
+            background-color: #e9ecef;
+            border-color: #ced4da;
+        }
+
+        .option.selected {
+            background-color: var(--accent-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .result-container {
+            text-align: center;
+            display: none;
+        }
+
+        .result-container h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        .feedback {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .restart-btn {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .restart-btn:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .question {
+                font-size: 1.1rem;
+            }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .test-container {
+                padding: 1.5rem;
+            }
+
+            .question {
+                font-size: 1rem;
+            }
+
+            .option {
+                padding: 10px 12px;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>World Religions Knowledge Test</h1>
+            <p>Test your understanding of Christianity, Islam, Hinduism, Judaism, Sikhism, Buddhism, Jainism, and Taoism</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Top Ad Banner -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Replace with your AdSense ad unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="test-container">
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div id="quiz">
+                <div class="question-count" id="questionCount"></div>
+                <div class="question" id="question"></div>
+                <div class="options-container" id="options"></div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="prevBtn">Previous</button>
+                    <button class="btn btn-primary" id="nextBtn">Next</button>
+                </div>
+            </div>
+
+            <div class="result-container" id="resultContainer">
+                <h2>Your Results</h2>
+                <div class="score" id="score"></div>
+                <div class="feedback" id="feedback"></div>
+                <button class="btn restart-btn" id="restartBtn">Take Test Again</button>
+            </div>
+        </div>
+
+        <!-- Middle Ad Banner -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- Replace with your AdSense ad unit -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> World Religions Knowledge Test. All rights reserved.</p>
+            <p>This tool is for educational purposes only and aims to promote understanding of world religions.</p>
+            <p><a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set copyright year
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Quiz questions and answers
+            const questions = [
+                {
+                    question: "Which religion's holy text is called the Guru Granth Sahib?",
+                    options: ["Christianity", "Sikhism", "Islam", "Jainism"],
+                    answer: 1,
+                    explanation: "The Guru Granth Sahib is the central religious scripture of Sikhism, regarded as the final, sovereign guru of the religion."
+                },
+                {
+                    question: "In Christianity, what is the term for the belief that Jesus will return to Earth at the end of time?",
+                    options: ["Reincarnation", "The Second Coming", "Nirvana", "The Great Return"],
+                    answer: 1,
+                    explanation: "The Second Coming is a Christian belief that Jesus will return to Earth to fulfill the rest of Messianic prophecy."
+                },
+                {
+                    question: "Which of these is NOT one of the Five Pillars of Islam?",
+                    options: ["Shahada (Faith)", "Salah (Prayer)", "Zakat (Charity)", "Pilgrimage to Jerusalem"],
+                    answer: 3,
+                    explanation: "The Five Pillars are Shahada, Salah, Zakat, Sawm (Fasting during Ramadan), and Hajj (Pilgrimage to Mecca, not Jerusalem)."
+                },
+                {
+                    question: "In Hinduism, what is the term for the cycle of birth, death, and rebirth?",
+                    options: ["Karma", "Dharma", "Samsara", "Moksha"],
+                    answer: 2,
+                    explanation: "Samsara refers to the cycle of death and rebirth to which life in the material world is bound in Hinduism."
+                },
+                {
+                    question: "Which Jewish holiday commemorates the liberation of the Israelites from Egyptian slavery?",
+                    options: ["Hanukkah", "Yom Kippur", "Passover", "Rosh Hashanah"],
+                    answer: 2,
+                    explanation: "Passover (Pesach) commemorates the Exodus story of the Israelites leaving slavery in Egypt."
+                },
+                {
+                    question: "What is the central teaching of Buddhism called that outlines the path to liberation from suffering?",
+                    options: ["The Ten Commandments", "The Noble Eightfold Path", "The Five Precepts", "The Four Noble Truths"],
+                    answer: 3,
+                    explanation: "The Four Noble Truths contain the essence of Buddhist teachings about the nature of suffering and how to overcome it."
+                },
+                {
+                    question: "Which principle is central to Jainism and means non-violence towards all living beings?",
+                    options: ["Ahimsa", "Satya", "Asteya", "Aparigraha"],
+                    answer: 0,
+                    explanation: "Ahimsa (non-violence) is a fundamental principle of Jainism that extends to all living beings."
+                },
+                {
+                    question: "In Taoism, what does the Yin-Yang symbol represent?",
+                    options: [
+                        "The balance of opposing but complementary forces in the universe",
+                        "The struggle between good and evil",
+                        "The separation of heaven and earth",
+                        "The cycle of day and night"
+                    ],
+                    answer: 0,
+                    explanation: "The Yin-Yang represents the concept of duality forming a whole - how seemingly opposite forces may actually be complementary and interconnected."
+                },
+                {
+                    question: "Which Christian denomination rejects the doctrine of the Trinity?",
+                    options: ["Catholicism", "Jehovah's Witnesses", "Eastern Orthodoxy", "Anglicanism"],
+                    answer: 1,
+                    explanation: "Jehovah's Witnesses believe that Jesus is God's son but not part of a Trinity, which they view as a pagan doctrine."
+                },
+                {
+                    question: "What is the Islamic concept of 'jihad' most accurately defined as?",
+                    options: [
+                        "Holy war against non-believers",
+                        "Struggle or striving in the way of God",
+                        "Religious conversion by force",
+                        "Martyrdom operations"
+                    ],
+                    answer: 1,
+                    explanation: "While jihad can include armed struggle in defense, it primarily refers to the spiritual struggle within oneself against sin and the effort to be a better Muslim."
+                }
+            ];
+
+            // Quiz variables
+            let currentQuestion = 0;
+            let score = 0;
+            let selectedOption = null;
+            let userAnswers = new Array(questions.length).fill(null);
+
+            // DOM elements
+            const quizElement = document.getElementById('quiz');
+            const resultContainer = document.getElementById('resultContainer');
+            const questionElement = document.getElementById('question');
+            const optionsElement = document.getElementById('options');
+            const questionCountElement = document.getElementById('questionCount');
+            const progressBar = document.getElementById('progressBar');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const scoreElement = document.getElementById('score');
+            const feedbackElement = document.getElementById('feedback');
+            const restartBtn = document.getElementById('restartBtn');
+
+            // Load question
+            function loadQuestion() {
+                const question = questions[currentQuestion];
+                questionElement.textContent = question.question;
+                optionsElement.innerHTML = '';
+                
+                // Update question count
+                questionCountElement.textContent = `Question ${currentQuestion + 1}/${questions.length}`;
+                
+                // Update progress bar
+                progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+                
+                // Create options
+                question.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add('option');
+                    if (userAnswers[currentQuestion] === index) {
+                        optionElement.classList.add('selected');
+                    }
+                    optionElement.textContent = option;
+                    optionElement.addEventListener('click', () => selectOption(optionElement, index));
+                    optionsElement.appendChild(optionElement);
+                });
+                
+                // Update button states
+                prevBtn.disabled = currentQuestion === 0;
+                nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Submit' : 'Next';
+            }
+
+            // Select option
+            function selectOption(optionElement, index) {
+                const options = document.querySelectorAll('.option');
+                options.forEach(opt => opt.classList.remove('selected'));
+                optionElement.classList.add('selected');
+                selectedOption = index;
+                userAnswers[currentQuestion] = index;
+            }
+
+            // Next question
+            function nextQuestion() {
+                if (selectedOption === null && userAnswers[currentQuestion] === null) {
+                    alert('Please select an option');
+                    return;
+                }
+                
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    selectedOption = userAnswers[currentQuestion];
+                    loadQuestion();
+                } else {
+                    showResult();
+                }
+            }
+
+            // Previous question
+            function prevQuestion() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    selectedOption = userAnswers[currentQuestion];
+                    loadQuestion();
+                }
+            }
+
+            // Show result
+            function showResult() {
+                // Calculate score
+                score = 0;
+                questions.forEach((question, index) => {
+                    if (userAnswers[index] === question.answer) {
+                        score++;
+                    }
+                });
+                
+                // Display result
+                quizElement.style.display = 'none';
+                resultContainer.style.display = 'block';
+                scoreElement.textContent = `${score}/${questions.length}`;
+                
+                // Generate feedback
+                let feedback = '';
+                const percentage = (score / questions.length) * 100;
+                
+                if (percentage >= 80) {
+                    feedback = 'Excellent! You have a deep understanding of world religions.';
+                } else if (percentage >= 60) {
+                    feedback = 'Good job! You have a solid knowledge of world religions.';
+                } else if (percentage >= 40) {
+                    feedback = 'Not bad! You know some basics about world religions.';
+                } else {
+                    feedback = 'Keep learning! Consider exploring more about world religions.';
+                }
+                
+                feedback += '<br><br><strong>Question Review:</strong><br><br>';
+                
+                questions.forEach((question, index) => {
+                    const isCorrect = userAnswers[index] === question.answer;
+                    feedback += `<strong>Q${index + 1}:</strong> ${question.question}<br>`;
+                    feedback += `Your answer: ${question.options[userAnswers[index]] || 'Not answered'}<br>`;
+                    feedback += `Correct answer: ${question.options[question.answer]}<br>`;
+                    feedback += `<em>${question.explanation}</em><br><
+                    feedback += isCorrect 
+                        ? '<span style="color: var(--success-color);">✓ Correct</span><br><br>' 
+                        : '<span style="color: var(--danger-color);">✗ Incorrect</span><br><br>';
+                });
+                
+                feedbackElement.innerHTML = feedback;
+            }
+
+            // Restart quiz
+            function restartQuiz() {
+                currentQuestion = 0;
+                score = 0;
+                selectedOption = null;
+                userAnswers = new Array(questions.length).fill(null);
+                quizElement.style.display = 'block';
+                resultContainer.style.display = 'none';
+                loadQuestion();
+            }
+
+            // Event listeners
+            nextBtn.addEventListener('click', nextQuestion);
+            prevBtn.addEventListener('click', prevQuestion);
+            restartBtn.addEventListener('click', restartQuiz);
+
+            // Initialize quiz
+            loadQuestion();
+
+            // Load AdSense ads (make sure to replace with your actual AdSense code)
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+    </script>
+</body>
+</html>
