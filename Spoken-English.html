@@ -369,21 +369,21 @@
                     <label for="social-scenario" class="lang-bn" style="display: none;">পরিস্থিতি</label>
                     <select id="social-scenario">
                         <option value="greeting" class="lang-en">Greeting someone</option>
-                        <option value="greeting" class="lang-bn" style="display: none;">কাউকে অভিবাদন জানানো</option>
+                        <option value="greeting" class="lang-bn">কাউকে অভিবাদন জানানো</option>
                         <option value="introduction" class="lang-en">Introducing yourself</option>
-                        <option value="introduction" class="lang-bn" style="display: none;">নিজেকে পরিচয় করানো</option>
+                        <option value="introduction" class="lang-bn">নিজেকে পরিচয় করানো</option>
                         <option value="smalltalk" class="lang-en">Making small talk</option>
-                        <option value="smalltalk" class="lang-bn" style="display: none;">ছোট্ট আলাপ করা</option>
+                        <option value="smalltalk" class="lang-bn">ছোট্ট আলাপ করা</option>
                         <option value="compliment" class="lang-en">Giving a compliment</option>
-                        <option value="compliment" class="lang-bn" style="display: none;">প্রশংসা করা</option>
+                        <option value="compliment" class="lang-bn">প্রশংসা করা</option>
                         <option value="apology" class="lang-en">Making an apology</option>
-                        <option value="apology" class="lang-bn" style="display: none;">ক্ষমা চাওয়া</option>
+                        <option value="apology" class="lang-bn">ক্ষমা চাওয়া</option>
                         <option value="invitation" class="lang-en">Inviting someone</option>
-                        <option value="invitation" class="lang-bn" style="display: none;">কাউকে আমন্ত্রণ জানানো</option>
-                        <option value="asking-for-help" class="lang-en">Asking for help</option>
-                        <option value="asking-for-help" class="lang-bn" style="display: none;">সাহায্য চাওয়া</option>
-                        <option value="giving-directions" class="lang-en">Giving directions</option>
-                        <option value="giving-directions" class="lang-bn" style="display: none;">দিকনির্দেশনা দেওয়া</option>
+                        <option value="invitation" class="lang-bn">কাউকে আমন্ত্রণ জানানো</option>
+                        <option value="askingForHelp" class="lang-en">Asking for help</option>
+                        <option value="askingForHelp" class="lang-bn">সাহায্য চাওয়া</option>
+                        <option value="givingDirections" class="lang-en">Giving directions</option>
+                        <option value="givingDirections" class="lang-bn">দিকনির্দেশনা দেওয়া</option>
                     </select>
                 </div>
                 <div class="input-group">
@@ -896,7 +896,7 @@
                              bn: "হেই, আমরা [ইভেন্ট] করছি - তুমি আসছো?"}
                         ]
                     },
-                    askingForHelp: {
+                    askingForHelp: {  // Must match exactly with select option value
                         formal: [
                             {en: "I was wondering if you might be able to assist me with [specific task].", 
                              bn: "আমি ভাবছিলাম আপনি কি আমাকে [নির্দিষ্ট কাজ] এ সহায়তা করতে পারবেন কিনা।"},
@@ -916,7 +916,7 @@
                              bn: "হেই, আমি [নির্দিষ্ট কাজ] এ আটকে গেছি। একটু সময় আছে?"}
                         ]
                     },
-                    givingDirections: {
+                    givingDirections: {  // Must match exactly with select option value
                         formal: [
                             {en: "To get to [location], please proceed [specific directions].", 
                              bn: "[স্থান] এ পৌঁছাতে, দয়া করে [নির্দিষ্ট দিকনির্দেশনা] অনুসরণ করুন।"},
@@ -937,7 +937,6 @@
                         ]
                     }
                 };
-
             // DOM elements
             const generateProfessionalBtn = document.getElementById('generate-professional');
             const generateSocialBtn = document.getElementById('generate-social');
@@ -992,7 +991,11 @@
                 const scenario = document.getElementById('social-scenario').value;
                 const context = document.getElementById('social-context').value;
                 
+                console.log("Selected scenario:", scenario); // Debug line
+                console.log("Available scenarios:", Object.keys(socialPhrases)); // Debug line
+                
                 if (!socialPhrases[scenario] || !socialPhrases[scenario][context]) {
+                    console.log("Problem with:", scenario, context); // Debug line
                     const errorMsg = document.querySelector('.lang-en').style.display === 'none' ? 
                         "দয়া করে পরিস্থিতি এবং প্রসঙ্গের জন্য বৈধ বিকল্পগুলি নির্বাচন করুন।" : 
                         "Please select valid options for scenario and context.";
