@@ -1,1 +1,570 @@
-jjj
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="বিশ্বের প্রধান ধর্মসমূহ - খ্রিস্টধর্ম, ইসলাম, হিন্দুধর্ম, ইহুদিধর্ম, শিখধর্ম, বৌদ্ধধর্ম, জৈনধর্ম এবং তাওবাদ সম্পর্কে আপনার জ্ঞান পরীক্ষা করুন।">
+    <meta name="keywords" content="ধর্ম কুইজ, ধর্মীয় বিতর্ক, খ্রিস্টধর্ম, ইসলাম, হিন্দুধর্ম, ইহুদিধর্ম, শিখধর্ম, বৌদ্ধধর্ম, জৈনধর্ম, তাওবাদ, আন্তঃধর্মীয় আলোচনা">
+    <meta name="author" content="ধর্মীয় বিতর্ক কুইজ">
+    <title>ধর্মীয় বিতর্ক কুইজ | বিশ্বের ধর্মসমূহ সম্পর্কে আপনার জ্ঞান পরীক্ষা করুন</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, 'SolaimanLipi', sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .ad-container {
+            margin: 20px 0;
+            text-align: center;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .quiz-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+        .options {
+            margin-bottom: 25px;
+        }
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: var(--light);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: right;
+        }
+        .option:hover {
+            background: #e9ecef;
+            border-color: var(--accent);
+        }
+        .option.selected {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        .btn {
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: var(--primary);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .answer-feedback {
+            margin-top: 30px;
+            text-align: right;
+        }
+        .answer-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f8f9fa;
+            text-align: right;
+        }
+        .correct {
+            border-left: 4px solid var(--success);
+        }
+        .incorrect {
+            border-left: 4px solid var(--danger);
+        }
+        .correct-answer {
+            color: var(--success);
+            font-weight: bold;
+        }
+        .user-answer {
+            color: var(--danger);
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: var(--warning);
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .quiz-container {
+                padding: 15px;
+            }
+            .question {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ধর্মীয় বিতর্ক কুইজ</h1>
+            <p class="description">বিশ্বের প্রধান ধর্মসমূহের বিতর্কিত দিকগুলি সম্পর্কে আপনার জ্ঞান পরীক্ষা করুন</p>
+        </header>
+
+        <!-- AdSense Ad Slot 1 -->
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <div class="quiz-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div id="quiz-content">
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                <button class="btn" id="next-btn" disabled>পরবর্তী প্রশ্ন</button>
+            </div>
+            <div id="results-section" style="display: none;">
+                <div class="result" id="result"></div>
+                <div class="answer-feedback" id="answer-feedback"></div>
+                <button class="btn restart-btn" id="restart-btn">আবার শুরু করুন</button>
+            </div>
+        </div>
+
+        <!-- AdSense Ad Slot 2 -->
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_ADSENSE_ID" crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-YOUR_ADSENSE_ID"
+                 data-ad-slot="YOUR_AD_SLOT_ID"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <footer>
+        <p>© ২০২৪ ধর্মীয় বিতর্ক কুইজ | আন্তঃধর্মীয় আলোচনা এবং শিক্ষামূলক উদ্দেশ্যে তৈরি।</p>
+    </footer>
+
+    <script>
+        const questions = [
+            // Existence of God
+            {
+                question: "যদি ঈশ্বর সর্বশক্তিমান এবং সর্বপ্রেমময় হন, তাহলে কেন মন্দ এবং দুর্ভোগ বিদ্যমান?",
+                options: [
+                    "মন্দ ঈশ্বরের একটি পরীক্ষা",
+                    "মানুষের স্বাধীন ইচ্ছা দুর্ভোগ সৃষ্টি করে",
+                    "মন্দ একটি বিভ্রম (কিছু পূর্বদেশীয় দর্শনের মত)",
+                    "কোনো ঈশ্বর নেই (নাস্তিক দৃষ্টিভঙ্গি)"
+                ],
+                correctAnswer: 1,
+                religion: "থিওডিসি",
+                explanation: "পশ্চিমা ধর্মে মন্দের সমস্যার জন্য স্বাধীন ইচ্ছা প্রতিরক্ষা সবচেয়ে ব্যাপকভাবে গৃহীত ধর্মতাত্ত্বিক উত্তর।"
+            },
+            {
+                question: "যুক্তি এবং প্রমাণের মাধ্যমে ঈশ্বরের অস্তিত্ব প্রমাণ করা যায় কি, নাকি বিশ্বাস প্রয়োজন?",
+                options: [
+                    "ঈশ্বরের অস্তিত্ব যুক্তিসঙ্গতভাবে প্রমাণ করা যেতে পারে",
+                    "কিছু প্রমাণ আছে কিন্তু বিশ্বাস এখনও প্রয়োজন",
+                    "ঈশ্বরের অস্তিত্ব প্রমাণ বা অপ্রমাণ করা যায় না",
+                    "ঈশ্বরের ধারণা মানুষের বোধগম্যতার বাইরে"
+                ],
+                correctAnswer: 2,
+                religion: "ধর্মের দর্শন",
+                explanation: "বেশিরভাগ ধর্মতত্ত্ববিদ একমত যে যদিও ঈশ্বরের অস্তিত্বের যুক্তি আকর্ষণীয় হতে পারে, তারা চূড়ান্ত প্রমাণ গঠন করে না।"
+            },
+            {
+                question: "যদি মহাবিশ্বের একজন স্রষ্টার প্রয়োজন হয়, তাহলে কে ঈশ্বরকে সৃষ্টি করল?",
+                options: [
+                    "ঈশ্বর অজাত এবং অনন্ত",
+                    "স্রষ্টাদের একটি অসীম শৃঙ্খলা আছে",
+                    "প্রশ্নটি অর্থহীন (বৌদ্ধধর্মের মত)",
+                    "আমরা উত্তর জানি না"
+                ],
+                correctAnswer: 0,
+                religion: "কসমোলজি",
+                explanation: "শাস্ত্রীয় আস্তিক্যবাদ বলে যে ঈশ্বর হলেন অকারণ কারণ যার স্রষ্টার প্রয়োজন নেই।"
+            },
+
+            // Scripture and Interpretation
+            {
+                question: "ধর্মীয় গ্রন্থগুলি (বাইবেল, কুরআন, বেদ ইত্যাদি) ঐশ্বরিকভাবে অনুপ্রাণিত নাকি মানবসৃষ্ট?",
+                options: [
+                    "সম্পূর্ণ ঐশ্বরিক এবং নির্ভুল",
+                    "ঐশ্বরিকভাবে অনুপ্রাণিত কিন্তু মানুষের দ্বারা লেখা",
+                    "মানুষের তৈরি নৈতিক জ্ঞান সহ",
+                    "কোনো ঐশ্বরিক উৎস ছাড়াই পৌরাণিক"
+                ],
+                correctAnswer: 1,
+                religion: "শাস্ত্রীয় কর্তৃত্ব",
+                explanation: "বেশিরভাগ মধ্যপন্থী ধর্মীয় পণ্ডিতরা শাস্ত্রকে ঐশ্বরিকভাবে অনুপ্রাণিত হিসাবে দেখেন কিন্তু মানুষের লেখক এবং ঐতিহাসিক প্রসঙ্গ স্বীকার করেন।"
+            },
+            {
+                question: "পবিত্র শাস্ত্রে বিরোধপূর্ণ অংশগুলিকে কীভাবে সমাধান করা উচিত?",
+                options: [
+                    "আক্ষরিক ব্যাখ্যার মাধ্যমে",
+                    "প্রাসঙ্গিক/ঐতিহাসিক বিশ্লেষণের মাধ্যমে",
+                    "আধ্যাত্মিক সত্যের বিভিন্ন স্তর হিসাবে",
+                    "সেগুলি সমাধান করা উচিত নয় - বৈপরীত্য বিদ্যমান"
+                ],
+                correctAnswer: 1,
+                religion: "হার্মেনিউটিক্স",
+                explanation: "আধুনিক বাইবেলের পণ্ডিতরা তাদের ঐতিহাসিক এবং সাংস্কৃতিক প্রসঙ্গে পাঠ্য বোঝার উপর জোর দেন।"
+            },
+            {
+                question: "শাস্ত্রের আক্ষরিক ব্যাখ্যা প্রয়োজন, নাকি পাঠ্যগুলিকে রূপকভাবে ব্যাখ্যা করা উচিত?",
+                options: [
+                    "সম্পূর্ণ আক্ষরিকতা অপরিহার্য",
+                    "কিছু অংশ আক্ষরিক, কিছু রূপক",
+                    "প্রধানত আধ্যাত্মিক সত্য সহ রূপক",
+                    "পাঠ্যগুলি সমালোচনামূলকভাবে বিশ্লেষণ করার জন্য মানুষের নথি"
+                ],
+                correctAnswer: 2,
+                religion: "ধর্মতত্ত্ব",
+                explanation: "বেশিরভাগ প্রধান ধর্মীয় ঐতিহ্য আক্ষরিক পাঠের পাশাপাশি পরিশীলিত রূপক ব্যাখ্যা পদ্ধতি তৈরি করেছে।"
+            },
+
+            // Science vs. Religion
+            {
+                question: "বিবর্তন কি ধর্মীয় সৃষ্টি বর্ণনার সাথে সাংঘর্ষিক?",
+                options: [
+                    "হ্যাঁ, বিবর্তন সৃষ্টিবাদকে খণ্ডন করে",
+                    "না, তারা সহাবস্থান করতে পারে (আস্তিক্যবাদী বিবর্তন)",
+                    "ধর্মীয় পাঠ্যগুলি রূপক, আক্ষরিক নয়",
+                    "বিবর্তন শুধুমাত্র একটি তত্ত্ব যার ফাঁক আছে"
+                ],
+                correctAnswer: 1,
+                religion: "বিজ্ঞান ও ধর্ম",
+                explanation: "আস্তিক্যবাদী বিবর্তন বিজ্ঞান গ্রহণ করে এমন মূলধারার ধর্মীয় গোষ্ঠীগুলির মধ্যে প্রভাবশালী দৃষ্টিভঙ্গি।"
+            },
+            {
+                question: "ঈশ্বরকে আহ্বান না করে বিজ্ঞান কি মহাবিশ্বের উৎপত্তি ব্যাখ্যা করতে পারে?",
+                options: [
+                    "হ্যাঁ, বিজ্ঞান সম্পূর্ণ ব্যাখ্যা প্রদান করে",
+                    "বিজ্ঞান ব্যাখ্যা করে কীভাবে, ধর্ম ব্যাখ্যা করে কেন",
+                    "বিজ্ঞান এবং ধর্ম বিভিন্ন প্রশ্নের সমাধান করে",
+                    "চূড়ান্ত উৎপত্তির জন্য একটি ঐশ্বরিক কারণ প্রয়োজন"
+                ],
+                correctAnswer: 2,
+                religion: "কসমোলজি",
+                explanation: "অনেক বিজ্ঞানী এবং ধর্মতত্ত্ববিদ যুক্তি দেন যে বিজ্ঞান এবং ধর্ম ব্যাখ্যার বিভিন্ন ক্ষেত্রে কাজ করে।"
+            },
+            {
+                question: "মৃত্যু-সমীপবর্তী অভিজ্ঞতা বা চেতনা গবেষণা কি আত্মার অস্তিত্ব প্রমাণ করে?",
+                options: [
+                    "হ্যাঁ, তারা বৈজ্ঞানিক প্রমাণ প্রদান করে",
+                    "তারা আধ্যাত্মিক বাস্তবতা প্রস্তাব করে কিন্তু নির্দিষ্ট মতবাদ নয়",
+                    "তাদের প্রাকৃতিক স্নায়ুবৈজ্ঞানিক ব্যাখ্যা আছে",
+                    "প্রশ্নটি বৈজ্ঞানিক গবেষণার বাইরে"
+                ],
+                correctAnswer: 2,
+                religion: "স্নায়ুবিজ্ঞান",
+                explanation: "বেশিরভাগ স্নায়ুবিজ্ঞানী মৃত্যু-সমীপবর্তী অভিজ্ঞতাগুলিকে মস্তিষ্কের ক্রিয়াকলাপের জন্য দায়ী করেন, যদিও কিছু গবেষক不同意।"
+            },
+
+            // Salvation and Exclusivity
+            {
+                question: "শুধুমাত্র একটি ধর্মের মাধ্যমেই কি মুক্তি সম্ভব (যেমন খ্রিস্টধর্মের 'শুধুমাত্র যীশুর মাধ্যমে')?",
+                options: [
+                    "হ্যাঁ, একচেটিয়াবাদ সত্য",
+                    "না, একাধিক পথ মুক্তির দিকে নিয়ে যায় (বহুত্ববাদ)",
+                    "মুক্তি সর্বজনীন (সবাই রক্ষা পায়)",
+                    "মুক্তি একটি মানবসৃষ্ট নির্মাণ"
+                ],
+                correctAnswer: 0,
+                religion: "সোটেরিওলজি",
+                explanation: "যদিও বহুত্ববাদী দৃষ্টিভঙ্গি বিদ্যমান, খ্রিস্টধর্ম, ইসলাম এবং কিছু অন্যান্য ধর্মে ঐতিহ্যগত মতবাদ একচেটিয়াবাদী দাবি বজায় রাখে।"
+            },
+            {
+                question: "অন্যান্য ধর্মের (বা ধর্মহীন) নৈতিকভাবে ভাল মানুষ কি স্বর্গ বা জ্ঞানলাভ অর্জন করতে পারে?",
+                options: [
+                    "না, সঠিক বিশ্বাস প্রয়োজন",
+                    "হ্যাঁ, যদি তারা প্রাকৃতিক আইন/নৈতিক সত্য অনুসরণ করে",
+                    "বিভিন্ন ধর্ম একই চূড়ান্ত বাস্তবতার দিকে নিয়ে যায়",
+                    "স্বর্গের মতো ধারণাগুলি রূপক"
+                ],
+                correctAnswer: 1,
+                religion: "আন্তঃধর্মীয়",
+                explanation: "অনেক আধুনিক ধর্মতত্ত্ববিদ স্বীকার করেন যে নাস্তিকরা যুক্তি ও মানব প্রকৃতি দ্বারা নৈতিক হতে পারে।"
+                },
+                {
+                question: "বিভিন্ন ধর্ম গর্ভপাত, ইচ্ছামৃত্যু বা যুদ্ধের মতো বিষয়গুলিতে নৈতিক অবস্থানকে কীভাবে ন্যায্যতা দেয়?",
+                options: [
+                "নির্দিষ্ট শাস্ত্রীয় নির্দেশের মাধ্যমে",
+                "নীতির যুক্তিসঙ্গত প্রয়োগের মাধ্যমে",
+                "বিকশিত ঐতিহ্য ও ঐক্যমতের মাধ্যমে",
+                "ব্যক্তিগত বিবেকের মাধ্যমে"
+                ],
+                correctAnswer: 2,
+                religion: "প্রায়োগিক নীতিশাস্ত্র",
+                explanation: "অধিকাংশ ধর্মীয় ঐতিহ্য যুক্তি ও অভিজ্ঞতার আলোকে শাস্ত্রের ধারাবাহিক ব্যাখ্যার মাধ্যমে নৈতিক অবস্থান তৈরি করে।"
+                },
+        // Miracles and Supernatural Claims
+                {
+                    question: "অলৌকিক ঘটনা (যেমন পুনরুত্থান, ভবিষ্যদ্বাণী) কি ঐতিহাসিকভাবে বিশ্বাসযোগ্য নাকি পৌরাণিক?",
+                    options: [
+                        "যেমন লিপিবদ্ধ আছে সম্পূর্ণ ঐতিহাসিক",
+                        "কিংবদন্তী উপাদান সহ ঐতিহাসিক মূল",
+                        "সম্পূর্ণ পৌরাণিক",
+                        "প্রতীকী সত্য, ঐতিহাসিক নয়"
+                    ],
+                    correctAnswer: 1,
+                    religion: "ঐতিহাসিকতা",
+                    explanation: "বেশিরভাগ বাইবেল পণ্ডিত অলৌকিক ঘটনার বর্ণনায় ঐতিহাসিক উপাদান এবং কিংবদন্তী বিকাশ উভয়ই স্বীকার করেন।"
+                },
+                {
+                    question: "আসল অলৌকিক ঘটনা এবং প্রাকৃতিক ঘটনার মধ্যে আমরা কীভাবে পার্থক্য করতে পারি?",
+                    options: [
+                        "ধর্মীয় কর্তৃপক্ষ দ্বারা",
+                        "বৈজ্ঞানিক তদন্ত দ্বারা",
+                        "ব্যক্তিগত বিশ্বাস অভিজ্ঞতা দ্বারা",
+                        "পার্থক্যটি অর্থহীন"
+                    ],
+                    correctAnswer: 1,
+                    religion: "দর্শন",
+                    explanation: "ক্যাথলিক চার্চ, উদাহরণস্বরূপ, দাবিকৃত অলৌকিক ঘটনা মূল্যায়ন করার সময় বৈজ্ঞানিক তদন্ত ব্যবহার করে।"
+                },
+                {
+                    question: "আধুনিক সময়ের অলৌকিক ঘটনা (যেমন নিরাময়, দর্শন) কি নির্দিষ্ট ধর্মগুলিকে বৈধতা দেয়?",
+                    options: [
+                        "হ্যাঁ, তারা ধর্মীয় সত্য প্রমাণ করে",
+                        "তারা আধ্যাত্মিক বাস্তবতা প্রস্তাব করে কিন্তু নির্দিষ্ট মতবাদ নয়",
+                        "তাদের মনস্তাত্ত্বিক ব্যাখ্যা আছে",
+                        "এগুলি সব ধর্মে সমানভাবে উপস্থিত"
+                    ],
+                    correctAnswer: 3,
+                    religion: "তুলনামূলক ধর্ম",
+                    explanation: "একই ধরনের অলৌকিক দাবি বিভিন্ন ধর্মে দেখা যায়, যা কোনো একটি ঐতিহ্যের জন্য দুর্বল প্রমাণ তৈরি করে।"
+                },
+        
+                // Religious Diversity
+                {
+                    question: "ঈশ্বর এক হলে এত ধর্ম কেন একচেটিয়া সত্যের দাবি করে?",
+                    options: [
+                        "শুধুমাত্র একটি ধর্মই ঈশ্বরের কাছ থেকে আসে",
+                        "একটি সত্যের বিভিন্ন সাংস্কৃতিক অভিব্যক্তি",
+                        "ঐশ্বরিককে বোঝার মানুষের প্রচেষ্টা",
+                        "ধর্মগুলি সামাজিক/রাজনৈতিক কাজ করে"
+                    ],
+                    correctAnswer: 2,
+                    religion: "ধর্মের দর্শন",
+                    explanation: "'চিরন্তন দর্শন' পরামর্শ দেয় যে বিভিন্ন ধর্ম হল চূড়ান্ত বাস্তবতাকে উপলব্ধি করার সীমিত মানুষের প্রচেষ্টা।"
+                },
+                {
+                    question: "সব ধর্মই কি আংশিকভাবে সত্য (বহুত্ববাদ), নাকি একটি সম্পূর্ণ সঠিক হতে হবে?",
+                    options: [
+                        "শুধুমাত্র একটি সম্পূর্ণ সত্য হতে পারে",
+                        "সবগুলিতে আংশিক সত্য রয়েছে",
+                        "মুক্তির বিভিন্ন বৈধ পথ",
+                        "সত্যের দাবিগুলি সাংস্কৃতিকভাবে আপেক্ষিক"
+                    ],
+                    correctAnswer: 1,
+                    religion: "আন্তঃধর্মীয়",
+                    explanation: "জন হিকের বহুত্ববাদী অনুমান প্রস্তাব করে যে ধর্মগুলি ঐশ্বরিকের প্রতি বিভিন্ন সাংস্কৃতিকভাবে শর্তযুক্ত প্রতিক্রিয়া।"
+                },
+                {
+                    question: "বিশ্বাসীদের উচিত ধর্মগুলির মধ্যে পরস্পরবিরোধী সত্যের দাবিগুলির প্রতি কীভাবে প্রতিক্রিয়া জানানো?",
+                    options: [
+                        "শুধুমাত্র নিজের ঐতিহ্যকে রক্ষা করা",
+                        "পার্থক্যকে সম্মান করার সময় সাধারণ ভূমি খোঁজা",
+                        "সমস্ত ধর্ম সমানভাবে বৈধ বলে স্বীকার করা",
+                        "সমস্ত ধর্মীয় দাবিকে সমানভাবে মিথ্যা হিসাবে প্রত্যাখ্যান করা"
+                    ],
+                    correctAnswer: 1,
+                    religion: "আন্তঃধর্মীয় সংলাপ",
+                    explanation: "অধিকাংশ আধুনিক ধর্মতত্ত্ববিদ ১৯৯৩ সালের বিশ্ব ধর্ম সংসদের মতো মডেল অনুসরণ করে নিজের বিশ্বাস বজায় রেখে বোঝার জন্য সংলাপের পরামর্শ দেন।"
+                }
+            ];
+        
+            let currentQuestion = 0;
+            let score = 0;
+            let userAnswers = [];
+            const questionElement = document.getElementById("question");
+            const optionsElement = document.getElementById("options");
+            const nextButton = document.getElementById("next-btn");
+            const resultElement = document.getElementById("result");
+            const progressBar = document.getElementById("progress");
+            const quizContent = document.getElementById("quiz-content");
+            const resultsSection = document.getElementById("results-section");
+            const answerFeedback = document.getElementById("answer-feedback");
+            const restartButton = document.getElementById("restart-btn");
+        
+            function loadQuestion() {
+                const q = questions[currentQuestion];
+                questionElement.textContent = q.question;
+                optionsElement.innerHTML = "";
+                q.options.forEach((option, index) => {
+                    const button = document.createElement("button");
+                    button.textContent = option;
+                    button.classList.add("option");
+                    button.addEventListener("click", () => selectOption(button, index));
+                    optionsElement.appendChild(button);
+                });
+                progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+                nextButton.disabled = true;
+        
+                if (currentQuestion === questions.length - 1) {
+                    nextButton.textContent = "শেষ করুন";
+                } else {
+                    nextButton.textContent = "পরবর্তী প্রশ্ন";
+                }
+            }
+        
+            function selectOption(selectedButton, index) {
+                const options = document.querySelectorAll(".option");
+                options.forEach(button => button.classList.remove("selected"));
+                selectedButton.classList.add("selected");
+                nextButton.disabled = false;
+                
+                // Store user's answer
+                userAnswers[currentQuestion] = index;
+            }
+        
+            function showResults() {
+                quizContent.style.display = "none";
+                resultsSection.style.display = "block";
+                
+                // Calculate score
+                score = 0;
+                questions.forEach((q, index) => {
+                    if (userAnswers[index] === q.correctAnswer) {
+                        score++;
+                    }
+                });
+                
+                resultElement.innerHTML = `আপনি পেয়েছেন <strong>${score} ${questions.length} এর মধ্যে</strong>!`;
+                
+                // Show detailed feedback
+                answerFeedback.innerHTML = "<h3>প্রশ্ন বিশ্লেষণ:</h3>";
+                questions.forEach((q, index) => {
+                    const isCorrect = userAnswers[index] === q.correctAnswer;
+                    const userAnswerText = q.options[userAnswers[index]] || "উত্তর দেওয়া হয়নি";
+                    const correctAnswerText = q.options[q.correctAnswer];
+                    
+                    answerFeedback.innerHTML += `
+                        <div class="answer-item ${isCorrect ? 'correct' : 'incorrect'}">
+                            <p><strong>প্রশ্ন ${index + 1}:</strong> ${q.question}</p>
+                            <p>আপনার উত্তর: <span class="user-answer">${userAnswerText}</span></p>
+                            ${!isCorrect ? `<p>সঠিক উত্তর: <span class="correct-answer">${correctAnswerText}</span></p>` : ''}
+                            <p><em>${q.explanation}</em></p>
+                            <p class="religion-tag">বিষয়: ${q.religion}</p>
+                        </div>
+                    `;
+                });
+            }
+        
+            nextButton.addEventListener("click", () => {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            });
+        
+            restartButton.addEventListener("click", () => {
+                currentQuestion = 0;
+                score = 0;
+                userAnswers = [];
+                quizContent.style.display = "block";
+                resultsSection.style.display = "none";
+                loadQuestion();
+            });
+        
+            // Initialize quiz
+            loadQuestion();
+        </script>
+    </body>
+</html>
