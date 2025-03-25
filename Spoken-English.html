@@ -772,273 +772,318 @@
                     ]
                 }
             };
-                // [Previous code remains the same until professionalPhrases object]
-                
-                // Enhanced professional phrase database with Bengali translations
-                <script>
-                // [Previous code remains the same until professionalPhrases object]
 
-                // Enhanced professional phrase database with Bengali translations
-                const professionalPhrases = {
-                    email: {
-                        formal: [
-                            {en: "Dear [Recipient],\n\nI hope this message finds you well.\n\n[Main content]\n\nBest regards,\n[Your Name]", 
-                             bn: "প্রিয় [প্রাপক],\n\nআমি আশা করি এই বার্তাটি আপনাকে ভালো পাবে।\n\n[মূল বিষয়বস্তু]\n\nশুভেচ্ছান্তে,\n[আপনার নাম]"},
-                            {en: "To whom it may concern,\n\nI am writing regarding [subject].\n\n[Main content]\n\nSincerely,\n[Your Name]", 
-                             bn: "যার যার প্রাসঙ্গিক,\n\nআমি [বিষয়] সম্পর্কে লিখছি।\n\n[মূল বিষয়বস্তু]\n\nআন্তরিকভাবে,\n[আপনার নাম]"}
-                        ],
-                        polite: [
-                            {en: "Hello [Name],\n\nI hope you're doing well.\n\n[Main content]\n\nThanks and best,\n[Your Name]", 
-                             bn: "হ্যালো [নাম],\n\nআমি আশা করি আপনি ভালো আছেন।\n\n[মূল বিষয়বস্তু]\n\nধন্যবাদ ও শুভেচ্ছা,\n[আপনার নাম]"},
-                            {en: "Hi [Name],\n\nJust reaching out about [subject].\n\n[Main content]\n\nBest,\n[Your Name]", 
-                             bn: "হাই [নাম],\n\nশুধু [বিষয়] সম্পর্কে যোগাযোগ করছি।\n\n[মূল বিষয়বস্তু]\n\nশুভকামনা,\n[আপনার নাম]"}
-                        ],
-                        friendly: [
-                            {en: "Hey [Name],\n\nQuick note about [subject].\n\n[Main content]\n\nTalk soon,\n[Your Name]", 
-                             bn: "হেই [নাম],\n\n[বিষয়] সম্পর্কে একটি দ্রুত নোট।\n\n[মূল বিষয়বস্তু]\n\nশীঘ্রই কথা হবে,\n[আপনার নাম]"}
-                        ]
-                    },
-                    meeting: {
-                        formal: [
-                            {en: "Thank you all for being here today.", bn: "আজ এখানে উপস্থিত থাকার জন্য আপনাদের সকলকে ধন্যবাদ।"},
-                            {en: "Let's begin with the first agenda item.", bn: "চলুন প্রথম এজেন্ডা আইটেম দিয়ে শুরু করি।"},
-                            {en: "Would anyone like to add anything before we move on?", bn: "আমরা এগোনোর আগে কি কেউ কিছু যোগ করতে চান?"}
-                        ],
-                        polite: [
-                            {en: "Does anyone have thoughts on this?", bn: "এ সম্পর্কে কি কারো কোন মতামত আছে?"},
-                            {en: "I'd appreciate everyone's input on this matter.", bn: "আমি এই বিষয়ে সবার মতামত প্রশংসা করব।"},
-                            {en: "Could you please clarify that point?", bn: "আপনি কি দয়া করে সেই পয়েন্টটি স্পষ্ট করতে পারবেন?"}
-                        ],
-                        friendly: [
-                            {en: "Thanks for joining, everyone!", bn: "সবাইকে যোগদানের জন্য ধন্যবাদ!"},
-                            {en: "Let's dive right in.", bn: "চলুন সরাসরি শুরু করি।"},
-                            {en: "Who wants to go first?", bn: "কে প্রথম শুরু করতে চান?"}
-                        ]
-                    },
-                    request: {
-                        formal: [
-                            {en: "I would be most grateful if you could [specific request].", 
-                             bn: "আমি খুবই কৃতজ্ঞ হব যদি আপনি [নির্দিষ্ট অনুরোধ] করতে পারেন।"},
-                            {en: "Might I request your assistance with [specific task]?", 
-                             bn: "আমি কি আপনার সহায়তা চাইতে পারি [নির্দিষ্ট কাজ] এর জন্য?"},
-                            {en: "Would it be possible for you to [specific action]?", 
-                             bn: "আপনার পক্ষে কি [নির্দিষ্ট কাজ] করা সম্ভব?"}
-                        ],
-                        polite: [
-                            {en: "Could you please [specific request]?", 
-                             bn: "আপনি কি দয়া করে [নির্দিষ্ট অনুরোধ] করতে পারবেন?"},
-                            {en: "Would you mind [specific task] when you have a moment?", 
-                             bn: "আপনার একটু সময় হলে কি আপনি [নির্দিষ্ট কাজ] করতে পারবেন?"},
-                            {en: "I was hoping you could help me with [specific action].", 
-                             bn: "আমি আশা করছিলাম আপনি আমাকে সাহায্য করবেন [নির্দিষ্ট কাজ] এ।"}
-                        ],
-                        friendly: [
-                            {en: "Can you [specific request] when you get a chance?", 
-                             bn: "আপনার সুযোগ হলে কি আপনি [নির্দিষ্ট অনুরোধ] করতে পারবেন?"},
-                            {en: "Would you be able to [specific task] for me?", 
-                             bn: "আপনি কি আমার জন্য [নির্দিষ্ট কাজ] করতে সক্ষম হবেন?"},
-                            {en: "Could I ask you to [specific action]?", 
-                             bn: "আমি কি আপনাকে [নির্দিষ্ট কাজ] করতে বলতে পারি?"}
-                        ]
-                    },
-                    presentation: {
-                        formal: [
-                            {en: "Today, I'll be presenting on [topic].", 
-                             bn: "আজ, আমি [বিষয়] উপস্থাপনা করব।"},
-                            {en: "This slide illustrates [key point].", 
-                             bn: "এই স্লাইডটি [মূল পয়েন্ট] চিত্রিত করে।"},
-                            {en: "To summarize our main findings...", 
-                             bn: "আমাদের প্রধান ফলাফলগুলি সংক্ষেপে বলতে..."}
-                        ],
-                        polite: [
-                            {en: "I'd like to walk you through [topic].", 
-                             bn: "আমি আপনাকে [বিষয়] এর মাধ্যমে নিয়ে যেতে চাই।"},
-                            {en: "Here we can see [key point].", 
-                             bn: "এখানে আমরা দেখতে পাচ্ছি [মূল পয়েন্ট]।"},
-                            {en: "Let me highlight the key takeaways...", 
-                             bn: "আমাকে মূল Takeaways গুলি হাইলাইট করতে দিন..."}
-                        ],
-                        friendly: [
-                            {en: "So today we're talking about [topic].", 
-                             bn: "তাই আজ আমরা কথা বলছি [বিষয়] সম্পর্কে।"},
-                            {en: "Check out this [key point] - it's really interesting!", 
-                             bn: "এই [মূল পয়েন্ট] দেখুন - এটি সত্যিই আকর্ষণীয়!"},
-                            {en: "The big things to remember are...", 
-                             bn: "মনে রাখার মতো বড় বিষয়গুলি হল..."}
-                        ]
-                    },
-                    interview: {
-                        formal: [
-                            {en: "Could you tell me more about your experience with [specific skill]?", 
-                             bn: "আপনি কি আমাকে [নির্দিষ্ট দক্ষতা] সম্পর্কে আপনার অভিজ্ঞতা সম্পর্কে আরও বলতে পারেন?"},
-                            {en: "What would you say is your greatest professional strength?", 
-                             bn: "আপনি কি বলবেন আপনার সবচেয়ে বড় পেশাদার শক্তি কি?"},
-                            {en: "How would you handle [specific scenario]?", 
-                             bn: "আপনি কিভাবে [নির্দিষ্ট পরিস্থিতি] হ্যান্ডেল করবেন?"}
-                        ],
-                        polite: [
-                            {en: "I'd love to hear about your work with [specific area].", 
-                             bn: "আমি শুনতে চাই [নির্দিষ্ট ক্ষেত্র] নিয়ে আপনার কাজ সম্পর্কে।"},
-                            {en: "What do you enjoy most about [relevant aspect] of your work?", 
-                             bn: "আপনার কাজের [প্রাসঙ্গিক দিক] সম্পর্কে আপনি সবচেয়ে বেশি কি উপভোগ করেন?"},
-                            {en: "Could you share how you'd approach [specific challenge]?", 
-                             bn: "আপনি কি শেয়ার করতে পারেন কিভাবে আপনি [নির্দিষ্ট চ্যালেঞ্জ] এর কাছে যাবেন?"}
-                        ],
-                        friendly: [
-                            {en: "Tell me about your experience with [specific skill].", 
-                             bn: "আমাকে বলুন [নির্দিষ্ট দক্ষতা] সম্পর্কে আপনার অভিজ্ঞতা সম্পর্কে।"},
-                            {en: "What gets you excited about this kind of work?", 
-                             bn: "এই ধরনের কাজ সম্পর্কে আপনাকে কি উত্তেজিত করে?"},
-                            {en: "How would you tackle [specific situation]?", 
-                             bn: "আপনি কিভাবে [নির্দিষ্ট পরিস্থিতি] মোকাবেলা করবেন?"}
-                        ]
-                    },
-                    negotiation: {
-                        formal: [
-                            {en: "Our position is that [specific terms] would be most favorable.", 
-                             bn: "আমাদের অবস্থান হল যে [নির্দিষ্ট শর্তাবলী] সবচেয়ে অনুকূল হবে।"},
-                            {en: "Perhaps we could find middle ground on [specific point].", 
-                             bn: "সম্ভবত আমরা [নির্দিষ্ট পয়েন্ট] এ একটি মধ্যবর্তী স্থান খুঁজে পেতে পারি।"},
-                            {en: "Would you consider [specific compromise]?", 
-                             bn: "আপনি কি [নির্দিষ্ট আপোস] বিবেচনা করবেন?"}
-                        ],
-                        polite: [
-                            {en: "We're thinking [specific terms] would work best.", 
-                             bn: "আমরা ভাবছি [নির্দিষ্ট শর্তাবলী] সবচেয়ে ভালো কাজ করবে।"},
-                            {en: "Maybe we could agree on [specific point].", 
-                             bn: "সম্ভবত আমরা [নির্দিষ্ট পয়েন্ট] এ একমত হতে পারি।"},
-                            {en: "How would you feel about [specific compromise]?", 
-                             bn: "আপনি [নির্দিষ্ট আপোস] সম্পর্কে কেমন অনুভব করবেন?"}
-                        ],
-                        friendly: [
-                            {en: "We'd really like [specific terms] if possible.", 
-                             bn: "সম্ভব হলে আমরা সত্যিই [নির্দিষ্ট শর্তাবলী] চাই।"},
-                            {en: "What if we tried [specific solution]?", 
-                             bn: "যদি আমরা [নির্দিষ্ট সমাধান] চেষ্টা করি?"},
-                            {en: "Could we do [specific compromise]?", 
-                             bn: "আমরা কি [নির্দিষ্ট আপোস] করতে পারি?"}
-                        ]
-                    },
-                    feedback: {
-                        formal: [
-                            {en: "I'd like to offer some constructive feedback regarding [specific area].", 
-                             bn: "আমি [নির্দিষ্ট ক্ষেত্র] সম্পর্কে কিছু গঠনমূলক প্রতিক্রিয়া দিতে চাই।"},
-                            {en: "One opportunity for improvement might be [specific suggestion].", 
-                             bn: "উন্নতির একটি সুযোগ হতে পারে [নির্দিষ্ট পরামর্শ]।"},
-                            {en: "Your work on [specific aspect] was particularly strong.", 
-                             bn: "[নির্দিষ্ট দিক] এ আপনার কাজ বিশেষভাবে শক্তিশালী ছিল।"}
-                        ],
-                        polite: [
-                            {en: "Here's some feedback about [specific area].", 
-                             bn: "এখানে [নির্দিষ্ট ক্ষেত্র] সম্পর্কে কিছু প্রতিক্রিয়া আছে।"},
-                            {en: "You might consider trying [specific suggestion].", 
-                             bn: "আপনি [নির্দিষ্ট পরামর্শ] চেষ্টা করে দেখতে পারেন।"},
-                            {en: "I really liked how you handled [specific aspect].", 
-                             bn: "আমি সত্যিই পছন্দ করেছি আপনি কিভাবে [নির্দিষ্ট দিক] হ্যান্ডেল করেছেন।"}
-                        ],
-                        friendly: [
-                            {en: "Let me share some thoughts about [specific area].", 
-                             bn: "আমাকে [নির্দিষ্ট ক্ষেত্র] সম্পর্কে কিছু চিন্তা শেয়ার করতে দিন।"},
-                            {en: "You could try [specific suggestion] next time.", 
-                             bn: "আপনি পরের বার [নির্দিষ্ট পরামর্শ] চেষ্টা করতে পারেন।"},
-                            {en: "Great job on [specific aspect]!", 
-                             bn: "[নির্দিষ্ট দিক] এ দুর্দান্ত কাজ!"}
-                        ]
-                    },
-                    networking: {
-                        formal: [
-                            {en: "I've long admired your work in [specific field].", 
-                             bn: "আমি দীর্ঘদিন ধরে [নির্দিষ্ট ক্ষেত্র] এ আপনার কাজের প্রশংসা করেছি।"},
-                            {en: "Would you be available for a brief conversation about [topic]?", 
-                             bn: "আপনি কি [বিষয়] সম্পর্কে একটি সংক্ষিপ্ত কথোপকথনের জন্য উপলব্ধ হবেন?"},
-                            {en: "Your perspective on [industry trend] would be most valuable.", 
-                             bn: "[শিল্প প্রবণতা] সম্পর্কে আপনার দৃষ্টিভঙ্গি সবচেয়ে মূল্যবান হবে।"}
-                        ],
-                        polite: [
-                            {en: "I really appreciate your work with [specific area].", 
-                             bn: "আমি সত্যিই [নির্দিষ্ট ক্ষেত্র] নিয়ে আপনার কাজের প্রশংসা করি।"},
-                            {en: "Could we connect to discuss [topic]?", 
-                             bn: "আমরা কি [বিষয়] নিয়ে আলোচনা করার জন্য সংযোগ করতে পারি?"},
-                            {en: "I'd love to hear your thoughts on [industry topic].", 
-                             bn: "আমি [শিল্প বিষয়] সম্পর্কে আপনার চিন্তাভাবনা শুনতে চাই।"}
-                        ],
-                        friendly: [
-                            {en: "Big fan of what you're doing with [specific thing]!", 
-                             bn: "আপনি [নির্দিষ্ট জিনিস] নিয়ে যা করছেন তার বড় ভক্ত!"},
-                            {en: "Let's grab coffee and chat about [topic] sometime!", 
-                             bn: "চলুন একদিন কফি খেয়ে [বিষয়] নিয়ে আলাপ করি!"},
-                            {en: "What do you think about [industry trend]?", 
-                             bn: "আপনি [শিল্প প্রবণতা] সম্পর্কে কি মনে করেন?"}
-                        ]
-                    }
-                };
+            // Social phrases database
+            const socialPhrases = {
+                greeting: {
+                    formal: [
+                        {en: "Good morning/afternoon/evening. How are you today?", 
+                         bn: "শুভ সকাল/দুপুর/সন্ধ্যা। আপনি আজ কেমন আছেন?"},
+                        {en: "Hello, it's a pleasure to meet you.", 
+                         bn: "হ্যালো, আপনার সাথে দেখা করে আনন্দ হল।"}
+                    ],
+                    neutral: [
+                        {en: "Hello, how are you?", 
+                         bn: "হ্যালো, আপনি কেমন আছেন?"},
+                        {en: "Hi there, nice to see you.", 
+                         bn: "হাই, আপনাকে দেখে ভালো লাগলো।"}
+                    ],
+                    informal: [
+                        {en: "Hey! What's up?", 
+                         bn: "হেই! কি অবস্থা?"},
+                        {en: "Yo! How's it going?", 
+                         bn: "ইয়ো! কি চলছে?"}
+                    ]
+                },
+                introduction: {
+                    formal: [
+                        {en: "Allow me to introduce myself. My name is [Your Name].", 
+                         bn: "আমাকে নিজের পরিচয় দিতে দিন। আমার নাম [আপনার নাম]।"},
+                        {en: "I don't believe we've met. I'm [Your Name].", 
+                         bn: "আমার মনে হয় না আমরা আগে দেখা করেছি। আমি [আপনার নাম]।"}
+                    ],
+                    neutral: [
+                        {en: "Hi, I'm [Your Name]. Nice to meet you.", 
+                         bn: "হাই, আমি [আপনার নাম]। আপনার সাথে দেখা করে ভালো লাগলো।"},
+                        {en: "Hello, my name is [Your Name].", 
+                         bn: "হ্যালো, আমার নাম [আপনার নাম]।"}
+                    ],
+                    informal: [
+                        {en: "Hey, I'm [Your Name].", 
+                         bn: "হেই, আমি [আপনার নাম]।"},
+                        {en: "What's up? I'm [Your Name].", 
+                         bn: "কি অবস্থা? আমি [আপনার নাম]।"}
+                    ]
+                },
+                // Add more social scenarios here...
+                smalltalk: {
+                    formal: [
+                        {en: "How have you been keeping lately?", 
+                         bn: "আপনি সম্প্রতি কেমন আছেন?"},
+                        {en: "That's a lovely [item] you have there.", 
+                         bn: "আপনার ওখানে যে [আইটেম]টি আছে সেটি খুব সুন্দর।"}
+                    ],
+                    neutral: [
+                        {en: "How's your day going so far?", 
+                         bn: "আপনার দিনটি এখন পর্যন্ত কেমন যাচ্ছে?"},
+                        {en: "Beautiful weather we're having, isn't it?", 
+                         bn: "আজকের আবহাওয়া খুব সুন্দর, তাই না?"}
+                    ],
+                    informal: [
+                        {en: "What's new with you?", 
+                         bn: "আপনার সাথে কি নতুন কিছু?"},
+                        {en: "Seen any good movies lately?", 
+                         bn: "সম্প্রতি কোন ভালো সিনেমা দেখেছেন?"}
+                    ]
+                }
+            };
+
+            // DOM elements
+            const generateProfessionalBtn = document.getElementById('generate-professional');
+            const generateSocialBtn = document.getElementById('generate-social');
+            const generateCustomBtn = document.getElementById('generate-custom');
+            const resultContent = document.getElementById('result-content');
+            const practiceSpeechBtn = document.getElementById('practice-speech');
+            const copyTextBtn = document.getElementById('copy-text');
+            const showTranslationBtn = document.getElementById('show-translation');
+            const translationContainer = document.getElementById('translation-container');
+            const bengaliTranslation = document.getElementById('bengali-translation');
+            const startRecordingBtn = document.getElementById('start-recording');
+            const stopRecordingBtn = document.getElementById('stop-recording');
+            const recordingStatus = document.getElementById('recording-status');
+            const recordedAudio = document.getElementById('recorded-audio');
+            const recordingUI = document.getElementById('recording-ui');
+
+            // Generate professional phrases
+            generateProfessionalBtn.addEventListener('click', function() {
+                const scenario = document.getElementById('professional-scenario').value;
+                const tone = document.getElementById('professional-tone').value;
                 
-                // DOM elements
-                const generateProfessionalBtn = document.getElementById('generate-professional');
-                const resultContent = document.getElementById('result-content');
-                const practiceSpeechBtn = document.getElementById('practice-speech');
-                const copyTextBtn = document.getElementById('copy-text');
-                const showTranslationBtn = document.getElementById('show-translation');
-                const translationContainer = document.getElementById('translation-container');
-                const bengaliTranslation = document.getElementById('bengali-translation');
-                
-                // Generate professional phrases - CORRECTED VERSION
-                generateProfessionalBtn.addEventListener('click', function() {
-                    const scenario = document.getElementById('professional-scenario').value;
-                    const tone = document.getElementById('professional-tone').value;
-                    
-                    if (!professionalPhrases[scenario] || !professionalPhrases[scenario][tone]) {
-                        const errorMsg = document.querySelector('.lang-en').style.display === 'none' ? 
-                            "দয়া করে পরিস্থিতি এবং সুরের জন্য বৈধ বিকল্পগুলি নির্বাচন করুন।" : 
-                            "Please select valid options for scenario and tone.";
-                        displayResult(errorMsg, "");
-                        return;
-                    }
-                    
-                    const phrases = professionalPhrases[scenario][tone];
-                    const randomPhrases = [];
-                    const randomTranslations = [];
-                    
-                    // Get 3 random phrases or all if less than 3
-                    const count = Math.min(3, phrases.length);
-                    const usedIndices = new Set();
-                    
-                    while (randomPhrases.length < count && usedIndices.size < phrases.length) {
-                        const randomIndex = Math.floor(Math.random() * phrases.length);
-                        if (!usedIndices.has(randomIndex)) {
-                            usedIndices.add(randomIndex);
-                            randomPhrases.push(phrases[randomIndex].en);
-                            randomTranslations.push(phrases[randomIndex].bn);
-                        }
-                    }
-                    
-                    displayResult(randomPhrases.join('<br><br>'), randomTranslations.join('<br><br>'));
-                });
-                
-                // Display result with translation
-                function displayResult(content, translation) {
-                    // Clear previous content
-                    resultContent.innerHTML = '';
-                    
-                    // Create new paragraph for content
-                    const contentPara = document.createElement('p');
-                    contentPara.innerHTML = content;
-                    resultContent.appendChild(contentPara);
-                    
-                    // Update translation
-                    bengaliTranslation.innerHTML = translation;
-                    
-                    // Show action buttons
-                    practiceSpeechBtn.style.display = 'inline-block';
-                    copyTextBtn.style.display = 'inline-block';
-                    showTranslationBtn.style.display = 'inline-block';
-                    translationContainer.style.display = 'none';
-                    
-                    // Hide recording UI initially
-                    document.getElementById('recording-ui').style.display = 'none';
+                if (!professionalPhrases[scenario] || !professionalPhrases[scenario][tone]) {
+                    const errorMsg = document.querySelector('.lang-en').style.display === 'none' ? 
+                        "দয়া করে পরিস্থিতি এবং সুরের জন্য বৈধ বিকল্পগুলি নির্বাচন করুন।" : 
+                        "Please select valid options for scenario and tone.";
+                    displayResult(errorMsg, "");
+                    return;
                 }
                 
-                // [Rest of the code remains the same]
-                </script>
-        </body>
+                const phrases = professionalPhrases[scenario][tone];
+                const randomPhrases = [];
+                const randomTranslations = [];
+                
+                // Get 3 random phrases or all if less than 3
+                const count = Math.min(3, phrases.length);
+                const usedIndices = new Set();
+                
+                while (randomPhrases.length < count && usedIndices.size < phrases.length) {
+                    const randomIndex = Math.floor(Math.random() * phrases.length);
+                    if (!usedIndices.has(randomIndex)) {
+                        usedIndices.add(randomIndex);
+                        randomPhrases.push(phrases[randomIndex].en);
+                        randomTranslations.push(phrases[randomIndex].bn);
+                    }
+                }
+                
+                displayResult(randomPhrases.join('<br><br>'), randomTranslations.join('<br><br>'));
+            });
+
+            // Generate social phrases
+            generateSocialBtn.addEventListener('click', function() {
+                const scenario = document.getElementById('social-scenario').value;
+                const context = document.getElementById('social-context').value;
+                
+                if (!socialPhrases[scenario] || !socialPhrases[scenario][context]) {
+                    const errorMsg = document.querySelector('.lang-en').style.display === 'none' ? 
+                        "দয়া করে পরিস্থিতি এবং প্রসঙ্গের জন্য বৈধ বিকল্পগুলি নির্বাচন করুন।" : 
+                        "Please select valid options for scenario and context.";
+                    displayResult(errorMsg, "");
+                    return;
+                }
+                
+                const phrases = socialPhrases[scenario][context];
+                const randomPhrases = [];
+                const randomTranslations = [];
+                
+                // Get 3 random phrases or all if less than 3
+                const count = Math.min(3, phrases.length);
+                const usedIndices = new Set();
+                
+                while (randomPhrases.length < count && usedIndices.size < phrases.length) {
+                    const randomIndex = Math.floor(Math.random() * phrases.length);
+                    if (!usedIndices.has(randomIndex)) {
+                        usedIndices.add(randomIndex);
+                        randomPhrases.push(phrases[randomIndex].en);
+                        randomTranslations.push(phrases[randomIndex].bn);
+                    }
+                }
+                
+                displayResult(randomPhrases.join('<br><br>'), randomTranslations.join('<br><br>'));
+            });
+
+            // Generate custom response
+            generateCustomBtn.addEventListener('click', function() {
+                const isBengali = document.querySelector('.lang-bn').style.display === '';
+                const scenario = isBengali ? 
+                    document.getElementById('custom-scenario-bn').value : 
+                    document.getElementById('custom-scenario').value;
+                const tone = document.getElementById('custom-tone').value;
+                
+                if (!scenario.trim()) {
+                    const errorMsg = isBengali ? 
+                        "দয়া করে আপনার পরিস্থিতি বর্ণনা করুন" : 
+                        "Please describe your situation";
+                    displayResult(errorMsg, "");
+                    return;
+                }
+                
+                // In a real app, this would call an API or more sophisticated logic
+                // For demo purposes, we'll generate a simple response
+                let response, translation;
+                
+                if (isBengali) {
+                    // If input was in Bengali, generate English response
+                    response = generateEnglishResponse(scenario, tone);
+                    translation = scenario; // Original Bengali input as translation
+                } else {
+                    // If input was in English, generate Bengali translation
+                    response = generateEnglishResponse(scenario, tone);
+                    translation = generateBengaliTranslation(response);
+                }
+                
+                displayResult(response, translation);
+            });
+
+            // Helper function to generate English response (simplified for demo)
+            function generateEnglishResponse(scenario, tone) {
+                const toneMap = {
+                    polite: "Here's a polite way to handle this situation:",
+                    friendly: "You could say this in a friendly way:",
+                    firm: "A firm approach would be:",
+                    formal: "In formal terms:",
+                    diplomatic: "A diplomatic response would be:"
+                };
+                
+                const responses = {
+                    polite: `I understand your situation. Perhaps you could say: "${scenario}" in a more polite manner.`,
+                    friendly: `For a friendly approach, try: "Hey, I was wondering about ${scenario.split(' ').slice(0,3).join(' ')}..."`,
+                    firm: `To be firm but polite: "I need to be clear that ${scenario.split(' ').slice(0,3).join(' ')}..."`,
+                    formal: `A formal response would be: "Dear Sir/Madam, regarding ${scenario.split(' ').slice(0,2).join(' ')}..."`,
+                    diplomatic: `A diplomatic way to phrase this: "I appreciate your perspective on ${scenario.split(' ').slice(0,2).join(' ')}, and..."`
+                };
+                
+                return `${toneMap[tone]}\n\n${responses[tone]}`;
+            }
+
+            // Helper function to generate Bengali translation (simplified for demo)
+            function generateBengaliTranslation(text) {
+                // In a real app, this would call a translation API
+                // For demo, we'll just return a placeholder
+                return "This is a placeholder Bengali translation. In a real app, this would be properly translated from the English text above.";
+            }
+
+            // Display result with translation
+            function displayResult(content, translation) {
+                // Clear previous content
+                resultContent.innerHTML = '';
+                
+                // Create new paragraph for content
+                const contentPara = document.createElement('p');
+                contentPara.innerHTML = content;
+                resultContent.appendChild(contentPara);
+                
+                // Update translation
+                bengaliTranslation.innerHTML = translation;
+                
+                // Show action buttons
+                practiceSpeechBtn.style.display = 'inline-block';
+                copyTextBtn.style.display = 'inline-block';
+                showTranslationBtn.style.display = 'inline-block';
+                translationContainer.style.display = 'none';
+                
+                // Hide recording UI initially
+                recordingUI.style.display = 'none';
+            }
+
+            // Copy text to clipboard
+            copyTextBtn.addEventListener('click', function() {
+                const textToCopy = resultContent.textContent;
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const msg = document.querySelector('.lang-en').style.display === 'none' ? 
+                        "কপি করা হয়েছে!" : "Copied!";
+                    alert(msg);
+                });
+            });
+
+            // Show/hide translation
+            showTranslationBtn.addEventListener('click', function() {
+                if (translationContainer.style.display === 'none') {
+                    translationContainer.style.display = 'block';
+                    showTranslationBtn.innerHTML = `<i class="fas fa-language"></i> <span class="lang-en">Hide Translation</span><span class="lang-bn" style="display: none;">অনুবাদ লুকান</span>`;
+                } else {
+                    translationContainer.style.display = 'none';
+                    showTranslationBtn.innerHTML = `<i class="fas fa-language"></i> <span class="lang-en">Show Translation</span><span class="lang-bn" style="display: none;">অনুবাদ দেখুন</span>`;
+                }
+            });
+
+            // Practice speaking - show recording UI
+            practiceSpeechBtn.addEventListener('click', function() {
+                recordingUI.style.display = 'block';
+            });
+
+            // Recording functionality
+            let mediaRecorder;
+            let audioChunks = [];
+
+            startRecordingBtn.addEventListener('click', async function() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+                    
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        recordedAudio.src = audioUrl;
+                        recordedAudio.style.display = 'block';
+                        audioChunks = [];
+                    };
+                    
+                    mediaRecorder.start();
+                    startRecordingBtn.style.display = 'none';
+                    stopRecordingBtn.style.display = 'inline-block';
+                    
+                    const statusMsg = document.querySelector('.lang-en').style.display === 'none' ? 
+                        "রেকর্ডিং চলছে..." : "Recording in progress...";
+                    recordingStatus.textContent = statusMsg;
+                    recordingStatus.classList.add('pulse');
+                    
+                } catch (error) {
+                    console.error("Error accessing microphone:", error);
+                    const errorMsg = document.querySelector('.lang-en').style.display === 'none' ? 
+                        "মাইক্রোফোন অ্যাক্সেস করার সময় ত্রুটি" : "Error accessing microphone";
+                    recordingStatus.textContent = errorMsg;
+                }
+            });
+
+            stopRecordingBtn.addEventListener('click', function() {
+                if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                    mediaRecorder.stop();
+                    startRecordingBtn.style.display = 'inline-block';
+                    stopRecordingBtn.style.display = 'none';
+                    
+                    const statusMsg = document.querySelector('.lang-en').style.display === 'none' ? 
+                        "রেকর্ডিং সম্পূর্ণ" : "Recording complete";
+                    recordingStatus.textContent = statusMsg;
+                    recordingStatus.classList.remove('pulse');
+                    
+                    // Stop all tracks
+                    mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                }
+            });
+        });
+    </script>
+</body>
 </html>
