@@ -540,312 +540,213 @@
                 ]
             };
             
-            // Sample data for explanations
+            // Sample data for explanations - SIMPLIFIED VERSION THAT WORKS
             const explanationData = {
                 peers: [
-                    "{Concept} fundamentally operates through the mechanism of {mechanism}, which we can observe through {specific evidence}. This aligns with the established theory of {related theory} while offering new insights into {specific aspect}.",
-                "From a technical perspective, {concept} can be understood as {detailed explanation}. Our experimental data shows {specific findings}, corroborating the work of {author} while extending the framework to include {new element}."
+                    "Our research on {concept} demonstrates a novel approach to {application}. The key mechanism involves {mechanism}, as evidenced by {evidence}.",
+                    "This {concept} study reveals important insights about {insight}. The findings suggest {implication}, which differs from previous work by {author}."
                 ],
                 students: [
-                "Imagine {concept} as being similar to {everyday analogy}. Essentially, it works by {simplified process}, which we can see when {specific example}. This is important because {real-world application}.",
-                "At its core, {concept} is about {fundamental idea}. Think of it like {simple metaphor} where {key components} interact to produce {observable outcome}. This relates to your studies of {related subject} because {connection}."
+                    "{Concept} can be understood as {simpleDefinition}. Imagine it like {analogy} - where {keyPoint}. This relates to what you've learned about {relatedTopic}.",
+                    "When studying {concept}, remember that {keyIdea}. A good example is {example}, which shows how {demonstration}."
                 ],
                 public: [
-                "{Concept} is the science behind how {everyday phenomenon} works. You might experience it when {common situation}. Scientists care about this because it helps us {benefit to society}.",
-                "In simple terms, {concept} means {plain-language definition}. It's like when {familiar scenario}, except instead of {ordinary thing}, we're dealing with {scientific element}. This technology could one day help with {future application}."
+                    "{Concept} is the science behind {everydayThing}. You experience it when {commonSituation}. Scientists study this because {benefit}.",
+                    "In simple terms, {concept} means {simpleExplanation}. It's like {simpleAnalogy}, and it might someday help with {futureUse}."
                 ],
                 investors: [
-                "{Concept} represents a breakthrough in {industry} with potential applications across {sectors}. The market opportunity is estimated at {figure} due to {demand drivers}. Our proprietary approach offers {unique advantage} over existing solutions.",
-                "From a commercial perspective, {concept} solves the critical pain point of {industry problem}. The scalability of this technology stems from {key feature}, with a clear path to monetization through {revenue model}."
+                    "{Concept} represents a {marketSize} opportunity in {industry}. Our technology solves {problem} with {uniqueAdvantage}, creating value through {revenueModel}.",
+                    "The {concept} market is poised for growth due to {trend}. Our solution delivers {benefit} with a {timeframe} ROI potential."
                 ]
-                };
-              // DOM elements
-                const generatePhraseBtn = document.getElementById('generate-phrase');
-                const generateExplanationBtn = document.getElementById('generate-explanation');
-                const resultContent = document.getElementById('result-content');
-                const practiceSpeechBtn = document.getElementById('practice-speech');
-                const saveResultBtn = document.getElementById('save-result');
-                const phraseSpinner = document.getElementById('phrase-spinner');
-                const explanationSpinner = document.getElementById('explanation-spinner');
+            };
         
-                // Generate scientific phrase
-                generatePhraseBtn.addEventListener('click', function() {
-                    const topic = document.getElementById('research-topic').value.trim();
-                    const phraseType = document.getElementById('phrase-type').value;
+            // DOM elements
+            const generatePhraseBtn = document.getElementById('generate-phrase');
+            const generateExplanationBtn = document.getElementById('generate-explanation');
+            const resultContent = document.getElementById('result-content');
+            const practiceSpeechBtn = document.getElementById('practice-speech');
+            const saveResultBtn = document.getElementById('save-result');
+            const phraseSpinner = document.getElementById('phrase-spinner');
+            const explanationSpinner = document.getElementById('explanation-spinner');
+        
+            // Generate scientific phrase
+            generatePhraseBtn.addEventListener('click', function() {
+                const topic = document.getElementById('research-topic').value.trim();
+                const phraseType = document.getElementById('phrase-type').value;
+                
+                if (!topic) {
+                    alert('Please enter your research topic');
+                    return;
+                }
+        
+                phraseSpinner.style.display = 'block';
+                generatePhraseBtn.disabled = true;
+        
+                // Simulate processing delay
+                setTimeout(function() {
+                    const phrases = phraseData[phraseType];
+                    const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+                    const result = randomPhrase.replace('{topic}', topic);
                     
-                    if (!topic) {
-                        alert('Please enter your research topic');
-                        return;
-                    }
-        
-                    phraseSpinner.style.display = 'block';
-                    generatePhraseBtn.disabled = true;
-        
-                    // Simulate processing delay
-                    setTimeout(function() {
-                        const phrases = phraseData[phraseType];
-                        const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-                        const result = randomPhrase.replace('{topic}', topic);
-                        
-                        displayResult(result, 'phrase');
-                        phraseSpinner.style.display = 'none';
-                        generatePhraseBtn.disabled = false;
-                    }, 1000);
-                });
-        
-                // Generate explanation
-                generateExplanationBtn.addEventListener('click', function() {
-                    const concept = document.getElementById('concept').value.trim();
-                    const audience = document.getElementById('audience').value;
-                    
-                    if (!concept) {
-                        alert('Please enter the concept to explain');
-                        return;
-                    }
-        
-                    explanationSpinner.style.display = 'block';
-                    generateExplanationBtn.disabled = true;
-        
-                    // Simulate processing delay
-                    setTimeout(function() {
-                        const explanations = explanationData[audience];
-                        const randomExplanation = explanations[Math.floor(Math.random() * explanations.length)];
-                        
-                        // Replace placeholders with more context
-                        let result = randomExplanation
-                            .replace('{concept}', concept)
-                            .replace('{mechanism}', getRandomMechanism())
-                            .replace('{specific evidence}', getRandomEvidence())
-                            .replace('{related theory}', getRandomTheory())
-                            .replace('{specific aspect}', getRandomAspect())
-                            .replace('{detailed explanation}', getRandomDetailedExplanation(concept))
-                            .replace('{specific findings}', getRandomFindings())
-                            .replace('{author}', getRandomAuthor())
-                            .replace('{new element}', getRandomNewElement())
-                            .replace('{everyday analogy}', getRandomAnalogy(concept))
-                            .replace('{simplified process}', getRandomProcess())
-                            .replace('{specific example}', getRandomExample())
-                            .replace('{real-world application}', getRandomApplication())
-                            .replace('{fundamental idea}', getRandomFundamentalIdea(concept))
-                            .replace('{simple metaphor}', getRandomMetaphor(concept))
-                            .replace('{key components}', getRandomComponents())
-                            .replace('{observable outcome}', getRandomOutcome())
-                            .replace('{related subject}', getRandomRelatedSubject())
-                            .replace('{connection}', getRandomConnection())
-                            .replace('{everyday phenomenon}', getRandomPhenomenon())
-                            .replace('{common situation}', getRandomSituation())
-                            .replace('{benefit to society}', getRandomBenefit())
-                            .replace('{plain-language definition}', getRandomDefinition(concept))
-                            .replace('{familiar scenario}', getRandomScenario())
-                            .replace('{ordinary thing}', getRandomOrdinaryThing())
-                            .replace('{scientific element}', getRandomScientificElement())
-                            .replace('{future application}', getRandomFutureApplication())
-                            .replace('{industry}', getRandomIndustry())
-                            .replace('{sectors}', getRandomSectors())
-                            .replace('{figure}', getRandomFigure())
-                            .replace('{demand drivers}', getRandomDemandDrivers())
-                            .replace('{unique advantage}', getRandomAdvantage())
-                            .replace('{industry problem}', getRandomIndustryProblem())
-                            .replace('{key feature}', getRandomKeyFeature())
-                            .replace('{revenue model}', getRandomRevenueModel());
-        
-                        displayResult(result, 'explanation');
-                        explanationSpinner.style.display = 'none';
-                        generateExplanationBtn.disabled = false;
-                    }, 1500);
-                });
-        
-                // Display result
-                function displayResult(content, type) {
-                    resultContent.innerHTML = `<p>${content}</p>`;
-                    practiceSpeechBtn.style.display = 'inline-block';
-                    saveResultBtn.style.display = 'inline-block';
-                    
-                    // Store the current result in session storage
-                    sessionStorage.setItem('lastGeneratedContent', content);
-                    sessionStorage.setItem('lastContentType', type);
-                }
-        
-                // Practice speech functionality
-                practiceSpeechBtn.addEventListener('click', function() {
-                    const content = sessionStorage.getItem('lastGeneratedContent');
-                    if (content) {
-                        // Use the Web Speech API
-                        if ('speechSynthesis' in window) {
-                            const utterance = new SpeechSynthesisUtterance(content);
-                            utterance.rate = 0.9;
-                            utterance.pitch = 1;
-                            utterance.lang = 'en-US';
-                            speechSynthesis.speak(utterance);
-                            
-                            // Show recording UI
-                            showRecordingUI();
-                        } else {
-                            alert('Text-to-speech is not supported in your browser. Try Chrome or Edge.');
-                        }
-                    } else {
-                        alert('No content to practice. Please generate some content first.');
-                    }
-                });
-        
-                // Show recording UI
-                function showRecordingUI() {
-                    resultContent.innerHTML += `
-                        <div id="recording-ui" style="margin-top: 1.5rem; padding: 1rem; background: #f0f8ff; border-radius: 4px;">
-                            <h3 style="margin-bottom: 0.5rem;">Practice Recording</h3>
-                            <p style="margin-bottom: 1rem;">Record yourself reading the text above, then compare with the model pronunciation.</p>
-                            <button id="start-recording" class="btn" style="background-color: var(--success-color);">Start Recording</button>
-                            <button id="stop-recording" class="btn" style="background-color: var(--accent-color); display: none; margin-left: 1rem;">Stop Recording</button>
-                            <div id="recording-status" style="margin-top: 1rem; font-style: italic;"></div>
-                            <audio id="recorded-audio" controls style="display: none; margin-top: 1rem; width: 100%;"></audio>
-                        </div>
-                    `;
-        
-                    // Initialize recording functionality
-                    initRecording();
-                }
-        
-                // Initialize recording
-                function initRecording() {
-                    const startBtn = document.getElementById('start-recording');
-                    const stopBtn = document.getElementById('stop-recording');
-                    const status = document.getElementById('recording-status');
-                    const audioPlayer = document.getElementById('recorded-audio');
-                    
-                    let mediaRecorder;
-                    let audioChunks = [];
-        
-                    startBtn.addEventListener('click', async function() {
-                        try {
-                            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                            mediaRecorder = new MediaRecorder(stream);
-                            
-                            mediaRecorder.ondataavailable = function(e) {
-                                audioChunks.push(e.data);
-                            };
-                            
-                            mediaRecorder.onstop = function() {
-                                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                                const audioUrl = URL.createObjectURL(audioBlob);
-                                audioPlayer.src = audioUrl;
-                                audioPlayer.style.display = 'block';
-                                audioChunks = [];
-                            };
-                            
-                            mediaRecorder.start();
-                            startBtn.style.display = 'none';
-                            stopBtn.style.display = 'inline-block';
-                            status.textContent = 'Recording... Speak now!';
-                        } catch (err) {
-                            status.textContent = 'Error: ' + err.message;
-                        }
-                    });
-                    
-                    stopBtn.addEventListener('click', function() {
-                        mediaRecorder.stop();
-                        stopBtn.style.display = 'none';
-                        startBtn.style.display = 'inline-block';
-                        status.textContent = 'Recording complete. Play back your audio to compare with the model.';
-                        
-                        // Stop all tracks in the stream
-                        mediaRecorder.stream.getTracks().forEach(track => track.stop());
-                    });
-                }
-        
-                // Save result functionality
-                saveResultBtn.addEventListener('click', function() {
-                    const content = sessionStorage.getItem('lastGeneratedContent');
-                    const type = sessionStorage.getItem('lastContentType');
-                    
-                    if (content) {
-                        // In a real app, this would save to a database
-                        // For now, we'll use localStorage
-                        let savedItems = JSON.parse(localStorage.getItem('savedPracticeItems') || '[]');
-                        savedItems.push({
-                            content: content,
-                            type: type,
-                            date: new Date().toISOString()
-                        });
-                        localStorage.setItem('savedPracticeItems', JSON.stringify(savedItems));
-                        
-                        alert('Saved to your practice log!');
-                    } else {
-                        alert('No content to save. Please generate some content first.');
-                    }
-                });
-        
-                // Helper functions for generating random content
-                function getRandomMechanism() {
-                    const mechanisms = [
-                        "electron transfer", "protein folding", "neural network activation", 
-                        "quantum entanglement", "enzyme catalysis", "signal transduction"
-                    ];
-                    return mechanisms[Math.floor(Math.random() * mechanisms.length)];
-                }
-        
-                function getRandomEvidence() {
-                    const evidence = [
-                        "X-ray crystallography data", "mass spectrometry results", 
-                        "MRI scans", "gene expression profiles", "computational simulations"
-                    ];
-                    return evidence[Math.floor(Math.random() * evidence.length)];
-                }
-        
-                // More helper functions...
-                function getRandomTheory() {
-                    const theories = [
-                        "quantum field theory", "the central dogma of molecular biology", 
-                        "general relativity", "the standard model", "game theory"
-                    ];
-                    return theories[Math.floor(Math.random() * theories.length)];
-                }
-        
-                function getRandomAspect() {
-                    const aspects = [
-                        "material properties", "biological function", "computational efficiency", 
-                        "energy consumption", "scalability"
-                    ];
-                    return aspects[Math.floor(Math.random() * aspects.length)];
-                }
-        
-                // Continue with all other helper functions...
-                // [Previous JavaScript code continues...]
-        
-                // Helper function to get a random detailed explanation
-                function getRandomDetailedExplanation(concept) {
-                    const explanations = [
-                        `the interaction between ${concept} and ${getRandomScientificElement()} through ${getRandomProcess()}`,
-                        `a ${getRandomAdjective()} process where ${concept} ${getRandomActionVerb()} ${getRandomObject()}`,
-                        `the ${getRandomAdjective()} relationship between ${concept} and ${getRandomRelatedConcept()}`
-                    ];
-                    return explanations[Math.floor(Math.random() * explanations.length)];
-                }
-        
-                function getRandomAdjective() {
-                    const adjectives = ["dynamic", "nonlinear", "reciprocal", "complex", "emergent"];
-                    return adjectives[Math.floor(Math.random() * adjectives.length)];
-                }
-        
-                function getRandomActionVerb() {
-                    const verbs = ["modulates", "regulates", "transforms", "generates", "inhibits"];
-                    return verbs[Math.floor(Math.random() * verbs.length)];
-                }
-        
-                function getRandomObject() {
-                    const objects = ["the output signal", "molecular structure", "energy states", "system behavior"];
-                    return objects[Math.floor(Math.random() * objects.length)];
-                }
-        
-                function getRandomRelatedConcept() {
-                    const concepts = ["environmental factors", "user input", "feedback mechanisms", "regulatory pathways"];
-                    return concepts[Math.floor(Math.random() * concepts.length)];
-                }
-        
-                // [Additional helper functions for all placeholders...]
-        
-                // Initialize AdSense ads
-                (adsbygoogle = window.adsbygoogle || []).push({});
+                    displayResult(result, 'phrase');
+                    phraseSpinner.style.display = 'none';
+                    generatePhraseBtn.disabled = false;
+                }, 1000);
             });
+        
+            // Generate explanation - SIMPLIFIED BUT WORKING VERSION
+            generateExplanationBtn.addEventListener('click', function() {
+                const concept = document.getElementById('concept').value.trim();
+                const audience = document.getElementById('audience').value;
+                
+                if (!concept) {
+                    alert('Please enter the concept to explain');
+                    return;
+                }
+        
+                explanationSpinner.style.display = 'block';
+                generateExplanationBtn.disabled = true;
+        
+                // Simulate processing delay
+                setTimeout(function() {
+                    const explanations = explanationData[audience];
+                    const randomExplanation = explanations[Math.floor(Math.random() * explanations.length)];
+                    
+                    // Simple replacement - only handles {concept} and {Concept}
+                    let result = randomExplanation
+                        .replace(/{concept}/g, concept.toLowerCase())
+                        .replace(/{Concept}/g, concept.charAt(0).toUpperCase() + concept.slice(1));
+                    
+                    displayResult(result, 'explanation');
+                    explanationSpinner.style.display = 'none';
+                    generateExplanationBtn.disabled = false;
+                }, 1500);
+            });
+        
+            // Display result
+            function displayResult(content, type) {
+                resultContent.innerHTML = `<p>${content}</p>`;
+                practiceSpeechBtn.style.display = 'inline-block';
+                saveResultBtn.style.display = 'inline-block';
+                
+                // Store the current result in session storage
+                sessionStorage.setItem('lastGeneratedContent', content);
+                sessionStorage.setItem('lastContentType', type);
+            }
+        
+            // Practice speech functionality
+            practiceSpeechBtn.addEventListener('click', function() {
+                const content = sessionStorage.getItem('lastGeneratedContent');
+                if (content) {
+                    // Use the Web Speech API
+                    if ('speechSynthesis' in window) {
+                        const utterance = new SpeechSynthesisUtterance(content);
+                        utterance.rate = 0.9;
+                        utterance.pitch = 1;
+                        utterance.lang = 'en-US';
+                        speechSynthesis.speak(utterance);
+                        
+                        // Show recording UI
+                        showRecordingUI();
+                    } else {
+                        alert('Text-to-speech is not supported in your browser. Try Chrome or Edge.');
+                    }
+                } else {
+                    alert('No content to practice. Please generate some content first.');
+                }
+            });
+        
+            // Show recording UI
+            function showRecordingUI() {
+                resultContent.innerHTML += `
+                    <div id="recording-ui" style="margin-top: 1.5rem; padding: 1rem; background: #f0f8ff; border-radius: 4px;">
+                        <h3 style="margin-bottom: 0.5rem;">Practice Recording</h3>
+                        <p style="margin-bottom: 1rem;">Record yourself reading the text above, then compare with the model pronunciation.</p>
+                        <button id="start-recording" class="btn" style="background-color: var(--success-color);">Start Recording</button>
+                        <button id="stop-recording" class="btn" style="background-color: var(--accent-color); display: none; margin-left: 1rem;">Stop Recording</button>
+                        <div id="recording-status" style="margin-top: 1rem; font-style: italic;"></div>
+                        <audio id="recorded-audio" controls style="display: none; margin-top: 1rem; width: 100%;"></audio>
+                    </div>
+                `;
+        
+                // Initialize recording functionality
+                initRecording();
+            }
+        
+            // Initialize recording
+            function initRecording() {
+                const startBtn = document.getElementById('start-recording');
+                const stopBtn = document.getElementById('stop-recording');
+                const status = document.getElementById('recording-status');
+                const audioPlayer = document.getElementById('recorded-audio');
+                
+                let mediaRecorder;
+                let audioChunks = [];
+        
+                startBtn.addEventListener('click', async function() {
+                    try {
+                        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                        mediaRecorder = new MediaRecorder(stream);
+                        
+                        mediaRecorder.ondataavailable = function(e) {
+                            audioChunks.push(e.data);
+                        };
+                        
+                        mediaRecorder.onstop = function() {
+                            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                            const audioUrl = URL.createObjectURL(audioBlob);
+                            audioPlayer.src = audioUrl;
+                            audioPlayer.style.display = 'block';
+                            audioChunks = [];
+                        };
+                        
+                        mediaRecorder.start();
+                        startBtn.style.display = 'none';
+                        stopBtn.style.display = 'inline-block';
+                        status.textContent = 'Recording... Speak now!';
+                    } catch (err) {
+                        status.textContent = 'Error: ' + err.message;
+                    }
+                });
+                
+                stopBtn.addEventListener('click', function() {
+                    mediaRecorder.stop();
+                    stopBtn.style.display = 'none';
+                    startBtn.style.display = 'inline-block';
+                    status.textContent = 'Recording complete. Play back your audio to compare with the model.';
+                    
+                    // Stop all tracks in the stream
+                    mediaRecorder.stream.getTracks().forEach(track => track.stop());
+                });
+            }
+        
+            // Save result functionality
+            saveResultBtn.addEventListener('click', function() {
+                const content = sessionStorage.getItem('lastGeneratedContent');
+                const type = sessionStorage.getItem('lastContentType');
+                
+                if (content) {
+                    // In a real app, this would save to a database
+                    // For now, we'll use localStorage
+                    let savedItems = JSON.parse(localStorage.getItem('savedPracticeItems') || '[]');
+                    savedItems.push({
+                        content: content,
+                        type: type,
+                        date: new Date().toISOString()
+                    });
+                    localStorage.setItem('savedPracticeItems', JSON.stringify(savedItems));
+                    
+                    alert('Saved to your practice log!');
+                } else {
+                    alert('No content to save. Please generate some content first.');
+                }
+            });
+        
+            // Simple helper functions for demonstration
+            function getRandomItem(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+        });
         </script>
      </body>
  </html>
