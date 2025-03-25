@@ -774,170 +774,169 @@
             };
 
             // Social phrases database
-            const socialPhrases = {
-                greeting: {
-                    formal: [
-                        {en: "Good morning/afternoon/evening. How are you today?", 
-                         bn: "শুভ সকাল/দুপুর/সন্ধ্যা। আপনি আজ কেমন আছেন?"},
-                        {en: "Hello, it's a pleasure to meet you.", 
-                         bn: "হ্যালো, আপনার সাথে দেখা করে আনন্দ হল।"}
-                    ],
-                    neutral: [
-                        {en: "Hello, how are you?", 
-                         bn: "হ্যালো, আপনি কেমন আছেন?"},
-                        {en: "Hi there, nice to see you.", 
-                         bn: "হাই, আপনাকে দেখে ভালো লাগলো।"}
-                    ],
-                    informal: [
-                        {en: "Hey! What's up?", 
-                         bn: "হেই! কি অবস্থা?"},
-                        {en: "Yo! How's it going?", 
-                         bn: "ইয়ো! কি চলছে?"}
-                    ]
-                },
-                introduction: {
-                    formal: [
-                        {en: "Allow me to introduce myself. My name is [Your Name].", 
-                         bn: "আমাকে নিজের পরিচয় দিতে দিন। আমার নাম [আপনার নাম]।"},
-                        {en: "I don't believe we've met. I'm [Your Name].", 
-                         bn: "আমার মনে হয় না আমরা আগে দেখা করেছি। আমি [আপনার নাম]।"}
-                    ],
-                    neutral: [
-                        {en: "Hi, I'm [Your Name]. Nice to meet you.", 
-                         bn: "হাই, আমি [আপনার নাম]। আপনার সাথে দেখা করে ভালো লাগলো।"},
-                        {en: "Hello, my name is [Your Name].", 
-                         bn: "হ্যালো, আমার নাম [আপনার নাম]।"}
-                    ],
-                    informal: [
-                        {en: "Hey, I'm [Your Name].", 
-                         bn: "হেই, আমি [আপনার নাম]।"},
-                        {en: "What's up? I'm [Your Name].", 
-                         bn: "কি অবস্থা? আমি [আপনার নাম]।"}
-                    ]
-                },
-                // Add more social scenarios here...
-                smalltalk: {
-                    formal: [
-                        {en: "How have you been keeping lately?", 
-                         bn: "আপনি সম্প্রতি কেমন আছেন?"},
-                        {en: "That's a lovely [item] you have there.", 
-                         bn: "আপনার ওখানে যে [আইটেম]টি আছে সেটি খুব সুন্দর।"}
-                    ],
-                    neutral: [
-                        {en: "How's your day going so far?", 
-                         bn: "আপনার দিনটি এখন পর্যন্ত কেমন যাচ্ছে?"},
-                        {en: "Beautiful weather we're having, isn't it?", 
-                         bn: "আজকের আবহাওয়া খুব সুন্দর, তাই না?"}
-                    ],
-                    informal: [
-                        {en: "What's new with you?", 
-                         bn: "আপনার সাথে কি নতুন কিছু?"},
-                        {en: "Seen any good movies lately?", 
-                         bn: "সম্প্রতি কোন ভালো সিনেমা দেখেছেন?"}
-                    ]
-                },
-                // Add this to the existing socialPhrases object, right after the smalltalk section
-                compliment: {
-                    formal: [
-                        {en: "I must commend you on your excellent [specific thing].", 
-                         bn: "আপনার চমৎকার [নির্দিষ্ট জিনিস] এর জন্য আমি আপনাকে প্রশংসা করতে চাই।"},
-                        {en: "You have done an outstanding job with [specific task].", 
-                         bn: "আপনি [নির্দিষ্ট কাজ] এর সাথে একটি অসাধারণ কাজ করেছেন।"}
-                    ],
-                    neutral: [
-                        {en: "I really like your [specific thing].", 
-                         bn: "আমি সত্যিই আপনার [নির্দিষ্ট জিনিস] পছন্দ করি।"},
-                        {en: "You're really good at [specific skill].", 
-                         bn: "আপনি [নির্দিষ্ট দক্ষতা] তে সত্যিই ভালো।"}
-                    ],
-                    informal: [
-                        {en: "Wow, I love your [specific thing]!", 
-                         bn: "বাহ, আমি আপনার [নির্দিষ্ট জিনিস] খুব পছন্দ করি!"},
-                        {en: "You rock at [specific thing]!", 
-                         bn: "আপনি [নির্দিষ্ট জিনিস] এ অসাধারণ!"}
-                    ]
-                },
-                apology: {
-                    formal: [
-                        {en: "I sincerely apologize for [specific issue].", 
-                         bn: "আমি [নির্দিষ্ট সমস্যা] এর জন্য আন্তরিকভাবে ক্ষমাপ্রার্থী।"},
-                        {en: "Please accept my deepest apologies for [specific issue].", 
-                         bn: "দয়া করে [নির্দিষ্ট সমস্যা] এর জন্য আমার গভীর ক্ষমা গ্রহণ করুন।"}
-                    ],
-                    neutral: [
-                        {en: "I'm sorry about [specific issue].", 
-                         bn: "আমি [নির্দিষ্ট সমস্যা] সম্পর্কে দুঃখিত।"},
-                        {en: "My apologies for [specific issue].", 
-                         bn: "[নির্দিষ্ট সমস্যা] এর জন্য আমার ক্ষমা চাইছি।"}
-                    ],
-                    informal: [
-                        {en: "Sorry about [specific issue].", 
-                         bn: "[নির্দিষ্ট সমস্যা] সম্পর্কে দুঃখিত।"},
-                        {en: "My bad! I shouldn't have [specific action].", 
-                         bn: "আমার ভুল! আমার [নির্দিষ্ট কাজ] করা উচিত ছিল না।"}
-                    ]
-                },
-                invitation: {
-                    formal: [
-                        {en: "We would be honored by your presence at [event].", 
-                         bn: "[ইভেন্ট] এ আপনার উপস্থিতিতে আমরা সম্মানিত হব।"},
-                        {en: "You are cordially invited to attend [event].", 
-                         bn: "আপনাকে সাদরে [ইভেন্ট] এ অংশগ্রহণের জন্য আমন্ত্রণ জানানো হচ্ছে।"}
-                    ],
-                    neutral: [
-                        {en: "Would you like to come to [event]?", 
-                         bn: "আপনি কি [ইভেন্ট] এ আসতে চান?"},
-                        {en: "We're having [event] and would love you to join us.", 
-                         bn: "আমরা [ইভেন্ট] এর আয়োজন করছি এবং আপনাকে আমাদের সাথে যোগ দিতে চাই।"}
-                    ],
-                    informal: [
-                        {en: "Wanna come to [event]?", 
-                         bn: "[ইভেন্ট] এ আসতে চাও?"},
-                        {en: "Hey, we're doing [event] - you in?", 
-                         bn: "হেই, আমরা [ইভেন্ট] করছি - তুমি আসছো?"}
-                    ]
-                },
-                askingForHelp: {
-                    formal: [
-                        {en: "I was wondering if you might be able to assist me with [specific task].", 
-                         bn: "আমি ভাবছিলাম আপনি কি আমাকে [নির্দিষ্ট কাজ] এ সহায়তা করতে পারবেন কিনা।"},
-                        {en: "Would it be possible for you to help me with [specific task]?", 
-                         bn: "আপনি কি আমাকে [নির্দিষ্ট কাজ] এ সাহায্য করতে পারবেন?"}
-                    ],
-                    neutral: [
-                        {en: "Could you help me with [specific task]?", 
-                         bn: "আপনি কি আমাকে [নির্দিষ্ট কাজ] এ সাহায্য করতে পারবেন?"},
-                        {en: "I need some help with [specific task]. Are you available?", 
-                         bn: "আমার [নির্দিষ্ট কাজ] এ কিছু সাহায্য দরকার। আপনি কি উপলব্ধ?"}
-                    ],
-                    informal: [
-                        {en: "Can you help me with [specific task]?", 
-                         bn: "তুমি কি আমাকে [নির্দিষ্ট কাজ] এ সাহায্য করতে পারবে?"},
-                        {en: "Hey, I'm stuck with [specific task]. Got a minute?", 
-                         bn: "হেই, আমি [নির্দিষ্ট কাজ] এ আটকে গেছি। একটু সময় আছে?"}
-                    ]
-                },
-                givingDirections: {
-                    formal: [
-                        {en: "To get to [location], please proceed [specific directions].", 
-                         bn: "[স্থান] এ পৌঁছাতে, দয়া করে [নির্দিষ্ট দিকনির্দেশনা] অনুসরণ করুন।"},
-                        {en: "You may reach [location] by following these directions: [specific directions].", 
-                         bn: "আপনি এই দিকনির্দেশনা অনুসরণ করে [স্থান] এ পৌঁছাতে পারেন: [নির্দিষ্ট দিকনির্দেশনা]"}
-                    ],
-                    neutral: [
-                        {en: "To find [location], go [specific directions].", 
-                         bn: "[স্থান] খুঁজে পেতে, [নির্দিষ্ট দিকনির্দেশনা] যান।"},
-                        {en: "Here's how to get there: [specific directions].", 
-                         bn: "সেখানে যাওয়ার উপায় এখানে: [নির্দিষ্ট দিকনির্দেশনা]"}
-                    ],
-                    informal: [
-                        {en: "Just go [specific directions] to get to [location].", 
-                         bn: "[স্থান] এ পৌঁছাতে শুধু [নির্দিষ্ট দিকনির্দেশনা] যাও।"},
-                        {en: "Head [specific directions] and you'll see [location].", 
-                         bn: "[নির্দিষ্ট দিকনির্দেশনা] এ যান এবং আপনি [স্থান] দেখতে পাবেন।"}
-                    ]
-                }
-            };
+            // Replace the ENTIRE socialPhrases object with this updated version
+                const socialPhrases = {
+                    greeting: {
+                        formal: [
+                            {en: "Good morning/afternoon/evening. How are you today?", 
+                             bn: "শুভ সকাল/দুপুর/সন্ধ্যা। আপনি আজ কেমন আছেন?"},
+                            {en: "Hello, it's a pleasure to meet you.", 
+                             bn: "হ্যালো, আপনার সাথে দেখা করে আনন্দ হল।"}
+                        ],
+                        neutral: [
+                            {en: "Hello, how are you?", 
+                             bn: "হ্যালো, আপনি কেমন আছেন?"},
+                            {en: "Hi there, nice to see you.", 
+                             bn: "হাই, আপনাকে দেখে ভালো লাগলো।"}
+                        ],
+                        informal: [
+                            {en: "Hey! What's up?", 
+                             bn: "হেই! কি অবস্থা?"},
+                            {en: "Yo! How's it going?", 
+                             bn: "ইয়ো! কি চলছে?"}
+                        ]
+                    },
+                    introduction: {
+                        formal: [
+                            {en: "Allow me to introduce myself. My name is [Your Name].", 
+                             bn: "আমাকে নিজের পরিচয় দিতে দিন। আমার নাম [আপনার নাম]।"},
+                            {en: "I don't believe we've met. I'm [Your Name].", 
+                             bn: "আমার মনে হয় না আমরা আগে দেখা করেছি। আমি [আপনার নাম]।"}
+                        ],
+                        neutral: [
+                            {en: "Hi, I'm [Your Name]. Nice to meet you.", 
+                             bn: "হাই, আমি [আপনার নাম]। আপনার সাথে দেখা করে ভালো লাগলো।"},
+                            {en: "Hello, my name is [Your Name].", 
+                             bn: "হ্যালো, আমার নাম [আপনার নাম]।"}
+                        ],
+                        informal: [
+                            {en: "Hey, I'm [Your Name].", 
+                             bn: "হেই, আমি [আপনার নাম]।"},
+                            {en: "What's up? I'm [Your Name].", 
+                             bn: "কি অবস্থা? আমি [আপনার নাম]।"}
+                        ]
+                    },
+                    smalltalk: {
+                        formal: [
+                            {en: "How have you been keeping lately?", 
+                             bn: "আপনি সম্প্রতি কেমন আছেন?"},
+                            {en: "That's a lovely [item] you have there.", 
+                             bn: "আপনার ওখানে যে [আইটেম]টি আছে সেটি খুব সুন্দর।"}
+                        ],
+                        neutral: [
+                            {en: "How's your day going so far?", 
+                             bn: "আপনার দিনটি এখন পর্যন্ত কেমন যাচ্ছে?"},
+                            {en: "Beautiful weather we're having, isn't it?", 
+                             bn: "আজকের আবহাওয়া খুব সুন্দর, তাই না?"}
+                        ],
+                        informal: [
+                            {en: "What's new with you?", 
+                             bn: "আপনার সাথে কি নতুন কিছু?"},
+                            {en: "Seen any good movies lately?", 
+                             bn: "সম্প্রতি কোন ভালো সিনেমা দেখেছেন?"}
+                        ]
+                    },
+                    compliment: {
+                        formal: [
+                            {en: "I must commend you on your excellent [specific thing].", 
+                             bn: "আপনার চমৎকার [নির্দিষ্ট জিনিস] এর জন্য আমি আপনাকে প্রশংসা করতে চাই।"},
+                            {en: "You have done an outstanding job with [specific task].", 
+                             bn: "আপনি [নির্দিষ্ট কাজ] এর সাথে একটি অসাধারণ কাজ করেছেন।"}
+                        ],
+                        neutral: [
+                            {en: "I really like your [specific thing].", 
+                             bn: "আমি সত্যিই আপনার [নির্দিষ্ট জিনিস] পছন্দ করি।"},
+                            {en: "You're really good at [specific skill].", 
+                             bn: "আপনি [নির্দিষ্ট দক্ষতা] তে সত্যিই ভালো।"}
+                        ],
+                        informal: [
+                            {en: "Wow, I love your [specific thing]!", 
+                             bn: "বাহ, আমি আপনার [নির্দিষ্ট জিনিস] খুব পছন্দ করি!"},
+                            {en: "You rock at [specific thing]!", 
+                             bn: "আপনি [নির্দিষ্ট জিনিস] এ অসাধারণ!"}
+                        ]
+                    },
+                    apology: {
+                        formal: [
+                            {en: "I sincerely apologize for [specific issue].", 
+                             bn: "আমি [নির্দিষ্ট সমস্যা] এর জন্য আন্তরিকভাবে ক্ষমাপ্রার্থী।"},
+                            {en: "Please accept my deepest apologies for [specific issue].", 
+                             bn: "দয়া করে [নির্দিষ্ট সমস্যা] এর জন্য আমার গভীর ক্ষমা গ্রহণ করুন।"}
+                        ],
+                        neutral: [
+                            {en: "I'm sorry about [specific issue].", 
+                             bn: "আমি [নির্দিষ্ট সমস্যা] সম্পর্কে দুঃখিত।"},
+                            {en: "My apologies for [specific issue].", 
+                             bn: "[নির্দিষ্ট সমস্যা] এর জন্য আমার ক্ষমা চাইছি।"}
+                        ],
+                        informal: [
+                            {en: "Sorry about [specific issue].", 
+                             bn: "[নির্দিষ্ট সমস্যা] সম্পর্কে দুঃখিত।"},
+                            {en: "My bad! I shouldn't have [specific action].", 
+                             bn: "আমার ভুল! আমার [নির্দিষ্ট কাজ] করা উচিত ছিল না।"}
+                        ]
+                    },
+                    invitation: {
+                        formal: [
+                            {en: "We would be honored by your presence at [event].", 
+                             bn: "[ইভেন্ট] এ আপনার উপস্থিতিতে আমরা সম্মানিত হব।"},
+                            {en: "You are cordially invited to attend [event].", 
+                             bn: "আপনাকে সাদরে [ইভেন্ট] এ অংশগ্রহণের জন্য আমন্ত্রণ জানানো হচ্ছে।"}
+                        ],
+                        neutral: [
+                            {en: "Would you like to come to [event]?", 
+                             bn: "আপনি কি [ইভেন্ট] এ আসতে চান?"},
+                            {en: "We're having [event] and would love you to join us.", 
+                             bn: "আমরা [ইভেন্ট] এর আয়োজন করছি এবং আপনাকে আমাদের সাথে যোগ দিতে চাই।"}
+                        ],
+                        informal: [
+                            {en: "Wanna come to [event]?", 
+                             bn: "[ইভেন্ট] এ আসতে চাও?"},
+                            {en: "Hey, we're doing [event] - you in?", 
+                             bn: "হেই, আমরা [ইভেন্ট] করছি - তুমি আসছো?"}
+                        ]
+                    },
+                    askingForHelp: {
+                        formal: [
+                            {en: "I was wondering if you might be able to assist me with [specific task].", 
+                             bn: "আমি ভাবছিলাম আপনি কি আমাকে [নির্দিষ্ট কাজ] এ সহায়তা করতে পারবেন কিনা।"},
+                            {en: "Would it be possible for you to help me with [specific task]?", 
+                             bn: "আপনি কি আমাকে [নির্দিষ্ট কাজ] এ সাহায্য করতে পারবেন?"}
+                        ],
+                        neutral: [
+                            {en: "Could you help me with [specific task]?", 
+                             bn: "আপনি কি আমাকে [নির্দিষ্ট কাজ] এ সাহায্য করতে পারবেন?"},
+                            {en: "I need some help with [specific task]. Are you available?", 
+                             bn: "আমার [নির্দিষ্ট কাজ] এ কিছু সাহায্য দরকার। আপনি কি উপলব্ধ?"}
+                        ],
+                        informal: [
+                            {en: "Can you help me with [specific task]?", 
+                             bn: "তুমি কি আমাকে [নির্দিষ্ট কাজ] এ সাহায্য করতে পারবে?"},
+                            {en: "Hey, I'm stuck with [specific task]. Got a minute?", 
+                             bn: "হেই, আমি [নির্দিষ্ট কাজ] এ আটকে গেছি। একটু সময় আছে?"}
+                        ]
+                    },
+                    givingDirections: {
+                        formal: [
+                            {en: "To get to [location], please proceed [specific directions].", 
+                             bn: "[স্থান] এ পৌঁছাতে, দয়া করে [নির্দিষ্ট দিকনির্দেশনা] অনুসরণ করুন।"},
+                            {en: "You may reach [location] by following these directions: [specific directions].", 
+                             bn: "আপনি এই দিকনির্দেশনা অনুসরণ করে [স্থান] এ পৌঁছাতে পারেন: [নির্দিষ্ট দিকনির্দেশনা]"}
+                        ],
+                        neutral: [
+                            {en: "To find [location], go [specific directions].", 
+                             bn: "[স্থান] খুঁজে পেতে, [নির্দিষ্ট দিকনির্দেশনা] যান।"},
+                            {en: "Here's how to get there: [specific directions].", 
+                             bn: "সেখানে যাওয়ার উপায় এখানে: [নির্দিষ্ট দিকনির্দেশনা]"}
+                        ],
+                        informal: [
+                            {en: "Just go [specific directions] to get to [location].", 
+                             bn: "[স্থান] এ পৌঁছাতে শুধু [নির্দিষ্ট দিকনির্দেশনা] যাও।"},
+                            {en: "Head [specific directions] and you'll see [location].", 
+                             bn: "[নির্দিষ্ট দিকনির্দেশনা] এ যান এবং আপনি [স্থান] দেখতে পাবেন।"}
+                        ]
+                    }
+                };
 
             // DOM elements
             const generateProfessionalBtn = document.getElementById('generate-professional');
@@ -1022,36 +1021,36 @@
             });
 
             // Generate custom response
-            generateCustomBtn.addEventListener('click', function() {
-                const isBengali = document.querySelector('.lang-bn').style.display === '';
-                const scenario = isBengali ? 
-                    document.getElementById('custom-scenario-bn').value : 
-                    document.getElementById('custom-scenario').value;
-                const tone = document.getElementById('custom-tone').value;
+            generateSocialBtn.addEventListener('click', function() {
+                const scenario = document.getElementById('social-scenario').value;
+                const context = document.getElementById('social-context').value;
                 
-                if (!scenario.trim()) {
-                    const errorMsg = isBengali ? 
-                        "দয়া করে আপনার পরিস্থিতি বর্ণনা করুন" : 
-                        "Please describe your situation";
+                if (!socialPhrases[scenario] || !socialPhrases[scenario][context]) {
+                    const errorMsg = document.querySelector('.lang-en').style.display === 'none' ? 
+                        "দয়া করে পরিস্থিতি এবং প্রসঙ্গের জন্য বৈধ বিকল্পগুলি নির্বাচন করুন।" : 
+                        "Please select valid options for scenario and context.";
                     displayResult(errorMsg, "");
                     return;
                 }
                 
-                // In a real app, this would call an API or more sophisticated logic
-                // For demo purposes, we'll generate a simple response
-                let response, translation;
+                const phrases = socialPhrases[scenario][context];
+                const randomPhrases = [];
+                const randomTranslations = [];
                 
-                if (isBengali) {
-                    // If input was in Bengali, generate English response
-                    response = generateEnglishResponse(scenario, tone);
-                    translation = scenario; // Original Bengali input as translation
-                } else {
-                    // If input was in English, generate Bengali translation
-                    response = generateEnglishResponse(scenario, tone);
-                    translation = generateBengaliTranslation(response);
+                // Get 3 random phrases or all if less than 3
+                const count = Math.min(3, phrases.length);
+                const usedIndices = new Set();
+                
+                while (randomPhrases.length < count && usedIndices.size < phrases.length) {
+                    const randomIndex = Math.floor(Math.random() * phrases.length);
+                    if (!usedIndices.has(randomIndex)) {
+                        usedIndices.add(randomIndex);
+                        randomPhrases.push(phrases[randomIndex].en);
+                        randomTranslations.push(phrases[randomIndex].bn);
+                    }
                 }
                 
-                displayResult(response, translation);
+                displayResult(randomPhrases.join('<br><br>'), randomTranslations.join('<br><br>'));
             });
 
             // Helper function to generate English response (simplified for demo)
