@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore debated aspects of Hinduism through this interactive quiz. Test your knowledge on philosophical, theological, and social issues within Hindu traditions.">
+    <meta name="keywords" content="Hinduism quiz, Hindu debates, Vedanta, Dharma, Karma, Moksha, Hindu philosophy, Hindu theology">
+    <meta name="author" content="Hinduism Debate Quiz">
+    <title>Hinduism Debate Quiz | Explore Contested Aspects of Hindu Thought</title>
+    <style>
+        :root {
+            --primary: #FF9933; /* Saffron */
+            --secondary: #138808; /* Green */
+            --accent: #000080; /* Navy Blue */
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--accent);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .ad-container {
+            margin: 20px 0;
+            text-align: center;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .quiz-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .options {
+            margin-bottom: 25px;
+        }
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: var(--light);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        .option:hover {
+            background: #e9ecef;
+            border-color: var(--primary);
+        }
+        .option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .btn {
+            padding: 12px 25px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        .answer-feedback {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .answer-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f8f9fa;
+        }
+        .correct {
+            border-left: 4px solid var(--success);
+        }
+        .incorrect {
+            border-left: 4px solid var(--danger);
+        }
+        .correct-answer {
+            color: var(--success);
+            font-weight: bold;
+        }
+        .user-answer {
+            color: var(--danger);
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: var(--warning);
+        }
+        .scripture-quote {
+            font-style: italic;
+            color: var(--secondary);
+            margin: 10px 0;
+            padding-left: 15px;
+            border-left: 3px solid var(--primary);
+        }
+        .school-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .quiz-container {
+                padding: 15px;
+            }
+            .question {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Hinduism Debate Quiz</h1>
+            <p class="description">Explore contested aspects of Hindu philosophy, theology, and practice</p>
+        </header>
+
+        <div class="quiz-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div id="quiz-content">
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                <button class="btn" id="next-btn" disabled>Next Question</button>
+            </div>
+            <div id="results-section" style="display: none;">
+                <div class="result" id="result"></div>
+                <div class="answer-feedback" id="answer-feedback"></div>
+                <button class="btn restart-btn" id="restart-btn">Restart Quiz</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Hinduism Debate Quiz | Designed for educational purposes and philosophical exploration of Hindu traditions.</p>
+    </footer>
+
+    <script>
+        const questions = [
+            // Nature of Brahman
+            {
+                question: "Is Brahman (Ultimate Reality) personal (Saguna Brahman) or impersonal (Nirguna Brahman)?",
+                options: [
+                    "Personal only - like Vishnu or Shiva",
+                    "Impersonal only - formless and beyond attributes",
+                    "Both personal and impersonal aspects",
+                    "Brahman is a philosophical concept, not a reality"
+                ],
+                correctAnswer: 2,
+                school: "Vedanta",
+                explanation: "Most Vedanta schools reconcile this by teaching that Nirguna Brahman is the ultimate reality, while Saguna Brahman is how humans relate to the divine.",
+                scripture: "Brahma Sutras 3.2.11-14 discusses both aspects of Brahman"
+            },
+            {
+                question: "Is the world (jagat) real (sat), unreal (asat), or illusory (maya)?",
+                options: [
+                    "Completely real - part of Brahman's creation",
+                    "Unreal - only Brahman exists",
+                    "Illusory appearance - not ultimately real",
+                    "Real but temporary - like a dream that exists while it lasts"
+                ],
+                correctAnswer: 3,
+                school: "Metaphysics",
+                explanation: "Different schools vary: Advaita says world is mithya (apparent reality), Vishishtadvaita says it's real but dependent on Brahman, Dvaita says it's as real as Brahman but separate.",
+                scripture: "Mandukya Upanishad 7 describes the world as 'neither real nor unreal'"
+            },
+
+            // Paths to Liberation
+            {
+                question: "Which is the superior path to moksha (liberation)?",
+                options: [
+                    "Jnana Yoga (path of knowledge)",
+                    "Bhakti Yoga (path of devotion)",
+                    "Karma Yoga (path of selfless action)",
+                    "All paths are equally valid depending on temperament"
+                ],
+                correctAnswer: 3,
+                school: "Yoga",
+                explanation: "The Bhagavad Gita (Chapter 12) validates all paths, though different traditions emphasize different approaches based on individual nature (svabhava).",
+                scripture: "Bhagavad Gita 12.5: 'For those whose minds are attached to the unmanifested, impersonal feature of the Supreme, advancement is very troublesome.'"
+            },
+            {
+                question: "Can women and lower castes achieve moksha directly, or do they need to be reborn as upper-caste males first?",
+                options: [
+                    "Only upper-caste males can achieve moksha",
+                    "All can achieve moksha but caste affects the path",
+                    "Caste/gender irrelevant for moksha",
+                    "The concept of moksha itself needs reformation"
+                ],
+                correctAnswer: 2,
+                school: "Social Dharma",
+                explanation: "While traditional texts sometimes restrict moksha, bhakti movements and modern Hinduism generally accept all can attain liberation regardless of birth.",
+                scripture: "Bhagavad Gita 9.32: 'For those who take refuge in Me, O Arjuna, even if they are of sinful birth... they attain the supreme goal.'"
+            },
+
+            // Caste System
+            {
+                question: "Is the caste system (varna) divinely ordained or a social construct?",
+                options: [
+                    "Divinely ordained in Vedas for social harmony",
+                    "Originally by guna/karma but corrupted into birth-based",
+                    "Purely social construct with no divine sanction",
+                    "A colonial misinterpretation of Indian society"
+                ],
+                correctAnswer: 1,
+                school: "Dharma",
+                explanation: "While the Bhagavad Gita (4.13) describes varna by guna/karma, in practice it became hereditary. Modern reformers reject birth-based caste.",
+                scripture: "Bhagavad Gita 4.13: 'The fourfold caste has been created by Me according to the differentiation of Guna and Karma...'"
+            },
+            {
+                question: "Should caste-based discrimination be addressed through:",
+                options: [
+                    "Reform within Hindu tradition",
+                    "Government affirmative action",
+                    "Complete rejection of caste identity",
+                    "It's not a significant problem today"
+                ],
+                correctAnswer: 0,
+                school: "Social Reform",
+                explanation: "Most Hindu reformers (from Buddha to Ambedkar) have worked within tradition to address caste issues, though approaches vary widely.",
+                scripture: "Rig Veda 10.90 (Purusha Sukta) is often cited regarding varna origins"
+            },
+
+            // Deities and Worship
+            {
+                question: "Are all Hindu deities (devas) manifestations of one Supreme Being or distinct entities?",
+                options: [
+                    "All are manifestations of one God (Brahman)",
+                    "Distinct entities with their own domains",
+                    "Some are manifestations, others are distinct",
+                    "They are symbolic representations of natural forces"
+                ],
+                correctAnswer: 0,
+                school: "Theology",
+                explanation: "The Vedantic view is that all deities are manifestations of Brahman, though popular worship often treats them as distinct.",
+                scripture: "Rig Veda 1.164.46: 'Truth is One, though the wise call it by many names.'"
+            },
+            {
+                question: "Is idol worship essential or can Hinduism be practiced without murtis (images)?",
+                options: [
+                    "Essential - murtis are divine manifestations",
+                    "Helpful but not absolutely necessary",
+                    "A later development not in original Vedas",
+                    "Potentially distracting from formless worship"
+                ],
+                correctAnswer: 1,
+                school: "Worship",
+                explanation: "While murti puja is central to most Hindu practice, traditions like Arya Samaj reject it, and the Upanishads emphasize formless worship.",
+                scripture: "Shvetashvatara Upanishad 4.19-20 describes both formless and with-form aspects of God"
+            },
+
+            // Karma and Rebirth
+            {
+                question: "Is karma an impersonal law or divinely administered justice?",
+                options: [
+                    "Impersonal cosmic law like gravity",
+                    "Administered by God/Ishvara",
+                    "Psychological mechanism creating rebirth",
+                    "A metaphorical teaching about consequences"
+                ],
+                correctAnswer: 0,
+                school: "Karma",
+                explanation: "Classical Hinduism views karma as an impersonal law (though some theistic schools see God as overseeing the process).",
+                scripture: "Brihadaranyaka Upanishad 4.4.5: 'According as one acts, so does he become...'"
+            },
+            {
+                question: "Can one's karma be altered by divine grace or only through one's own efforts?",
+                options: [
+                    "Only through personal effort",
+                    "Divine grace can override karma",
+                    "Grace helps but doesn't cancel karma",
+                    "The concept of grace is foreign to Hinduism"
+                ],
+                correctAnswer: 2,
+                school: "Bhakti",
+                explanation: "Bhakti traditions emphasize grace (especially in Vaishnavism), while classical yoga emphasizes personal effort. Most accept both play roles.",
+                scripture: "Bhagavad Gita 18.66: 'Abandon all varieties of dharma and simply surrender unto Me...'"
+            },
+
+            // Scriptures and Authority
+            {
+                question: "Which scriptures have the highest authority in Hinduism?",
+                options: [
+                    "Vedas alone",
+                    "Vedas plus Upanishads",
+                    "Vedas, Upanishads, plus Puranas and Itihasas",
+                    "Personal experience and guru's teachings"
+                ],
+                correctAnswer: 2,
+                school: "Scriptural Authority",
+                explanation: "While Vedas are supreme, in practice most Hindus derive theology from later texts like Gita and Puranas, with regional variations.",
+                scripture: "Manusmriti 2.6: 'The Veda is the eternal eye of the ancestors...'"
+            },
+            {
+                question: "How should apparent contradictions between scriptures be resolved?",
+                options: [
+                    "Earlier texts supersede later ones",
+                    "Later interpretations clarify earlier ones",
+                    "Context determines which applies",
+                    "Contradictions show human authorship"
+                ],
+                correctAnswer: 2,
+                school: "Hermeneutics",
+                explanation: "Traditional Mimamsa rules of interpretation emphasize context, with later acharyas reconciling apparent contradictions.",
+                scripture: "Jaimini's Mimamsa Sutras establish rules for Vedic interpretation"
+            },
+
+            // Modern Issues
+            {
+                question: "How should Hinduism respond to scientific discoveries like evolution?",
+                options: [
+                    "Reject as incompatible with creation accounts",
+                    "Accept as describing material reality only",
+                    "Find parallels in Hindu cosmology",
+                    "Reinterpret scriptures allegorically"
+                ],
+                correctAnswer: 2,
+                school: "Science",
+                explanation: "Many Hindu scholars note concepts like cosmic cycles (yugas) and avataric evolution parallel scientific ideas, avoiding conflict.",
+                scripture: "Mahabharata (Shanti Parva) describes time cycles of creation and dissolution"
+            },
+            {
+                question: "Is vegetarianism essential for Hindus or optional?",
+                options: [
+                    "Absolutely essential for all Hindus",
+                    "Required only for brahmins and sadhus",
+                    "Recommended but not mandatory",
+                    "A personal choice with no religious significance"
+                ],
+                correctAnswer: 2,
+                school: "Dharma",
+                explanation: "While ahimsa is valued, only some traditions mandate vegetarianism. Many Hindus eat meat, with regional and caste variations.",
+                scripture: "Manusmriti 5.56: 'By not killing any living being, one becomes fit for salvation.'"
+            },
+            {
+                question: "Should Hindu temples be managed by:",
+                options: [
+                    "Priestly families traditionally associated",
+                    "Government agencies",
+                    "Elected community boards",
+                    "Private trusts"
+                ],
+                correctAnswer: 2,
+                school: "Temple Reform",
+                explanation: "The current debate involves traditional rights vs. demands for democratic management and financial transparency.",
+                scripture: "Agamas prescribe temple management but don't address modern governance issues"
+            },
+
+              {
+                  question: "Is the individual soul (atman) identical with Brahman or distinct?",
+                  options: [
+                      "Fully identical (Advaita view)",
+                      "Part of Brahman but not identical (Vishishtadvaita)",
+                      "Eternally distinct (Dvaita)",
+                      "The soul itself is illusory (Buddhist influence)"
+                  ],
+                  correctAnswer: 0,
+                  school: "Vedanta",
+                  explanation: "This is the core debate between Vedanta schools - Advaita says atman is Brahman, Vishishtadvaita says qualified non-duality, while Dvaita maintains eternal distinction.",
+                  scripture: "Chandogya Upanishad 6.8.7: 'Tat Tvam Asi' (Thou art That) - the famous identity statement"
+              },
+            {
+                question: "Is liberation (moksha) achieved through gradual practice or sudden realization?",
+                options: [
+                    "Gradual through prolonged sadhana",
+                    "Sudden through guru's grace or insight",
+                    "Both - preparation is gradual but realization is sudden",
+                    "Pre-determined by past karma"
+                ],
+                correctAnswer: 2,
+                school: "Moksha",
+                explanation: "Most traditions acknowledge both aspects - preparation is gradual but the final realization often comes suddenly.",
+                scripture: "Yoga Sutras 1.21-22 discusses both intensity of practice and grace"
+            },
+
+            // Ethics and Social Issues
+            {
+                question: "How should Hinduism address LGBTQ+ rights and relationships?",
+                options: [
+                    "Reject as against dharma",
+                    "Accept as modern social reality but not endorse",
+                    "Find support in ancient texts like Kamasutra",
+                    "Celebrate as part of divine diversity"
+                ],
+                correctAnswer: 2,
+                school: "Social Dharma",
+                explanation: "While traditional texts mention third-gender (hijra) and same-sex relations, modern Hinduism is grappling with full LGBTQ+ inclusion.",
+                scripture: "Kamasutra and temple art depict diverse sexualities"
+            },
+            {
+                question: "Is conversion to Hinduism allowed or against its principles?",
+                options: [
+                    "Not allowed - one must be born Hindu",
+                    "Allowed through prescribed rituals",
+                    "Hinduism doesn't have conversion concept",
+                    "Allowed but shouldn't be proselytized"
+                ],
+                correctAnswer: 1,
+                school: "Dharma",
+                explanation: "While traditionally birth-based, modern Hinduism has developed conversion rituals (like shuddhi), though views vary widely.",
+                scripture: "No explicit Vedic prohibition on conversion exists"
+            },
+
+            // Final Question
+            {
+                question: "What is the most pressing challenge for Hinduism today?",
+                options: [
+                    "Preserving tradition vs. adapting to modernity",
+                    "Caste discrimination and social inequality",
+                    "Religious conversion and demography",
+                    "Misrepresentation and lack of unified voice"
+                ],
+                correctAnswer: 0,
+                school: "Contemporary Issues",
+                explanation: "All are significant challenges, but the tension between preservation and adaptation underlies many current debates.",
+                scripture: "Bhagavad Gita 2.11: 'The wise grieve neither for the living nor for the dead.'"
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+        const questionElement = document.getElementById("question");
+        const optionsElement = document.getElementById("options");
+        const nextButton = document.getElementById("next-btn");
+        const resultElement = document.getElementById("result");
+        const progressBar = document.getElementById("progress");
+        const quizContent = document.getElementById("quiz-content");
+        const resultsSection = document.getElementById("results-section");
+        const answerFeedback = document.getElementById("answer-feedback");
+        const restartButton = document.getElementById("restart-btn");
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            questionElement.textContent = q.question;
+            optionsElement.innerHTML = "";
+            
+            // Add scripture quote if exists
+            if (q.scripture) {
+                optionsElement.innerHTML += `<div class="scripture-quote">${q.scripture}</div>`;
+            }
+            
+            q.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.classList.add("option");
+                button.addEventListener("click", () => selectOption(button, index));
+                optionsElement.appendChild(button);
+            });
+            
+            progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+            nextButton.disabled = true;
+
+            if (currentQuestion === questions.length - 1) {
+                nextButton.textContent = "Finish Quiz";
+            } else {
+                nextButton.textContent = "Next Question";
+            }
+        }
+
+        function selectOption(selectedButton, index) {
+            const options = document.querySelectorAll(".option");
+            options.forEach(button => button.classList.remove("selected"));
+            selectedButton.classList.add("selected");
+            nextButton.disabled = false;
+            
+            // Store user's answer
+            userAnswers[currentQuestion] = index;
+        }
+
+        function showResults() {
+            quizContent.style.display = "none";
+            resultsSection.style.display = "block";
+            
+            // Calculate score
+            score = 0;
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.correctAnswer) {
+                    score++;
+                }
+            });
+            
+            resultElement.innerHTML = `You scored <strong>${score} out of ${questions.length}</strong>!<br>
+            <small>${getResultComment(score)}</small>`;
+            
+            // Show detailed feedback
+            answerFeedback.innerHTML = "<h3>Question Analysis:</h3>";
+            questions.forEach((q, index) => {
+                const isCorrect = userAnswers[index] === q.correctAnswer;
+                const userAnswerText = q.options[userAnswers[index]] || "Not answered";
+                const correctAnswerText = q.options[q.correctAnswer];
+                
+                answerFeedback.innerHTML += `
+                    <div class="answer-item ${isCorrect ? 'correct' : 'incorrect'}">
+                        <p><strong>Question ${index + 1}:</strong> ${q.question}</p>
+                        ${q.scripture ? `<p class="scripture-quote">${q.scripture}</p>` : ''}
+                        <p>Your answer: <span class="user-answer">${userAnswerText}</span></p>
+                        ${!isCorrect ? `<p>Correct answer: <span class="correct-answer">${correctAnswerText}</span></p>` : ''}
+                        <p><em>${q.explanation}</em></p>
+                        <p class="school-tag">${q.school}</p>
+                    </div>
+                `;
+            });
+        }
+
+        function getResultComment(score) {
+            const percentage = (score / questions.length) * 100;
+            if (percentage >= 80) return "Excellent! You have deep understanding of Hindu philosophical debates.";
+            if (percentage >= 60) return "Good! You're familiar with many key debates in Hinduism.";
+            if (percentage >= 40) return "Fair. You know some aspects but could explore more.";
+            return "Keep exploring! Hinduism has rich philosophical traditions to discover.";
+        }
+
+        nextButton.addEventListener("click", () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        restartButton.addEventListener("click", () => {
+            currentQuestion = 0;
+            score = 0;
+            userAnswers = [];
+            quizContent.style.display = "block";
+            resultsSection.style.display = "none";
+            loadQuestion();
+        });
+
+        // Initialize quiz
+        loadQuestion();
+    </script>
+</body>
+</html>
