@@ -106,6 +106,8 @@ Continue from where it stopped.
 Continue from where it stopprd.
 
 
+T. Develop a fully responsive tool for a Test on faults of common religions (Chistianity, Islam, Hindu, Jew, Sikhism, Buddhism, Jainism, Taoism). The tool should ask users Questions and allow to answer accordingly. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the UI look good and responsive. check that it's giving output correctly.
+Continue from where it stopped.
 
 
 
