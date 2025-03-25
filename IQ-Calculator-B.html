@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সম্পূর্ণ আইকিউ টেস্ট (৫০টি প্রশ্ন)</title>
+    <style>
+        body {
+            font-family: 'SolaimanLipi', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        
+        .test-container {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .options {
+            margin-left: 20px;
+        }
+        
+        .shape-options {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .shape {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        
+        .matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin: 15px 0;
+        }
+        
+        .matrix-cell {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            font-size: 24px;
+        }
+        
+        button {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 25px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .result {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .timer {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>সম্পূর্ণ আইকিউ টেস্ট</h1>
+    <div class="timer">সময় বাকি: <span id="time">60:00</span></div>
+    
+    <div class="test-container">
+        <h2>মৌখিক বোধশক্তি</h2>
+        
+        <!-- প্রশ্ন ১-১০ -->
+        <div class="question">
+            <p>১. নিচের কোন শব্দটি অন্যগুলো থেকে আলাদা?</p>
+            <div class="options">
+                <input type="radio" name="q1" value="a"> আপেল<br>
+                <input type="radio" name="q1" value="b"> কলা<br>
+                <input type="radio" name="q1" value="c"> গাজর<br>
+                <input type="radio" name="q1" value="d"> কমলা<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২. সাদৃশ্য পূর্ণ করুন: বই এর সাথে পড়ার সম্পর্ক যেমন চামচের সাথে _____ এর সম্পর্ক।</p>
+            <div class="options">
+                <input type="radio" name="q2" value="a"> কাটার<br>
+                <input type="radio" name="q2" value="b"> খাওয়ার<br>
+                <input type="radio" name="q2" value="c"> ছুরিকাঘাত<br>
+                <input type="radio" name="q2" value="d"> রান্নার<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩. "S A F E T Y" অক্ষরগুলো সাজিয়ে একটি অর্থপূর্ণ শব্দ তৈরি করুন। সেই শব্দের দ্বিতীয় অক্ষর কী?</p>
+            <div class="options">
+                <input type="radio" name="q3" value="a"> A<br>
+                <input type="radio" name="q3" value="b"> E<br>
+                <input type="radio" name="q3" value="c"> F<br>
+                <input type="radio" name="q3" value="d"> S<br>
+                <input type="radio" name="q3" value="e"> T<br>
+                <input type="radio" name="q3" value="f"> Y<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৪. "পরোপকারী" শব্দের বিপরীত শব্দ কোনটি?</p>
+            <div class="options">
+                <input type="radio" name="q4" value="a"> দয়ালু<br>
+                <input type="radio" name="q4" value="b"> অপরোপকারী<br>
+                <input type="radio" name="q4" value="c"> উদার<br>
+                <input type="radio" name="q4" value="d"> বন্ধুত্বপূর্ণ<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৫. যদি সব ব্লুপ র্যাজি হয় এবং সব র্যাজি ল্যাজি হয়, তাহলে সব ব্লুপ অবশ্যই ল্যাজি হবে।</p>
+            <div class="options">
+                <input type="radio" name="q5" value="a"> সত্য<br>
+                <input type="radio" name="q5" value="b"> মিথ্যা<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৬. নিচের কোনটি "বুদ্ধিমান" শব্দের প্রতিশব্দ নয়?</p>
+            <div class="options">
+                <input type="radio" name="q6" value="a"> বিচক্ষণ<br>
+                <input type="radio" name="q6" value="b"> ধূর্ত<br>
+                <input type="radio" name="q6" value="c"> মন্দবুদ্ধি<br>
+                <input type="radio" name="q6" value="d"> সূক্ষ্মদর্শী<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৭. শব্দজোড়া পূর্ণ করুন: শান্তির সাথে যুদ্ধের সম্পর্ক যেমন ভালোবাসার সাথে _____ এর সম্পর্ক।</p>
+            <div class="options">
+                <input type="radio" name="q7" value="a"> ঘৃণা<br>
+                <input type="radio" name="q7" value="b"> আনন্দ<br>
+                <input type="radio" name="q7" value="c"> আবেগ<br>
+                <input type="radio" name="q7" value="d"> জীবন<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৮. নিচের কোন শব্দটি R, E, A, D, I, N, G অক্ষর দিয়ে গঠন করা যায়?</p>
+            <div class="options">
+                <input type="radio" name="q8" value="a"> Daring<br>
+                <input type="radio" name="q8" value="b"> Garden<br>
+                <input type="radio" name="q8" value="c"> Grained<br>
+                <input type="radio" name="q8" value="d"> উপরের সবগুলো<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৯. নিচের কোন প্রবাদের অর্থ অন্যগুলো থেকে আলাদা?</p>
+            <div class="options">
+                <input type="radio" name="q9" value="a"> লাফ দেবার আগে দেখে নাও<br>
+                <input type="radio" name="q9" value="b"> বোকারা যেখানে দেবতারা ভয় পায় সেখানে ছুটে যায়<br>
+                <input type="radio" name="q9" value="c"> যে দেরি করে সে হারায়<br>
+                <input type="radio" name="q9" value="d"> দুইবার মেপে একবার কাটো<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>১০. নিচের কোন শব্দটি ভুল বানান?</p>
+            <div class="options">
+                <input type="radio" name="q10" value="a"> Accommodate<br>
+                <input type="radio" name="q10" value="b"> Definitely<br>
+                <input type="radio" name="q10" value="c"> Seperate<br>
+                <input type="radio" name="q10" value="d"> Privilege<br>
+            </div>
+        </div>
+        
+        <h2>সংখ্যাগত দক্ষতা</h2>
+        
+        <!-- প্রশ্ন ১১-২০ -->
+        <div class="question">
+            <p>১১. এই সিরিজের পরবর্তী সংখ্যা কী: ২, ৬, ১২, ২০, ৩০, ?</p>
+            <div class="options">
+                <input type="radio" name="q11" value="a"> ৩৮<br>
+                <input type="radio" name="q11" value="b"> ৪২<br>
+                <input type="radio" name="q11" value="c"> ৪৪<br>
+                <input type="radio" name="q11" value="d"> ৪০<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>১২. যদি ৩x + ৭ = ২২ হয়, তাহলে x এর মান কত?</p>
+            <div class="options">
+                <input type="radio" name="q12" value="a"> ৪<br>
+                <input type="radio" name="q12" value="b"> ৫<br>
+                <input type="radio" name="q12" value="c"> ৬<br>
+                <input type="radio" name="q12" value="d"> ৭<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>১৩. একটি ট্রেন ৫ ঘন্টায় ৩০০ মাইল যায়। একই গতিতে ৭ ঘন্টায় কত দূর যাবে?</p>
+            <div class="options">
+                <input type="radio" name="q13" value="a"> ৪০০ মাইল<br>
+                <input type="radio" name="q13" value="b"> ৪২০ মাইল<br>
+                <input type="radio" name="q13" value="c"> ৪৫০ মাইল<br>
+                <input type="radio" name="q13" value="d"> ৪৯০ মাইল<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>১৪. ২০০ এর ১/৫ অংশের ২৫% কত?</p>
+            <div class="options">
+                <input type="radio" name="q14" value="a"> ৫<br>
+                <input type="radio" name="q14" value="b"> ১০<br>
+                <input type="radio" name="q14" value="c"> ১৫<br>
+                <input type="radio" name="q14" value="d"> ২০<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>১৫. যদি একটি শার্ট ২০% ছাড়ে $২০ হয়, তাহলে এর আসল দাম কত ছিল?</p>
+            <div class="options">
+                <input type="radio" name="q15" value="a"> $২২<br>
+                <input type="radio" name="q15" value="b"> $২৪<br>
+                <input type="radio" name="q15" value="c"> $২৫<br>
+                <input type="radio" name="q15" value="d"> $২৮<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>১৬. লুপ্ত সংখ্যাটি কী: ৮, ১৬, ৩২, ৬৪, ?</p>
+            <div class="options">
+                <input type="radio" name="q16" value="a"> ৯৬<br>
+                <input type="radio" name="q16" value="b"> ১১২<br>
+                <input type="radio" name="q16" value="c"> ১২৮<br>
+                <input type="radio" name="q16" value="d"> ১৪৪<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>১৭. একজন কৃষকের ১৭টি ভেড়া ছিল এবং ৯টি ছাড়া সব মারা গেল। কতটি বাকি আছে?</p>
+            <div class="options">
+                <input type="radio" name="q17" value="a"> ৮<br>
+                <input type="radio" name="q17" value="b"> ৯<br>
+                <input type="radio" name="q17" value="c"> ১৭<br>
+                <input type="radio" name="q17" value="d"> ২৬<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>১৮. প্রথম ১০টি মৌলিক সংখ্যার যোগফল কত?</p>
+            <div class="options">
+                <input type="radio" name="q18" value="a"> ১০১<br>
+                <input type="radio" name="q18" value="b"> ১১২<br>
+                <input type="radio" name="q18" value="c"> ১২৯<br>
+                <input type="radio" name="q18" value="d"> ১৫৮<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>১৯. যদি ৫ জন কর্মী ৫ দিনে ৫টি বাড়ি বানাতে পারে, তাহলে ১০ জন কর্মী ১০টি বাড়ি বানাতে কত দিন লাগবে?</p>
+            <div class="options">
+                <input type="radio" name="q19" value="a"> ৫ দিন<br>
+                <input type="radio" name="q19" value="b"> ১০ দিন<br>
+                <input type="radio" name="q19" value="c"> ১৫ দিন<br>
+                <input type="radio" name="q19" value="d"> ২০ দিন<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২০. এই সিরিজের পরবর্তী সংখ্যা কী: ১, ১, ২, ৩, ৫, ৮, ১৩, ?</p>
+            <div class="options">
+                <input type="radio" name="q20" value="a"> ১৮<br>
+                <input type="radio" name="q20" value="b"> ১৯<br>
+                <input type="radio" name="q20" value="c"> ২০<br>
+                <input type="radio" name="q20" value="d"> ২১<br>
+            </div>
+        </div>
+        
+        <h2>যুক্তি ও যৌক্তিক চিন্তা</h2>
+        
+        <!-- প্রশ্ন ২১-৩০ -->
+        <div class="question">
+            <p>২১. যদি কিছু ডাক্তার বিজ্ঞানী হয় এবং সব বিজ্ঞানী গবেষক হয়, তাহলে কোন বিবৃতিটি সত্য?</p>
+            <div class="options">
+                <input type="radio" name="q21" value="a"> সব ডাক্তার গবেষক<br>
+                <input type="radio" name="q21" value="b"> কিছু ডাক্তার গবেষক<br>
+                <input type="radio" name="q21" value="c"> কোন ডাক্তার গবেষক নয়<br>
+                <input type="radio" name="q21" value="d"> কিছু গবেষক ডাক্তার<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২২. সব গোলাপ ফুল। কিছু ফুল দ্রুত শুকিয়ে যায়। অতএব:</p>
+            <div class="options">
+                <input type="radio" name="q22" value="a"> সব গোলাপ দ্রুত শুকিয়ে যায়<br>
+                <input type="radio" name="q22" value="b"> কিছু গোলাপ দ্রুত শুকিয়ে যায়<br>
+                <input type="radio" name="q22" value="c"> কোন গোলাপ দ্রুত শুকিয়ে যায় না<br>
+                <input type="radio" name="q22" value="d"> কিছু ফুল যা দ্রুত শুকিয়ে যায় তারা গোলাপ<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২৩. যদি আজ শনিবার হয়, তাহলে ৩০ দিন পর কী বার হবে?</p>
+            <div class="options">
+                <input type="radio" name="q23" value="a"> রবিবার<br>
+                <input type="radio" name="q23" value="b"> সোমবার<br>
+                <input type="radio" name="q23" value="c"> মঙ্গলবার<br>
+                <input type="radio" name="q23" value="d"> বুধবার<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২৪. একটি ঘড়ি প্রতি ঘন্টায় ১০ মিনিট পিছিয়ে যায়। যদি ঘড়িটি ঠিক দুপুর ১২টায় সেট করা হয়, তবে সন্ধ্যা ৬টায় এটি কী সময় দেখাবে?</p>
+            <div class="options">
+                <input type="radio" name="q24" value="a"> ৪:০০ PM<br>
+                <input type="radio" name="q24" value="b"> ৪:৩০ PM<br>
+                <input type="radio" name="q24" value="c"> ৫:০০ PM<br>
+                <input type="radio" name="q24" value="d"> ৫:৩০ PM<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২৫. যদি A, B থেকে লম্বা হয় এবং B, C থেকে লম্বা হয়, তবে কোন বিবৃতিটি সত্য?</p>
+            <div class="options">
+                <input type="radio" name="q25" value="a"> C সবচেয়ে খাটো<br>
+                <input type="radio" name="q25" value="b"> A সবচেয়ে লম্বা<br>
+                <input type="radio" name="q25" value="c"> B মাঝামাঝি<br>
+                <input type="radio" name="q25" value="d"> উপরের সবগুলো<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২৬. এই ধারার পরবর্তী আকৃতি কী: △, ◯, □, △, ◯, □, △, ◯, ?</p>
+            <div class="options">
+                <input type="radio" name="q26" value="a"> △<br>
+                <input type="radio" name="q26" value="b"> ◯<br>
+                <input type="radio" name="q26" value="c"> □<br>
+                <input type="radio" name="q26" value="d"> ◇<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২৭. যদি সব জিপস জ্যাপ হয় এবং কিছু জ্যাপ জপ হয়, তবে কোন বিবৃতিটি সত্য?</p>
+            <div class="options">
+                <input type="radio" name="q27" value="a"> সব জিপস জপ<br>
+                <input type="radio" name="q27" value="b"> কিছু জিপস জপ<br>
+                <input type="radio" name="q27" value="c"> কোন জিপস জপ নয়<br>
+                <input type="radio" name="q27" value="d"> কিছু জপ জিপস<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২৮. একজন মানুষ এমন বাড়ি তৈরি করল যার সব দেয়াল দক্ষিণমুখী। একটি ভালুক পাশ দিয়ে গেল। ভালুকটির রং কী?</p>
+            <div class="options">
+                <input type="radio" name="q28" value="a"> কালো<br>
+                <input type="radio" name="q28" value="b"> বাদামী<br>
+                <input type="radio" name="q28" value="c"> সাদা<br>
+                <input type="radio" name="q28" value="d"> ধূসর<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>২৯. যদি লালকে নীল বলা হয়, নীলকে সবুজ বলা হয়, সবুজকে হলুদ বলা হয় এবং হলুদকে লাল বলা হয়, তবে ঘাসের রং কী?</p>
+            <div class="options">
+                <input type="radio" name="q29" value="a"> লাল<br>
+                <input type="radio" name="q29" value="b"> নীল<br>
+                <input type="radio" name="q29" value="c"> সবুজ<br>
+                <input type="radio" name="q29" value="d"> হলুদ<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩০. নিচের কোন সংখ্যাটি অন্যগুলো থেকে আলাদা: ২, ৫, ১০, ১৭, ২৬, ৩৭, ৫০, ৬৪</p>
+            <div class="options">
+                <input type="radio" name="q30" value="a"> ২<br>
+                <input type="radio" name="q30" value="b"> ১০<br>
+                <input type="radio" name="q30" value="c"> ৩৭<br>
+                <input type="radio" name="q30" value="d"> ৬৪<br>
+            </div>
+        </div>
+        
+        <h2>স্থানিক দৃষ্টি</h2>
+        
+        <!-- প্রশ্ন ৩১-৪০ -->
+        <div class="question">
+            <p>৩১. কোন আকৃতিটি অন্যগুলো থেকে আলাদা?</p>
+            <div class="shape-options">
+                <span class="shape" style="background-color: red; border-radius: 50%;">◯</span>
+                <span class="shape" style="background-color: blue;">□</span>
+                <span class="shape" style="background-color: green; border-radius: 5px;">▢</span>
+                <span class="shape" style="background-color: yellow; height: 30px;">▭</span>
+            </div>
+            <div class="options">
+                <input type="radio" name="q31" value="a"> লাল বৃত্ত<br>
+                <input type="radio" name="q31" value="b"> নীল বর্গ<br>
+                <input type="radio" name="q31" value="c"> সবুজ গোলাকার বর্গ<br>
+                <input type="radio" name="q31" value="d"> হলুদ আয়তক্ষেত্র<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩২. এই নেট থেকে কোন কিউব তৈরি করা যায়?</p>
+            <div class="shape-options">
+                <span style="font-size: 24px;">+--+<br>|  |<br>+--+--+<br>   |  |<br>   +--+</span>
+            </div>
+            <div class="options">
+                <input type="radio" name="q32" value="a"> বিপরীত দিক একই রঙের কিউব<br>
+                <input type="radio" name="q32" value="b"> সংলগ্ন দিক একই রঙের কিউব<br>
+                <input type="radio" name="q32" value="c"> তিন দিক এক রঙ, তিন দিক অন্য রঙের কিউব<br>
+                <input type="radio" name="q32" value="d"> নির্ধারণ করা সম্ভব নয়<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩৩. এই ধারার পরবর্তী আকৃতি কী?</p>
+            <div class="shape-options">
+                <span class="shape">↑</span>
+                <span class="shape">→</span>
+                <span class="shape">↓</span>
+                <span class="shape">?</span>
+            </div>
+            <div class="options">
+                <input type="radio" name="q33" value="a"> ←<br>
+                <input type="radio" name="q33" value="b"> ↑<br>
+                <input type="radio" name="q33" value="c"> ↘<br>
+                <input type="radio" name="q33" value="d"> ↖<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩৪. এই চিত্রে কয়টি কিউব আছে?</p>
+            <div class="shape-options">
+                <span style="display: inline-block; width: 80px; height: 60px; border: 1px solid #000; position: relative;">
+                    <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 0; top: 0;"></span>
+                    <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 20px; top: 0;"></span>
+                    <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 0; top: 20px;"></span>
+                    <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 20px; top: 20px;"></span>
+                    <span style="position: absolute; width: 20px; height: 20px; background: #ccc; left: 0; top: 40px;"></span>
+                </span>
+            </div>
+            <div class="options">
+                <input type="radio" name="q34" value="a"> ৪<br>
+                <input type="radio" name="q34" value="b"> ৫<br>
+                <input type="radio" name="q34" value="c"> ৬<br>
+                <input type="radio" name="q34" value="d"> ৭<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩৫. কোন আকৃতি ম্যাট্রিক্সটি সম্পূর্ণ করে?</p>
+            <div class="matrix">
+                <div class="matrix-cell">△</div>
+                <div class="matrix-cell">□</div>
+                <div class="matrix-cell">◯</div>
+                <div class="matrix-cell">□</div>
+                <div class="matrix-cell">◯</div>
+                <div class="matrix-cell">△</div>
+                <div class="matrix-cell">◯</div>
+                <div class="matrix-cell">△</div>
+                <div class="matrix-cell">?</div>
+            </div>
+            <div class="options">
+                <input type="radio" name="q35" value="a"> △<br>
+                <input type="radio" name="q35" value="b"> □<br>
+                <input type="radio" name="q35" value="c"> ◯<br>
+                <input type="radio" name="q35" value="d"> ◇<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩৬. কোন ত্রিমাত্রিক আকৃতির ৬টি তল, ১২টি ধার এবং ৮টি কোণ রয়েছে?</p>
+            <div class="options">
+                <input type="radio" name="q36" value="a"> গোলক<br>
+                <input type="radio" name="q36" value="b"> সিলিন্ডার<br>
+                <input type="radio" name="q36" value="c"> ঘনক<br>
+                <input type="radio" name="q36" value="d"> শঙ্কু<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩৭. আপনি যদি এই নেটটি একটি কিউবে ভাঁজ করেন, তবে X এর বিপরীত দিকে কোন তল থাকবে?</p>
+            <div class="shape-options">
+                <span style="font-size: 24px;">+--+--+<br>|X |  |<br>+--+--+<br>|  |O |<br>+--+--+</span>
+            </div>
+            <div class="options">
+                <input type="radio" name="q37" value="a"> খালি তল<br>
+                <input type="radio" name="q37" value="b"> O তল<br>
+                <input type="radio" name="q37" value="c"> X তল<br>
+                <input type="radio" name="q37" value="d"> নির্ধারণ করা সম্ভব নয়<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩৮. কোন আকৃতিটি প্রদত্ত আকৃতির আয়না প্রতিবিম্ব?</p>
+            <div class="shape-options">
+                <span style="font-size: 24px;">/</span>
+                <span style="font-size: 24px;">\</span>
+                <span style="font-size: 24px;">></span>
+                <span style="font-size: 24px;"><</span>
+            </div>
+            <div class="options">
+                <input type="radio" name="q38" value="a"> /<br>
+                <input type="radio" name="q38" value="b"> \<br>
+                <input type="radio" name="q38" value="c"> ><br>
+                <input type="radio" name="q38" value="d"> <<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৩৯. এই চিত্রে কয়টি ত্রিভুজ আছে?</p>
+            <div class="shape-options">
+                <span style="font-size: 24px;">▲<br>▲▲</span>
+            </div>
+            <div class="options">
+                <input type="radio" name="q39" value="a"> ৩<br>
+                <input type="radio" name="q39" value="b"> ৪<br>
+                <input type="radio" name="q39" value="c"> ৫<br>
+                <input type="radio" name="q39" value="d"> ৬<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৪০. কোন প্যাটার্নটি পরবর্তী আসবে?</p>
+            <div class="shape-options">
+                <span style="font-size: 24px;">■ □ ■ □ ■ ?</span>
+            </div>
+            <div class="options">
+                <input type="radio" name="q40" value="a"> ■<br>
+                <input type="radio" name="q40" value="b"> □<br>
+                <input type="radio" name="q40" value="c"> ◯<br>
+                <input type="radio" name="q40" value="d"> △<br>
+            </div>
+        </div>
+        
+        <h2>স্মৃতি ও প্রক্রিয়াকরণ গতি</h2>
+        
+        <!-- প্রশ্ন ৪১-৫০ -->
+        <div class="question">
+            <p>৪১. এই সংখ্যাটি মনে রাখুন: ৫৮২৯। পরের কয়েকটি প্রশ্নের উত্তর দেবার পর এটা আপনাকে আবার জিজ্ঞাসা করা হবে।</p>
+            <input type="hidden" name="q41" value="5829">
+        </div>
+        
+        <div class="question">
+            <p>৪২. এই টেস্টের আগের কোন প্রশ্নে "অপরোপকারী" শব্দটি এসেছিল?</p>
+            <div class="options">
+                <input type="radio" name="q42" value="a"> প্রশ্ন ৪<br>
+                <input type="radio" name="q42" value="b"> প্রশ্ন ৬<br>
+                <input type="radio" name="q42" value="c"> প্রশ্ন ৯<br>
+                <input type="radio" name="q42" value="d"> প্রশ্ন ১২<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৪৩. প্রশ্ন ১৫ এর উত্তর কী ছিল?</p>
+            <div class="options">
+                <input type="radio" name="q43" value="a"> $২২<br>
+                <input type="radio" name="q43" value="b"> $২৪<br>
+                <input type="radio" name="q43" value="c"> $২৫<br>
+                <input type="radio" name="q43" value="d"> $২৮<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৪৪. প্রশ্ন ৪১ এ আপনাকে কোন সংখ্যা মনে রাখতে বলা হয়েছিল?</p>
+            <div class="options">
+                <input type="radio" name="q44" value="a"> ৫২৮৯<br>
+                <input type="radio" name="q44" value="b"> ৫৮২৯<br>
+                <input type="radio" name="q44" value="c"> ৫৮৯২<br>
+                <input type="radio" name="q44" value="d"> ৫২৯৮<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৪৫. এখন পর্যন্ত এই টেস্টে কয়টি প্রশ্ন আকৃতি বা স্থানিক যুক্তি সম্পর্কিত ছিল?</p>
+            <div class="options">
+                <input type="radio" name="q45" value="a"> ৫<br>
+                <input type="radio" name="q45" value="b"> ৭<br>
+                <input type="radio" name="q45" value="c"> ১০<br>
+                <input type="radio" name="q45" value="d"> ১২<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৪৬. নিচের কোন সিরিজটি এই টেস্টের আগের কোন প্রশ্নে
+                   এসেছিল?</p>
+            <div class="options">
+                <input type="radio" name="q46" value="a"> ২, ৫, ১০, ১৭, ২৬<br>
+                <input type="radio" name="q46" value="b"> ১, ১, ২, ৩, ৫, ৮<br>
+                <input type="radio" name="q46" value="c"> ৮, ১৬, ৩২, ৬৪<br>
+                <input type="radio" name="q46" value="d"> উপরের সবগুলো<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৪৭. প্রশ্ন ২৮ এ ভালুকটির রং কী ছিল?</p>
+            <div class="options">
+                <input type="radio" name="q47" value="a"> কালো<br>
+                <input type="radio" name="q47" value="b"> বাদামী<br>
+                <input type="radio" name="q47" value="c"> সাদা<br>
+                <input type="radio" name="q47" value="d"> ধূসর<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৪৮. কোন প্রশ্নে ফিবোনাচি সিরিজ সম্পর্কে জিজ্ঞাসা করা হয়েছিল?</p>
+            <div class="options">
+                <input type="radio" name="q48" value="a"> প্রশ্ন ১১<br>
+                <input type="radio" name="q48" value="b"> প্রশ্ন ১৬<br>
+                <input type="radio" name="q48" value="c"> প্রশ্ন ২০<br>
+                <input type="radio" name="q48" value="d"> প্রশ্ন ৩০<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৪৯. প্রশ্ন ৩৭ এর বিষয়বস্তু কী ছিল?</p>
+            <div class="options">
+                <input type="radio" name="q49" value="a"> আয়না প্রতিবিম্ব<br>
+                <input type="radio" name="q49" value="b"> নেট থেকে কিউব তৈরি<br>
+                <input type="radio" name="q49" value="c"> ত্রিভুজ গণনা<br>
+                <input type="radio" name="q49" value="d"> ত্রিমাত্রিক আকৃতি চিহ্নিতকরণ<br>
+            </div>
+        </div>
+        
+        <div class="question">
+            <p>৫০. নিচের কোন শব্দটি এই টেস্টের কোন প্রশ্নে আসেনি?</p>
+            <div class="options">
+                <input type="radio" name="q50" value="a"> সিলোজিজম<br>
+                <input type="radio" name="q50" value="b"> ফিবোনাচি<br>
+                <input type="radio" name="q50" value="c"> অপরোপকারী<br>
+                <input type="radio" name="q50" value="d"> মন্দবুদ্ধি<br>
+            </div>
+        </div>
+        
+        <button onclick="calculateScore()">টেস্ট জমা দিন</button>
+        <div class="result" id="result"></div>
+    </div>
+    
+    <script>
+        // টাইমার (৬০ মিনিট)
+        let timeLeft = 60 * 60;
+        const timer = setInterval(function() {
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('time').textContent = 
+                `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                calculateScore();
+            }
+        }, 1000);
+
+        // সঠিক উত্তর
+        const correctAnswers = {
+            q1: "c", q2: "b", q3: "b", q4: "b", q5: "a",
+            q6: "c", q7: "a", q8: "d", q9: "c", q10: "c",
+            q11: "b", q12: "b", q13: "b", q14: "b", q15: "c",
+            q16: "c", q17: "b", q18: "c", q19: "a", q20: "d",
+            q21: "b", q22: "d", q23: "b", q24: "c", q25: "d",
+            q26: "c", q27: "b", q28: "c", q29: "d", q30: "d",
+            q31: "d", q32: "a", q33: "a", q34: "b", q35: "b",
+            q36: "c", q37: "b", q38: "b", q39: "c", q40: "b",
+            q41: "b", q42: "a", q43: "c", q44: "b", q45: "c",
+            q46: "d", q47: "c", q48: "c", q49: "b", q50: "a"
+        };
+
+        // স্কোর গণনা
+        function calculateScore() {
+            clearInterval(timer);
+            let score = 0;
+            const totalQuestions = 50;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = "q" + i;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                
+                if (selectedOption && selectedOption.value === correctAnswers[questionName]) {
+                    score++;
+                }
+            }
+            
+            const iqScore = Math.round(100 + (score - 25) * (15/7.5));
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.style.backgroundColor = '#e8f4f8';
+            resultDiv.style.border = '1px solid #3498db';
+            
+            resultDiv.innerHTML = `
+                <h3>আপনার আইকিউ টেস্ট ফলাফল</h3>
+                <p>আপনি পেয়েছেন ${score} পয়েন্ট ${totalQuestions} এর মধ্যে।</p>
+                <p>আনুমানিক আইকিউ: <strong>${iqScore}</strong></p>
+                <p>পার্সেন্টাইল: ${calculatePercentile(iqScore)}</p>
+                <p>${getIQCategory(iqScore)}</p>
+            `;
+            
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function calculatePercentile(iq) {
+            if (iq >= 145) return "৯৯.৯%";
+            if (iq >= 130) return "৯৮%";
+            if (iq >= 120) return "৯১%";
+            if (iq >= 115) return "৮৪%";
+            if (iq >= 110) return "৭৫%";
+            if (iq >= 100) return "৫০%";
+            if (iq >= 90) return "২৫%";
+            return "২% এর নিচে";
+        }
+        
+        function getIQCategory(iq) {
+            if (iq >= 145) return "প্রতিভাবান বা প্রায় প্রতিভাবান";
+            if (iq >= 130) return "অত্যন্ত উচ্চ বুদ্ধিমত্তা";
+            if (iq >= 120) return "উচ্চ বুদ্ধিমত্তা";
+            if (iq >= 110) return "গড় থেকে উচ্চ বুদ্ধিমত্তা";
+            if (iq >= 90) return "গড় বুদ্ধিমত্তা";
+            return "গড়ের নিচে বুদ্ধিমত্তা";
+        }
+    </script>
+</body>
+</html>
