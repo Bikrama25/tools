@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everyday English Helper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --secondary-color: #34a853;
+            --accent-color: #ea4335;
+            --light-color: #f8f9fa;
+            --dark-color: #202124;
+            --border-color: #dadce0;
+            --recording-color: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 2.5rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            color: var(--dark-color);
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        .tool-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .tool-card h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.4rem;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        select, textarea, input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        select:focus, textarea:focus, input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #3367d6;
+        }
+        
+        .btn-tertiary {
+            background-color: var(--secondary-color);
+        }
+        
+        .btn-tertiary:hover {
+            background-color: #2d924a;
+        }
+        
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .result-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .result-container h2 {
+            margin-bottom: 1.2rem;
+            color: var(--dark-color);
+            font-size: 1.3rem;
+        }
+        
+        #result-content {
+            background-color: #f8f9fa;
+            padding: 1.2rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary-color);
+            min-height: 100px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .recording-ui {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background: #f0f8ff;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: none;
+        }
+        
+        .recording-ui h3 {
+            margin-bottom: 0.8rem;
+            color: var(--dark-color);
+        }
+        
+        .recording-ui p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .recording-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        #recorded-audio {
+            width: 100%;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .recording-status {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.2rem;
+            }
+            
+            .hero {
+                padding: 2rem 1rem;
+            }
+            
+            .tabs {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+            }
+            
+            .tool-card, .result-container {
+                padding: 1.4rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .recording-controls {
+                flex-direction: column;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Everyday English Helper</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section class="hero">
+            <h1>Master Daily English Communication</h1>
+            <p>Practical tools for social, professional, and custom communication needs</p>
+        </section>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="social">Social Interactions</div>
+            <div class="tab" data-tab="professional">Professional Communication</div>
+            <div class="tab" data-tab="custom">Custom Practice</div>
+        </div>
+        
+        <div class="tab-content active" id="social-tab">
+            <div class="tool-card">
+                <h2>Social English Builder</h2>
+                <div class="input-group">
+                    <label for="social-scenario">Scenario</label>
+                    <select id="social-scenario">
+                        <option value="greeting">Greeting someone</option>
+                        <option value="introduction">Introducing yourself</option>
+                        <option value="smalltalk">Making small talk</option>
+                        <option value="compliment">Giving a compliment</option>
+                        <option value="apology">Making an apology</option>
+                        <option value="invitation">Inviting someone</option>
+                        <option value="asking-for-help">Asking for help</option>
+                        <option value="giving-directions">Giving directions</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="social-context">Context</label>
+                    <select id="social-context">
+                        <option value="formal">Formal</option>
+                        <option value="neutral">Neutral</option>
+                        <option value="informal">Informal</option>
+                    </select>
+                </div>
+                <button id="generate-social" class="btn">
+                    <i class="fas fa-comment-dots"></i> Generate Phrases
+                </button>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="professional-tab">
+            <div class="tool-card">
+                <h2>Professional English Builder</h2>
+                <div class="input-group">
+                    <label for="professional-scenario">Scenario</label>
+                    <select id="professional-scenario">
+                        <option value="email">Writing an email</option>
+                        <option value="meeting">Participating in a meeting</option>
+                        <option value="request">Making a request</option>
+                        <option value="presentation">Giving a presentation</option>
+                        <option value="interview">Job interview</option>
+                        <option value="negotiation">Negotiation</option>
+                        <option value="feedback">Giving feedback</option>
+                        <option value="networking">Networking</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="professional-tone">Tone</label>
+                    <select id="professional-tone">
+                        <option value="formal">Formal</option>
+                        <option value="polite">Polite</option>
+                        <option value="friendly">Friendly Professional</option>
+                    </select>
+                </div>
+                <button id="generate-professional" class="btn">
+                    <i class="fas fa-briefcase"></i> Generate Phrases
+                </button>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="custom-tab">
+            <div class="tool-card">
+                <h2>Custom English Practice</h2>
+                <div class="input-group">
+                    <label for="custom-scenario">Describe your situation</label>
+                    <textarea id="custom-scenario" rows="3" placeholder="e.g., I need to ask my neighbor to be quieter at night"></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="custom-tone">Desired tone</label>
+                    <select id="custom-tone">
+                        <option value="polite">Polite</option>
+                        <option value="friendly">Friendly</option>
+                        <option value="firm">Firm</option>
+                        <option value="formal">Formal</option>
+                        <option value="diplomatic">Diplomatic</option>
+                    </select>
+                </div>
+                <button id="generate-custom" class="btn">
+                    <i class="fas fa-magic"></i> Generate Response
+                </button>
+            </div>
+        </div>
+        
+        <section class="result-container">
+            <h2>Suggested Phrases</h2>
+            <div id="result-content">
+                <p style="color: #666;">Your generated English phrases will appear here.</p>
+            </div>
+            <div class="action-buttons">
+                <button id="practice-speech" class="btn btn-secondary" style="display: none;">
+                    <i class="fas fa-volume-up"></i> Practice Speaking
+                </button>
+                <button id="copy-text" class="btn btn-tertiary" style="display: none;">
+                    <i class="fas fa-copy"></i> Copy Text
+                </button>
+            </div>
+            <div class="recording-ui" id="recording-ui">
+                <h3>Practice Recording</h3>
+                <p>Record yourself reading the text above, then compare with the model pronunciation.</p>
+                <div class="recording-controls">
+                    <button id="start-recording" class="btn" style="background-color: var(--secondary-color);">
+                        <i class="fas fa-microphone"></i> Start Recording
+                    </button>
+                    <button id="stop-recording" class="btn" style="background-color: var(--accent-color); display: none;">
+                        <i class="fas fa-stop"></i> Stop Recording
+                    </button>
+                </div>
+                <div class="recording-status" id="recording-status"></div>
+                <audio id="recorded-audio" controls></audio>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+                });
+            });
+
+            // Complete phrase databases
+            const socialPhrases = {
+                greeting: {
+                    formal: [
+                        "Good morning/afternoon/evening, [Name].",
+                        "Hello, it's a pleasure to see you.",
+                        "How do you do?"
+                    ],
+                    neutral: [
+                        "Hello [Name], how are you?",
+                        "Hi there!",
+                        "Good to see you."
+                    ],
+                    informal: [
+                        "Hey! What's up?",
+                        "Hi [Name]! Long time no see!",
+                        "Yo! How's it going?"
+                    ]
+                },
+                introduction: {
+                    formal: [
+                        "Allow me to introduce myself. I'm [Name].",
+                        "Hello, my name is [Name]. It's a pleasure to meet you.",
+                        "I don't believe we've met. I'm [Name]."
+                    ],
+                    neutral: [
+                        "Hi, I'm [Name].",
+                        "Hello, my name is [Name].",
+                        "Nice to meet you, I'm [Name]."
+                    ],
+                    informal: [
+                        "Hey, I'm [Name]!",
+                        "What's up? I'm [Name].",
+                        "[Name] here. Nice to meet you!"
+                    ]
+                },
+                smalltalk: {
+                    formal: [
+                        "How have you been keeping?",
+                        "Lovely weather we're having, isn't it?",
+                        "Have you been keeping busy?"
+                    ],
+                    neutral: [
+                        "How's your day going?",
+                        "What have you been up to lately?",
+                        "Did you do anything interesting this weekend?"
+                    ],
+                    informal: [
+                        "What's new with you?",
+                        "How's life treating you?",
+                        "Anything exciting happening?"
+                    ]
+                },
+                compliment: {
+                    formal: [
+                        "I must say, you've done an excellent job with [specific thing].",
+                        "You have a wonderful [specific quality].",
+                        "I really admire your [specific skill/trait]."
+                    ],
+                    neutral: [
+                        "I really like your [specific thing]!",
+                        "You're really good at [specific skill].",
+                        "That's a great [specific item/idea]!"
+                    ],
+                    informal: [
+                        "Wow, you're amazing at [specific thing]!",
+                        "Dude, that's awesome!",
+                        "You totally rock at [specific skill]!"
+                    ]
+                },
+                apology: {
+                    formal: [
+                        "I sincerely apologize for [specific issue].",
+                        "Please accept my deepest apologies for [what happened].",
+                        "I regret any inconvenience caused by [situation]."
+                    ],
+                    neutral: [
+                        "I'm sorry about [what happened].",
+                        "My apologies for [specific issue].",
+                        "I want to apologize for [situation]."
+                    ],
+                    informal: [
+                        "Sorry about that!",
+                        "My bad! I'll fix it.",
+                        "Oops! I didn't mean to [action]."
+                    ]
+                },
+                invitation: {
+                    formal: [
+                        "We would be honored if you could join us for [event].",
+                        "You are cordially invited to attend [event].",
+                        "We kindly invite you to [event/details]."
+                    ],
+                    neutral: [
+                        "Would you like to come to [event]?",
+                        "We're having [event] and thought you might like to join.",
+                        "Are you free to attend [event]?"
+                    ],
+                    informal: [
+                        "Wanna come to [event]?",
+                        "Hey, we're doing [activity] - join us!",
+                        "Come hang out with us at [event]!"
+                    ]
+                },
+                "asking-for-help": {
+                    formal: [
+                        "I was wondering if you might be able to assist me with [specific request]?",
+                        "Would you be so kind as to help me with [specific task]?",
+                        "Might I trouble you for your assistance with [specific need]?"
+                    ],
+                    neutral: [
+                        "Could you help me with [specific request]?",
+                        "I need some help with [specific task] - are you available?",
+                        "Would you mind helping me with [specific need]?"
+                    ],
+                    informal: [
+                        "Can you help me with [specific request]?",
+                        "Hey, I need a hand with [specific task] - got a minute?",
+                        "Help me out with [specific need], would you?"
+                    ]
+                },
+                "giving-directions": {
+                    formal: [
+                        "To reach [destination], please proceed to [landmark] and turn [direction].",
+                        "You'll want to go [general direction] until you see [landmark], then [specific instructions].",
+                        "The most direct route would be to [detailed directions]."
+                    ],
+                    neutral: [
+                        "Go [direction] until you see [landmark], then turn [direction].",
+                        "Head toward [landmark] and then [specific instructions].",
+                        "You can get there by [general route] and then [specific directions]."
+                    ],
+                    informal: [
+                        "Just go [direction] past the [landmark] and you'll see it!",
+                        "Walk straight until [landmark], then hang a [direction].",
+                        "It's easy - just follow [route] and look for [landmark]."
+                    ]
+                }
+            };
+
+            const professionalPhrases = {
+                email: {
+                    formal: [
+                        "Dear [Recipient],\n\nI hope this message finds you well.\n\n[Main content]\n\nBest regards,\n[Your Name]",
+                        "To whom it may concern,\n\nI am writing regarding [subject].\n\n[Main content]\n\nSincerely,\n[Your Name]"
+                    ],
+                    polite: [
+                        "Hello [Name],\n\nI hope you're doing well.\n\n[Main content]\n\nThanks and best,\n[Your Name]",
+                        "Hi [Name],\n\nJust reaching out about [subject].\n\n[Main content]\n\nBest,\n[Your Name]"
+                    ],
+                    friendly: [
+                        "Hey [Name],\n\nQuick note about [subject].\n\n[Main content]\n\nTalk soon,\n[Your Name]"
+                    ]
+                },
+                meeting: {
+                    formal: [
+                        "Thank you all for being here today.",
+                        "Let's begin with the first agenda item.",
+                        "Would anyone like to add anything before we move on?"
+                    ],
+                    polite: [
+                        "Does anyone have thoughts on this?",
+                        "I'd appreciate everyone's input on this matter.",
+                        "Could you please clarify that point?"
+                    ],
+                    friendly: [
+                        "Thanks for joining, everyone!",
+                        "Let's dive right in.",
+                        "Who wants to go first?"
+                    ]
+                },
+                request: {
+                    formal: [
+                        "I would be most grateful if you could [specific request].",
+                        "Might I request your assistance with [specific task]?",
+                        "Would it be possible for you to [specific action]?"
+                    ],
+                    polite: [
+                        "Could you please [specific request]?",
+                        "Would you mind [specific task] when you have a moment?",
+                        "I was hoping you could help me with [specific action]."
+                    ],
+                    friendly: [
+                        "Can you [specific request] when you get a chance?",
+                        "Would you be able to [specific task] for me?",
+                        "Could I ask you to [specific action]?"
+                    ]
+                },
+                presentation: {
+                    formal: [
+                        "Today, I'll be presenting on [topic].",
+                        "This slide illustrates [key point].",
+                        "To summarize our main findings..."
+                    ],
+                    polite: [
+                        "I'd like to walk you through [topic].",
+                        "Here we can see [key point].",
+                        "Let me highlight the key takeaways..."
+                    ],
+                    friendly: [
+                        "So today we're talking about [topic].",
+                        "Check out this [key point] - it's really interesting!",
+                        "The big things to remember are..."
+                    ]
+                },
+                interview: {
+                    formal: [
+                        "Could you tell me more about your experience with [specific skill]?",
+                        "What would you say is your greatest professional strength?",
+                        "How would you handle [specific scenario]?"
+                    ],
+                    polite: [
+                        "I'd love to hear about your work with [specific area].",
+                        "What do you enjoy most about [relevant aspect] of your work?",
+                        "Could you share how you'd approach [specific challenge]?"
+                    ],
+                    friendly: [
+                        "Tell me about your experience with [specific skill].",
+                        "What gets you excited about this kind of work?",
+                        "How would you tackle [specific situation]?"
+                    ]
+                },
+                negotiation: {
+                    formal: [
+                        "Our position is that [specific terms] would be most favorable.",
+                        "Perhaps we could find middle ground on [specific point].",
+                        "Would you consider [specific compromise]?"
+                    ],
+                    polite: [
+                        "We're thinking [specific terms] would work best.",
+                        "Maybe we could agree on [specific point].",
+                        "How would you feel about [specific compromise]?"
+                    ],
+                    friendly: [
+                        "We'd really like [specific terms] if possible.",
+                        "What if we tried [specific solution]?",
+                        "Could we do [specific compromise]?"
+                    ]
+                },
+                feedback: {
+                    formal: [
+                        "I'd like to offer some constructive feedback regarding [specific area].",
+                        "One opportunity for improvement might be [specific suggestion].",
+                        "Your work on [specific aspect] was particularly strong."
+                    ],
+                    polite: [
+                        "Here's some feedback about [specific area].",
+                        "You might consider trying [specific suggestion].",
+                        "I really liked how you handled [specific aspect]."
+                    ],
+                    friendly: [
+                        "Let me share some thoughts about [specific area].",
+                        "You could try [specific suggestion] next time.",
+                        "Great job on [specific aspect]!"
+                    ]
+                },
+                networking: {
+                    formal: [
+                        "I've long admired your work in [specific field].",
+                        "Would you be available for a brief conversation about [topic]?",
+                        "Your perspective on [industry trend] would be most valuable."
+                    ],
+                    polite: [
+                        "I really appreciate your work with [specific area].",
+                        "Could we connect to discuss [topic]?",
+                        "I'd love to hear your thoughts on [industry topic]."
+                    ],
+                    friendly: [
+                        "Big fan of what you're doing with [specific thing]!",
+                        "Let's grab coffee and chat about [topic] sometime!",
+                        "What do you think about [industry trend]?"
+                    ]
+                }
+            };
+
+            // DOM elements
+            const generateSocialBtn = document.getElementById('generate-social');
+            const generateProfessionalBtn = document.getElementById('generate-professional');
+            const generateCustomBtn = document.getElementById('generate-custom');
+            const resultContent = document.getElementById('result-content');
+            const practiceSpeechBtn = document.getElementById('practice-speech');
+            const copyTextBtn = document.getElementById('copy-text');
+            const recordingUI = document.getElementById('recording-ui');
+            const startRecordingBtn = document.getElementById('start-recording');
+            const stopRecordingBtn = document.getElementById('stop-recording');
+            const recordingStatus = document.getElementById('recording-status');
+            const recordedAudio = document.getElementById('recorded-audio');
+
+            // Audio recording variables
+            let mediaRecorder;
+            let audioChunks = [];
+            let isRecording = false;
+
+            // Generate social phrases
+            generateSocialBtn.addEventListener('click', function() {
+                const scenario = document.getElementById('social-scenario').value;
+                const context = document.getElementById('social-context').value;
+                
+                if (!socialPhrases[scenario] || !socialPhrases[scenario][context]) {
+                    displayResult("Please select valid options for scenario and context.");
+                    return;
+                }
+                
+                const phrases = socialPhrases[scenario][context];
+                const randomPhrases = [];
+                
+                // Get 3 random phrases or all if less than 3
+                const count = Math.min(3, phrases.length);
+                const usedIndices = new Set();
+                
+                while (randomPhrases.length < count && usedIndices.size < phrases.length) {
+                    const randomIndex = Math.floor(Math.random() * phrases.length);
+                    if (!usedIndices.has(randomIndex)) {
+                        usedIndices.add(randomIndex);
+                        randomPhrases.push(phrases[randomIndex]);
+                    }
+                }
+                
+                displayResult(randomPhrases.join('<br><br>'));
+            });
+
+            // Generate professional phrases
+            generateProfessionalBtn.addEventListener('click', function() {
+                const scenario = document.getElementById('professional-scenario').value;
+                const tone = document.getElementById('professional-tone').value;
+                
+                if (!professionalPhrases[scenario] || !professionalPhrases[scenario][tone]) {
+                    displayResult("Please select valid options for scenario and tone.");
+                    return;
+                }
+                
+                const phrases = professionalPhrases[scenario][tone];
+                const randomPhrases = [];
+                
+                // Get 3 random phrases or all if less than 3
+                const count = Math.min(3, phrases.length);
+                const usedIndices = new Set();
+                
+                while (randomPhrases.length < count && usedIndices.size < phrases.length) {
+                    const randomIndex = Math.floor(Math.random() * phrases.length);
+                    if (!usedIndices.has(randomIndex)) {
+                        usedIndices.add(randomIndex);
+                        randomPhrases.push(phrases[randomIndex]);
+                    }
+                }
+                
+                displayResult(randomPhrases.join('<br><br>'));
+            });
+
+            // Generate custom response
+            generateCustomBtn.addEventListener('click', function() {
+                const scenario = document.getElementById('custom-scenario').value.trim();
+                const tone = document.getElementById('custom-tone').value;
+                
+                if (!scenario) {
+                    displayResult("Please describe your situation first.");
+                    return;
+                }
+                
+                const response = generateCustomResponse(scenario, tone);
+                displayResult(response);
+            });
+
+            // Display result
+            function displayResult(content) {
+                resultContent.innerHTML = `<p>${content}</p>`;
+                practiceSpeechBtn.style.display = 'inline-block';
+                copyTextBtn.style.display = 'inline-block';
+                recordingUI.style.display = 'none';
+            }
+
+            // Enhanced custom response generator
+            function generateCustomResponse(scenario, tone) {
+                const toneData = {
+                    polite: {
+                        starters: [
+                            "Could you possibly",
+                            "Would you mind",
+                            "I'd really appreciate it if",
+                            "Might I ask you to",
+                            "Please"
+                        ],
+                        closers: [
+                            "Thank you so much for your understanding.",
+                            "I truly appreciate your help with this.",
+                            "Thanks in advance for your consideration."
+                        ]
+                    },
+                    friendly: {
+                        starters: [
+                            "Hey, could you",
+                            "Would you be able to",
+                            "Do you think you could",
+                            "Can you",
+                            "Let's"
+                        ],
+                        closers: [
+                            "Thanks a bunch!",
+                            "I owe you one!",
+                            "Appreciate it!",
+                            "You're the best!"
+                        ]
+                    },
+                    firm: {
+                        starters: [
+                            "I need you to",
+                            "You'll need to",
+                            "It's important that",
+                            "Please ensure you",
+                            "Kindly"
+                        ],
+                        closers: [
+                            "This needs to be addressed promptly.",
+                            "Your immediate attention to this would be appreciated.",
+                            "Please take care of this as soon as possible."
+                        ]
+                    },
+                    formal: {
+                        starters: [
+                            "I would like to request that",
+                            "It would be preferable if",
+                            "I must ask you to",
+                            "Would you be so kind as to",
+                            "Kindly"
+                        ],
+                        closers: [
+                            "Thank you for your cooperation in this matter.",
+                            "Your prompt attention to this would be greatly appreciated.",
+                            "I thank you in advance for your assistance."
+                        ]
+                    },
+                    diplomatic: {
+                        starters: [
+                            "Perhaps we could",
+                            "I was wondering if",
+                            "It might be beneficial to",
+                            "Would it be possible to",
+                            "Maybe we should consider"
+                        ],
+                        closers: [
+                            "I'm open to discussing alternatives if needed.",
+                            "Let me know your thoughts on this approach.",
+                            "I'd welcome your perspective on this matter."
+                        ]
+                    }
+                };
+                
+                const currentTone = toneData[tone] || toneData.polite;
+                const starter = currentTone.starters[Math.floor(Math.random() * currentTone.starters.length)];
+                const closer = currentTone.closers[Math.floor(Math.random() * currentTone.closers.length)];
+                
+                // Process the scenario input
+                let processedScenario = scenario;
+                if (!/[.!?]$/.test(processedScenario)) {
+                    processedScenario = processedScenario.replace(/\.$/, '');
+                }
+                processedScenario = processedScenario.charAt(0).toLowerCase() + processedScenario.slice(1);
+                
+                return `${starter} ${processedScenario}. ${closer}`;
+            }
+
+            // Practice speech functionality
+            practiceSpeechBtn.addEventListener('click', function() {
+                const content = resultContent.textContent;
+                if (content && !content.includes("Your generated English phrases will appear here.")) {
+                    if ('speechSynthesis' in window) {
+                        const utterance = new SpeechSynthesisUtterance(content);
+                        utterance.rate = 0.9;
+                        utterance.pitch = 1;
+                        utterance.lang = 'en-US';
+                        
+                        // Show recording UI after speech ends
+                        utterance.onend = function() {
+                            recordingUI.style.display = 'block';
+                            recordedAudio.style.display = 'none';
+                        };
+                        
+                        speechSynthesis.speak(utterance);
+                    } else {
+                        alert('Text-to-speech not supported in your browser');
+                    }
+                } else {
+                    alert('Please generate some content first');
+                }
+            });
+
+            // Copy text functionality
+            copyTextBtn.addEventListener('click', function() {
+                const content = resultContent.textContent;
+                if (content && !content.includes("Your generated English phrases will appear here.")) {
+                    navigator.clipboard.writeText(content)
+                        .then(() => {
+                            const originalText = copyTextBtn.innerHTML;
+                            copyTextBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                            setTimeout(() => {
+                                copyTextBtn.innerHTML = originalText;
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            console.error('Failed to copy: ', err);
+                        });
+                }
+            });
+
+            // Initialize recording functionality
+            startRecordingBtn.addEventListener('click', async function() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    
+                    mediaRecorder.ondataavailable = function(e) {
+                        audioChunks.push(e.data);
+                    };
+                    
+                    mediaRecorder.onstop = function() {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        recordedAudio.src = audioUrl;
+                        recordedAudio.style.display = 'block';
+                        
+                        // Stop all tracks in the stream
+                        stream.getTracks().forEach(track => track.stop());
+                    };
+                    
+                    mediaRecorder.start();
+                    isRecording = true;
+                    startRecordingBtn.style.display = 'none';
+                    stopRecordingBtn.style.display = 'inline-block';
+                    recordingStatus.textContent = "Recording... Speak now!";
+                    recordingStatus.classList.add('pulse');
+                    
+                } catch (err) {
+                    console.error('Error accessing microphone:', err);
+                    recordingStatus.textContent = "Error accessing microphone. Please check permissions.";
+                }
+            });
+            
+            stopRecordingBtn.addEventListener('click', function() {
+                if (isRecording && mediaRecorder) {
+                    mediaRecorder.stop();
+                    isRecording = false;
+                    stopRecordingBtn.style.display = 'none';
+                    startRecordingBtn.style.display = 'inline-block';
+                    recordingStatus.textContent = "Recording complete. Play back your audio to compare with the model.";
+                    recordingStatus.classList.remove('pulse');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
