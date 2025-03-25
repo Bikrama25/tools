@@ -536,8 +536,10 @@
                     feedback += `<strong>Q${index + 1}:</strong> ${question.question}<br>`;
                     feedback += `Your answer: ${question.options[userAnswers[index]] || 'Not answered'}<br>`;
                     feedback += `Correct answer: ${question.options[question.answer]}<br>`;
-                    feedback += `<em>${question.explanation}</em><br><
+                    feedback += `<em>${question.explanation}</em><br>`;
                     feedback += isCorrect 
+                        ? '<span style="color: var
+                        feedback += isCorrect 
                         ? '<span style="color: var(--success-color);">✓ Correct</span><br><br>' 
                         : '<span style="color: var(--danger-color);">✗ Incorrect</span><br><br>';
                 });
