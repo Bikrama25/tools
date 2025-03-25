@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="হিন্দুধর্মের বিতর্কিত দিকগুলি অন্বেষণ করুন এই ইন্টারেক্টিভ কুইজের মাধ্যমে। হিন্দু ঐতিহ্যের দার্শনিক, ধর্মতাত্ত্বিক এবং সামাজিক বিষয়গুলিতে আপনার জ্ঞান পরীক্ষা করুন।">
+    <meta name="keywords" content="হিন্দুধর্ম কুইজ, হিন্দু বিতর্ক, বেদান্ত, ধর্ম, কর্ম, মোক্ষ, হিন্দু দর্শন, হিন্দু ধর্মতত্ত্ব">
+    <meta name="author" content="হিন্দুধর্ম বিতর্ক কুইজ">
+    <title>হিন্দুধর্ম বিতর্ক কুইজ | হিন্দু চিন্তার বিতর্কিত দিকগুলি অন্বেষণ করুন</title>
+    <style>
+        :root {
+            --primary: #FF9933; /* Saffron */
+            --secondary: #138808; /* Green */
+            --accent: #000080; /* Navy Blue */
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--accent);
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .ad-container {
+            margin: 20px 0;
+            text-align: center;
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        .quiz-container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .question {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .options {
+            margin-bottom: 25px;
+        }
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: var(--light);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+        .option:hover {
+            background: #e9ecef;
+            border-color: var(--primary);
+        }
+        .option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .btn {
+            padding: 12px 25px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        .btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .result {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 0%;
+            transition: width 0.3s;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #eee;
+        }
+        .answer-feedback {
+            margin-top: 30px;
+            text-align: left;
+        }
+        .answer-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 5px;
+            background: #f8f9fa;
+        }
+        .correct {
+            border-left: 4px solid var(--success);
+        }
+        .incorrect {
+            border-left: 4px solid var(--danger);
+        }
+        .correct-answer {
+            color: var(--success);
+            font-weight: bold;
+        }
+        .user-answer {
+            color: var(--danger);
+            font-weight: bold;
+        }
+        .restart-btn {
+            margin-top: 20px;
+            background: var(--warning);
+        }
+        .scripture-quote {
+            font-style: italic;
+            color: var(--secondary);
+            margin: 10px 0;
+            padding-left: 15px;
+            border-left: 3px solid var(--primary);
+        }
+        .school-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .quiz-container {
+                padding: 15px;
+            }
+            .question {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>হিন্দুধর্ম বিতর্ক কুইজ</h1>
+            <p class="description">হিন্দু দর্শন, ধর্মতত্ত্ব এবং চর্চার বিতর্কিত দিকগুলি অন্বেষণ করুন</p>
+        </header>
+
+        <div class="quiz-container">
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+            <div id="quiz-content">
+                <div class="question" id="question"></div>
+                <div class="options" id="options"></div>
+                <button class="btn" id="next-btn" disabled>পরবর্তী প্রশ্ন</button>
+            </div>
+            <div id="results-section" style="display: none;">
+                <div class="result" id="result"></div>
+                <div class="answer-feedback" id="answer-feedback"></div>
+                <button class="btn restart-btn" id="restart-btn">আবার শুরু করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© ২০২৪ হিন্দুধর্ম বিতর্ক কুইজ | হিন্দু ঐতিহ্যের শিক্ষামূলক উদ্দেশ্য এবং দার্শনিক অন্বেষণের জন্য ডিজাইন করা হয়েছে।</p>
+    </footer>
+
+    <script>
+        const questions = [
+            // ব্রহ্মের প্রকৃতি
+            {
+                question: "ব্রহ্ম (পরম সত্য) ব্যক্তিগত (সগুণ ব্রহ্ম) নাকি নিরাকার (নির্গুণ ব্রহ্ম)?",
+                options: [
+                    "কেবল ব্যক্তিগত - যেমন বিষ্ণু বা শিব",
+                    "কেবল নিরাকার - রূপ ও গুণহীন",
+                    "ব্যক্তিগত ও নিরাকার উভয় দিক",
+                    "ব্রহ্ম একটি দার্শনিক ধারণা, বাস্তবতা নয়"
+                ],
+                correctAnswer: 2,
+                school: "বেদান্ত",
+                explanation: "অধিকাংশ বেদান্ত সম্প্রদায় এটিকে মিলিয়ে নেয় এই শিক্ষা দিয়ে যে নির্গুণ ব্রহ্ম হল পরম সত্য, আর সগুণ ব্রহ্ম হল মানুষের সাথে ঐশ্বরিকের সম্পর্ক।",
+                scripture: "ব্রহ্ম সূত্র ৩.২.১১-১৪ ব্রহ্মের উভয় দিক নিয়ে আলোচনা করে"
+            },
+            {
+                question: "জগৎ (বিশ্ব) বাস্তব (সৎ), অবাস্তব (অসৎ) নাকি মায়া (ভ্রম)?",
+                options: [
+                    "সম্পূর্ণ বাস্তব - ব্রহ্মের সৃষ্টির অংশ",
+                    "অবাস্তব - কেবল ব্রহ্মই বিদ্যমান",
+                    "ভ্রমাত্মক উপস্থিতি - চূড়ান্তভাবে বাস্তব নয়",
+                    "বাস্তব কিন্তু অস্থায়ী - যেমন একটি স্বপ্ন যা থাকা পর্যন্ত বিদ্যমান"
+                ],
+                correctAnswer: 3,
+                school: "তত্ত্ববিদ্যা",
+                explanation: "বিভিন্ন সম্প্রদায়ের ভিন্ন মত: অদ্বৈত বলে জগৎ মিথ্যা (প্রকটিত বাস্তবতা), বিশিষ্টাদ্বৈত বলে এটি বাস্তব কিন্তু ব্রহ্মের উপর নির্ভরশীল, দ্বৈত বলে এটি ব্রহ্মের মতোই বাস্তব কিন্তু পৃথক।",
+                scripture: "মাণ্ডুক্য উপনিষদ ৭ জগৎকে 'না বাস্তব না অবাস্তব' বলে বর্ণনা করে"
+            },
+
+            // মোক্ষের পথ
+            {
+                question: "মোক্ষ (মুক্তি) লাভের শ্রেষ্ঠ পথ কোনটি?",
+                options: [
+                    "জ্ঞান যোগ (জ্ঞানের পথ)",
+                    "ভক্তি যোগ (ভক্তির পথ)",
+                    "কর্ম যোগ (নিঃস্বার্থ কর্মের পথ)",
+                    "প্রত্যেকের প্রকৃতি অনুযায়ী সব পথই সমানভাবে বৈধ"
+                ],
+                correctAnswer: 3,
+                school: "যোগ",
+                explanation: "ভগবদ্গীতা (অধ্যায় ১২) সব পথকে বৈধতা দেয়, যদিও বিভিন্ন ঐতিহ্য ব্যক্তির প্রকৃতি (স্বভাব) এর উপর ভিত্তি করে বিভিন্ন পদ্ধতির উপর জোর দেয়।",
+                scripture: "ভগবদ্গীতা ১২.৫: 'যাদের মন অপ্রকটিত, নিরাকার Supreme-এর দিকে আকৃষ্ট, তাদের জন্য অগ্রগতি খুবই কষ্টসাধ্য।'"
+            },
+            {
+                question: "নারী ও নিম্ন বর্ণের লোকেরা সরাসরি মোক্ষ লাভ করতে পারে নাকি তাদের প্রথমে উচ্চ বর্ণের পুরুষ হিসাবে পুনর্জন্ম নিতে হবে?",
+                options: [
+                    "কেবল উচ্চ বর্ণের পুরুষরাই মোক্ষ লাভ করতে পারে",
+                    "সবাই মোক্ষ লাভ করতে পারে কিন্তু বর্ণ পথকে প্রভাবিত করে",
+                    "বর্ণ/লিঙ্গ মোক্ষের জন্য অপ্রাসঙ্গিক",
+                    "মোক্ষের ধারণাটিকেই সংস্কার করা প্রয়োজন"
+                ],
+                correctAnswer: 2,
+                school: "সামাজিক ধর্ম",
+                explanation: "যদিও প্রথাগত গ্রন্থগুলো কখনো কখনো মোক্ষকে সীমাবদ্ধ করে, ভক্তি আন্দোলন এবং আধুনিক হিন্দুধর্ম সাধারণত স্বীকার করে যে জন্ম নির্বিশেষে সকলেই মুক্তি লাভ করতে পারে।",
+                scripture: "ভগবদ্গীতা ৯.৩২: 'হে অর্জুন, যারা আমার শরণাপন্ন হয়, তারা পাপী জন্মের হলেও... তারা পরম লক্ষ্য লাভ করে।'"
+            },
+
+            // বর্ণ প্রথা
+            {
+                question: "বর্ণ প্রথা দৈবভাবে নির্ধারিত নাকি একটি সামাজিক নির্মাণ?",
+                options: [
+                    "বেদে দৈবভাবে নির্ধারিত সামাজিক সম্প্রীতির জন্য",
+                    "মূলত গুণ/কর্ম দ্বারা কিন্তু জন্মভিত্তিক হয়ে বিকৃত হয়েছে",
+                    "কোনো দৈব অনুমোদন ছাড়াই সম্পূর্ণ সামাজিক নির্মাণ",
+                    "ভারতীয় সমাজের একটি ঔপনিবেশিক ভুল ব্যাখ্যা"
+                ],
+                correctAnswer: 1,
+                school: "ধর্ম",
+                explanation: "যদিও ভগবদ্গীতা (৪.১৩) গুণ/কর্ম দ্বারা বর্ণ বর্ণনা করে, কিন্তু ব্যবহারিকভাবে এটি বংশানুক্রমিক হয়ে উঠেছে। আধুনিক সংস্কারকেরা জন্মভিত্তিক বর্ণকে প্রত্যাখ্যান করেন।",
+                scripture: "ভগবদ্গীতা ৪.১৩: 'চতুর্বর্ণ্যাং ময়া সৃষ্টং গুণ কর্ম বিভাগশঃ...'"
+            },
+            {
+                question: "বর্ণভিত্তিক বৈষম্য কীভাবে সমাধান করা উচিত?",
+                options: [
+                    "হিন্দু ঐতিহ্যের মধ্যে সংস্কারের মাধ্যমে",
+                    "সরকারী ইতিবাচক কর্মসূচির মাধ্যমে",
+                    "বর্ণ পরিচয় সম্পূর্ণ প্রত্যাখ্যানের মাধ্যমে",
+                    "এটি আজকাল একটি উল্লেখযোগ্য সমস্যা নয়"
+                ],
+                correctAnswer: 0,
+                school: "সামাজিক সংস্কার",
+                explanation: "অধিকাংশ হিন্দু সংস্কারক (বুদ্ধ থেকে আম্বেডকর পর্যন্ত) বর্ণের সমস্যা সমাধানের জন্য ঐতিহ্যের মধ্যে কাজ করেছেন, যদিও পদ্ধতিগুলো ব্যাপকভাবে পরিবর্তিত হয়।",
+                scripture: "ঋগ্বেদ ১০.৯০ (পুরুষ সুক্ত) প্রায়ই বর্ণের উৎস সম্পর্কে উদ্ধৃত হয়"
+            },
+
+            // দেবতা ও পূজা
+            {
+                question: "সমস্ত হিন্দু দেবতা (দেব) কি এক পরম সত্তার প্রকাশ নাকি স্বতন্ত্র সত্তা?",
+                options: [
+                    "সবাই এক ঈশ্বরের (ব্রহ্ম) প্রকাশ",
+                    "স্বতন্ত্র সত্তা যাদের নিজস্ব এলাকা আছে",
+                    "কিছু প্রকাশ, কিছু স্বতন্ত্র",
+                    "তারা প্রাকৃতিক শক্তির প্রতীকী উপস্থাপনা"
+                ],
+                correctAnswer: 0,
+                school: "ধর্মতত্ত্ব",
+                explanation: "বেদান্তিক দৃষ্টিভঙ্গি হল যে সমস্ত দেবতা ব্রহ্মের প্রকাশ, যদিও জনপ্রিয় উপাসনা প্রায়শ তাদের স্বতন্ত্র হিসাবে বিবেচনা করে।",
+                scripture: "ঋগ্বেদ ১.১৬৪.৪৬: 'একং সৎ বিপ্রা বহুধা বদন্তি' (সত্য এক, কিন্তু জ্ঞানীরা এটিকে অনেক নামে ডাকে)"
+            },
+            {
+                question: "মূর্তি পূজা অপরিহার্য নাকি মূর্তি ছাড়াই হিন্দুধর্ম চর্চা করা যায়?",
+                options: [
+                    "অপরিহার্য - মূর্তি হল ঐশ্বরিক প্রকাশ",
+                    "সাহায্যকারী কিন্তু একেবারে প্রয়োজনীয় নয়",
+                    "মূল বেদে নেই এমন একটি পরবর্তী বিকাশ",
+                    "নিরাকার উপাসনা থেকে বিভ্রান্তিকর হতে পারে"
+                ],
+                correctAnswer: 1,
+                school: "উপাসনা",
+                explanation: "যদিও মূর্তি পূজা অধিকাংশ হিন্দু অনুশীলনের কেন্দ্রে রয়েছে, আর্য সমাজের মতো ঐতিহ্য এটি প্রত্যাখ্যান করে, এবং উপনিষদগুলি নিরাকার উপাসনার উপর জোর দেয়।",
+                scripture: "শ্বেতাশ্বতর উপনিষদ ৪.১৯-২০ ঈশ্বরের নিরাকার ও সাকার উভয় দিক বর্ণনা করে"
+            },
+
+            // কর্ম ও পুনর্জন্ম
+            {
+                question: "কর্ম একটি নিরাকার নিয়ম নাকি দৈবভাবে পরিচালিত ন্যায়?",
+                options: [
+                    "মাধ্যাকর্ষণের মতো নিরাকার মহাজাগতিক নিয়ম",
+                    "ঈশ্বর/ঈশ্বর দ্বারা পরিচালিত",
+                    "পুনর্জন্ম সৃষ্টিকারী একটি মনস্তাত্ত্বিক প্রক্রিয়া",
+                    "পরিণতি সম্পর্কে একটি রূপক শিক্ষা"
+                ],
+                correctAnswer: 0,
+                school: "কর্ম",
+                explanation: "শাস্ত্রীয় হিন্দুধর্ম কর্মকে একটি নিরাকার নিয়ম হিসাবে দেখে (যদিও কিছু আস্তিক সম্প্রদায় ঈশ্বরকে এই প্রক্রিয়াটি তত্ত্বাবধান করতে দেখে)।",
+                scripture: "বৃহদারণ্যক উপনিষদ ৪.৪.৫: 'যেমন কর্ম তেমনই ফল...'"
+                },
+                {
+                question: "কর্ম কি দৈব কৃপায় পরিবর্তন করা যায় নাকি শুধুমাত্র নিজের প্রচেষ্টায়?",
+                options: [
+                "শুধুমাত্র ব্যক্তিগত প্রচেষ্টায়",
+                "দৈব কৃপা কর্মকে অগ্রাহ্য করতে পারে",
+                "কৃপা সাহায্য করে কিন্তু কর্ম বাতিল করে না",
+                "কৃপার ধারণা হিন্দুধর্মে বিদেশী"
+                ],
+                correctAnswer: 2,
+                school: "ভক্তি",
+                explanation: "ভক্তি ঐতিহ্য কৃপার উপর জোর দেয় (বিশেষ করে বৈষ্ণবধর্মে), যেখানে শাস্ত্রীয় যোগ ব্যক্তিগত প্রচেষ্টার উপর জোর দেয়। অধিকাংশই স্বীকার করে যে উভয়ই ভূমিকা পালন করে।",
+                scripture: "ভগবদ্গীতা ১৮.৬৬: 'সর্বধর্মান পরিত্যজ্য মামেকং শরণং ব্রজ...'"
+                },
+               // শাস্ত্র ও কর্তৃত্ব
+              {
+                  question: "হিন্দুধর্মে কোন শাস্ত্রের সর্বোচ্চ কর্তৃত্ব আছে?",
+                  options: [
+                      "কেবল বেদ",
+                      "বেদ ও উপনিষদ",
+                      "বেদ, উপনিষদ, পুরাণ ও ইতিহাস",
+                      "ব্যক্তিগত অভিজ্ঞতা ও গুরুদের শিক্ষা"
+                  ],
+                  correctAnswer: 2,
+                  school: "শাস্ত্রীয় কর্তৃত্ব",
+                  explanation: "যদিও বেদ সর্বোচ্চ, বাস্তবে অধিকাংশ হিন্দু গীতা ও পুরাণের মতো পরবর্তী গ্রন্থ থেকে ধর্মতত্ত্ব গ্রহণ করে, আঞ্চলিক বৈচিত্র্য সহ।",
+                  scripture: "মনুস্মৃতি ২.৬: 'বেদঃ খিলো ধর্মমূলং...'"
+              },
+              {
+                  question: "শাস্ত্রের মধ্যে আপাত বিরোধ কীভাবে সমাধান করা উচিত?",
+                  options: [
+                      "প্রাথমিক গ্রন্থগুলি পরবর্তীগুলিকে অগ্রাহ্য করে",
+                      "পরবর্তী ব্যাখ্যাগুলি প্রাথমিকগুলিকে স্পষ্ট করে",
+                      "প্রসঙ্গ নির্ধারণ করে কোনটি প্রযোজ্য",
+                      "বিরোধগুলি মানুষের রচনা দেখায়"
+                  ],
+                  correctAnswer: 2,
+                  school: "ব্যাখ্যাবিজ্ঞান",
+                  explanation: "প্রথাগত মীমাংসা ব্যাখ্যার নিয়মগুলি প্রসঙ্গের উপর জোর দেয়, পরবর্তী আচার্যগণ আপাত বিরোধগুলি মিলিয়ে দেন।",
+                  scripture: "জৈমিনির মীমাংসা সূত্র বেদিক ব্যাখ্যার জন্য নিয়ম স্থাপন করে"
+              },
+      
+              // আধুনিক সমস্যা
+              {
+                  question: "বিবর্তনের মত বৈজ্ঞানিক আবিষ্কারের প্রতি হিন্দুধর্মের প্রতিক্রিয়া কী হওয়া উচিত?",
+                  options: [
+                      "সৃষ্টি বর্ণনার সাথে অসামঞ্জস্যপূর্ণ হিসাবে প্রত্যাখ্যান করুন",
+                      "কেবল বস্তুগত বাস্তবতা বর্ণনা হিসাবে গ্রহণ করুন",
+                      "হিন্দু সৃষ্টিতত্ত্বে সমান্তরাল খুঁজুন",
+                      "শাস্ত্রগুলিকে রূপকভাবে পুনর্ব্যাখ্যা করুন"
+                  ],
+                  correctAnswer: 2,
+                  school: "বিজ্ঞান",
+                  explanation: "অনেক হিন্দু পণ্ডিত লক্ষ্য করেন যে যুগ চক্র (যুগ) এবং অবতার বিবর্তনের মত ধারণাগুলি বৈজ্ঞানিক ধারণার সমান্তরাল, সংঘাত এড়িয়ে।",
+                  scripture: "মহাভারত (শান্তি পর্ব) সৃষ্টি ও বিলয়ের সময় চক্র বর্ণনা করে"
+              },
+              {
+                  question: "হিন্দুদের জন্য নিরামিষভোজন অপরিহার্য নাকি ঐচ্ছিক?",
+                  options: [
+                      "সমস্ত হিন্দুদের জন্য একেবারে অপরিহার্য",
+                      "কেবল ব্রাহ্মণ ও সাধুদের জন্য প্রয়োজন",
+                      "প্রস্তাবিত কিন্তু বাধ্যতামূলক নয়",
+                      "কোন ধর্মীয় তাৎপর্য ছাড়াই একটি ব্যক্তিগত পছন্দ"
+                  ],
+                  correctAnswer: 2,
+                  school: "ধর্ম",
+                  explanation: "যদিও অহিংসাকে মূল্য দেওয়া হয়, কেবল কিছু ঐতিহ্য নিরামিষভোজন বাধ্যতামূলক করে। অনেক হিন্দু মাংস খায়, আঞ্চলিক ও বর্ণ বৈচিত্র্য সহ।",
+                  scripture: "মনুস্মৃতি ৫.৫৬: 'অহিংসা সর্বভূতানাং সর্বত্র সমভবেদিহ...'"
+              },
+              {
+                  question: "হিন্দু মন্দির পরিচালনা করা উচিত:",
+                  options: [
+                      "ঐতিহ্যগতভাবে যুক্ত পুরোহিত পরিবার দ্বারা",
+                      "সরকারী সংস্থা দ্বারা",
+                      "নির্বাচিত সম্প্রদায় বোর্ড দ্বারা",
+                      "প্রাইভেট ট্রাস্ট দ্বারা"
+                  ],
+                  correctAnswer: 2,
+                  school: "মন্দির সংস্কার",
+                  explanation: "বর্তমান বিতর্কে রয়েছে ঐতিহ্যগত অধিকার বনাম গণতান্ত্রিক ব্যবস্থাপনা ও আর্থিক স্বচ্ছতার দাবি।",
+                  scripture: "আগম মন্দির ব্যবস্থাপনা নির্দেশ করে কিন্তু আধুনিক প্রশাসনিক সমস্যা সম্বোধন করে না"
+              },
+      
+                {
+                    question: "ব্যক্তিগত আত্মা (আত্মান) ব্রহ্মের সাথে অভিন্ন নাকি পৃথক?",
+                    options: [
+                        "সম্পূর্ণ অভিন্ন (অদ্বৈত দৃষ্টিভঙ্গি)",
+                        "ব্রহ্মের অংশ কিন্তু অভিন্ন নয় (বিশিষ্টাদ্বৈত)",
+                        "চিরন্তন পৃথক (দ্বৈত)",
+                        "আত্মা নিজেই মায়া (বৌদ্ধ প্রভাব)"
+                    ],
+                    correctAnswer: 0,
+                    school: "বেদান্ত",
+                    explanation: "এটি বেদান্ত সম্প্রদায়গুলির মধ্যে মূল বিতর্ক - অদ্বৈত বলে আত্মান ব্রহ্ম, বিশিষ্টাদ্বৈত বলে যোগ্য অদ্বৈত, যখন দ্বৈত চিরন্তন পার্থক্য বজায় রাখে।",
+                    scripture: "ছান্দোগ্য উপনিষদ ৬.৮.৭: 'তত্ত্বমসি' (তুমিই সেই) - বিখ্যাত অভিন্নতা বক্তব্য"
+                },
+              {
+                  question: "মুক্তি (মোক্ষ) কি ধীর সাধনার মাধ্যমে নাকি আকস্মিক উপলব্ধির মাধ্যমে অর্জিত হয়?",
+                  options: [
+                      "ধীরে ধীরে দীর্ঘ সাধনার মাধ্যমে",
+                      "গুরুর কৃপা বা অন্তর্দৃষ্টির মাধ্যমে আকস্মিকভাবে",
+                      "উভয় - প্রস্তুতি ধীর কিন্তু উপলব্ধি আকস্মিক",
+                      "অতীত কর্ম দ্বারা পূর্বনির্ধারিত"
+                  ],
+                  correctAnswer: 2,
+                  school: "মোক্ষ",
+                  explanation: "অধিকাংশ ঐতিহ্য উভয় দিক স্বীকার করে - প্রস্তুতি ধীর কিন্তু চূড়ান্ত উপলব্ধি প্রায়শই আকস্মিকভাবে আসে।",
+                  scripture: "যোগ সূত্র ১.২১-২২ সাধনার তীব্রতা ও কৃপা উভয়ই নিয়ে আলোচনা করে"
+              },
+      
+              // নীতিশাস্ত্র ও সামাজিক সমস্যা
+              {
+                  question: "হিন্দুধর্ম LGBTQ+ অধিকার ও সম্পর্ক কীভাবে সম্বোধন করা উচিত?",
+                  options: [
+                      "ধর্মবিরুদ্ধ হিসাবে প্রত্যাখ্যান করুন",
+                      "আধুনিক সামাজিক বাস্তবতা হিসাবে গ্রহণ করুন কিন্তু অনুমোদন নয়",
+                      "কামসূত্রের মতো প্রাচীন গ্রন্থে সমর্থন খুঁজুন",
+                      "ঐশ্বরিক বৈচিত্র্যের অংশ হিসাবে উদযাপন করুন"
+                  ],
+                  correctAnswer: 2,
+                  school: "সামাজিক ধর্ম",
+                  explanation: "যদিও প্রথাগত গ্রন্থগুলি তৃতীয় লিঙ্গ (হিজড়া) ও সমলিঙ্গ সম্পর্কের কথা উল্লেখ করে, আধুনিক হিন্দুধর্ম সম্পূর্ণ LGBTQ+ অন্তর্ভুক্তি নিয়ে চিন্তিত।",
+                  scripture: "কামসূত্র ও মন্দির শিল্প বিভিন্ন যৌনতা চিত্রিত করে"
+              },
+              {
+                  question: "হিন্দুধর্মে ধর্মান্তর অনুমোদিত নাকি এর নীতির বিরুদ্ধে?",
+                  options: [
+                      "অনুমোদিত নয় - কেউ হিন্দু হিসাবে জন্ম নিতে হবে",
+                      "নির্ধারিত অনুষ্ঠানের মাধ্যমে অনুমোদিত",
+                      "হিন্দুধর্মে ধর্মান্তরের ধারণা নেই",
+                      "অনুমোদিত কিন্তু ধর্মপ্রচার করা উচিত নয়"
+                  ],
+                  correctAnswer: 1,
+                  school: "ধর্ম",
+                  explanation: "যদিও ঐতিহ্যগতভাবে জন্মভিত্তিক, আধুনিক হিন্দুধর্ম (শুদ্ধির মতো) ধর্মান্তর অনুষ্ঠান বিকশিত করেছে, যদিও মতামত ব্যাপকভাবে পরিবর্তিত হয়।",
+                  scripture: "বেদে ধর্মান্তরের উপর কোনো স্পষ্ট নিষেধাজ্ঞা নেই"
+              },
+      
+              // চূড়ান্ত প্রশ্ন
+              {
+                  question: "আজ হিন্দুধর্মের সবচেয়ে জরুরি চ্যালেঞ্জ কী?",
+                  options: [
+                      "ঐতিহ্য সংরক্ষণ বনাম আধুনিকতার সাথে খাপ খাওয়ানো",
+                      "বর্ণ বৈষম্য ও সামাজিক অসমতা",
+                      "ধর্মান্তর ও জনসংখ্যা",
+                      "ভুল উপস্থাপনা ও ঐক্যবদ্ধ কণ্ঠের অভাব"
+                  ],
+                  correctAnswer: 0,
+                  school: "সমসাময়িক সমস্যা",
+                  explanation: "সবই উল্লেখযোগ্য চ্যালেঞ্জ, কিন্তু সংরক্ষণ ও অভিযোজনের মধ্যে টান অনেক বর্তমান বিতর্কের অন্তর্নিহিত।",
+                  scripture: "ভগবদ্গীতা ২.১১: 'জ্ঞানীরা জীবিত বা মৃত কারোর জন্য শোক করেন না।'"
+              }
+          ];
+      
+          let currentQuestion = 0;
+          let score = 0;
+          let userAnswers = [];
+          const questionElement = document.getElementById("question");
+          const optionsElement = document.getElementById("options");
+          const nextButton = document.getElementById("next-btn");
+          const resultElement = document.getElementById("result");
+          const progressBar = document.getElementById("progress");
+          const quizContent = document.getElementById("quiz-content");
+          const resultsSection = document.getElementById("results-section");
+          const answerFeedback = document.getElementById("answer-feedback");
+          const restartButton = document.getElementById("restart-btn");
+      
+          function loadQuestion() {
+              const q = questions[currentQuestion];
+              questionElement.textContent = q.question;
+              optionsElement.innerHTML = "";
+              
+              // Add scripture quote if exists
+              if (q.scripture) {
+                  optionsElement.innerHTML += `<div class="scripture-quote">${q.scripture}</div>`;
+              }
+              
+              q.options.forEach((option, index) => {
+                  const button = document.createElement("button");
+                  button.textContent = option;
+                  button.classList.add("option");
+                  button.addEventListener("click", () => selectOption(button, index));
+                  optionsElement.appendChild(button);
+              });
+              
+              progressBar.style.width = `${((currentQuestion + 1) / questions.length) * 100}%`;
+              nextButton.disabled = true;
+      
+              if (currentQuestion === questions.length - 1) {
+                  nextButton.textContent = "কুইজ শেষ করুন";
+              } else {
+                  nextButton.textContent = "পরবর্তী প্রশ্ন";
+              }
+          }
+      
+          function selectOption(selectedButton, index) {
+              const options = document.querySelectorAll(".option");
+              options.forEach(button => button.classList.remove("selected"));
+              selectedButton.classList.add("selected");
+              nextButton.disabled = false;
+              
+              // Store user's answer
+              userAnswers[currentQuestion] = index;
+          }
+      
+          function showResults() {
+              quizContent.style.display = "none";
+              resultsSection.style.display = "block";
+              
+              // Calculate score
+              score = 0;
+              questions.forEach((q, index) => {
+                  if (userAnswers[index] === q.correctAnswer) {
+                      score++;
+                  }
+              });
+              
+              resultElement.innerHTML = `আপনি পেয়েছেন <strong>${score} / ${questions.length}</strong>!<br>
+              <small>${getResultComment(score)}</small>`;
+              
+              // Show detailed feedback
+              answerFeedback.innerHTML = "<h3>প্রশ্ন বিশ্লেষণ:</h3>";
+              questions.forEach((q, index) => {
+                  const isCorrect = userAnswers[index] === q.correctAnswer;
+                  const userAnswerText = q.options[userAnswers[index]] || "উত্তর দেওয়া হয়নি";
+                  const correctAnswerText = q.options[q.correctAnswer];
+                  
+                  answerFeedback.innerHTML += `
+                      <div class="answer-item ${isCorrect ? 'correct' : 'incorrect'}">
+                          <p><strong>প্রশ্ন ${index + 1}:</strong> ${q.question}</p>
+                          ${q.scripture ? `<p class="scripture-quote">${q.scripture}</p>` : ''}
+                          <p>আপনার উত্তর: <span class="user-answer">${userAnswerText}</span></p>
+                          ${!isCorrect ? `<p>সঠিক উত্তর: <span class="correct-answer">${correctAnswerText}</span></p>` : ''}
+                          <p><em>${q.explanation}</em></p>
+                          <p class="school-tag">${q.school}</p>
+                      </div>
+                  `;
+              });
+          }
+      
+          function getResultComment(score) {
+              const percentage = (score / questions.length) * 100;
+              if (percentage >= 80) return "অসাধারণ! হিন্দু দার্শনিক বিতর্ক সম্পর্কে আপনার গভীর বোঝাপড়া আছে।";
+              if (percentage >= 60) return "ভাল! আপনি হিন্দুধর্মের অনেক মূল বিতর্কের সাথে পরিচিত।";
+              if (percentage >= 40) return "মোটামুটি। আপনি কিছু দিক জানেন কিন্তু আরও অন্বেষণ করতে পারেন।";
+              return "অন্বেষণ চালিয়ে যান! হিন্দুধর্মে সমৃদ্ধ দার্শনিক ঐতিহ্য রয়েছে আবিষ্কারের জন্য।";
+          }
+      
+          nextButton.addEventListener("click", () => {
+              if (currentQuestion < questions.length - 1) {
+                  currentQuestion++;
+                  loadQuestion();
+              } else {
+                  showResults();
+              }
+          });
+      
+          restartButton.addEventListener("click", () => {
+              currentQuestion = 0;
+              score = 0;
+              userAnswers = [];
+              quizContent.style.display = "block";
+              resultsSection.style.display = "none";
+              loadQuestion();
+          });
+      
+          // Initialize quiz
+          loadQuestion();
+      </script>
+   </body>
+</html>
