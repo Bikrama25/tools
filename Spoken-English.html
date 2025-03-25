@@ -324,6 +324,37 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        
+            .resources-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .resource-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        
+        .resource-link:hover {
+            background-color: #f0f7ff;
+            transform: translateX(5px);
+        }
+        
+        .resource-link i {
+            color: var(--secondary-color);
+        }
+
+
+        
     </style>
 </head>
 <body>
@@ -358,6 +389,37 @@
                 <span class="lang-en">Custom Practice</span>
                 <span class="lang-bn" style="display: none;">কাস্টম অনুশীলন</span>
             </div>
+            
+
+            <!-- Add this section right before the closing </div> of your container -->
+            <div class="tool-card">
+                <h2 class="lang-en">Useful Resources</h2>
+                <h2 class="lang-bn" style="display: none;">দরকারী সম্পদ</h2>
+                <div class="resources-links">
+                    <a href="https://www.bbc.co.uk/learningenglish/" target="_blank" class="resource-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="lang-en">BBC Learning English</span>
+                        <span class="lang-bn" style="display: none;">বিবিসি লার্নিং ইংলিশ</span>
+                    </a>
+                    <a href="https://learnenglish.britishcouncil.org/" target="_blank" class="resource-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="lang-en">British Council Learn English</span>
+                        <span class="lang-bn" style="display: none;">ব্রিটিশ কাউন্সিল লার্ন ইংলিশ</span>
+                    </a>
+                    <a href="https://www.duolingo.com/" target="_blank" class="resource-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="lang-en">Duolingo English Learning</span>
+                        <span class="lang-bn" style="display: none;">ডুয়োলিঙ্গো ইংলিশ লার্নিং</span>
+                    </a>
+                    <a href="https://www.englishclub.com/" target="_blank" class="resource-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="lang-en">English Club</span>
+                        <span class="lang-bn" style="display: none;">ইংলিশ ক্লাব</span>
+                    </a>
+                </div>
+            </div>
+            
+            
         </div>
         
         <div class="tab-content active" id="social-tab">
