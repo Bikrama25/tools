@@ -110,13 +110,18 @@ T. Develop a fully responsive tool for a Test on faults of common religions (Chi
 Continue from where it stopped.
 
 
-U.
-
+U. {Prev Code} in the same way Develop a tool for problems in Hinduism. take help from youtube religious debates and other sources.
+{Part of the code} -- Seems there is something missing here. correct it.
+{Full code} --- Make bengali version of it
 
 V. How to quickly improve speaking power for non-native speakers ?
 Develop a fully responsive tool for a quick improvement of english speaking for non-native speakers for effective communication for research scientists. Additionally, ensure the website is SEO optimized for better visibility and performance. Include designated spaces for advertisements and integrate Google AdSense ad code, allowing easy insertion of the AdSense ad unit ID for monetization. Combine all codes into one. Make the UI look good and responsive. check that it's giving output correctly.
-Continue from where it stopped. -- DeepSeek
+Continue from where it stopped. 
+it's worse. The previous one was working to some extent. This is not showing anything in the display.-- DeepSeek
 
+W. That's impressive. Make similar tool for general, common, day to day, English communication.
+It's good. But some of the options are not giving any output. Apart from that make the UI better organized.
+Thats impressive. Please, add the recording tool too as earlier so that one can rehearse.
 
 
 
