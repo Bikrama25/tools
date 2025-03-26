@@ -39,6 +39,8 @@
             color: var(--dark-color);
             line-height: 1.6;
             min-height: 100vh;
+        /* Ensure body extends properly */
+            padding-bottom: 30px;
         }
         
         header {
@@ -618,44 +620,6 @@
             .btn {
                 width: 100%;
             }
-
-            /* Add this at the bottom of your existing CSS */
-            .resources-content {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-                position: relative;
-                z-index: 10;
-            }
-            
-            .resources-content.active {
-                max-height: 60vh;
-                overflow-y: auto;
-                padding: 0 1.5rem 1.5rem;
-            }
-            
-            /* Optional scrollbar styling */
-            .resources-content::-webkit-scrollbar {
-                width: 8px;
-            }
-            
-            .resources-content::-webkit-scrollbar-track {
-                background: var(--gray-extra-light);
-            }
-            
-            .resources-content::-webkit-scrollbar-thumb {
-                background: var(--gray-light);
-                border-radius: 4px;
-            }
-            
-            .resources-content::-webkit-scrollbar-thumb:hover {
-                background: var(--gray-dark);
-            }
-            
-            /* Ensure body extends properly */
-            body {
-                padding-bottom: 20px;
-            }
             
         }
 
@@ -1006,21 +970,6 @@
         </div>
                 
     <script>
-
-        
-            document.addEventListener('click', function(event) {
-            const resourcesHeader = document.getElementById('resources-header');
-            const resourcesContent = document.getElementById('resources-content');
-            const chevron = document.getElementById('resources-chevron');
-            
-            if (!resourcesHeader.contains(event.target) && 
-                !resourcesContent.contains(event.target) &&
-                resourcesContent.classList.contains('active')) {
-                resourcesContent.classList.remove('active');
-                chevron.style.transform = 'rotate(0deg)';
-            }
-        });
-
         
         document.addEventListener('DOMContentLoaded', function() {
             // Language switching functionality
