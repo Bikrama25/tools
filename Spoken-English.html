@@ -537,6 +537,26 @@
         .resource-section h3 i {
             color: var(--primary-color);
         }
+
+
+        .container {
+            padding-bottom: 2rem; /* Add padding at bottom */
+        }
+        
+        .resources-card {
+            margin-top: 2rem;
+        }
+        
+        .resource-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .resource-section h3 {
+            margin: 1rem 0 0.5rem;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+            
         
         @keyframes pulse {
             0% { opacity: 1; }
@@ -854,7 +874,19 @@
                             <span class="lang-bn" style="display: none;">টকইংলিশ</span>
                         </a>
                     </div>
-                    
+                    <div class="resources-card">
+                        <div class="resources-header" id="resources-header">
+                            <h2><i class="fas fa-book-open"></i> <span class="lang-en">Learning Resources</span><span class="lang-bn" style="display: none;">শেখার সম্পদ</span></h2>
+                            <i class="fas fa-chevron-down" id="resources-chevron"></i>
+                        </div>
+                        <div class="resources-content" id="resources-content">
+                            <div class="resources-links">
+                                <!-- Language Learning Resources -->
+                                <div class="resource-section">
+                                    <h3><i class="fas fa-language"></i> <span class="lang-en">Language Learning</span><span class="lang-bn" style="display: none;">ভাষা শেখা</span></h3>
+                                    <!-- Existing language resources here... -->
+                                </div>
+                                
                     <!-- British TV Shows Section -->
                     <div class="resource-section">
                         <h3><i class="fas fa-tv"></i> <span class="lang-en">Best British TV Shows to Learn English</span><span class="lang-bn" style="display: none;">ইংরেজি শেখার জন্য সেরা ব্রিটিশ টিভি শো</span></h3>
@@ -943,7 +975,8 @@
                 </div>
             </div>
         </div>
-    
+    </div>
+                
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Language switching functionality
