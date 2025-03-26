@@ -33,14 +33,40 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
+
+
+        /* Add this to your CSS */
+            body {
+                overflow-x: hidden;
+                min-height: 100vh;
+                position: relative;
+                padding-bottom: 60px; /* Add some padding at bottom for breathing room */
+            }
+            
+            .resources-content {
+                max-height: 0;
+                overflow-y: auto; /* Make it scrollable if content is too long */
+                transition: max-height 0.3s ease;
+            }
+            
+            .resources-content.active {
+                max-height: 70vh; /* Set a maximum height that's most of the viewport */
+                padding: 0 1.5rem 1.5rem;
+            }
+            
+            /* Ensure the resources card has some margin at bottom */
+            .resources-card {
+                margin-bottom: 2rem;
+            }
+        
+ 
+        
         
         body {
             background-color: var(--gray-extra-light);
             color: var(--dark-color);
             line-height: 1.6;
             min-height: 100vh;
-        /* Ensure body extends properly */
-            padding-bottom: 30px;
         }
         
         header {
@@ -96,7 +122,7 @@
         .container {
             max-width: 1200px;
             margin: 2rem auto;
-            padding: 0 2rem 4rem;
+            padding: 0 2rem; /* Remove the fixed padding-bottom */
             display: flex;
             flex-direction: column;
             gap: 2rem;
@@ -968,7 +994,6 @@
                 </div>
             </div>
         </div>
-    </div>
                 
     <script>
         
