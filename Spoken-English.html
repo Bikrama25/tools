@@ -354,6 +354,61 @@
         }
 
 
+
+    /* Add this to your existing CSS */
+        .resources-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 1rem;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        
+        .resources-header:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .resources-header h2 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        #resources-chevron {
+            color: var(--primary-color);
+            transition: transform 0.3s;
+        }
+        
+        .resources-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding-top: 1rem;
+            animation: fadeIn 0.3s;
+        }
+        
+        .resource-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        
+        .resource-link:hover {
+            background-color: #f0f7ff;
+            transform: translateX(5px);
+        }
+        
+        .resource-link i {
+            color: var(--secondary-color);
+        }
+
         
     </style>
 </head>
@@ -418,6 +473,39 @@
                     </a>
                 </div>
             </div>
+
+
+            <!-- Add this at the end of your container, before the closing </div> -->
+            <div class="tool-card">
+                <div class="resources-header" id="resources-header">
+                    <h2 class="lang-en">Useful Resources</h2>
+                    <h2 class="lang-bn" style="display: none;">দরকারী সম্পদ</h2>
+                    <i class="fas fa-chevron-down" id="resources-chevron"></i>
+                </div>
+                <div class="resources-links" id="resources-links" style="display: none;">
+                    <a href="https://www.bbc.co.uk/learningenglish/" target="_blank" class="resource-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="lang-en">BBC Learning English</span>
+                        <span class="lang-bn" style="display: none;">বিবিসি লার্নিং ইংলিশ</span>
+                    </a>
+                    <a href="https://learnenglish.britishcouncil.org/" target="_blank" class="resource-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="lang-en">British Council Learn English</span>
+                        <span class="lang-bn" style="display: none;">ব্রিটিশ কাউন্সিল লার্ন ইংলিশ</span>
+                    </a>
+                    <a href="https://www.duolingo.com/" target="_blank" class="resource-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="lang-en">Duolingo English Learning</span>
+                        <span class="lang-bn" style="display: none;">ডুয়োলিঙ্গো ইংলিশ লার্নিং</span>
+                    </a>
+                    <a href="https://www.englishclub.com/" target="_blank" class="resource-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <span class="lang-en">English Club</span>
+                        <span class="lang-bn" style="display: none;">ইংলিশ ক্লাব</span>
+                    </a>
+                </div>
+            </div>
+
             
             
         </div>
@@ -1248,7 +1336,24 @@
                     mediaRecorder.stream.getTracks().forEach(track => track.stop());
                 }
             });
+
+            // Add this at the end of your existing JavaScript
+            document.getElementById('resources-header').addEventListener('click', function() {
+                const links = document.getElementById('resources-links');
+                const chevron = document.getElementById('resources-chevron');
+                
+                if (links.style.display === 'none') {
+                    links.style.display = 'flex';
+                    chevron.style.transform = 'rotate(180deg)';
+                } else {
+                    links.style.display = 'none';
+                    chevron.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            
         });
+
     </script>
 </body>
 </html>
