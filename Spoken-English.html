@@ -33,40 +33,20 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
-
-
-        /* Add this to your CSS */
-            body {
-                overflow-x: hidden;
-                min-height: 100vh;
-                position: relative;
-                padding-bottom: 60px; /* Add some padding at bottom for breathing room */
-            }
-            
-            .resources-content {
-                max-height: 0;
-                overflow-y: auto; /* Make it scrollable if content is too long */
-                transition: max-height 0.3s ease;
-            }
-            
-            .resources-content.active {
-                max-height: 70vh; /* Set a maximum height that's most of the viewport */
-                padding: 0 1.5rem 1.5rem;
-            }
-            
-            /* Ensure the resources card has some margin at bottom */
-            .resources-card {
-                margin-bottom: 2rem;
-            }
-        
- 
-        
         
         body {
             background-color: var(--gray-extra-light);
             color: var(--dark-color);
             line-height: 1.6;
             min-height: 100vh;
+        }
+        
+        body {
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 60px;
+            overflow-y: auto; /* Ensure body can scroll */
         }
         
         header {
@@ -119,14 +99,14 @@
             box-shadow: var(--shadow-sm);
         }
         
- /*       .container {
+        .container {
             max-width: 1200px;
             margin: 2rem auto;
-            padding: 0 2rem;*/ /* Remove the fixed padding-bottom */
-  /*          display: flex;
+            padding: 0 2rem 2rem; /* Add bottom padding */
+            display: flex;
             flex-direction: column;
             gap: 2rem;
-        } */
+        }
         
         .hero {
             text-align: center;
@@ -455,7 +435,7 @@
         }
         
         .resources-card {
-            margin: 2rem 0; /* Standardize margin top and bottom */
+            margin: 2rem 0;
             background-color: white;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow-sm);
@@ -495,14 +475,15 @@
             transition: var(--transition);
         }
         
-        .resources-content {
+        ..container {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
         
-        .resources-content.active {
-            max-height: 500px;
+        ..container.active {
+            max-height: none; /* Remove fixed height */
+            overflow-y: auto;
             padding: 0 1.5rem 1.5rem;
         }
         
@@ -876,7 +857,7 @@
                 <h2><i class="fas fa-book-open"></i> <span class="lang-en">Learning Resources</span><span class="lang-bn" style="display: none;">শেখার সম্পদ</span></h2>
                 <i class="fas fa-chevron-down" id="resources-chevron"></i>
             </div>
-            <div class="resources-content" id="resources-content">
+            <div class=".container" id=".container">
                 <div class="resources-links">
                     <!-- Language Learning Resources -->
                     <div class="resource-section">
@@ -1422,7 +1403,7 @@
             const recordedAudio = document.getElementById('recorded-audio');
             const recordingUI = document.getElementById('recording-ui');
             const resourcesHeader = document.getElementById('resources-header');
-            const resourcesContent = document.getElementById('resources-content');
+            const resourcesContent = document.getElementById('.container');
             const resourcesChevron = document.getElementById('resources-chevron');
 
             // Toggle resources section
