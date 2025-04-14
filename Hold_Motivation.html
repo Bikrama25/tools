@@ -1303,5 +1303,14 @@
             saveData();
         });
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded - buttons should work now");
+    // Test if basic click works
+    document.querySelector('button').addEventListener('click', function() {
+        alert("Test button worked!");
+    });
+});
+</script>
 </body>
 </html>
