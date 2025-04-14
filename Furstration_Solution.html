@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Frustration Relief Tool</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4caf50;
+            --warning: #ff9800;
+            --danger: #f44336;
+        }
+        body {
+            font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        h2 {
+            color: var(--secondary);
+            margin-top: 0;
+        }
+        .step {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-left: 5px solid var(--accent);
+            background-color: var(--light);
+            border-radius: 0 10px 10px 0;
+            transition: all 0.3s ease;
+        }
+        .step:hover {
+            transform: translateX(5px);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        }
+        .step-number {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            border-radius: 50%;
+            margin-right: 10px;
+            line-height: 35px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .action-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .action-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+        .hidden-content {
+            display: none;
+            margin-top: 15px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid var(--success);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .expert-tip {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent);
+        }
+        .expert-tip h4 {
+            margin-top: 0;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        .expert-tip h4::before {
+            content: "💡";
+            margin-right: 8px;
+        }
+        .tab-container {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .breathing-exercise {
+            text-align: center;
+            font-size: 22px;
+            margin: 20px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .breathing-circle {
+            width: 150px;
+            height: 150px;
+            background: rgba(76, 201, 240, 0.2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 8s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        .progress-container {
+            width: 100%;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 30px 0;
+            height: 12px;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        .quote {
+            font-style: italic;
+            color: #555;
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid var(--warning);
+            margin: 20px 0;
+        }
+        .language-toggle {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .language-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .language-btn.active {
+            background: #2E7D32;
+            font-weight: bold;
+        }
+        .bengali-text {
+            font-family: 'Hind Siliguri', Arial, sans-serif;
+        }
+        .hidden {
+            display: none;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            .step { padding: 15px; }
+            .tab-container { flex-wrap: wrap; }
+            .tab { flex: 1; text-align: center; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="language-toggle">
+            <button id="englishBtn" class="language-btn active">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/20px-Flag_of_the_United_Kingdom.svg.png" class="icon"> English
+            </button>
+            <button id="bengaliBtn" class="language-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Rabindranath_Tagore.jpg/20px-Rabindranath_Tagore.jpg" class="icon"> বাংলা
+            </button>
+        </div>
+        
+        <div id="englishContent">
+            <h1>Ultimate Frustration Relief Tool</h1>
+            <p>Handle frustration with science-backed strategies from Yogis, Doctors, Psychiatrists & Coaches.</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <!-- Step 1: Pause & Breathe -->
+            <div class="step" id="step1">
+                <div class="step-number">1</div>
+                <h2>Pause & Regulate Your Nervous System</h2>
+                <button class="action-btn" onclick="showContent('content1')">Show Expert Techniques</button>
+                <div class="hidden-content" id="content1">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('yogi1')">Yogi's Approach</div>
+                        <div class="tab" onclick="openTab('doctor1')">Doctor's Advice</div>
+                        <div class="tab" onclick="openTab('psych1')">Psychiatrist's Tip</div>
+                    </div>
+                    
+                    <div id="yogi1" class="tab-content active">
+                        <div class="breathing-exercise">
+                            <div class="breathing-circle">
+                                <div id="breathText">Breathe Deeply</div>
+                            </div>
+                            <button class="action-btn" onclick="startBreathing()">Start 4-7-8 Breathing</button>
+                        </div>
+                        <div class="expert-tip">
+                            <h4>Yogi's Wisdom</h4>
+                            <p><strong>Pranayama (Breath Control):</strong> Alternate Nostril Breathing (Nadi Shodhana) balances emotions. Close right nostril, inhale left (4 sec), hold (4 sec), exhale right (6 sec). Repeat.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="doctor1" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Doctor's Prescription</h4>
+                            <p><strong>Physiological Reset:</strong> Splash cold water on your face or hold an ice cube to trigger the "dive reflex," slowing heart rate and reducing stress.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="psych1" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Psychiatrist's Strategy</h4>
+                            <p><strong>Grounding Technique (5-4-3-2-1):</strong> Name 5 things you see, 4 you feel, 3 you hear, 2 you smell, 1 you taste. This interrupts frustration loops.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Identify the Source -->
+            <div class="step" id="step2">
+                <div class="step-number">2</div>
+                <h2>Identify the Root Cause</h2>
+                <button class="action-btn" onclick="showContent('content2')">Show Expert Analysis</button>
+                <div class="hidden-content" id="content2">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('coach2')">Career Coach</div>
+                        <div class="tab" onclick="openTab('psych2')">Psychiatrist</div>
+                        <div class="tab" onclick="openTab('wellness2')">Wellness Coach</div>
+                    </div>
+                    
+                    <div id="coach2" class="tab-content active">
+                        <div class="expert-tip">
+                            <h4>Career Coach's Method</h4>
+                            <p><strong>Frustration Mapping:</strong> Is it a <strong>skill gap</strong> (need training), <strong>system issue</strong> (process problem), or <strong>values conflict</strong> (misalignment)?</p>
+                        </div>
+                        <textarea placeholder="What's really bothering you? (e.g., 'I feel undervalued at work')" rows="3" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ddd;"></textarea>
+                    </div>
+                    
+                    <div id="psych2" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Psychiatrist's Insight</h4>
+                            <p><strong>ABC Model:</strong> <strong>A</strong>ctivating event → <strong>B</strong>eliefs → <strong>C</strong>onsequence. Is your frustration from facts or interpretations?</p>
+                        </div>
+                    </div>
+                    
+                    <div id="wellness2" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Wellness Coach's Approach</h4>
+                            <p><strong>HALT Check:</strong> Are you <strong>H</strong>ungry, <strong>A</strong>ngry, <strong>L</strong>onely, or <strong>T</strong>ired? Basic needs affect frustration tolerance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Reframe Perspective -->
+            <div class="step" id="step3">
+                <div class="step-number">3</div>
+                <h2>Reframe Your Mindset</h2>
+                <button class="action-btn" onclick="showContent('content3')">Show Cognitive Tools</button>
+                <div class="hidden-content" id="content3">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('psych3')">Psychiatrist</div>
+                        <div class="tab" onclick="openTab('coach3')">Life Coach</div>
+                        <div class="tab" onclick="openTab('yogi3')">Yogi's Wisdom</div>
+                    </div>
+                    
+                    <div id="psych3" class="tab-content active">
+                        <div class="expert-tip">
+                            <h4>CBT Technique</h4>
+                            <p><strong>Challenge Automatic Thoughts:</strong> Ask: <br>
+                            1. Is this thought 100% true? <br>
+                            2. What's a more balanced view? <br>
+                            3. How would I advise a friend?</p>
+                        </div>
+                        <select style="width: 100%; padding: 10px; border-radius: 8px; margin: 10px 0;">
+                            <option>Select a reframing statement...</option>
+                            <option>"This is hard right now, but not forever."</option>
+                            <option>"I don't have to solve everything today."</option>
+                            <option>"My frustration shows I care—that's strength."</option>
+                        </select>
+                    </div>
+                    
+                    <div id="coach3" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Life Coach's Reframe</h4>
+                            <p><strong>Growth Mindset:</strong> Instead of "This shouldn't be happening," try "What is this teaching me?"</p>
+                        </div>
+                    </div>
+                    
+                    <div id="yogi3" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Yogi's Philosophy</h4>
+                            <p><strong>Detachment (Vairagya):</strong> "I am not my frustration. It's a passing cloud in my awareness." Observe without identifying.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 4: Take Action -->
+            <div class="step" id="step4">
+                <div class="step-number">4</div>
+                <h2>Take Constructive Action</h2>
+                <button class="action-btn" onclick="showContent('content4')">Show Expert Plans</button>
+                <div class="hidden-content" id="content4">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('coach4')">Career Coach</div>
+                        <div class="tab" onclick="openTab('doctor4')">Doctor</div>
+                        <div class="tab" onclick="openTab('wellness4')">Wellness Coach</div>
+                    </div>
+                    
+                    <div id="coach4" class="tab-content active">
+                        <div class="expert-tip">
+                            <h4>Career Coach's Plan</h4>
+                            <p><strong>SMART Steps:</strong> <br>
+                            - <strong>S</strong>pecific: "I'll schedule a talk with my boss." <br>
+                            - <strong>M</strong>easurable: "I'll research 3 courses by Friday."</p>
+                        </div>
+                        <input type="text" placeholder="Your next small step..." style="width: 100%; padding: 10px; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd;">
+                        <button class="action-btn">Set Reminder</button>
+                    </div>
+                    
+                    <div id="doctor4" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Doctor's Advice</h4>
+                            <p><strong>Movement:</strong> A 10-minute walk reduces cortisol (stress hormone) by 20%. Even stretching helps!</p>
+                        </div>
+                    </div>
+                    
+                    <div id="wellness4" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Wellness Strategy</h4>
+                            <p><strong>Energy Management:</strong> Work in 90-min focus blocks with 20-min recovery (tea, music, nature).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 5: Release & Recover -->
+            <div class="step" id="step5">
+                <div class="step-number">5</div>
+                <h2>Release & Restore Energy</h2>
+                <button class="action-btn" onclick="showContent('content5')">Show Recovery Tools</button>
+                <div class="hidden-content" id="content5">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('yogi5')">Yogi's Method</div>
+                        <div class="tab" onclick="openTab('psych5')">Psychiatrist</div>
+                        <div class="tab" onclick="openTab('wellness5')">Wellness Coach</div>
+                    </div>
+                    
+                    <div id="yogi5" class="tab-content active">
+                        <div class="expert-tip">
+                            <h4>Yogic Release</h4>
+                            <p><strong>Shaking Meditation:</strong> Stand and shake every limb for 2 mins to release tension, then lie still and observe.</p>
+                        </div>
+                        <div class="quote">
+                            "You are the sky. Everything else is just weather." — Pema Chödrön
+                        </div>
+                    </div>
+                    
+                    <div id="psych5" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Psychiatrist's Tool</h4>
+                            <p><strong>Progressive Muscle Relaxation:</strong> Tense (5 sec) & release each muscle group from toes to head.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="wellness5" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>Wellness Ritual</h4>
+                            <p><strong>Herbal Support:</strong> Chamomile tea (calming) or adaptogens (ashwagandha) help stress recovery.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="action-btn" style="background: var(--success); padding: 12px 30px; font-size: 18px;" onclick="resetTool()">Start Over</button>
+            </div>
+        </div>
+        
+        <div id="bengaliContent" class="hidden bengali-text">
+            <h1>চূড়ান্ত হতাশা প্রশমন টুল</h1>
+            <p>যোগী, ডাক্তার, মনোরোগ বিশেষজ্ঞ এবং কোচদের বৈজ্ঞানিক কৌশল দিয়ে হতাশা মোকাবেলা করুন।</p>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBarBn"></div>
+            </div>
+            
+            <!-- Step 1: Pause & Breathe -->
+            <div class="step" id="step1Bn">
+                <div class="step-number">1</div>
+                <h2>থামুন এবং শ্বাস নিন</h2>
+                <button class="action-btn" onclick="showContent('content1Bn')">বিশেষজ্ঞ কৌশল দেখুন</button>
+                <div class="hidden-content" id="content1Bn">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('yogi1Bn')">যোগীর পদ্ধতি</div>
+                        <div class="tab" onclick="openTab('doctor1Bn')">ডাক্তারের পরামর্শ</div>
+                        <div class="tab" onclick="openTab('psych1Bn')">মনোরোগ বিশেষজ্ঞের টিপ</div>
+                    </div>
+                    
+                    <div id="yogi1Bn" class="tab-content active">
+                        <div class="breathing-exercise">
+                            <div class="breathing-circle">
+                                <div id="breathTextBn">গভীর শ্বাস নিন</div>
+                            </div>
+                            <button class="action-btn" onclick="startBreathingBn()">৪-৭-৮ শ্বাস শুরু করুন</button>
+                        </div>
+                        <div class="expert-tip">
+                            <h4>যোগীর জ্ঞান</h4>
+                            <p><strong>প্রাণায়াম (শ্বাস নিয়ন্ত্রণ):</strong> নাড়ী শোধন (বিকল্প নাসিকা শ্বাস) আবেগকে ভারসাম্য করে। ডান নাক বন্ধ করে, বাম দিয়ে শ্বাস নিন (৪ সেকেন্ড), ধরে রাখুন (৪ সেকেন্ড), ডান দিয়ে শ্বাস ছাড়ুন (৬ সেকেন্ড)। পুনরাবৃত্তি করুন।</p>
+                        </div>
+                    </div>
+                    
+                    <div id="doctor1Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>ডাক্তারের প্রেসক্রিপশন</h4>
+                            <p><strong>শারীরিক রিসেট:</strong> মুখে ঠান্ডা জল ছিটান বা বরফের টুকরো ধরুন "ডাইভ রিফ্লেক্স" ট্রিগার করতে, যা হৃদস্পন্দন কমায় এবং চাপ কমায়।</p>
+                        </div>
+                    </div>
+                    
+                    <div id="psych1Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>মনোরোগ বিশেষজ্ঞের কৌশল</h4>
+                            <p><strong>গ্রাউন্ডিং টেকনিক (৫-৪-৩-২-১):</strong> ৫টি জিনিস নাম করুন যা আপনি দেখছেন, ৪টি যা অনুভব করছেন, ৩টি শুনছেন, ২টি গন্ধ পাচ্ছেন, ১টি স্বাদ নিচ্ছেন। এটি হতাশার লুপকে বাধা দেয়।</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Identify the Source -->
+            <div class="step" id="step2Bn">
+                <div class="step-number">2</div>
+                <h2>মূল কারণ চিহ্নিত করুন</h2>
+                <button class="action-btn" onclick="showContent('content2Bn')">বিশেষজ্ঞ বিশ্লেষণ দেখুন</button>
+                <div class="hidden-content" id="content2Bn">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('coach2Bn')">ক্যারিয়ার কোচ</div>
+                        <div class="tab" onclick="openTab('psych2Bn')">মনোরোগ বিশেষজ্ঞ</div>
+                        <div class="tab" onclick="openTab('wellness2Bn')">ওয়েলনেস কোচ</div>
+                    </div>
+                    
+                    <div id="coach2Bn" class="tab-content active">
+                        <div class="expert-tip">
+                            <h4>ক্যারিয়ার কোচের পদ্ধতি</h4>
+                            <p><strong>হতাশা ম্যাপিং:</strong> এটি কি একটি <strong>দক্ষতার ঘাটতি</strong> (প্রশিক্ষণের প্রয়োজন), <strong>সিস্টেম সমস্যা</strong> (প্রক্রিয়া সমস্যা), নাকি <strong>মূল্যবোধের দ্বন্দ্ব</strong> (অসঙ্গতি)?</p>
+                        </div>
+                        <textarea placeholder="আসলে কী আপনাকে বিরক্ত করছে? (যেমন, 'আমি কর্মক্ষেত্রে অবমূল্যায়িত বোধ করি')" rows="3" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ddd;"></textarea>
+                    </div>
+                    
+                    <div id="psych2Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>মনোরোগ বিশেষজ্ঞের অন্তর্দৃষ্টি</h4>
+                            <p><strong>এবিসি মডেল:</strong> <strong>এ</strong>ক্রিয়েটিং ইভেন্ট → <strong>বি</strong>লিফস → <strong>সি</strong>নসিকোয়েন্স। আপনার হতাশা কি তথ্য থেকে নাকি ব্যাখ্যা থেকে আসছে?</p>
+                        </div>
+                    </div>
+                    
+                    <div id="wellness2Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>ওয়েলনেস কোচের পদ্ধতি</h4>
+                            <p><strong>এইচএএলটি চেক:</strong> আপনি কি <strong>হ</strong>াঙ্গরি, <strong>এ</strong>ংরি, <strong>ল</strong>োনলি, নাকি <strong>টি</strong>য়ার্ড? মৌলিক প্রয়োজনগুলি হতাশা সহনশীলতাকে প্রভাবিত করে।</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3: Reframe Perspective -->
+            <div class="step" id="step3Bn">
+                <div class="step-number">3</div>
+                <h2>আপনার মানসিকতা পুনর্গঠন করুন</h2>
+                <button class="action-btn" onclick="showContent('content3Bn')">জ্ঞানীয় সরঞ্জাম দেখুন</button>
+                <div class="hidden-content" id="content3Bn">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('psych3Bn')">মনোরোগ বিশেষজ্ঞ</div>
+                        <div class="tab" onclick="openTab('coach3Bn')">লাইফ কোচ</div>
+                        <div class="tab" onclick="openTab('yogi3Bn')">যোগীর জ্ঞান</div>
+                    </div>
+                    
+                    <div id="psych3Bn" class="tab-content active">
+                        <div class="expert-tip">
+                            <h4>সিবিটি কৌশল</h4>
+                            <p><strong>স্বয়ংক্রিয় চিন্তাকে চ্যালেঞ্জ করুন:</strong> জিজ্ঞাসা করুন: <br>
+                            1. এই চিন্তা কি ১০০% সত্য? <br>
+                            2. আরও ভারসাম্যপূর্ণ দৃষ্টিভঙ্গি কী? <br>
+                            3. আমি একজন বন্ধুকে কী পরামর্শ দেব?</p>
+                        </div>
+                        <select style="width: 100%; padding: 10px; border-radius: 8px; margin: 10px 0;">
+                            <option>একটি পুনর্গঠন বিবৃতি নির্বাচন করুন...</option>
+                            <option>"এটি এখন কঠিন, কিন্তু চিরকাল নয়।"</option>
+                            <option>"আমার আজ সবকিছু সমাধান করতে হবে না।"</option>
+                            <option>"আমার হতাশা দেখায় যে আমি যত্নশীল—এটি শক্তি।"</option>
+                        </select>
+                    </div>
+                    
+                    <div id="coach3Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>লাইফ কোচের পুনর্গঠন</h4>
+                            <p><strong>গ্রোথ মাইন্ডসেট:</strong> "এটি ঘটা উচিত নয়" এর পরিবর্তে "এটি আমাকে কী শিখাচ্ছে?" চেষ্টা করুন।</p>
+                        </div>
+                    </div>
+                    
+                    <div id="yogi3Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>যোগীর দর্শন</h4>
+                            <p><strong>বৈরাগ্য (বিচ্ছিন্নতা):</strong> "আমি আমার হতাশা নই। এটি আমার সচেতনতায় একটি ক্ষণস্থায়ী মেঘ।" সনাক্ত না করে পর্যবেক্ষণ করুন।</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 4: Take Action -->
+            <div class="step" id="step4Bn">
+                <div class="step-number">4</div>
+                <h2>গঠনমূলক পদক্ষেপ নিন</h2>
+                <button class="action-btn" onclick="showContent('content4Bn')">বিশেষজ্ঞ পরিকল্পনা দেখুন</button>
+                <div class="hidden-content" id="content4Bn">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('coach4Bn')">ক্যারিয়ার কোচ</div>
+                        <div class="tab" onclick="openTab('doctor4Bn')">ডাক্তার</div>
+                        <div class="tab" onclick="openTab('wellness4Bn')">ওয়েলনেস কোচ</div>
+                    </div>
+                    
+                    <div id="coach4Bn" class="tab-content active">
+                        <div class="expert-tip">
+                            <h4>ক্যারিয়ার কোচের পরিকল্পনা</h4>
+                            <p><strong>স্মার্ট পদক্ষেপ:</strong> <br>
+                            - <strong>নির্দিষ্ট:</strong> "আমি আমার বসের সাথে কথা বলার সময়সূচী করব।" <br>
+                            - <strong>পরিমাপযোগ্য:</strong> "আমি শুক্রবারের মধ্যে ৩টি কোর্স গবেষণা করব।"</p>
+                        </div>
+                        <input type="text" placeholder="আপনার পরবর্তী ছোট পদক্ষেপ..." style="width: 100%; padding: 10px; border-radius: 8px; margin: 10px 0; border: 1px solid #ddd;">
+                        <button class="action-btn">অনুস্মারক সেট করুন</button>
+                    </div>
+                    
+                    <div id="doctor4Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>ডাক্তারের পরামর্শ</h4>
+                            <p><strong>গতি:</strong> ১০ মিনিটের হাঁটা কর্টিসল (স্ট্রেস হরমোন) ২০% কমায়। এমনকি স্ট্রেচিংও সাহায্য করে!</p>
+                        </div>
+                    </div>
+                    
+                    <div id="wellness4Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>ওয়েলনেস কৌশল</h4>
+                            <p><strong>শক্তি ব্যবস্থাপনা:</strong> ৯০-মিনিট ফোকাস ব্লকে কাজ করুন ২০-মিনিট পুনরুদ্ধারের সাথে (চা, সঙ্গীত, প্রকৃতি)।</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 5: Release & Recover -->
+            <div class="step" id="step5Bn">
+                <div class="step-number">5</div>
+                <h2>মুক্ত করুন এবং শক্তি পুনরুদ্ধার করুন</h2>
+                <button class="action-btn" onclick="showContent('content5Bn')">পুনরুদ্ধারের সরঞ্জাম দেখুন</button>
+                <div class="hidden-content" id="content5Bn">
+                    <div class="tab-container">
+                        <div class="tab active" onclick="openTab('yogi5Bn')">যোগীর পদ্ধতি</div>
+                        <div class="tab" onclick="openTab('psych5Bn')">মনোরোগ বিশেষজ্ঞ</div>
+                        <div class="tab" onclick="openTab('wellness5Bn')">ওয়েলনেস কোচ</div>
+                    </div>
+                    
+                    <div id="yogi5Bn" class="tab-content active">
+                        <div class="expert-tip">
+                            <h4>যোগিক মুক্তি</h4>
+                            <p><strong>কাঁপানো ধ্যান:</strong> দাঁড়িয়ে প্রতিটি অঙ্গ ২ মিনিটের জন্য কাঁপান টেনশন মুক্ত করতে, তারপর শান্ত হয়ে পর্যবেক্ষণ করুন।</p>
+                        </div>
+                        <div class="quote">
+                            "আপনি আকাশ। বাকি সব কিছু শুধু আবহাওয়া।" — পেমা চোদ্রোন
+                        </div>
+                    </div>
+                    
+                    <div id="psych5Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>মনোরোগ বিশেষজ্ঞের সরঞ্জাম</h4>
+                            <p><strong>প্রগ্রেসিভ মাসল রিলাক্সেশন:</strong> প্রতিটি পেশী গ্রুপকে টানুন (৫ সেকেন্ড) এবং ছেড়ে দিন পায়ের আঙুল থেকে মাথা পর্যন্ত।</p>
+                        </div>
+                    </div>
+                    
+                    <div id="wellness5Bn" class="tab-content">
+                        <div class="expert-tip">
+                            <h4>ওয়েলনেস রিচুয়াল</h4>
+                            <p><strong>হার্বাল সমর্থন:</strong> ক্যামোমাইল চা (শান্ত করা) বা অ্যাডাপ্টোজেন (অশ্বগন্ধা) স্ট্রেস পুনরুদ্ধারে সহায়তা করে।</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <button class="action-btn" style="background: var(--success); padding: 12px 30px; font-size: 18px;" onclick="resetTool()">আবার শুরু করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language toggle functionality
+        document.getElementById('englishBtn').addEventListener('click', function() {
+            document.getElementById('englishContent').classList.remove('hidden');
+            document.getElementById('bengaliContent').classList.add('hidden');
+            document.getElementById('englishBtn').classList.add('active');
+            document.getElementById('bengaliBtn').classList.remove('active');
+        });
+        
+        document.getElementById('bengaliBtn').addEventListener('click', function() {
+            document.getElementById('bengaliContent').classList.remove('hidden');
+            document.getElementById('englishContent').classList.add('hidden');
+                   document.getElementById('bengaliBtn').classList.add('active');
+        document.getElementById('englishBtn').classList.remove('active');
+    });
+
+    // Track completed steps
+    let completedSteps = 0;
+    
+    // Show/hide content
+    function showContent(contentId) {
+        const content = document.getElementById(contentId);
+        if (content.style.display === 'block') {
+            content.style.display = 'none';
+        } else {
+            content.style.display = 'block';
+            if (contentId.includes('content1') && completedSteps < 1) completedSteps = 1;
+            if (contentId.includes('content2') && completedSteps < 2) completedSteps = 2;
+            if (contentId.includes('content3') && completedSteps < 3) completedSteps = 3;
+            if (contentId.includes('content4') && completedSteps < 4) completedSteps = 4;
+            if (contentId.includes('content5') && completedSteps < 5) completedSteps = 5;
+            updateProgress();
+        }
+    }
+    
+    // Tab switching
+    function openTab(tabId) {
+        // Get all tabs in the current step
+        const parent = document.getElementById(tabId).parentNode.parentNode;
+        const tabs = parent.querySelectorAll('.tab-content');
+        const tabButtons = parent.querySelectorAll('.tab');
+        
+        // Hide all tab contents and deactivate buttons
+        tabs.forEach(tab => tab.classList.remove('active'));
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Show selected tab and activate button
+        document.getElementById(tabId).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+    
+    // Breathing exercise
+    function startBreathing() {
+        const breathText = document.getElementById('breathText');
+        let cycle = 0;
+        const maxCycles = 3;
+        
+        function breathingCycle() {
+            if (cycle >= maxCycles) {
+                breathText.innerHTML = "Complete! Feel calmer?";
+                return;
+            }
+            
+            // Inhale
+            breathText.innerHTML = "🌬️ Breathe IN... (4 sec)";
+            setTimeout(() => {
+                // Hold
+                breathText.innerHTML = "⏳ Hold... (7 sec)";
+                setTimeout(() => {
+                    // Exhale
+                    breathText.innerHTML = "💨 Breathe OUT... (8 sec)";
+                    setTimeout(() => {
+                        cycle++;
+                        if (cycle < maxCycles) {
+                            breathText.innerHTML = "🌀 Next round...";
+                            setTimeout(breathingCycle, 2000);
+                        } else {
+                            breathingCycle();
+                        }
+                    }, 8000);
+                }, 7000);
+            }, 4000);
+        }
+        
+        breathingCycle();
+    }
+
+    function startBreathingBn() {
+        const breathText = document.getElementById('breathTextBn');
+        let cycle = 0;
+        const maxCycles = 3;
+        
+        function breathingCycle() {
+            if (cycle >= maxCycles) {
+                breathText.innerHTML = "সম্পূর্ণ! আরও শান্ত বোধ করছেন?";
+                return;
+            }
+            
+            // Inhale
+            breathText.innerHTML = "🌬️ শ্বাস নিন... (৪ সেকেন্ড)";
+            setTimeout(() => {
+                // Hold
+                breathText.innerHTML = "⏳ ধরে রাখুন... (৭ সেকেন্ড)";
+                setTimeout(() => {
+                    // Exhale
+                    breathText.innerHTML = "💨 শ্বাস ছাড়ুন... (৮ সেকেন্ড)";
+                    setTimeout(() => {
+                        cycle++;
+                        if (cycle < maxCycles) {
+                            breathText.innerHTML = "🌀 পরবর্তী রাউন্ড...";
+                            setTimeout(breathingCycle, 2000);
+                        } else {
+                            breathingCycle();
+                        }
+                    }, 8000);
+                }, 7000);
+            }, 4000);
+        }
+        
+        breathingCycle();
+    }
+    
+    // Update progress bar
+    function updateProgress() {
+        const progress = (completedSteps / 5) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+        document.getElementById('progressBarBn').style.width = progress + '%';
+    }
+    
+    // Reset tool
+    function resetTool() {
+        document.querySelectorAll('.hidden-content').forEach(content => {
+            content.style.display = 'none';
+        });
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        
+        // Reactivate first tab in each step
+        document.querySelectorAll('.tab-container').forEach(container => {
+            container.firstElementChild.classList.add('active');
+            const firstTabId = container.firstElementChild.getAttribute('onclick').match(/'([^']+)'/)[1];
+            document.getElementById(firstTabId).classList.add('active');
+        });
+        
+        completedSteps = 0;
+        updateProgress();
+        document.getElementById('breathText').innerHTML = "Breathe Deeply";
+        document.getElementById('breathTextBn').innerHTML = "গভীর শ্বাস নিন";
+    }
+</script>
+</body>
+</html>
