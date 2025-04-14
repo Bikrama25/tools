@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person Evaluator Tool / ব্যক্তি মূল্যায়ন টুল</title>
+    <style>
+        body {
+            font-family: Arial, 'Hind Siliguri', sans-serif;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .language-toggle {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .language-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .language-btn.active {
+            background: #2E7D32;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #444;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        textarea {
+            min-height: 80px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #388E3C;
+        }
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+        .good {
+            background-color: #e8f5e9;
+            color: #1B5E20;
+            border: 1px solid #c8e6c9;
+        }
+        .bad {
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
+        .neutral {
+            background-color: #fff8e1;
+            color: #FF8F00;
+            border: 1px solid #FFE082;
+        }
+        .disclaimer {
+            font-size: 13px;
+            color: #666;
+            margin-top: 30px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        .hidden {
+            display: none;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .bengali-text {
+            font-family: 'Hind Siliguri', Arial, sans-serif;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="language-toggle">
+            <button id="englishBtn" class="language-btn active">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/20px-Flag_of_the_United_Kingdom.svg.png" class="icon"> English
+            </button>
+            <button id="bengaliBtn" class="language-btn">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Rabindranath_Tagore.jpg/20px-Rabindranath_Tagore.jpg" class="icon"> বাংলা
+            </button>
+        </div>
+        
+        <div id="englishContent">
+            <h1>Person Evaluator Tool</h1>
+            <p>Answer these questions about the person you met to get an evaluation:</p>
+            
+            <div class="form-group">
+                <label for="eye-contact">How was their eye contact?</label>
+                <select id="eye-contact">
+                    <option value="good">Strong and confident</option>
+                    <option value="neutral">Normal/average</option>
+                    <option value="bad">Avoiding or staring intensely</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="body-language">How was their body language?</label>
+                <select id="body-language">
+                    <option value="good">Open and relaxed</option>
+                    <option value="neutral">Neutral</option>
+                    <option value="bad">Closed off or aggressive</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="conversation">How was the conversation?</label>
+                <select id="conversation">
+                    <option value="good">Engaging and respectful</option>
+                    <option value="neutral">Normal small talk</option>
+                    <option value="bad">Awkward or disrespectful</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="intuition">What does your intuition tell you?</label>
+                <select id="intuition">
+                    <option value="good">I feel good about this person</option>
+                    <option value="neutral">I'm not sure</option>
+                    <option value="bad">I feel uneasy</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="behavior">Any unusual behavior?</label>
+                <textarea id="behavior" rows="3" placeholder="Describe anything that stood out..."></textarea>
+            </div>
+            
+            <button onclick="evaluatePerson()">Evaluate Person</button>
+            
+            <div id="result">
+                <h3 id="result-title">Evaluation Result</h3>
+                <p id="result-text"></p>
+                <p id="result-advice"></p>
+            </div>
+            
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This tool is for entertainment purposes only. 
+                Real people are complex and cannot be accurately judged by a simple questionnaire. 
+                Always use your best judgment and give people a fair chance.
+            </div>
+        </div>
+        
+        <div id="bengaliContent" class="hidden bengali-text">
+            <h1>ব্যক্তি মূল্যায়ন টুল</h1>
+            <p>আপনার দেখা ব্যক্তির সম্পর্কে এই প্রশ্নগুলির উত্তর দিন একটি মূল্যায়ন পেতে:</p>
+            
+            <div class="form-group">
+                <label for="eye-contact-bn">তাদের চোখের সংস্পর্শ কেমন ছিল?</label>
+                <select id="eye-contact-bn">
+                    <option value="good">দৃঢ় এবং আত্মবিশ্বাসী</option>
+                    <option value="neutral">সাধারণ/গড়</option>
+                    <option value="bad">এড়িয়ে চলা বা তীব্রভাবে তাকানো</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="body-language-bn">তাদের শরীরের ভাষা কেমন ছিল?</label>
+                <select id="body-language-bn">
+                    <option value="good">খোলামেলা এবং স্বস্তিতে</option>
+                    <option value="neutral">নিরপেক্ষ</option>
+                    <option value="bad">বন্ধ বা আক্রমণাত্মক</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="conversation-bn">কথোপকথন কেমন ছিল?</label>
+                <select id="conversation-bn">
+                    <option value="good">আকর্ষণীয় এবং সম্মানজনক</option>
+                    <option value="neutral">সাধারণ ছোট কথা</option>
+                    <option value="bad">বিশৃঙ্খল বা অসম্মানজনক</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="intuition-bn">আপনার অন্তর্দৃষ্টি আপনাকে কী বলে?</label>
+                <select id="intuition-bn">
+                    <option value="good">আমি এই ব্যক্তির সম্পর্কে ভাল বোধ করি</option>
+                    <option value="neutral">আমি নিশ্চিত নই</option>
+                    <option value="bad">আমি অস্বস্তি বোধ করি</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="behavior-bn">কোন অস্বাভাবিক আচরণ?</label>
+                <textarea id="behavior-bn" rows="3" placeholder="যে কোন অস্বাভাবিক আচরণ বর্ণনা করুন..."></textarea>
+            </div>
+            
+            <button onclick="evaluatePerson()">ব্যক্তি মূল্যায়ন করুন</button>
+            
+            <div id="result-bn">
+                <h3 id="result-title-bn">মূল্যায়ন ফলাফল</h3>
+                <p id="result-text-bn"></p>
+                <p id="result-advice-bn"></p>
+            </div>
+            
+            <div class="disclaimer">
+                <strong>দাবিত্যাগ:</strong> এই টুলটি শুধুমাত্র বিনোদনের উদ্দেশ্যে। 
+                বাস্তব মানুষ জটিল এবং একটি সাধারণ প্রশ্নোত্তর দ্বারা সঠিকভাবে বিচার করা যায় না। 
+                সর্বদা আপনার সেরা বিচার ব্যবহার করুন এবং মানুষকে একটি ন্যায্য সুযোগ দিন।
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language toggle functionality
+        document.getElementById('englishBtn').addEventListener('click', function() {
+            document.getElementById('englishContent').classList.remove('hidden');
+            document.getElementById('bengaliContent').classList.add('hidden');
+            document.getElementById('englishBtn').classList.add('active');
+            document.getElementById('bengaliBtn').classList.remove('active');
+        });
+        
+        document.getElementById('bengaliBtn').addEventListener('click', function() {
+            document.getElementById('bengaliContent').classList.remove('hidden');
+            document.getElementById('englishContent').classList.add('hidden');
+            document.getElementById('bengaliBtn').classList.add('active');
+            document.getElementById('englishBtn').classList.remove('active');
+        });
+        
+        function evaluatePerson() {
+            const isEnglish = !document.getElementById('englishContent').classList.contains('hidden');
+            
+            // Get values from form based on language
+            let eyeContact, bodyLanguage, conversation, intuition, behavior, resultDiv;
+            
+            if (isEnglish) {
+                eyeContact = document.getElementById('eye-contact').value;
+                bodyLanguage = document.getElementById('body-language').value;
+                conversation = document.getElementById('conversation').value;
+                intuition = document.getElementById('intuition').value;
+                behavior = document.getElementById('behavior').value.toLowerCase();
+                resultDiv = document.getElementById('result');
+            } else {
+                eyeContact = document.getElementById('eye-contact-bn').value;
+                bodyLanguage = document.getElementById('body-language-bn').value;
+                conversation = document.getElementById('conversation-bn').value;
+                intuition = document.getElementById('intuition-bn').value;
+                behavior = document.getElementById('behavior-bn').value.toLowerCase();
+                resultDiv = document.getElementById('result-bn');
+            }
+            
+            // Score the person
+            let score = 0;
+            
+            if (eyeContact === 'good') score += 1;
+            else if (eyeContact === 'bad') score -= 1;
+            
+            if (bodyLanguage === 'good') score += 1;
+            else if (bodyLanguage === 'bad') score -= 1;
+            
+            if (conversation === 'good') score += 1;
+            else if (conversation === 'bad') score -= 1;
+            
+            if (intuition === 'good') score += 2;
+            else if (intuition === 'bad') score -= 2;
+            
+            // Check for red flags in behavior text
+            const redFlags = isEnglish ? 
+                ['angry', 'aggressive', 'threat', 'creepy', 'rude', 'disrespect', 'manipulate'] : 
+                ['রাগান্বিত', 'আক্রমণাত্মক', 'হুমকি', 'ভীতিকর', 'অভদ্র', 'অসম্মান', 'নিয়ন্ত্রণ'];
+            
+            const greenFlags = isEnglish ? 
+                ['kind', 'helpful', 'polite', 'respect', 'friendly', 'smile', 'honest'] : 
+                ['দয়ালু', 'সহায়ক', 'ভদ্র', 'সম্মান', 'বন্ধুত্বপূর্ণ', 'হাসি', 'সৎ'];
+            
+            redFlags.forEach(flag => {
+                if (behavior.includes(flag)) score -= 1;
+            });
+            
+            greenFlags.forEach(flag => {
+                if (behavior.includes(flag)) score += 1;
+            });
+            
+            // Determine result
+            resultDiv.style.display = 'block';
+            
+            if (score >= 3) {
+                resultDiv.className = 'good';
+                if (isEnglish) {
+                    document.getElementById('result-title').textContent = 'Evaluation: Likely a Good Person';
+                    document.getElementById('result-text').textContent = 
+                        'Based on your inputs, this person seems positive and trustworthy. They displayed good social cues and your intuition feels good about them.';
+                    document.getElementById('result-advice').textContent = 
+                        'Remember to still use caution and get to know them gradually.';
+                } else {
+                    document.getElementById('result-title-bn').textContent = 'মূল্যায়ন: সম্ভবত একজন ভাল ব্যক্তি';
+                    document.getElementById('result-text-bn').textContent = 
+                        'আপনার ইনপুটের ভিত্তিতে, এই ব্যক্তিটি ইতিবাচক এবং বিশ্বস্ত বলে মনে হচ্ছে। তারা ভাল সামাজিক সংকেত প্রদর্শন করেছে এবং আপনার অন্তর্দৃষ্টি তাদের সম্পর্কে ভাল বোধ করে।';
+                    document.getElementById('result-advice-bn').textContent = 
+                        'সতর্কতা অবলম্বন করতে ভুলবেন না এবং ধীরে ধীরে তাদের জানুন।';
+                }
+            } else if (score <= -3) {
+                resultDiv.className = 'bad';
+                if (isEnglish) {
+                    document.getElementById('result-title').textContent = 'Evaluation: Potential Concerns';
+                    document.getElementById('result-text').textContent = 
+                        'Based on your inputs, there may be reasons to be cautious with this person. They displayed several negative cues or your intuition feels uneasy.';
+                    document.getElementById('result-advice').textContent = 
+                        'Trust your instincts and maintain healthy boundaries.';
+                } else {
+                    document.getElementById('result-title-bn').textContent = 'মূল্যায়ন: সম্ভাব্য উদ্বেগ';
+                    document.getElementById('result-text-bn').textContent = 
+                        'আপনার ইনপুটের ভিত্তিতে, এই ব্যক্তির সাথে সতর্ক থাকার কারণ থাকতে পারে। তারা বেশ কয়েকটি নেতিবাচক সংকেত প্রদর্শন করেছে বা আপনার অন্তর্দৃষ্টি অস্বস্তি বোধ করে।';
+                    document.getElementById('result-advice-bn').textContent = 
+                        'আপনার সহজাত বুদ্ধিতে বিশ্বাস রাখুন এবং সুস্থ সীমানা বজায় রাখুন।';
+                }
+            } else {
+                resultDiv.className = 'neutral';
+                if (isEnglish) {
+                    document.getElementById('result-title').textContent = 'Evaluation: Neutral/Inconclusive';
+                    document.getElementById('result-text').textContent = 
+                        'Based on your inputs, it\'s hard to say definitively whether this person is good or bad. They displayed a mix of neutral and some positive/negative cues.';
+                    document.getElementById('result-advice').textContent = 
+                        'Give it more time and interactions to form a better judgment.';
+                } else {
+                    document.getElementById('result-title-bn').textContent = 'মূল্যায়ন: নিরপেক্ষ/অনির্ধারিত';
+                    document.getElementById('result-text-bn').textContent = 
+                        'আপনার ইনপুটের ভিত্তিতে, এই ব্যক্তি ভাল না খারাপ তা নির্দিষ্টভাবে বলা কঠিন। তারা নিরপেক্ষ এবং কিছু ইতিবাচক/নেতিবাচক সংকেতের মিশ্রণ প্রদর্শন করেছে।';
+                    document.getElementById('result-advice-bn').textContent = 
+                        'একটি ভাল বিচার গঠনের জন্য আরও সময় এবং মিথস্ক্রিয়া দিন।';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
