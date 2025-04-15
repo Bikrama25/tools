@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Focus & Recovery Daily</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5e72e4;
+            --primary-dark: #4a56e2;
+            --primary-light: #8290f7;
+            --accent: #11cdef;
+            --accent-dark: #00a5c4;
+            --recovery: #2dce89;
+            --recovery-dark: #25b87a;
+            --health: #11cdef;
+            --health-dark: #00a5c4;
+            --light: #f8f9fa;
+            --light-gray: #e9ecef;
+            --medium-gray: #adb5bd;
+            --dark: #212529;
+            --success: #2dce89;
+            --warning: #fb6340;
+            --danger: #f5365c;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            -webkit-text-size-adjust: 100%;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            background-color: white;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        h1 {
+            color: var(--primary);
+            text-align: center;
+            margin: 0 0 25px 0;
+            font-size: 28px;
+            font-weight: 700;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        h2 {
+            color: var(--primary-dark);
+            margin: 20px 0 15px 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        h3 {
+            color: var(--dark);
+            margin: 15px 0 10px 0;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .card {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            background: white;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-box {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .stat-box:active {
+            transform: scale(0.98);
+        }
+        
+        .stat-box.focus {
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+        }
+        
+        .stat-box.recovery {
+            background: linear-gradient(135deg, var(--recovery), var(--recovery-dark));
+        }
+        
+        .stat-box.health {
+            background: linear-gradient(135deg, var(--health), var(--health-dark));
+        }
+        
+        .stat-box .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .stat-box .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background: var(--light-gray);
+            border-radius: 100px;
+            margin: 15px 0;
+            height: 12px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 100px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .quote {
+            font-style: italic;
+            color: var(--dark);
+            padding: 15px;
+            background: var(--light);
+            border-radius: var(--border-radius-sm);
+            margin: 15px 0;
+            font-size: 15px;
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        button, .stat-box {
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            margin: 8px 0;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 15px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+            min-height: 44px;
+        }
+        
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        button.secondary {
+            background: var(--light);
+            color: var(--dark);
+            border: 1px solid var(--light-gray);
+        }
+        
+        button.secondary:hover {
+            background: #e9ecef;
+        }
+        
+        button.danger {
+            background: var(--danger);
+        }
+        
+        button.danger:hover {
+            background: #e0314b;
+        }
+        
+        button.success {
+            background: var(--success);
+        }
+        
+        button.success:hover {
+            background: #25b87a;
+        }
+        
+        button.recovery {
+            background: var(--recovery);
+        }
+        
+        button.recovery:hover {
+            background: var(--recovery-dark);
+        }
+        
+        button.health {
+            background: var(--health);
+        }
+        
+        button.health:hover {
+            background: var(--health-dark);
+        }
+        
+        input[type="text"], textarea, select, input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid var(--light-gray);
+            font-size: 15px;
+            transition: var(--transition);
+            -webkit-appearance: none;
+        }
+        
+        input[type="text"]:focus, textarea:focus, select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(94, 114, 228, 0.2);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+        
+        .task-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--light-gray);
+            touch-action: manipulation;
+        }
+        
+        .task-item:last-child {
+            border-bottom: none;
+        }
+        
+        .task-item input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 4px;
+            margin-right: 12px;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+        
+        .task-item input[type="checkbox"]:checked {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        
+        .task-item input[type="checkbox"]:checked::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+        }
+        
+        .task-item .task-text {
+            flex: 1;
+            word-break: break-word;
+            padding-right: 10px;
+        }
+        
+        .task-item .delete-task {
+            color: var(--medium-gray);
+            cursor: pointer;
+            margin-left: 10px;
+            transition: var(--transition);
+            padding: 5px;
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+        
+        .task-item .delete-task:hover {
+            color: var(--danger);
+        }
+        
+        .completed {
+            text-decoration: line-through;
+            color: var(--medium-gray);
+            opacity: 0.7;
+        }
+        
+        .focus-mode {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .focus-mode.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .focus-timer {
+            font-size: 72px;
+            font-weight: bold;
+            margin: 30px 0;
+            color: var(--primary);
+            font-family: 'Courier New', monospace;
+            touch-action: manipulation;
+        }
+        
+        .timer-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .timer-controls button {
+            width: auto;
+            padding: 10px 20px;
+            min-width: 100px;
+        }
+        
+        .distraction-list {
+            margin: 25px 0;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .distraction-item {
+            padding: 12px 15px;
+            background: var(--light);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .distraction-item span {
+            font-weight: 500;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 20px;
+            color: var(--medium-gray);
+        }
+        
+        .history-item {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .history-item:last-child {
+            border-bottom: none;
+        }
+        
+        .history-date {
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+        
+        .recovery-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .recovery-stat {
+            background: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .recovery-stat .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--recovery-dark);
+        }
+        
+        .recovery-card {
+            border-left: 4px solid var(--recovery);
+        }
+        
+        .health-card {
+            border-left: 4px solid var(--health);
+        }
+        
+        #recoveryMessage {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: var(--border-radius-sm);
+            display: none;
+        }
+        
+        .health-tracker {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .health-stat {
+            background: white;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .health-stat .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--health-dark);
+            margin: 5px 0;
+        }
+        
+        .health-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .health-buttons button {
+            flex: 1;
+            padding: 8px;
+            font-size: 14px;
+        }
+        
+        .water-cups {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+        
+        .water-cup {
+            width: 30px;
+            height: 40px;
+            background: #e6f7ff;
+            border: 2px solid var(--health);
+            border-radius: 0 0 5px 5px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .water-cup.filled {
+            background: var(--health);
+        }
+        
+        .water-cup::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 5px;
+            background: var(--health);
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .exercise-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .exercise-input input {
+            flex: 1;
+        }
+        
+        .exercise-log {
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .exercise-item {
+            padding: 10px;
+            background: var(--light);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        @media (max-width: 500px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .health-tracker {
+                grid-template-columns: 1fr;
+            }
+            
+            .focus-timer {
+                font-size: 60px;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            .recovery-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .timer-controls button {
+                min-width: 80px;
+                padding: 8px 12px;
+            }
+            
+            .modal-content {
+                padding: 15px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                padding: 20px;
+                background-color: var(--light-gray);
+            }
+            
+            .container {
+                border-radius: var(--border-radius);
+                box-shadow: var(--shadow-lg);
+                min-height: auto;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Mobile tap highlights */
+        button:active, .stat-box:active, .task-item:active {
+            opacity: 0.8;
+        }
+        
+        /* Prevent zoom on input focus on mobile */
+        @media screen and (max-width: 767px) {
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-bullseye"></i> Focus & Recovery Daily</h1>
+        
+        <div class="stats-container">
+            <div class="stat-box" data-action="showStreakInfo">
+                <div class="stat-label"><i class="fas fa-fire"></i> Focus Streak</div>
+                <div class="stat-value" id="streak">0</div>
+            </div>
+            <div class="stat-box focus" data-action="showFocusMode">
+                <div class="stat-label"><i class="fas fa-clock"></i> Focus Mode</div>
+                <div class="stat-value">Start</div>
+            </div>
+            <div class="stat-box recovery" data-action="showRecoveryInfo">
+                <div class="stat-label"><i class="fas fa-heartbeat"></i> Clean Days</div>
+                <div class="stat-value" id="recoveryStreak">0</div>
+            </div>
+            <div class="stat-box health" data-action="showHealthInfo">
+                <div class="stat-label"><i class="fas fa-glass-water"></i> Water</div>
+                <div class="stat-value" id="waterStat">0/8</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-quote-left"></i> Today's Motivation</h2>
+            <div class="quote" id="dailyQuote">
+                "The secret of getting ahead is getting started." — Mark Twain
+            </div>
+            <button data-action="newQuote"><i class="fas fa-sync-alt"></i> New Motivation Quote</button>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-bullseye"></i> My Goal</h2>
+            <input type="text" id="goalInput" placeholder="What are you working toward?">
+            <button data-action="setGoal"><i class="fas fa-save"></i> Set Goal</button>
+            <div id="goalDisplay" style="margin-top: 15px; font-weight: 500; padding: 10px; background-color: var(--light); border-radius: var(--border-radius-sm);"></div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-chart-line"></i> Daily Progress</h2>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <textarea id="dailyProgress" placeholder="What did you accomplish today? What's your plan for tomorrow?"></textarea>
+            <button data-action="saveProgress"><i class="fas fa-save"></i> Save Progress</button>
+            <div id="progressHistory" style="margin-top: 20px;"></div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-tasks"></i> Today's Focus Tasks</h2>
+            <ul class="task-list" id="taskList">
+                <!-- Tasks will be added here -->
+            </ul>
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="newTask" placeholder="Add a new task" style="flex: 1;">
+                <button data-action="addTask" style="width: auto; padding: 0 15px; min-width: 44px;"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+        
+        <div class="card health-card">
+            <h2><i class="fas fa-heartbeat"></i> Daily Health Tracker</h2>
+            
+            <div class="health-tracker">
+                <div class="health-stat">
+                    <div class="label"><i class="fas fa-glass-water"></i> Water Intake</div>
+                    <div class="value" id="waterCount">0/8 cups</div>
+                    <div class="water-cups" id="waterCupsContainer">
+                        <!-- Cups will be added by JavaScript -->
+                    </div>
+                    <div class="health-buttons">
+                        <button class="health" data-action="addWater"><i class="fas fa-plus"></i> Add Cup</button>
+                        <button class="secondary" data-action="resetWater"><i class="fas fa-undo"></i> Reset</button>
+                    </div>
+                </div>
+                
+                <div class="health-stat">
+                    <div class="label"><i class="fas fa-running"></i> Exercise</div>
+                    <div class="value" id="exerciseCount">0 min</div>
+                    <div class="exercise-input">
+                        <input type="number" id="exerciseMinutes" placeholder="Minutes" min="1">
+                        <button class="health" data-action="logExercise"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                    <div class="exercise-log" id="exerciseLog">
+                        <!-- Exercise items will be added here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2><i class="fas fa-heart"></i> Why This Matters</h2>
+            <textarea id="whyMatters" placeholder="Why is achieving this goal important to you? How will your life be different when you achieve it?"></textarea>
+            <button data-action="saveReason"><i class="fas fa-save"></i> Save Reason</button>
+            <div id="reasonDisplay" style="margin-top: 15px; padding: 10px; background-color: var(--light); border-radius: var(--border-radius-sm); font-style: italic;"></div>
+        </div>
+        
+        <div class="card recovery-card">
+            <h2><i class="fas fa-heartbeat"></i> Recovery Tracker</h2>
+            
+            <div class="recovery-stats">
+                <div class="recovery-stat">
+                    <div class="label">Current Streak</div>
+                    <div class="value" id="recoveryDays">0 days</div>
+                </div>
+                <div class="recovery-stat">
+                    <div class="label">Best Streak</div>
+                    <div class="value" id="recoveryBest">0 days</div>
+                </div>
+                <div class="recovery-stat">
+                    <div class="label">Relapses</div>
+                    <div class="value" id="relapseCount">0</div>
+                </div>
+                <div class="recovery-stat">
+                    <div class="label">Clean This Month</div>
+                    <div class="value" id="cleanThisMonth">0%</div>
+                </div>
+            </div>
+            
+            <button class="recovery" data-action="logCleanDay">
+                <i class="fas fa-check-circle"></i> I stayed clean today
+            </button>
+            
+            <button class="danger" data-action="showRelapseModal">
+                <i class="fas fa-times-circle"></i> I relapsed
+            </button>
+            
+            <div id="recoveryMessage" style="margin-top: 15px; padding: 10px; border-radius: var(--border-radius-sm); display: none;"></div>
+            
+            <h3 style="margin-top: 20px;"><i class="fas fa-first-aid"></i> Emergency Tools</h3>
+            <button class="secondary" data-action="showUrgeModal">
+                <i class="fas fa-fire-extinguisher"></i> Urge Control Techniques
+            </button>
+            
+            <button class="secondary" data-action="showBenefitsModal" style="margin-top: 10px;">
+                <i class="fas fa-brain"></i> Benefits of Staying Clean
+            </button>
+        </div>
+    </div>
+    
+    <div id="focusMode" class="focus-mode">
+        <div style="max-width: 500px; width: 100%;">
+            <h2><i class="fas fa-clock"></i> Focus Mode</h2>
+            <div class="focus-timer" id="focusTimer">25:00</div>
+            
+            <div class="timer-controls">
+                <button data-action="startTimer" data-minutes="25"><i class="fas fa-play"></i> 25 min</button>
+                <button class="secondary" data-action="startTimer" data-minutes="5"><i class="fas fa-play"></i> 5 min</button>
+                <button class="secondary" data-action="startTimer" data-minutes="50"><i class="fas fa-play"></i> 50 min</button>
+            </div>
+            
+            <div class="timer-controls">
+                <button data-action="pauseTimer" id="pauseBtn"><i class="fas fa-pause"></i> Pause</button>
+                <button class="danger" data-action="exitFocusMode"><i class="fas fa-times"></i> Exit</button>
+            </div>
+            
+            <div class="distraction-list">
+                <h3><i class="fas fa-eye-slash"></i> Common Distractions</h3>
+                <div id="distractionsList">
+                    <div class="distraction-item">
+                        <span><i class="fas fa-mobile-screen"></i> Phone</span>
+                        <button class="secondary" style="padding: 5px 10px; width: auto;" data-action="logDistraction" data-type="Phone">Got Distracted</button>
+                    </div>
+                    <div class="distraction-item">
+                        <span><i class="fas fa-scroll"></i> Social Media</span>
+                        <button class="secondary" style="padding: 5px 10px; width: auto;" data-action="logDistraction" data-type="Social Media">Got Distracted</button>
+                    </div>
+                    <div class="distraction-item">
+                        <span><i class="fas fa-brain"></i> Negative Thoughts</span>
+                        <button class="secondary" style="padding: 5px 10px; width: auto;" data-action="logDistraction" data-type="Negative Thoughts">Got Distracted</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="urgeModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2><i class="fas fa-fire-extinguisher"></i> Urge Control Techniques</h2>
+            <ul style="margin: 15px 0; padding-left: 20px;">
+                <li style="margin-bottom: 10px;"><strong>Delay:</strong> Wait 15 minutes (urges typically pass)</li>
+                <li style="margin-bottom: 10px;"><strong>Distract:</strong> Call a friend or go for a walk</li>
+                <li style="margin-bottom: 10px;"><strong>Deep breathe:</strong> 4-7-8 technique (inhale 4s, hold 7s, exhale 8s)</li>
+                <li style="margin-bottom: 10px;"><strong>Cold shower:</strong> Resets your nervous system</li>
+                <li style="margin-bottom: 10px;"><strong>Remember your "why":</strong> Read your goal above</li>
+                <li style="margin-bottom: 10px;"><strong>Exercise:</strong> 10 pushups or jumping jacks</li>
+                <li style="margin-bottom: 10px;"><strong>Visualize:</strong> Picture yourself proud after resisting</li>
+            </ul>
+            <button data-action="hideModal" data-modal="urgeModal"><i class="fas fa-times"></i> Close</button>
+        </div>
+    </div>
+    
+    <div id="benefitsModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2><i class="fas fa-brain"></i> Benefits of Staying Clean</h2>
+            <ul style="margin: 15px 0; padding-left: 20px;">
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--recovery);"></i> Improved self-esteem and confidence</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--recovery);"></i> More energy and motivation</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--recovery);"></i> Better real-life relationships</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--recovery);"></i> Increased productivity</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--recovery);"></i> Healthier brain chemistry</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--recovery);"></i> More free time for hobbies</li>
+                <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: var(--recovery);"></i> Reduced anxiety and depression</li>
+            </ul>
+            <button data-action="hideModal" data-modal="benefitsModal"><i class="fas fa-times"></i> Close</button>
+        </div>
+    </div>
+    
+    <div id="relapseModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2><i class="fas fa-exclamation-triangle" style="color: var(--danger);"></i> Relapse Prevention</h2>
+            <p style="margin-bottom: 15px;">If you relapsed, don't despair. Recovery is a journey with ups and downs.</p>
+            
+            <div style="margin-bottom: 15px;">
+                <h3>What triggered you?</h3>
+                <select id="triggerSelect" style="width: 100%; margin-bottom: 10px;">
+                    <option value="">Select a trigger...</option>
+                    <option value="Stress">Stress</option>
+                    <option value="Boredom">Boredom</option>
+                    <option value="Loneliness">Loneliness</option>
+                    <option value="Late night">Late night</option>
+                    <option value="Seeing suggestive content">Seeing suggestive content</option>
+                </select>
+                
+                <textarea id="relapseNotes" placeholder="What could you do differently next time?" style="min-height: 80px;"></textarea>
+            </div>
+            
+            <button class="danger" data-action="logRelapse"><i class="fas fa-save"></i> Log Relapse & Reset</button>
+            <button class="secondary" data-action="hideModal" data-modal="relapseModal" style="margin-top: 10px;"><i class="fas fa-times"></i> Cancel</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Safe data handling with defaults
+            const safeParse = (key, defaultValue) => {
+                try {
+                    const item = localStorage.getItem(key);
+                    return item ? JSON.parse(item) : defaultValue;
+                } catch (e) {
+                    console.error('Data parse error:', e);
+                    return defaultValue;
+                }
+            };
+
+            // Initialize app data with proper defaults
+            const today = new Date();
+            const defaultRecoveryData = {
+                currentStreak: 0,
+                bestStreak: 0,
+                relapseCount: 0,
+                lastCleanDate: null,
+                triggers: [],
+                cleanDaysThisMonth: 0,
+                totalDaysThisMonth: today.getDate(),
+                monthTracked: today.toISOString()
+            };
+
+            const defaultHealthData = {
+                waterIntake: 0,
+                exerciseMinutes: 0,
+                exerciseHistory: [],
+                lastUpdate: null
+            };
+
+            window.appData = {
+                streak: parseInt(localStorage.getItem('motivationStreak')) || 0,
+                lastVisit: localStorage.getItem('lastVisit'),
+                goal: localStorage.getItem('currentGoal') || '',
+                progressHistory: safeParse('progressHistory', []),
+                tasks: safeParse('tasks', [
+                    {text: "Review my goals", completed: false},
+                    {text: "Work on most important task", completed: false}
+                ]),
+                whyMatters: localStorage.getItem('whyMatters') || '',
+                distractions: safeParse('distractions', []),
+                recovery: safeParse('recoveryData', defaultRecoveryData),
+                health: safeParse('healthData', defaultHealthData),
+                quotes: [
+                    "The secret of getting ahead is getting started. — Mark Twain",
+                    "You don't have to be great to start. — Zig Ziglar",
+                    "Small daily improvements lead to big results. — John Maxwell",
+                    "Motivation is what gets you started. Habit is what keeps you going. — Jim Ryun",
+                    "Success is the sum of small efforts, repeated day in and day out. — Robert Collier",
+                    "The only limit to our realization of tomorrow is our doubts of today. — Franklin D. Roosevelt",
+                    "What you get by achieving your goals is not as important as what you become by achieving your goals. — Zig Ziglar",
+                    "The future belongs to those who believe in the beauty of their dreams. — Eleanor Roosevelt",
+                    "Discipline is choosing between what you want now and what you want most. — Abraham Lincoln",
+                    "Your focus determines your reality. — George Lucas",
+                    "Recovery is not perfection. It's progress. — Unknown",
+                    "Every day is a new opportunity to build the life you want. — Unknown"
+                ],
+                timer: {
+                    seconds: 1500,
+                    isRunning: false,
+                    interval: null,
+                    startTime: null
+                }
+            };
+
+            // Event delegation for all interactive elements
+            document.addEventListener('click', function(e) {
+                const actionEl = e.target.closest('[data-action]');
+                if (!actionEl) return;
+
+                const action = actionEl.getAttribute('data-action');
+                const index = actionEl.getAttribute('data-index');
+                const type = actionEl.getAttribute('data-type');
+                const minutes = parseInt(actionEl.getAttribute('data-minutes'));
+                const modal = actionEl.getAttribute('data-modal');
+
+                // Unified action handler
+                const actions = {
+                    showStreakInfo: showStreakInfo,
+                    showFocusMode: showFocusMode,
+                    showHealthInfo: showHealthInfo,
+                    newQuote: newQuote,
+                    setGoal: setGoal,
+                    saveProgress: saveProgress,
+                    addTask: addTask,
+                    saveReason: saveReason,
+                    logCleanDay: logCleanDay,
+                    showRelapseModal: showRelapseModal,
+                    showUrgeModal: showUrgeModal,
+                    showBenefitsModal: showBenefitsModal,
+                    startTimer: () => startTimer(minutes),
+                    pauseTimer: pauseTimer,
+                    exitFocusMode: exitFocusMode,
+                    logDistraction: () => logDistraction(type),
+                    hideModal: () => hideModal(modal),
+                    logRelapse: logRelapse,
+                    addWater: addWater,
+                    resetWater: resetWater,
+                    logExercise: logExercise,
+                    toggleTask: () => {
+                        if (index !== null) {
+                            updateTask(parseInt(index), actionEl.checked);
+                        }
+                    },
+                    deleteTask: () => {
+                        if (index !== null) {
+                            deleteTask(parseInt(index));
+                        }
+                    }
+                };
+
+                if (actions[action]) {
+                    actions[action]();
+                }
+            });
+
+            // Initialize the app
+            initApp();
+
+            function initApp() {
+                updateStreak();
+                renderAll();
+                updateRecoveryStats();
+                checkSavedTimer();
+                setupMobileHandlers();
+            }
+
+            function checkSavedTimer() {
+                const savedTimer = safeParse('activeTimer', null);
+                if (savedTimer?.isRunning) {
+                    const timeElapsed = Math.floor((Date.now() - savedTimer.startTime) / 1000);
+                    const remainingTime = savedTimer.duration - timeElapsed;
+
+                    if (remainingTime > 0) {
+                        appData.timer.seconds = remainingTime;
+                        appData.timer.startTime = Date.now() - (savedTimer.duration - remainingTime) * 1000;
+                        showFocusMode();
+                        startTimer(Math.ceil(remainingTime / 60), true);
+                    } else {
+                        localStorage.removeItem('activeTimer');
+                        if (remainingTime <= 0) {
+                            showMessage('Previous focus session completed!', 'success');
+                        }
+                    }
+                }
+            }
+
+            /* ===== HEALTH TRACKING FUNCTIONS ===== */
+            function renderWaterCups() {
+                const container = document.getElementById('waterCupsContainer');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                const totalCups = 8;
+                
+                for (let i = 0; i < totalCups; i++) {
+                    const cup = document.createElement('div');
+                    cup.className = `water-cup ${i < appData.health.waterIntake ? 'filled' : ''}`;
+                    cup.dataset.index = i;
+                    cup.addEventListener('click', () => toggleWaterCup(i));
+                    container.appendChild(cup);
+                }
+            }
+            
+            function toggleWaterCup(index) {
+                const newIntake = index + 1;
+                appData.health.waterIntake = newIntake;
+                appData.health.lastUpdate = new Date().toISOString();
+                saveData();
+                updateHealthDisplay();
+                renderWaterCups();
+            }
+            
+            function addWater() {
+                if (appData.health.waterIntake < 8) {
+                    appData.health.waterIntake++;
+                    appData.health.lastUpdate = new Date().toISOString();
+                    saveData();
+                    updateHealthDisplay();
+                    renderWaterCups();
+                    showMessage('Added water intake!', 'success');
+                } else {
+                    showMessage('You\'ve reached the daily goal!', 'info');
+                }
+            }
+            
+            function resetWater() {
+                appData.health.waterIntake = 0;
+                appData.health.lastUpdate = new Date().toISOString();
+                saveData();
+                updateHealthDisplay();
+                renderWaterCups();
+                showMessage('Water intake reset', 'info');
+            }
+            
+            function logExercise() {
+                const input = document.getElementById('exerciseMinutes');
+                if (!input) return;
+                
+                const minutes = parseInt(input.value);
+                if (isNaN(minutes) || minutes <= 0) {
+                    showMessage('Please enter valid minutes', 'error');
+                    return;
+                }
+                
+                const today = new Date();
+                const timeString = today.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                appData.health.exerciseMinutes += minutes;
+                appData.health.exerciseHistory.push({
+                    minutes: minutes,
+                    time: timeString,
+                    date: today.toLocaleDateString(),
+                    timestamp: today.getTime()
+                });
+                
+                appData.health.lastUpdate = today.toISOString();
+                input.value = '';
+                
+                saveData();
+                updateHealthDisplay();
+                renderExerciseLog();
+                showMessage(`Added ${minutes} minutes of exercise!`, 'success');
+            }
+            
+            function updateHealthDisplay() {
+                document.getElementById('waterCount').textContent = 
+                    `${appData.health.waterIntake}/8 cups`;
+                document.getElementById('waterStat').textContent = 
+                    `${appData.health.waterIntake}/8`;
+                
+                document.getElementById('exerciseCount').textContent = 
+                    `${appData.health.exerciseMinutes} min`;
+            }
+            
+            function renderExerciseLog() {
+                const container = document.getElementById('exerciseLog');
+                if (!container) return;
+                
+                container.innerHTML = '';
+                
+                if (!appData.health.exerciseHistory || appData.health.exerciseHistory.length === 0) {
+                    container.innerHTML = '<div class="empty-state">No exercise logged today</div>';
+                    return;
+                }
+                
+                // Show most recent first
+                [...appData.health.exerciseHistory].reverse().forEach((item, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'exercise-item';
+                    div.innerHTML = `
+                        <span>${item.minutes} min</span>
+                        <span>${item.time}</span>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+            
+            function showHealthInfo() {
+                let message = `Today's Health Summary:\n\n` +
+                             `Water Intake: ${appData.health.waterIntake}/8 cups\n` +
+                             `Exercise: ${appData.health.exerciseMinutes} minutes\n\n`;
+                
+                if (appData.health.waterIntake < 4) {
+                    message += `Remember to drink more water today!`;
+                } else if (appData.health.waterIntake >= 8) {
+                    message += `Great job on hydration!`;
+                }
+                
+                if (appData.health.exerciseMinutes < 30) {
+                    message += `\nTry to get at least 30 minutes of exercise today.`;
+                } else {
+                    message += `\nExcellent work on your exercise goals!`;
+                }
+                
+                alert(message);
+            }
+
+            /* ===== CORE APP FUNCTIONS ===== */
+            function saveData() {
+                try {
+                    localStorage.setItem('motivationStreak', appData.streak);
+                    localStorage.setItem('lastVisit', appData.lastVisit);
+                    localStorage.setItem('currentGoal', appData.goal);
+                    localStorage.setItem('progressHistory', JSON.stringify(appData.progressHistory));
+                    localStorage.setItem('tasks', JSON.stringify(appData.tasks));
+                    localStorage.setItem('whyMatters', appData.whyMatters);
+                    localStorage.setItem('distractions', JSON.stringify(appData.distractions));
+                    localStorage.setItem('recoveryData', JSON.stringify(appData.recovery));
+                    localStorage.setItem('healthData', JSON.stringify(appData.health));
+                } catch (e) {
+                    console.error('Error saving data:', e);
+                }
+            }
+
+            function renderAll() {
+                document.getElementById('streak').textContent = appData.streak;
+                document.getElementById('bestStreak').textContent = appData.recovery.bestStreak;
+                document.getElementById('goalDisplay').textContent = appData.goal || 'No goal set yet';
+                document.getElementById('whyMatters').value = appData.whyMatters;
+                document.getElementById('reasonDisplay').textContent = appData.whyMatters || 'Write why this goal matters to you...';
+                renderTasks();
+                updateProgressHistory();
+                newQuote();
+                updateRecoveryDisplay();
+                updateHealthDisplay();
+                renderWaterCups();
+                renderExerciseLog();
+            }
+
+            function renderTasks() {
+                const taskList = document.getElementById('taskList');
+                if (!taskList) return;
+                
+                taskList.innerHTML = '';
+                
+                if (!appData.tasks || appData.tasks.length === 0) {
+                    taskList.innerHTML = '<div class="empty-state">No tasks yet. Add your first task!</div>';
+                    return;
+                }
+                
+                appData.tasks.forEach((task, index) => {
+                    if (!task) return;
+                    
+                    const li = document.createElement('li');
+                    li.className = 'task-item';
+                    li.innerHTML = `
+                        <input type="checkbox" ${task.completed ? 'checked' : ''} 
+                               data-action="toggleTask" data-index="${index}"
+                               aria-label="${task.completed ? 'Completed' : 'Pending'} task: ${task.text}">
+                        <span class="task-text ${task.completed ? 'completed' : ''}">${task.text}</span>
+                        <i class="fas fa-trash delete-task" data-action="deleteTask" data-index="${index}" aria-label="Delete task"></i>
+                    `;
+                    taskList.appendChild(li);
+                });
+                
+                updateProgressBar();
+            }
+
+            function addTask() {
+                const taskInput = document.getElementById('newTask');
+                const taskText = taskInput?.value.trim();
+                
+                if (taskText) {
+                    if (!appData.tasks) {
+                        appData.tasks = [];
+                    }
+                    
+                    appData.tasks.push({
+                        text: taskText,
+                        completed: false
+                    });
+                    
+                    saveData();
+                    if (taskInput) taskInput.value = '';
+                    renderTasks();
+                    
+                    // Scroll to the new task on mobile
+                    setTimeout(() => {
+                        const taskList = document.getElementById('taskList');
+                        if (taskList && taskList.lastElementChild) {
+                            taskList.lastElementChild.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'nearest'
+                            });
+                        }
+                    }, 100);
+                } else {
+                    showMessage('Please enter a task description', 'error');
+                }
+            }
+
+            function updateTask(index, isChecked) {
+                if (appData.tasks && appData.tasks[index]) {
+                    appData.tasks[index].completed = isChecked;
+                    saveData();
+                    renderTasks();
+                    updateProgressBar();
+                }
+            }
+
+            function deleteTask(index) {
+                if (appData.tasks && appData.tasks[index]) {
+                    if (confirm('Are you sure you want to delete this task?')) {
+                        appData.tasks.splice(index, 1);
+                        saveData();
+                        renderTasks();
+                        updateProgressBar();
+                    }
+                }
+            }
+
+            function updateProgressBar() {
+                const progressBar = document.getElementById('progressBar');
+                if (!progressBar) return;
+                
+                const totalTasks = appData.tasks?.length || 0;
+                const completedTasks = totalTasks > 0 ? 
+                    appData.tasks.filter(task => task?.completed).length : 0;
+                const progress = totalTasks > 0 ? 
+                    Math.round((completedTasks / totalTasks) * 100) : 0;
+                
+                progressBar.style.width = `${progress}%`;
+                progressBar.setAttribute('aria-valuenow', progress);
+                progressBar.setAttribute('aria-valuetext', `${progress}% of tasks completed`);
+            }
+
+            function updateStreak() {
+                const today = new Date().toDateString();
+                
+                if (appData.lastVisit !== today) {
+                    const yesterday = new Date();
+                    yesterday.setDate(yesterday.getDate() - 1);
+                    
+                    if (appData.lastVisit === yesterday.toDateString()) {
+                        appData.streak++;
+                    } else if (appData.lastVisit && appData.lastVisit !== today) {
+                        const lastVisitDate = new Date(appData.lastVisit);
+                        const daysSinceLastVisit = Math.floor((new Date() - lastVisitDate) / (1000 * 60 * 60 * 24));
+                        
+                        if (daysSinceLastVisit > 1) {
+                            appData.streak = 1;
+                        } else {
+                            appData.streak++;
+                        }
+                    } else {
+                        appData.streak = 1;
+                    }
+                    
+                    appData.lastVisit = today;
+                    saveData();
+                    const streakElement = document.getElementById('streak');
+                    if (streakElement) streakElement.textContent = appData.streak;
+                }
+            }
+
+            function showStreakInfo() {
+                alert(`Your current focus streak is ${appData.streak} days! ${appData.streak > 3 ? 'Keep going!' : 'You got this!'}`);
+            }
+
+            function newQuote() {
+                if (!appData.quotes || appData.quotes.length === 0) return;
+                
+                const randomIndex = Math.floor(Math.random() * appData.quotes.length);
+                const quoteElement = document.getElementById('dailyQuote');
+                if (quoteElement && appData.quotes[randomIndex]) {
+                    quoteElement.textContent = appData.quotes[randomIndex];
+                }
+            }
+
+            function setGoal() {
+                const goalInput = document.getElementById('goalInput');
+                if (!goalInput) return;
+                
+                appData.goal = goalInput.value.trim();
+                
+                if (appData.goal) {
+                    saveData();
+                    const goalDisplay = document.getElementById('goalDisplay');
+                    if (goalDisplay) goalDisplay.textContent = appData.goal;
+                    goalInput.value = '';
+                    showMessage('Goal saved successfully!', 'success');
+                } else {
+                    showMessage('Please enter a valid goal', 'error');
+                }
+            }
+
+            function saveProgress() {
+                const progressText = document.getElementById('dailyProgress')?.value.trim();
+                
+                if (progressText) {
+                    const today = new Date();
+                    const dateString = today.toLocaleDateString('en-US', { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                    });
+                    
+                    if (!appData.progressHistory) {
+                        appData.progressHistory = [];
+                    }
+                    
+                    appData.progressHistory.unshift({
+                        date: dateString,
+                        text: progressText,
+                        timestamp: today.getTime()
+                    });
+                    
+                    if (appData.progressHistory.length > 7) {
+                        appData.progressHistory = appData.progressHistory.slice(0, 7);
+                    }
+                    
+                    saveData();
+                    const dailyProgress = document.getElementById('dailyProgress');
+                    if (dailyProgress) dailyProgress.value = '';
+                    updateProgressHistory();
+                    showMessage('Progress saved successfully!', 'success');
+                } else {
+                    showMessage('Please enter your progress before saving', 'error');
+                }
+            }
+
+            function updateProgressHistory() {
+                const historyDiv = document.getElementById('progressHistory');
+                if (!historyDiv) return;
+                
+                historyDiv.innerHTML = '<h3><i class="fas fa-history"></i> Recent Progress</h3>';
+                
+                if (!appData.progressHistory || appData.progressHistory.length === 0) {
+                    historyDiv.innerHTML += '<div class="empty-state">No progress recorded yet. Add your first update!</div>';
+                    return;
+                }
+                
+                appData.progressHistory.forEach(item => {
+                    if (!item) return;
+                    
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'history-item';
+                    itemDiv.innerHTML = `
+                        <div class="history-date">${item.date || 'Unknown date'}</div>
+                        <div>${item.text || ''}</div>
+                    `;
+                    historyDiv.appendChild(itemDiv);
+                });
+            }
+
+            function saveReason() {
+                const whyMattersInput = document.getElementById('whyMatters');
+                if (!whyMattersInput) return;
+                
+                appData.whyMatters = whyMattersInput.value.trim();
+                
+                if (appData.whyMatters) {
+                    saveData();
+                    const reasonDisplay = document.getElementById('reasonDisplay');
+                    if (reasonDisplay) reasonDisplay.textContent = appData.whyMatters;
+                    showMessage('Your "Why" has been saved!', 'success');
+                } else {
+                    showMessage('Please enter why this goal matters to you', 'error');
+                }
+            }
+
+            /* ===== FOCUS TIMER FUNCTIONS ===== */
+            function showFocusMode() {
+                const focusMode = document.getElementById('focusMode');
+                const container = document.querySelector('.container');
+                if (!focusMode || !container) return;
+                
+                focusMode.classList.add('active', 'fade-in');
+                container.style.opacity = '0';
+                container.style.pointerEvents = 'none';
+                appData.timer.seconds = 1500;
+                updateTimerDisplay();
+            }
+
+            function exitFocusMode() {
+                if (confirm('Are you sure you want to exit focus mode?')) {
+                    const focusMode = document.getElementById('focusMode');
+                    const container = document.querySelector('.container');
+                    if (!focusMode || !container) return;
+                    
+                    focusMode.classList.remove('active');
+                    container.style.opacity = '1';
+                    container.style.pointerEvents = 'auto';
+                    clearInterval(appData.timer.interval);
+                    appData.timer.isRunning = false;
+                    
+                    const pauseBtn = document.getElementById('pauseBtn');
+                    if (pauseBtn) pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                    
+                    const focusTimer = document.getElementById('focusTimer');
+                    if (focusTimer) focusTimer.classList.remove('pulse');
+                    
+                    if (appData.timer.isRunning) {
+                        localStorage.removeItem('activeTimer');
+                    }
+                }
+            }
+
+            function startTimer(minutes, fromResume = false) {
+                if (!minutes || minutes <= 0) return;
+                
+                if (appData.timer.isRunning && !fromResume) return;
+                
+                if (!fromResume) {
+                    appData.timer.seconds = minutes * 60;
+                    appData.timer.startTime = Date.now();
+                }
+                
+                if (!fromResume) {
+                    localStorage.setItem('activeTimer', JSON.stringify({
+                        isRunning: true,
+                        startTime: appData.timer.startTime,
+                        duration: appData.timer.seconds
+                    }));
+                }
+                
+                updateTimerDisplay();
+                appData.timer.isRunning = true;
+                
+                clearInterval(appData.timer.interval);
+                
+                appData.timer.interval = setInterval(() => {
+                    appData.timer.seconds--;
+                    updateTimerDisplay();
+                    
+                    if (appData.timer.seconds <= 0) {
+                        clearInterval(appData.timer.interval);
+                        appData.timer.isRunning = false;
+                        localStorage.removeItem('activeTimer');
+                        const focusTimer = document.getElementById('focusTimer');
+                        if (focusTimer) focusTimer.classList.remove('pulse');
+                        playCompletionSound();
+                        showMessage('Focus session complete! Take a short break.', 'success');
+                    }
+                }, 1000);
+                
+                const pauseBtn = document.getElementById('pauseBtn');
+                if (pauseBtn) pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+                
+                const focusTimer = document.getElementById('focusTimer');
+                if (focusTimer) focusTimer.classList.add('pulse');
+            }
+
+            function pauseTimer() {
+                if (appData.timer.isRunning) {
+                    clearInterval(appData.timer.interval);
+                    appData.timer.isRunning = false;
+                    const pauseBtn = document.getElementById('pauseBtn');
+                    if (pauseBtn) pauseBtn.innerHTML = '<i class="fas fa-play"></i> Resume';
+                    
+                    const focusTimer = document.getElementById('focusTimer');
+                    if (focusTimer) focusTimer.classList.remove('pulse');
+                    
+                    localStorage.setItem('activeTimer', JSON.stringify({
+                        isRunning: false,
+                        startTime: appData.timer.startTime,
+                        duration: appData.timer.seconds
+                    }));
+                } else {
+                    const now = Date.now();
+                    const pausedDuration = now - (appData.timer.startTime + (appData.timer.startTime - now));
+                    appData.timer.startTime = now - pausedDuration;
+                    
+                    startTimer(Math.ceil(appData.timer.seconds / 60), true);
+                }
+            }
+
+            function updateTimerDisplay() {
+                const minutes = Math.floor(appData.timer.seconds / 60);
+                const seconds = appData.timer.seconds % 60;
+                const focusTimer = document.getElementById('focusTimer');
+                if (focusTimer) {
+                    focusTimer.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                    focusTimer.setAttribute('aria-label', `${minutes} minutes and ${seconds} seconds remaining`);
+                }
+            }
+
+            function logDistraction(type) {
+                if (!type) return;
+                
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                
+                if (!appData.distractions) {
+                    appData.distractions = [];
+                }
+                
+                appData.distractions.unshift({
+                    type: type,
+                    time: timeString,
+                    date: now.toLocaleDateString(),
+                    timestamp: now.getTime()
+                });
+                
+                if (appData.distractions.length > 20) {
+                    appData.distractions = appData.distractions.slice(0, 20);
+                }
+                
+                saveData();
+                showMessage(`Acknowledged distraction from ${type} at ${timeString}. Refocus!`, 'warning');
+            }
+
+            /* ===== RECOVERY TRACKING FUNCTIONS ===== */
+            function updateRecoveryStats() {
+                if (!appData.recovery) {
+                    appData.recovery = {
+                        currentStreak: 0,
+                        bestStreak: 0,
+                        relapseCount: 0,
+                        lastCleanDate: null,
+                        triggers: [],
+                        cleanDaysThisMonth: 0,
+                        totalDaysThisMonth: new Date().getDate(),
+                        monthTracked: new Date().toISOString()
+                    };
+                }
+                
+                // Check streak continuity
+                if (appData.recovery.lastCleanDate) {
+                    const lastDate = new Date(appData.recovery.lastCleanDate);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0);
+                    
+                    const timeDiff = today - lastDate;
+                    const daysSince = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    
+                    if (daysSince === 1) {
+                        appData.recovery.currentStreak++;
+                        
+                        if (appData.recovery.currentStreak > appData.recovery.bestStreak) {
+                            appData.recovery.bestStreak = appData.recovery.currentStreak;
+                        }
+                    } else if (daysSince > 1) {
+                        appData.recovery.currentStreak = 0;
+                    }
+                }
+                
+                // Update month stats
+                const today = new Date();
+                const currentMonth = today.getMonth();
+                const currentYear = today.getFullYear();
+                
+                if (!appData.recovery.monthTracked || 
+                    (new Date(appData.recovery.monthTracked).getMonth() !== currentMonth) ||
+                    (new Date(appData.recovery.monthTracked).getFullYear() !== currentYear)) {
+                    appData.recovery.cleanDaysThisMonth = 0;
+                    appData.recovery.totalDaysThisMonth = today.getDate();
+                    appData.recovery.monthTracked = today.toISOString();
+                }
+                
+                updateRecoveryDisplay();
+                saveData();
+            }
+
+            function updateRecoveryDisplay() {
+                if (!appData.recovery) return;
+                
+                document.getElementById('recoveryDays').textContent = 
+                    `${appData.recovery.currentStreak} day${appData.recovery.currentStreak !== 1 ? 's' : ''}`;
+                document.getElementById('recoveryBest').textContent = 
+                    `${appData.recovery.bestStreak} day${appData.recovery.bestStreak !== 1 ? 's' : ''}`;
+                document.getElementById('recoveryStreak').textContent = appData.recovery.currentStreak;
+                document.getElementById('bestStreak').textContent = appData.recovery.bestStreak;
+                document.getElementById('relapseCount').textContent = appData.recovery.relapseCount;
+                
+                const cleanPercentage = appData.recovery.totalDaysThisMonth > 0 ? 
+                    Math.round((appData.recovery.cleanDaysThisMonth / appData.recovery.totalDaysThisMonth) * 100) : 0;
+                document.getElementById('cleanThisMonth').textContent = `${cleanPercentage}%`;
+            }
+
+            function logCleanDay() {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                if (!appData.recovery) {
+                    appData.recovery = {
+                        currentStreak: 0,
+                        bestStreak: 0,
+                        lastCleanDate: null
+                    };
+                }
+                
+                // Check if already logged today
+                if (appData.recovery.lastCleanDate) {
+                    const lastDate = new Date(appData.recovery.lastCleanDate);
+                    if (lastDate.getTime() === today.getTime()) {
+                        showMessage('You already logged today!', 'info');
+                        return;
+                    }
+                }
+                
+                appData.recovery.lastCleanDate = today.toISOString();
+                
+                // Increment monthly count
+                if (typeof appData.recovery.cleanDaysThisMonth !== 'number') {
+                    appData.recovery.cleanDaysThisMonth = 0;
+                }
+                appData.recovery.cleanDaysThisMonth++;
+                
+                // Start new streak if at 0
+                if (appData.recovery.currentStreak === 0) {
+                    appData.recovery.currentStreak = 1;
+                }
+                
+                updateRecoveryStats();
+                showMessage('✔️ Day logged! Stay strong!', 'success');
+            }
+
+            function showRelapseModal() {
+                const modal = document.getElementById('relapseModal');
+                if (modal) modal.classList.add('active');
+            }
+
+            function logRelapse() {
+                const triggerSelect = document.getElementById('triggerSelect');
+                const notes = document.getElementById('relapseNotes')?.value.trim();
+                
+                if (!appData.recovery) {
+                    appData.recovery = {
+                        currentStreak: 0,
+                        bestStreak: 0,
+                        relapseCount: 0,
+                        triggers: []
+                    };
+                }
+                
+                if (triggerSelect && triggerSelect.value) {
+                    appData.recovery.triggers.push({
+                        date: new Date().toISOString(),
+                        trigger: triggerSelect.value,
+                        notes: notes || ''
+                    });
+                    
+                    appData.recovery.currentStreak = 0;
+                    appData.recovery.relapseCount++;
+                    
+                    hideModal('relapseModal');
+                    updateRecoveryStats();
+                    showMessage('Streak reset. Recovery starts now!', 'warning');
+                    
+                    // Reset form
+                    triggerSelect.value = '';
+                    const relapseNotes = document.getElementById('relapseNotes');
+                    if (relapseNotes) relapseNotes.value = '';
+                } else {
+                    showMessage('Please select a trigger', 'error');
+                }
+            }
+
+            function showRecoveryInfo() {
+                if (!appData.recovery) {
+                    appData.recovery = {
+                        currentStreak: 0,
+                        bestStreak: 0,
+                        relapseCount: 0
+                    };
+                }
+                
+                let message = `Your Recovery Stats:\n\n` +
+                             `Current Streak: ${appData.recovery.currentStreak} days\n` +
+                             `Best Streak: ${appData.recovery.bestStreak} days\n` +
+                             `Relapses: ${appData.recovery.relapseCount}\n\n`;
+                
+                if (appData.recovery.currentStreak > 0) {
+                    message += `Keep going! You're doing great!`;
+                } else {
+                    message += `Every day is a new opportunity. You got this!`;
+                }
+                
+                alert(message);
+            }
+
+            /* ===== MODAL FUNCTIONS ===== */
+            function showUrgeModal() {
+                const modal = document.getElementById('urgeModal');
+                if (modal) modal.classList.add('active');
+            }
+
+            function showBenefitsModal() {
+                const modal = document.getElementById('benefitsModal');
+                if (modal) modal.classList.add('active');
+            }
+
+            function hideModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) modal.classList.remove('active');
+            }
+
+            /* ===== UTILITY FUNCTIONS ===== */
+            function showMessage(text, type) {
+                const el = document.getElementById('recoveryMessage');
+                if (!el) return;
+                
+                el.textContent = text;
+                el.style.display = 'block';
+                
+                const typeStyles = {
+                    success: {
+                        bg: 'rgba(45, 206, 137, 0.2)',
+                        border: '4px solid var(--success)'
+                    },
+                    error: {
+                        bg: 'rgba(245, 54, 92, 0.2)',
+                        border: '4px solid var(--danger)'
+                    },
+                    warning: {
+                        bg: 'rgba(251, 99, 64, 0.2)',
+                        border: '4px solid var(--warning)'
+                    },
+                    info: {
+                        bg: 'rgba(94, 114, 228, 0.2)',
+                        border: '4px solid var(--primary)'
+                    }
+                };
+                
+                if (typeStyles[type]) {
+                    el.style.backgroundColor = typeStyles[type].bg;
+                    el.style.borderLeft = typeStyles[type].border;
+                }
+                
+                setTimeout(() => {
+                    el.style.display = 'none';
+                }, 5000);
+            }
+
+            function playCompletionSound() {
+                try {
+                    // In a real implementation, you would play an audio file
+                    console.log('Focus session complete sound would play here');
+                } catch (e) {
+                    console.error('Error playing sound:', e);
+                }
+            }
+
+            /* ===== MOBILE HANDLERS ===== */
+            function setupMobileHandlers() {
+                const focusTimer = document.getElementById('focusTimer');
+                if (focusTimer) {
+                    focusTimer.addEventListener('touchstart', handleTouchStart, {passive: true});
+                    focusTimer.addEventListener('touchend', handleTouchEnd, {passive: true});
+                }
+
+                // Make buttons more touch-friendly
+                document.querySelectorAll('button').forEach(btn => {
+                    btn.style.minHeight = '44px';
+                    btn.style.minWidth = '44px';
+                });
+            }
+
+            let touchStartTime = 0;
+            function handleTouchStart() {
+                touchStartTime = Date.now();
+            }
+
+            function handleTouchEnd() {
+                if (Date.now() - touchStartTime < 200) {
+                    // Handle quick tap
+                    if (appData.timer.isRunning) {
+                        pauseTimer();
+                    } else {
+                        startTimer(Math.ceil(appData.timer.seconds / 60));
+                    }
+                }
+            }
+
+            // Handle Before Unload
+            window.addEventListener('beforeunload', function() {
+                saveData();
+            });
+        });
+    </script>
+</body>
+</html>
