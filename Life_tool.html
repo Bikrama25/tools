@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Optimization Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #166088;
+            --accent: #4fc3f7;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        
+        h2 {
+            color: var(--secondary);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dashboard-card h3 {
+            margin-top: 0;
+            color: var(--secondary);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 200px;
+            width: 100%;
+        }
+        
+        .habit-tracker {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .habit {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            margin: 0.5rem;
+        }
+        
+        .habit-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .habit-circle.completed {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .stat-info {
+            flex-grow: 1;
+        }
+        
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .task-item input[type="checkbox"] {
+            margin-right: 1rem;
+        }
+        
+        .task-item.completed .task-text {
+            text-decoration: line-through;
+            color: #999;
+        }
+        
+        .timer-display {
+            font-size: 3rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .ikigai-diagram {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            height: 500px;
+            margin: 2rem 0;
+        }
+        
+        .ikigai-quadrant {
+            border: 2px solid var(--dark);
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .ikigai-quadrant:nth-child(1) {
+            border-color: var(--success);
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+        
+        .ikigai-quadrant:nth-child(2) {
+            border-color: var(--primary);
+            background-color: rgba(74, 111, 165, 0.1);
+        }
+        
+        .ikigai-quadrant:nth-child(3) {
+            border-color: var(--warning);
+            background-color: rgba(255, 193, 7, 0.1);
+        }
+        
+        .ikigai-quadrant:nth-child(4) {
+            border-color: var(--danger);
+            background-color: rgba(220, 53, 69, 0.1);
+        }
+        
+        .quadrant-title {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid, .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .habit-tracker {
+                flex-direction: column;
+            }
+            
+            .ikigai-diagram {
+                height: auto;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Life Optimization Dashboard</h1>
+            <p>Track your habits, goals, and progress in one place</p>
+        </header>
+        
+        <!-- ===== DASHBOARD ===== -->
+        <section class="section">
+            <h2>📊 Your Progress Dashboard</h2>
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <h3>Habit Completion</h3>
+                    <div class="chart-container">
+                        <canvas id="habitsChart"></canvas>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Task Completion</h3>
+                    <div class="chart-container">
+                        <canvas id="tasksChart"></canvas>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Blood Sugar Trends</h3>
+                    <div class="chart-container">
+                        <canvas id="bloodSugarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <h3>Quick Stats</h3>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="streak-count">0 days</div>
+                            <div class="stat-label">Addiction-Free Streak</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="learning-sessions-count">0</div>
+                            <div class="stat-label">Learning Sessions (Week)</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💧</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="water-avg">0/8</div>
+                            <div class="stat-label">Avg. Water Intake</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Productivity</h3>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="pomodoro-sessions">0</div>
+                            <div class="stat-label">Pomodoro Sessions</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="revision-next">--:--</div>
+                            <div class="stat-label">Next Revision</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="tasks-completed">0%</div>
+                            <div class="stat-label">Tasks Completed</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Weekly Habits</h3>
+                    <div class="chart-container">
+                        <canvas id="weeklyHabitsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== IKIGAI DISCOVERY ===== -->
+        <section class="section">
+            <h2>🧭 Discover Your IKIGAI</h2>
+            <p>IKIGAI is the Japanese concept of finding your life purpose at the intersection of:</p>
+            
+            <div class="ikigai-diagram">
+                <div class="ikigai-quadrant">
+                    <div class="quadrant-title">What You LOVE</div>
+                    <textarea id="love-text" placeholder="Activities that bring you joy..."></textarea>
+                </div>
+                <div class="ikigai-quadrant">
+                    <div class="quadrant-title">What You're GOOD AT</div>
+                    <textarea id="good-at-text" placeholder="Your skills & talents..."></textarea>
+                </div>
+                <div class="ikigai-quadrant">
+                    <div class="quadrant-title">What the World NEEDS</div>
+                    <textarea id="needs-text" placeholder="Problems you can solve..."></textarea>
+                </div>
+                <div class="ikigai-quadrant">
+                    <div class="quadrant-title">What You Can Be PAID FOR</div>
+                    <textarea id="paid-text" placeholder="Ways to monetize..."></textarea>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button id="analyze-ikigai" class="btn-success">Analyze My IKIGAI</button>
+                <button id="save-ikigai" class="btn-info">Save IKIGAI</button>
+            </div>
+            
+            <div id="ikigai-result" style="display: none; margin-top: 2rem; padding: 1rem; background-color: #e8f5e9; border-radius: 8px;">
+                <h3>Your IKIGAI Potential</h3>
+                <p id="ikigai-suggestion"></p>
+            </div>
+        </section>
+        
+        <!-- ===== HABIT TRACKER ===== -->
+        <section class="section">
+            <h2>📅 Daily Habit Tracker</h2>
+            <div class="habit-tracker">
+                <div class="habit">
+                    <div class="habit-circle" data-habit="water">0/8</div>
+                    <h4>Water (glasses)</h4>
+                </div>
+                <div class="habit">
+                    <div class="habit-circle" data-habit="exercise">0/1</div>
+                    <h4>Exercise</h4>
+                </div>
+                <div class="habit">
+                    <div class="habit-circle" data-habit="meditation">0/1</div>
+                    <h4>Meditation</h4>
+                </div>
+                <div class="habit">
+                    <div class="habit-circle" data-habit="learning">0/1</div>
+                    <h4>Learning</h4>
+                </div>
+                <div class="habit">
+                    <div class="habit-circle" data-habit="family">0/1</div>
+                    <h4>Family Time</h4>
+                </div>
+                <div class="habit">
+                    <div class="habit-circle" data-habit="addiction-free">0/1</div>
+                    <h4>Addiction-Free</h4>
+                </div>
+                <div class="habit">
+                    <div class="habit-circle" data-habit="diabetes">0/1</div>
+                    <h4>Diabetes Check</h4>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button id="reset-habits" class="btn-warning">Reset Day</button>
+                <button id="save-habits" class="btn-success">Save Progress</button>
+            </div>
+        </section>
+        
+        <!-- ===== ADDICTION CONTROL ===== -->
+        <section class="section">
+            <h2>🚫 Addiction Control</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Addiction-Free Streak</h3>
+                    <div style="text-align: center; font-size: 2rem; margin: 1rem 0;" id="addiction-streak-display">0 days</div>
+                    <button id="addiction-clean-today" class="btn-success">I Stayed Clean Today</button>
+                    <button id="addiction-slipped" class="btn-danger" style="margin-top: 0.5rem;">I Slipped Today</button>
+                </div>
+                <div class="card">
+                    <h3>Relapse Prevention Plan</h3>
+                    <textarea id="relapse-plan" rows="5" placeholder="What will you do when cravings hit?"></textarea>
+                    <button id="save-relapse-plan" class="btn-info">Save Plan</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== DIABETES MANAGEMENT ===== -->
+        <section class="section">
+            <h2>🩸 Diabetes Control</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Blood Sugar Tracker</h3>
+                    <input type="number" id="blood-sugar-value" placeholder="mg/dL">
+                    <select id="blood-sugar-time">
+                        <option value="fasting">Fasting</option>
+                        <option value="after-meal">After Meal</option>
+                        <option value="random">Random</option>
+                    </select>
+                    <button id="record-blood-sugar" class="btn-success">Record</button>
+                    <div id="blood-sugar-history" style="margin-top: 1rem;"></div>
+                </div>
+                <div class="card">
+                    <h3>Medication Reminders</h3>
+                    <input type="text" id="medication-name" placeholder="Medication">
+                    <input type="time" id="medication-time">
+                    <button id="add-medication" class="btn-info">Add Reminder</button>
+                    <div id="medication-list" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== LEARNING & REVISION ===== -->
+        <section class="section">
+            <h2>📚 Learning & Revision</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Fixed Revision Schedule</h3>
+                    <select id="revision-minutes">
+                        <option value="15">15 minutes</option>
+                        <option value="20">20 minutes</option>
+                        <option value="30">30 minutes</option>
+                    </select>
+                    <input type="time" id="revision-time">
+                    <button id="set-revision" class="btn-success">Set Daily Revision</button>
+                    <div id="revision-status" style="margin-top: 1rem;"></div>
+                </div>
+                <div class="card">
+                    <h3>Learning Tracker</h3>
+                    <input type="text" id="learning-topic" placeholder="Topic">
+                    <textarea id="learning-notes" placeholder="Notes"></textarea>
+                    <button id="save-learning" class="btn-info">Save Session</button>
+                    <div id="learning-history" style="margin-top: 1rem;"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== TASK MANAGEMENT ===== -->
+        <section class="section">
+            <h2>✅ Task Manager</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Add New Task</h3>
+                    <input type="text" id="new-task" placeholder="Task description">
+                    <input type="date" id="task-due">
+                    <button id="add-task" class="btn-success">Add Task</button>
+                </div>
+                <div class="card">
+                    <h3>My Tasks</h3>
+                    <div id="task-list"></div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="task-progress" style="width: 0%;">0%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== POMODORO TIMER ===== -->
+        <section class="section">
+            <h2>⏱️ Pomodoro Timer</h2>
+            <div class="card" style="max-width: 400px; margin: 0 auto;">
+                <div class="timer-display">25:00</div>
+                <div class="timer-controls">
+                    <button id="start-timer" class="btn-success">Start</button>
+                    <button id="pause-timer" class="btn-warning">Pause</button>
+                    <button id="reset-timer" class="btn-danger">Reset</button>
+                </div>
+                <select id="timer-type" style="margin-top: 1rem;">
+                    <option value="25">Work (25 min)</option>
+                    <option value="5">Short Break (5 min)</option>
+                    <option value="15">Long Break (15 min)</option>
+                </select>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // ===== DATA STORAGE =====
+        let appData = {
+            habits: {
+                water: 0,
+                exercise: false,
+                meditation: false,
+                learning: false,
+                family: false,
+                addictionFree: false,
+                diabetesCheck: false,
+                history: []
+            },
+            addictionStreak: 0,
+            lastAddictionFreeDate: null,
+            bloodSugarReadings: [],
+            medications: [],
+            revisionSchedule: null,
+            learningSessions: [],
+            tasks: [],
+            pomodoroSessions: 0,
+            relapsePlan: "",
+            ikigai: {
+                love: "",
+                goodAt: "",
+                needs: "",
+                paid: ""
+            }
+        };
+
+        // ===== LOAD/SAVE DATA =====
+        function loadData() {
+            const savedData = localStorage.getItem('lifeOptimizationData');
+            if (savedData) {
+                appData = JSON.parse(savedData);
+                updateUI();
+            }
+            initializeCharts();
+        }
+
+        function saveData() {
+            localStorage.setItem('lifeOptimizationData', JSON.stringify(appData));
+            updateDashboard();
+        }
+
+        // ===== INITIALIZE CHARTS =====
+        function initializeCharts() {
+            // Habit Completion Chart
+            const habitsCtx = document.getElementById('habitsChart').getContext('2d');
+            window.habitsChart = new Chart(habitsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Water', 'Exercise', 'Meditation', 'Learning', 'Family', 'Addiction-Free', 'Diabetes Check'],
+                    datasets: [{
+                        data: [0, 0, 0, 0, 0, 0, 0],
+                        backgroundColor: [
+                            '#4fc3f7', '#28a745', '#17a2b8', 
+                            '#ffc107', '#6f42c1', '#dc3545', 
+                            '#6610f2'
+                        ]
+                    }]
+                }
+            });
+
+            // Task Completion Chart
+            const tasksCtx = document.getElementById('tasksChart').getContext('2d');
+            window.tasksChart = new Chart(tasksCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Completed', 'Pending'],
+                    datasets: [{
+                        data: [0, 0],
+                        backgroundColor: ['#28a745', '#dc3545']
+                    }]
+                }
+            });
+
+            // Blood Sugar Chart
+            const bloodSugarCtx = document.getElementById('bloodSugarChart').getContext('2d');
+            window.bloodSugarChart = new Chart(bloodSugarCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Blood Sugar',
+                        data: [],
+                        borderColor: '#dc3545',
+                        fill: false
+                    }]
+                }
+            });
+
+            // Weekly Habits Chart
+            const weeklyHabitsCtx = document.getElementById('weeklyHabitsChart').getContext('2d');
+            window.weeklyHabitsChart = new Chart(weeklyHabitsCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Water', 'Exercise', 'Meditation', 'Learning', 'Family', 'Addiction-Free', 'Diabetes Check'],
+                    datasets: [{
+                        label: 'Habit Completion %',
+                        data: [0, 0, 0, 0, 0, 0, 0],
+                        backgroundColor: 'rgba(74, 111, 165, 0.2)'
+                    }]
+                }
+            });
+        }
+
+        // ===== UPDATE UI FUNCTIONS =====
+        function updateUI() {
+            updateHabitTracker();
+            updateAddictionStreak();
+            updateBloodSugarReadings();
+            updateMedicationList();
+            updateRevisionStatus();
+            updateLearningHistory();
+            updateTaskList();
+            updateRelapsePlan();
+            updateIkigaiFields();
+            updateDashboard();
+        }
+
+        function updateDashboard() {
+            // Update habit chart
+            const habitValues = [
+                (appData.habits.water / 8) * 100,
+                appData.habits.exercise ? 100 : 0,
+                appData.habits.meditation ? 100 : 0,
+                appData.habits.learning ? 100 : 0,
+                appData.habits.family ? 100 : 0,
+                appData.habits.addictionFree ? 100 : 0,
+                appData.habits.diabetesCheck ? 100 : 0
+            ];
+            window.habitsChart.data.datasets[0].data = habitValues;
+            window.habitsChart.update();
+
+            // Update task chart
+            const completedTasks = appData.tasks.filter(task => task.completed).length;
+            const pendingTasks = appData.tasks.length - completedTasks;
+            window.tasksChart.data.datasets[0].data = [completedTasks, pendingTasks];
+            window.tasksChart.update();
+
+            // Update blood sugar chart
+            const readings = appData.bloodSugarReadings.slice(-7).reverse();
+            window.bloodSugarChart.data.labels = readings.map(r => new Date(r.date).toLocaleDateString());
+            window.bloodSugarChart.data.datasets[0].data = readings.map(r => r.value);
+            window.bloodSugarChart.update();
+
+            // Update weekly habits
+            if (appData.habits.history.length > 0) {
+                const weeklyAverages = calculateWeeklyHabitAverages();
+                window.weeklyHabitsChart.data.datasets[0].data = weeklyAverages;
+                window.weeklyHabitsChart.update();
+            }
+
+            // Update stats
+            document.getElementById('streak-count').textContent = `${appData.addictionStreak} days`;
+            document.getElementById('learning-sessions-count').textContent = 
+                appData.learningSessions.filter(s => isThisWeek(new Date(s.date))).length;
+            document.getElementById('water-avg').textContent = 
+                `${Math.round(calculateWeeklyAverageWater())}/8`;
+            document.getElementById('pomodoro-sessions').textContent = appData.pomodoroSessions;
+            document.getElementById('tasks-completed').textContent = 
+                appData.tasks.length > 0 ? `${Math.round((completedTasks / appData.tasks.length) * 100)}%` : '0%';
+            
+            if (appData.revisionSchedule) {
+                document.getElementById('revision-next').textContent = appData.revisionSchedule.time;
+            }
+        }
+
+        function calculateWeeklyHabitAverages() {
+            const last7Days = appData.habits.history.slice(-7);
+            if (last7Days.length === 0) return [0, 0, 0, 0, 0, 0, 0];
+            
+            const sums = { water: 0, exercise: 0, meditation: 0, learning: 0, family: 0, addictionFree: 0, diabetesCheck: 0 };
+            
+            last7Days.forEach(day => {
+                sums.water += day.water / 8;
+                sums.exercise += day.exercise ? 1 : 0;
+                sums.meditation += day.meditation ? 1 : 0;
+                sums.learning += day.learning ? 1 : 0;
+                sums.family += day.family ? 1 : 0;
+                sums.addictionFree += day.addictionFree ? 1 : 0;
+                sums.diabetesCheck += day.diabetesCheck ? 1 : 0;
+            });
+            
+            return [
+                (sums.water / last7Days.length) * 100,
+                (sums.exercise / last7Days.length) * 100,
+                (sums.meditation / last7Days.length) * 100,
+                (sums.learning / last7Days.length) * 100,
+                (sums.family / last7Days.length) * 100,
+                (sums.addictionFree / last7Days.length) * 100,
+                (sums.diabetesCheck / last7Days.length) * 100
+            ];
+        }
+
+        function calculateWeeklyAverageWater() {
+            const last7Days = appData.habits.history.slice(-7);
+            if (last7Days.length === 0) return 0;
+            return last7Days.reduce((sum, day) => sum + day.water, 0) / last7Days.length;
+        }
+
+        function isThisWeek(date) {
+            const now = new Date();
+            const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+            const endOfWeek = new Date(now.setDate(now.getDate() + 6));
+            return date >= startOfWeek && date <= endOfWeek;
+        }
+
+        // ===== INDIVIDUAL COMPONENT UPDATES =====
+        function updateHabitTracker() {
+            document.querySelector('[data-habit="water"]').textContent = `${appData.habits.water}/8`;
+            toggleCompletedClass('water', appData.habits.water >= 8);
+            
+            const habits = ['exercise', 'meditation', 'learning', 'family', 'addiction-free', 'diabetes'];
+            habits.forEach(habit => {
+                const value = appData.habits[habit.replace('-', '')];
+                document.querySelector(`[data-habit="${habit}"]`).textContent = `${value ? 1 : 0}/1`;
+                toggleCompletedClass(habit, value);
+            });
+        }
+
+        function toggleCompletedClass(habit, isCompleted) {
+            const element = document.querySelector(`[data-habit="${habit}"]`);
+            if (isCompleted) {
+                element.classList.add('completed');
+            } else {
+                element.classList.remove('completed');
+            }
+        }
+
+        function updateAddictionStreak() {
+            document.getElementById('addiction-streak-display').textContent = `${appData.addictionStreak} days`;
+        }
+
+        function updateBloodSugarReadings() {
+            const container = document.getElementById('blood-sugar-history');
+            container.innerHTML = '<h4>Recent Readings</h4>';
+            
+            appData.bloodSugarReadings.slice(-5).reverse().forEach(reading => {
+                const div = document.createElement('div');
+                div.style.display = 'flex';
+                div.style.justifyContent = 'space-between';
+                div.style.padding = '0.5rem';
+                div.style.borderBottom = '1px solid #eee';
+                
+                const value = document.createElement('span');
+                value.textContent = `${reading.value} mg/dL`;
+                value.style.color = reading.value > 180 ? 'var(--danger)' : (reading.value < 70 ? 'var(--warning)' : 'var(--success)');
+                
+                const time = document.createElement('span');
+                time.textContent = `${reading.time} (${new Date(reading.date).toLocaleDateString()})`;
+                
+                div.appendChild(value);
+                div.appendChild(time);
+                container.appendChild(div);
+            });
+        }
+
+        function updateMedicationList() {
+            const container = document.getElementById('medication-list');
+            container.innerHTML = '<h4>Medication Schedule</h4>';
+            
+            appData.medications.forEach((med, index) => {
+                const div = document.createElement('div');
+                div.style.display = 'flex';
+                div.style.justifyContent = 'space-between';
+                div.style.padding = '0.5rem';
+                div.style.borderBottom = '1px solid #eee';
+                
+                const name = document.createElement('span');
+                name.textContent = `${med.name} at ${med.time}`;
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'X';
+                deleteBtn.className = 'btn-danger';
+                deleteBtn.style.padding = '0.2rem 0.5rem';
+                deleteBtn.onclick = () => {
+                    appData.medications.splice(index, 1);
+                    saveData();
+                };
+                
+                div.appendChild(name);
+                div.appendChild(deleteBtn);
+                container.appendChild(div);
+            });
+        }
+
+        function updateRevisionStatus() {
+            const container = document.getElementById('revision-status');
+            if (appData.revisionSchedule) {
+                container.innerHTML = `
+                    <p>Daily revision set for <strong>${appData.revisionSchedule.time}</strong> (${appData.revisionSchedule.minutes} minutes)</p>
+                    <button id="start-revision-now" class="btn-info">Start Now</button>
+                `;
+                document.getElementById('start-revision-now').onclick = startRevisionNow;
+            } else {
+                container.innerHTML = '<p>No revision schedule set</p>';
+            }
+        }
+
+        function startRevisionNow() {
+            alert(`Starting ${appData.revisionSchedule.minutes}-minute revision session!`);
+            // Timer implementation would go here
+        }
+
+        function updateLearningHistory() {
+            const container = document.getElementById('learning-history');
+            container.innerHTML = '<h4>Recent Sessions</h4>';
+            
+            appData.learningSessions.slice(-5).reverse().forEach(session => {
+                const div = document.createElement('div');
+                div.style.padding = '0.5rem';
+                div.style.borderBottom = '1px solid #eee';
+                
+                const topic = document.createElement('div');
+                topic.textContent = session.topic;
+                topic.style.fontWeight = 'bold';
+                
+                const date = document.createElement('div');
+                date.textContent = new Date(session.date).toLocaleString();
+                date.style.fontSize = '0.8rem';
+                date.style.color = '#666';
+                
+                div.appendChild(topic);
+                div.appendChild(date);
+                container.appendChild(div);
+            });
+        }
+
+        function updateTaskList() {
+            const container = document.getElementById('task-list');
+            container.innerHTML = '';
+            
+            appData.tasks.forEach((task, index) => {
+                const div = document.createElement('div');
+                div.className = `task-item ${task.completed ? 'completed' : ''}`;
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.checked = task.completed;
+                checkbox.onchange = () => {
+                    appData.tasks[index].completed = checkbox.checked;
+                    saveData();
+                };
+                
+                const text = document.createElement('span');
+                text.className = 'task-text';
+                text.textContent = task.text;
+                
+                const due = document.createElement('span');
+                due.className = 'task-due';
+                due.textContent = task.due ? new Date(task.due).toLocaleDateString() : '';
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'X';
+                deleteBtn.className = 'btn-danger';
+                deleteBtn.style.marginLeft = '0.5rem';
+                deleteBtn.style.padding = '0.2rem 0.5rem';
+                deleteBtn.onclick = () => {
+                    appData.tasks.splice(index, 1);
+                    saveData();
+                };
+                
+                div.appendChild(checkbox);
+                div.appendChild(text);
+                div.appendChild(due);
+                div.appendChild(deleteBtn);
+                container.appendChild(div);
+            });
+            
+            updateTaskProgress();
+        }
+
+        function updateTaskProgress() {
+            const completed = appData.tasks.filter(t => t.completed).length;
+            const total = appData.tasks.length;
+            const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            const bar = document.getElementById('task-progress');
+            bar.style.width = `${progress}%`;
+            bar.textContent = `${progress}%`;
+        }
+
+        function updateRelapsePlan() {
+            document.getElementById('relapse-plan').value = appData.relapsePlan;
+        }
+
+        function updateIkigaiFields() {
+            document.getElementById('love-text').value = appData.ikigai.love;
+            document.getElementById('good-at-text').value = appData.ikigai.goodAt;
+            document.getElementById('needs-text').value = appData.ikigai.needs;
+            document.getElementById('paid-text').value = appData.ikigai.paid;
+        }
+
+              // ===== EVENT LISTENERS =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            
+            // Habit Tracker
+            document.querySelectorAll('.habit-circle').forEach(circle => {
+                circle.addEventListener('click', function() {
+                    const habit = this.getAttribute('data-habit');
+                    
+                    if (habit === 'water') {
+                        if (appData.habits.water < 8) {
+                            appData.habits.water++;
+                        }
+                    } else {
+                        const habitKey = habit.replace('-', '');
+                        appData.habits[habitKey] = !appData.habits[habitKey];
+                    }
+                    
+                    saveData();
+                });
+            });
+            
+            document.getElementById('reset-habits').addEventListener('click', function() {
+                appData.habits = {
+                    water: 0,
+                    exercise: false,
+                    meditation: false,
+                    learning: false,
+                    family: false,
+                    addictionFree: false,
+                    diabetesCheck: false,
+                    history: appData.habits.history
+                };
+                saveData();
+            });
+            
+            document.getElementById('save-habits').addEventListener('click', function() {
+                // Add today's habits to history
+                appData.habits.history.push({
+                    date: new Date().toISOString(),
+                    water: appData.habits.water,
+                    exercise: appData.habits.exercise,
+                    meditation: appData.habits.meditation,
+                    learning: appData.habits.learning,
+                    family: appData.habits.family,
+                    addictionFree: appData.habits.addictionFree,
+                    diabetesCheck: appData.habits.diabetesCheck
+                });
+                
+                // Keep only last 30 days
+                if (appData.habits.history.length > 30) {
+                    appData.habits.history = appData.habits.history.slice(-30);
+                }
+                
+                saveData();
+                alert('Daily habits saved!');
+            });
+            
+            // Addiction Control
+            document.getElementById('addiction-clean-today').addEventListener('click', function() {
+                const today = new Date();
+                const lastDate = appData.lastAddictionFreeDate ? new Date(appData.lastAddictionFreeDate) : null;
+                
+                if (!lastDate || today.toDateString() !== lastDate.toDateString()) {
+                    if (lastDate && isConsecutiveDay(today, lastDate)) {
+                        appData.addictionStreak++;
+                    } else {
+                        appData.addictionStreak = 1;
+                    }
+                    appData.lastAddictionFreeDate = today.toISOString();
+                    appData.habits.addictionFree = true;
+                    saveData();
+                    alert('Great job staying clean today!');
+                } else {
+                    alert("You've already recorded being clean today.");
+                }
+            });
+            
+            document.getElementById('addiction-slipped').addEventListener('click', function() {
+                appData.addictionStreak = 0;
+                appData.habits.addictionFree = false;
+                saveData();
+                alert("Don't worry - recovery is a journey. Reset your streak and try again tomorrow.");
+            });
+            
+            document.getElementById('save-relapse-plan').addEventListener('click', function() {
+                appData.relapsePlan = document.getElementById('relapse-plan').value;
+                saveData();
+                alert('Relapse prevention plan saved!');
+            });
+            
+            // Diabetes Management
+            document.getElementById('record-blood-sugar').addEventListener('click', function() {
+                const value = parseInt(document.getElementById('blood-sugar-value').value);
+                const time = document.getElementById('blood-sugar-time').value;
+                
+                if (!isNaN(value)) {
+                    appData.bloodSugarReadings.push({
+                        date: new Date().toISOString(),
+                        value: value,
+                        time: time
+                    });
+                    appData.habits.diabetesCheck = true;
+                    saveData();
+                    document.getElementById('blood-sugar-value').value = '';
+                }
+            });
+            
+            document.getElementById('add-medication').addEventListener('click', function() {
+                const name = document.getElementById('medication-name').value.trim();
+                const time = document.getElementById('medication-time').value;
+                
+                if (name && time) {
+                    appData.medications.push({
+                        name: name,
+                        time: time
+                    });
+                    saveData();
+                    document.getElementById('medication-name').value = '';
+                    document.getElementById('medication-time').value = '';
+                }
+            });
+            
+            // Learning & Revision
+            document.getElementById('set-revision').addEventListener('click', function() {
+                const minutes = document.getElementById('revision-minutes').value;
+                const time = document.getElementById('revision-time').value;
+                
+                if (time) {
+                    appData.revisionSchedule = {
+                        minutes: minutes,
+                        time: time,
+                        lastCompleted: null
+                    };
+                    saveData();
+                    alert(`Daily revision scheduled for ${time} (${minutes} minutes)`);
+                }
+            });
+            
+            document.getElementById('save-learning').addEventListener('click', function() {
+                const topic = document.getElementById('learning-topic').value.trim();
+                const notes = document.getElementById('learning-notes').value.trim();
+                
+                if (topic) {
+                    appData.learningSessions.push({
+                        date: new Date().toISOString(),
+                        topic: topic,
+                        notes: notes
+                    });
+                    appData.habits.learning = true;
+                    saveData();
+                    document.getElementById('learning-topic').value = '';
+                    document.getElementById('learning-notes').value = '';
+                }
+            });
+            
+            // Task Management
+            document.getElementById('add-task').addEventListener('click', function() {
+                const text = document.getElementById('new-task').value.trim();
+                const due = document.getElementById('task-due').value;
+                
+                if (text) {
+                    appData.tasks.push({
+                        text: text,
+                        due: due,
+                        completed: false
+                    });
+                    saveData();
+                    document.getElementById('new-task').value = '';
+                    document.getElementById('task-due').value = '';
+                }
+            });
+            
+            // Pomodoro Timer
+            let timerInterval;
+            let minutes = 25;
+            let seconds = 0;
+            let isRunning = false;
+            
+            function updateTimerDisplay() {
+                document.querySelector('.timer-display').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            document.getElementById('start-timer').addEventListener('click', function() {
+                if (isRunning) return;
+                isRunning = true;
+                
+                timerInterval = setInterval(function() {
+                    if (seconds === 0) {
+                        if (minutes === 0) {
+                            clearInterval(timerInterval);
+                            isRunning = false;
+                            alert('Timer completed!');
+                            appData.pomodoroSessions++;
+                            saveData();
+                            return;
+                        }
+                        minutes--;
+                        seconds = 59;
+                    } else {
+                        seconds--;
+                    }
+                    updateTimerDisplay();
+                }, 1000);
+            });
+            
+            document.getElementById('pause-timer').addEventListener('click', function() {
+                clearInterval(timerInterval);
+                isRunning = false;
+            });
+            
+            document.getElementById('reset-timer').addEventListener('click', function() {
+                clearInterval(timerInterval);
+                isRunning = false;
+                minutes = parseInt(document.getElementById('timer-type').value);
+                seconds = 0;
+                updateTimerDisplay();
+            });
+            
+            document.getElementById('timer-type').addEventListener('change', function() {
+                if (!isRunning) {
+                    minutes = parseInt(this.value);
+                    seconds = 0;
+                    updateTimerDisplay();
+                }
+            });
+            
+            // IKIGAI
+            document.getElementById('save-ikigai').addEventListener('click', function() {
+                appData.ikigai = {
+                    love: document.getElementById('love-text').value,
+                    goodAt: document.getElementById('good-at-text').value,
+                    needs: document.getElementById('needs-text').value,
+                    paid: document.getElementById('paid-text').value
+                };
+                saveData();
+                alert('IKIGAI saved successfully!');
+            });
+            
+            document.getElementById('analyze-ikigai').addEventListener('click', function() {
+                const resultSection = document.getElementById('ikigai-result');
+                const suggestionText = document.getElementById('ikigai-suggestion');
+                
+                const love = document.getElementById('love-text').value;
+                const goodAt = document.getElementById('good-at-text').value;
+                const needs = document.getElementById('needs-text').value;
+                const paid = document.getElementById('paid-text').value;
+                
+                let suggestions = [];
+                
+                if (love && goodAt && needs && paid) {
+                    suggestions.push("Your IKIGAI lies at the intersection of these four elements:");
+                    suggestions.push(`<strong>Passion:</strong> ${love} + ${goodAt}`);
+                    suggestions.push(`<strong>Mission:</strong> ${love} + ${needs}`);
+                    suggestions.push(`<strong>Vocation:</strong> ${needs} + ${paid}`);
+                    suggestions.push(`<strong>Profession:</strong> ${goodAt} + ${paid}`);
+                    
+                    suggestions.push("<br><strong>Action Steps:</strong>");
+                    suggestions.push("1. Explore ways to combine your passion and mission");
+                    suggestions.push("2. Find how your vocation can support your profession");
+                } else {
+                    suggestions.push("Complete all four quadrants for a full IKIGAI analysis.");
+                }
+                
+                suggestionText.innerHTML = suggestions.join('<br>');
+                resultSection.style.display = 'block';
+            });
+            
+            // Check for revision reminders
+            setInterval(function() {
+                if (appData.revisionSchedule) {
+                    const now = new Date();
+                    const [hours, mins] = appData.revisionSchedule.time.split(':');
+                    const revisionTime = new Date();
+                    revisionTime.setHours(parseInt(hours), parseInt(mins), 0, 0);
+                    
+                    // Notify if it's time for revision (within 1 minute)
+                    if (Math.abs(now - revisionTime) < 60000 && 
+                        (!appData.revisionSchedule.lastCompleted || 
+                         new Date(appData.revisionSchedule.lastCompleted).toDateString() !== now.toDateString())) {
+                        if (confirm(`Time for your ${appData.revisionSchedule.minutes}-minute revision session! Start now?`)) {
+                            startRevisionNow();
+                            appData.revisionSchedule.lastCompleted = now.toISOString();
+                            saveData();
+                        }
+                    }
+                }
+            }, 60000); // Check every minute
+        });
+        
+        // Helper Functions
+        function isConsecutiveDay(day1, day2) {
+            const oneDay = 24 * 60 * 60 * 1000;
+            return Math.abs((day1 - day2) / oneDay) <= 1;
+        }
+    </script>
+</body>
+</html>
