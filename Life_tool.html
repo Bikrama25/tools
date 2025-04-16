@@ -247,6 +247,61 @@
             margin-bottom: 1rem;
         }
         
+        textarea, input, select {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        button, .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover, .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+        }
+        
+        .btn-info {
+            background-color: var(--info);
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 20px;
+            margin: 1rem 0;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            border-radius: 20px;
+            background-color: var(--success);
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
+        
         @media (max-width: 768px) {
             .grid, .dashboard {
                 grid-template-columns: 1fr;
@@ -562,25 +617,42 @@
                 goodAt: "",
                 needs: "",
                 paid: ""
-            }
+            },
+            lastSave: null
         };
 
         // ===== LOAD/SAVE DATA =====
         function loadData() {
             const savedData = localStorage.getItem('lifeOptimizationData');
             if (savedData) {
-                appData = JSON.parse(savedData);
-                updateUI();
+                try {
+                    const parsed = JSON.parse(savedData);
+                    // Merge with default values
+                    appData = {...appData, ...parsed};
+                    
+                    // Initialize arrays if they don't exist
+                    appData.habits.history = appData.habits.history || [];
+                    appData.bloodSugarReadings = appData.bloodSugarReadings || [];
+                    appData.medications = appData.medications || [];
+                    appData.learningSessions = appData.learningSessions || [];
+                    appData.tasks = appData.tasks || [];
+                    
+                    updateAllUI();
+                } catch (e) {
+                    console.error("Failed to load data:", e);
+                    localStorage.removeItem('lifeOptimizationData');
+                }
             }
             initializeCharts();
         }
 
         function saveData() {
+            appData.lastSave = new Date().toISOString();
             localStorage.setItem('lifeOptimizationData', JSON.stringify(appData));
             updateDashboard();
         }
 
-        // ===== INITIALIZE CHARTS =====
+        // ===== CHARTS =====
         function initializeCharts() {
             // Habit Completion Chart
             const habitsCtx = document.getElementById('habitsChart').getContext('2d');
@@ -591,11 +663,25 @@
                     datasets: [{
                         data: [0, 0, 0, 0, 0, 0, 0],
                         backgroundColor: [
-                            '#4fc3f7', '#28a745', '#17a2b8', 
-                            '#ffc107', '#6f42c1', '#dc3545', 
+                            '#4fc3f7',
+                            '#28a745',
+                            '#17a2b8',
+                            '#ffc107',
+                            '#6f42c1',
+                            '#dc3545',
                             '#6610f2'
-                        ]
+                        ],
+                        borderWidth: 1
                     }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
                 }
             });
 
@@ -606,9 +692,22 @@
                 data: {
                     labels: ['Completed', 'Pending'],
                     datasets: [{
+                        label: 'Tasks',
                         data: [0, 0],
-                        backgroundColor: ['#28a745', '#dc3545']
+                        backgroundColor: [
+                            '#28a745',
+                            '#dc3545'
+                        ]
                     }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
                 }
             });
 
@@ -619,11 +718,24 @@
                 data: {
                     labels: [],
                     datasets: [{
-                        label: 'Blood Sugar',
+                        label: 'Blood Sugar (mg/dL)',
                         data: [],
                         borderColor: '#dc3545',
-                        fill: false
+                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                        fill: true,
+                        tension: 0.1
                     }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            suggestedMin: 70,
+                            suggestedMax: 180
+                        }
+                    }
                 }
             });
 
@@ -634,16 +746,34 @@
                 data: {
                     labels: ['Water', 'Exercise', 'Meditation', 'Learning', 'Family', 'Addiction-Free', 'Diabetes Check'],
                     datasets: [{
-                        label: 'Habit Completion %',
+                        label: 'Habit Completion',
                         data: [0, 0, 0, 0, 0, 0, 0],
-                        backgroundColor: 'rgba(74, 111, 165, 0.2)'
+                        backgroundColor: 'rgba(74, 111, 165, 0.2)',
+                        borderColor: '#4a6fa5',
+                        pointBackgroundColor: '#4a6fa5',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#4a6fa5'
                     }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    }
                 }
             });
         }
 
-        // ===== UPDATE UI FUNCTIONS =====
-        function updateUI() {
+        // ===== UI UPDATES =====
+        function updateAllUI() {
             updateHabitTracker();
             updateAddictionStreak();
             updateBloodSugarReadings();
@@ -657,7 +787,7 @@
         }
 
         function updateDashboard() {
-            // Update habit chart
+            // Update habit completion chart
             const habitValues = [
                 (appData.habits.water / 8) * 100,
                 appData.habits.exercise ? 100 : 0,
@@ -670,19 +800,20 @@
             window.habitsChart.data.datasets[0].data = habitValues;
             window.habitsChart.update();
 
-            // Update task chart
+            // Update task completion chart
             const completedTasks = appData.tasks.filter(task => task.completed).length;
             const pendingTasks = appData.tasks.length - completedTasks;
             window.tasksChart.data.datasets[0].data = [completedTasks, pendingTasks];
             window.tasksChart.update();
 
             // Update blood sugar chart
-            const readings = appData.bloodSugarReadings.slice(-7).reverse();
-            window.bloodSugarChart.data.labels = readings.map(r => new Date(r.date).toLocaleDateString());
-            window.bloodSugarChart.data.datasets[0].data = readings.map(r => r.value);
+            const recentReadings = appData.bloodSugarReadings.slice(-7).reverse();
+            window.bloodSugarChart.data.labels = recentReadings.map(r => 
+                new Date(r.date).toLocaleDateString(undefined, {month: 'short', day: 'numeric'}));
+            window.bloodSugarChart.data.datasets[0].data = recentReadings.map(r => r.value);
             window.bloodSugarChart.update();
 
-            // Update weekly habits
+            // Update weekly habits radar chart
             if (appData.habits.history.length > 0) {
                 const weeklyAverages = calculateWeeklyHabitAverages();
                 window.weeklyHabitsChart.data.datasets[0].data = weeklyAverages;
@@ -704,54 +835,15 @@
             }
         }
 
-        function calculateWeeklyHabitAverages() {
-            const last7Days = appData.habits.history.slice(-7);
-            if (last7Days.length === 0) return [0, 0, 0, 0, 0, 0, 0];
-            
-            const sums = { water: 0, exercise: 0, meditation: 0, learning: 0, family: 0, addictionFree: 0, diabetesCheck: 0 };
-            
-            last7Days.forEach(day => {
-                sums.water += day.water / 8;
-                sums.exercise += day.exercise ? 1 : 0;
-                sums.meditation += day.meditation ? 1 : 0;
-                sums.learning += day.learning ? 1 : 0;
-                sums.family += day.family ? 1 : 0;
-                sums.addictionFree += day.addictionFree ? 1 : 0;
-                sums.diabetesCheck += day.diabetesCheck ? 1 : 0;
-            });
-            
-            return [
-                (sums.water / last7Days.length) * 100,
-                (sums.exercise / last7Days.length) * 100,
-                (sums.meditation / last7Days.length) * 100,
-                (sums.learning / last7Days.length) * 100,
-                (sums.family / last7Days.length) * 100,
-                (sums.addictionFree / last7Days.length) * 100,
-                (sums.diabetesCheck / last7Days.length) * 100
-            ];
-        }
-
-        function calculateWeeklyAverageWater() {
-            const last7Days = appData.habits.history.slice(-7);
-            if (last7Days.length === 0) return 0;
-            return last7Days.reduce((sum, day) => sum + day.water, 0) / last7Days.length;
-        }
-
-        function isThisWeek(date) {
-            const now = new Date();
-            const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
-            const endOfWeek = new Date(now.setDate(now.getDate() + 6));
-            return date >= startOfWeek && date <= endOfWeek;
-        }
-
-        // ===== INDIVIDUAL COMPONENT UPDATES =====
         function updateHabitTracker() {
             document.querySelector('[data-habit="water"]').textContent = `${appData.habits.water}/8`;
             toggleCompletedClass('water', appData.habits.water >= 8);
             
             const habits = ['exercise', 'meditation', 'learning', 'family', 'addiction-free', 'diabetes'];
             habits.forEach(habit => {
-                const value = appData.habits[habit.replace('-', '')];
+                const habitKey = habit === 'addiction-free' ? 'addictionFree' : 
+                                habit === 'diabetes' ? 'diabetesCheck' : habit;
+                const value = appData.habits[habitKey];
                 document.querySelector(`[data-habit="${habit}"]`).textContent = `${value ? 1 : 0}/1`;
                 toggleCompletedClass(habit, value);
             });
@@ -783,7 +875,8 @@
                 
                 const value = document.createElement('span');
                 value.textContent = `${reading.value} mg/dL`;
-                value.style.color = reading.value > 180 ? 'var(--danger)' : (reading.value < 70 ? 'var(--warning)' : 'var(--success)');
+                value.style.color = reading.value > 180 ? 'var(--danger)' : 
+                                   reading.value < 70 ? 'var(--warning)' : 'var(--success)';
                 
                 const time = document.createElement('span');
                 time.textContent = `${reading.time} (${new Date(reading.date).toLocaleDateString()})`;
@@ -915,7 +1008,7 @@
             const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
             
             const bar = document.getElementById('task-progress');
-            bar.style.width = `${progress}%`;
+                        bar.style.width = `${progress}%`;
             bar.textContent = `${progress}%`;
         }
 
@@ -930,21 +1023,64 @@
             document.getElementById('paid-text').value = appData.ikigai.paid;
         }
 
-              // ===== EVENT LISTENERS =====
-        document.addEventListener('DOMContentLoaded', function() {
-            loadData();
+        // ===== HELPER FUNCTIONS =====
+        function calculateWeeklyHabitAverages() {
+            const last7Days = appData.habits.history.slice(-7);
+            if (last7Days.length === 0) return [0, 0, 0, 0, 0, 0, 0];
             
+            const sums = { water: 0, exercise: 0, meditation: 0, learning: 0, family: 0, addictionFree: 0, diabetesCheck: 0 };
+            
+            last7Days.forEach(day => {
+                sums.water += day.water / 8;
+                sums.exercise += day.exercise ? 1 : 0;
+                sums.meditation += day.meditation ? 1 : 0;
+                sums.learning += day.learning ? 1 : 0;
+                sums.family += day.family ? 1 : 0;
+                sums.addictionFree += day.addictionFree ? 1 : 0;
+                sums.diabetesCheck += day.diabetesCheck ? 1 : 0;
+            });
+            
+            return [
+                (sums.water / last7Days.length) * 100,
+                (sums.exercise / last7Days.length) * 100,
+                (sums.meditation / last7Days.length) * 100,
+                (sums.learning / last7Days.length) * 100,
+                (sums.family / last7Days.length) * 100,
+                (sums.addictionFree / last7Days.length) * 100,
+                (sums.diabetesCheck / last7Days.length) * 100
+            ];
+        }
+
+        function calculateWeeklyAverageWater() {
+            const last7Days = appData.habits.history.slice(-7);
+            if (last7Days.length === 0) return 0;
+            return last7Days.reduce((sum, day) => sum + day.water, 0) / last7Days.length;
+        }
+
+        function isThisWeek(date) {
+            const now = new Date();
+            const startOfWeek = new Date(now.setDate(now.getDate() - now.getDay()));
+            const endOfWeek = new Date(now.setDate(now.getDate() + 6));
+            return date >= startOfWeek && date <= endOfWeek;
+        }
+
+        function isConsecutiveDay(day1, day2) {
+            const oneDay = 24 * 60 * 60 * 1000;
+            return Math.abs((day1 - day2) / oneDay) <= 1;
+        }
+
+        // ===== EVENT LISTENERS =====
+        function initializeEventListeners() {
             // Habit Tracker
             document.querySelectorAll('.habit-circle').forEach(circle => {
                 circle.addEventListener('click', function() {
                     const habit = this.getAttribute('data-habit');
+                    const habitKey = habit === 'addiction-free' ? 'addictionFree' : 
+                                    habit === 'diabetes' ? 'diabetesCheck' : habit;
                     
                     if (habit === 'water') {
-                        if (appData.habits.water < 8) {
-                            appData.habits.water++;
-                        }
+                        appData.habits.water = appData.habits.water < 8 ? appData.habits.water + 1 : 8;
                     } else {
-                        const habitKey = habit.replace('-', '');
                         appData.habits[habitKey] = !appData.habits[habitKey];
                     }
                     
@@ -1219,13 +1355,16 @@
                     }
                 }
             }, 60000); // Check every minute
-        });
-        
-        // Helper Functions
-        function isConsecutiveDay(day1, day2) {
-            const oneDay = 24 * 60 * 60 * 1000;
-            return Math.abs((day1 - day2) / oneDay) <= 1;
         }
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            initializeEventListeners();
+            
+            // First render
+            updateAllUI();
+        });
     </script>
 </body>
 </html>
