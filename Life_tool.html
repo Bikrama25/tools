@@ -786,76 +786,27 @@
             updateDashboard();
         }
 
-        function updateDashboard() {
-            // Update habit completion chart
-            const habitValues = [
-                (appData.habits.water / 8) * 100,
-                appData.habits.exercise ? 100 : 0,
-                appData.habits.meditation ? 100 : 0,
-                appData.habits.learning ? 100 : 0,
-                appData.habits.family ? 100 : 0,
-                appData.habits.addictionFree ? 100 : 0,
-                appData.habits.diabetesCheck ? 100 : 0
-            ];
-            window.habitsChart.data.datasets[0].data = habitValues;
-            window.habitsChart.update();
-
-            // Update task completion chart
-            const completedTasks = appData.tasks.filter(task => task.completed).length;
-            const pendingTasks = appData.tasks.length - completedTasks;
-            window.tasksChart.data.datasets[0].data = [completedTasks, pendingTasks];
-            window.tasksChart.update();
-
-            // Update blood sugar chart
-            const recentReadings = appData.bloodSugarReadings.slice(-7).reverse();
-            window.bloodSugarChart.data.labels = recentReadings.map(r => 
-                new Date(r.date).toLocaleDateString(undefined, {month: 'short', day: 'numeric'}));
-            window.bloodSugarChart.data.datasets[0].data = recentReadings.map(r => r.value);
-            window.bloodSugarChart.update();
-
-            // Update weekly habits radar chart
-            if (appData.habits.history.length > 0) {
-                const weeklyAverages = calculateWeeklyHabitAverages();
-                window.weeklyHabitsChart.data.datasets[0].data = weeklyAverages;
-                window.weeklyHabitsChart.update();
-            }
-
-            // Update stats
-            document.getElementById('streak-count').textContent = `${appData.addictionStreak} days`;
-            document.getElementById('learning-sessions-count').textContent = 
-                appData.learningSessions.filter(s => isThisWeek(new Date(s.date))).length;
-            document.getElementById('water-avg').textContent = 
-                `${Math.round(calculateWeeklyAverageWater())}/8`;
-            document.getElementById('pomodoro-sessions').textContent = appData.pomodoroSessions;
-            document.getElementById('tasks-completed').textContent = 
-                appData.tasks.length > 0 ? `${Math.round((completedTasks / appData.tasks.length) * 100)}%` : '0%';
-            
-            if (appData.revisionSchedule) {
-                document.getElementById('revision-next').textContent = appData.revisionSchedule.time;
-            }
-        }
-
         function updateHabitTracker() {
-            document.querySelector('[data-habit="water"]').textContent = `${appData.habits.water}/8`;
-            toggleCompletedClass('water', appData.habits.water >= 8);
+            // Water habit
+            const waterElement = document.querySelector('[data-habit="water"]');
+            waterElement.textContent = `${appData.habits.water}/8`;
+            waterElement.classList.toggle('completed', appData.habits.water >= 8);
             
-            const habits = ['exercise', 'meditation', 'learning', 'family', 'addiction-free', 'diabetes'];
-            habits.forEach(habit => {
-                const habitKey = habit === 'addiction-free' ? 'addictionFree' : 
-                                habit === 'diabetes' ? 'diabetesCheck' : habit;
-                const value = appData.habits[habitKey];
-                document.querySelector(`[data-habit="${habit}"]`).textContent = `${value ? 1 : 0}/1`;
-                toggleCompletedClass(habit, value);
+            // Other habits
+            const habits = [
+                { element: 'exercise', key: 'exercise' },
+                { element: 'meditation', key: 'meditation' },
+                { element: 'learning', key: 'learning' },
+                { element: 'family', key: 'family' },
+                { element: 'addiction-free', key: 'addictionFree' },
+                { element: 'diabetes', key: 'diabetesCheck' }
+            ];
+            
+            habits.forEach(({element, key}) => {
+                const el = document.querySelector(`[data-habit="${element}"]`);
+                el.textContent = `${appData.habits[key] ? 1 : 0}/1`;
+                el.classList.toggle('completed', appData.habits[key]);
             });
-        }
-
-        function toggleCompletedClass(habit, isCompleted) {
-            const element = document.querySelector(`[data-habit="${habit}"]`);
-            if (isCompleted) {
-                element.classList.add('completed');
-            } else {
-                element.classList.remove('completed');
-            }
         }
 
         function updateAddictionStreak() {
@@ -1008,7 +959,7 @@
             const progress = total > 0 ? Math.round((completed / total) * 100) : 0;
             
             const bar = document.getElementById('task-progress');
-                        bar.style.width = `${progress}%`;
+            bar.style.width = `${progress}%`;
             bar.textContent = `${progress}%`;
         }
 
@@ -1021,6 +972,55 @@
             document.getElementById('good-at-text').value = appData.ikigai.goodAt;
             document.getElementById('needs-text').value = appData.ikigai.needs;
             document.getElementById('paid-text').value = appData.ikigai.paid;
+        }
+
+        function updateDashboard() {
+            // Update habit completion chart
+            const habitValues = [
+                (appData.habits.water / 8) * 100,
+                appData.habits.exercise ? 100 : 0,
+                appData.habits.meditation ? 100 : 0,
+                appData.habits.learning ? 100 : 0,
+                appData.habits.family ? 100 : 0,
+                appData.habits.addictionFree ? 100 : 0,
+                appData.habits.diabetesCheck ? 100 : 0
+            ];
+            window.habitsChart.data.datasets[0].data = habitValues;
+            window.habitsChart.update();
+
+            // Update task completion chart
+            const completedTasks = appData.tasks.filter(task => task.completed).length;
+            const pendingTasks = appData.tasks.length - completedTasks;
+            window.tasksChart.data.datasets[0].data = [completedTasks, pendingTasks];
+            window.tasksChart.update();
+
+            // Update blood sugar chart
+            const recentReadings = appData.bloodSugarReadings.slice(-7).reverse();
+            window.bloodSugarChart.data.labels = recentReadings.map(r => 
+                new Date(r.date).toLocaleDateString(undefined, {month: 'short', day: 'numeric'}));
+            window.bloodSugarChart.data.datasets[0].data = recentReadings.map(r => r.value);
+            window.bloodSugarChart.update();
+
+            // Update weekly habits radar chart
+            if (appData.habits.history.length > 0) {
+                const weeklyAverages = calculateWeeklyHabitAverages();
+                window.weeklyHabitsChart.data.datasets[0].data = weeklyAverages;
+                window.weeklyHabitsChart.update();
+            }
+
+            // Update stats
+            document.getElementById('streak-count').textContent = `${appData.addictionStreak} days`;
+            document.getElementById('learning-sessions-count').textContent = 
+                appData.learningSessions.filter(s => isThisWeek(new Date(s.date))).length;
+                        document.getElementById('water-avg').textContent = 
+                `${Math.round(calculateWeeklyAverageWater())}/8`;
+            document.getElementById('pomodoro-sessions').textContent = appData.pomodoroSessions;
+            document.getElementById('tasks-completed').textContent = 
+                appData.tasks.length > 0 ? `${Math.round((completedTasks / appData.tasks.length) * 100)}%` : '0%';
+            
+            if (appData.revisionSchedule) {
+                document.getElementById('revision-next').textContent = appData.revisionSchedule.time;
+            }
         }
 
         // ===== HELPER FUNCTIONS =====
@@ -1075,13 +1075,22 @@
             document.querySelectorAll('.habit-circle').forEach(circle => {
                 circle.addEventListener('click', function() {
                     const habit = this.getAttribute('data-habit');
-                    const habitKey = habit === 'addiction-free' ? 'addictionFree' : 
-                                    habit === 'diabetes' ? 'diabetesCheck' : habit;
                     
                     if (habit === 'water') {
-                        appData.habits.water = appData.habits.water < 8 ? appData.habits.water + 1 : 8;
+                        appData.habits.water = appData.habits.water < 8 ? appData.habits.water + 1 : 0;
                     } else {
-                        appData.habits[habitKey] = !appData.habits[habitKey];
+                        const habitKey = {
+                            'exercise': 'exercise',
+                            'meditation': 'meditation',
+                            'learning': 'learning',
+                            'family': 'family',
+                            'addiction-free': 'addictionFree',
+                            'diabetes': 'diabetesCheck'
+                        }[habit];
+                        
+                        if (habitKey) {
+                            appData.habits[habitKey] = !appData.habits[habitKey];
+                        }
                     }
                     
                     saveData();
