@@ -1,1 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holistic Growth System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #4B0082;
+            --secondary: #9370DB;
+            --accent: #FFD700;
+            --light: #F5F5F5;
+            --dark: #1A1A1A;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+        }
+        
+        .meditation-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(var(--secondary) 0%, var(--primary) 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .habit-card {
+            transition: transform 0.3s;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .habit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .dashboard-widget {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            height: 100%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .flowchart-step {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .flowchart-step:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+        
+        .flowchart-connector {
+            position: absolute;
+            left: 9px;
+            top: 20px;
+            bottom: -20px;
+            width: 2px;
+            background: var(--secondary);
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--primary);
+        }
+        
+        .progress {
+            height: 10px;
+        }
+        
+        .mood-indicator {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-flower1"></i> Holistic Growth
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#dashboard"><i class="bi bi-speedometer2"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#meditation"><i class="bi bi-brightness-high"></i> Meditation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#habits"><i class="bi bi-check-circle"></i> Habits</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#flowchart"><i class="bi bi-diagram-3"></i> Growth Flow</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-outline-warning me-2" id="adminToggle">
+                        <i class="bi bi-unlock"></i> Admin Mode
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i> User
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Main Content -->
+    <div class="container my-4">
+        <!-- Dashboard Section -->
+        <section id="dashboard">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <h2><i class="bi bi-speedometer2"></i> Dashboard</h2>
+                    <p class="text-muted">Your holistic growth overview</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                        <input type="date" class="form-control" id="dashboardDate" value="2023-07-20">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Daily Quote -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-widget">
+                        <h5><i class="bi bi-chat-quote"></i> Today's Mantra</h5>
+                        <div class="p-3 bg-light rounded my-2">
+                            <p class="mb-0 fst-italic">"The mind is everything. What you think you become."</p>
+                            <p class="text-end mb-0">- Buddha</p>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary">New Mantra</button>
+                    </div>
+                </div>
+
+                <!-- Success Memories -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-widget">
+                        <h5><i class="bi bi-trophy"></i> Success Memories</h5>
+                        <div class="my-2">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span>Completed 30-day meditation</span>
+                                <span>Jul 15</span>
+                            </div>
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span>Published research paper</span>
+                                <span>Jun 28</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>Promoted to team lead</span>
+                                <span>May 10</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary">Add Memory</button>
+                    </div>
+                </div>
+
+                <!-- Humiliations -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-widget">
+                        <h5><i class="bi bi-exclamation-triangle"></i> Learning Moments</h5>
+                        <div class="my-2">
+                            <div class="d-flex justify-content-between small mb-1">
+                                <span>Missed important deadline</span>
+                                <span>Jul 5</span>
+                            </div>
+                            <div class="d-flex justify-content-between small">
+                                <span>Lost temper in meeting</span>
+                                <span>Jun 12</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary">Add Reflection</button>
+                    </div>
+                </div>
+
+                <!-- Today's Progress -->
+                <div class="col-md-6">
+                    <div class="dashboard-widget">
+                        <h5><i class="bi bi-graph-up"></i> Today's Progress</h5>
+                        <div class="my-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Meditation</span>
+                                <span>2/5 sessions</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" style="width: 40%"></div>
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Water Intake</span>
+                                <span>3/5 glasses</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <div class="my-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Tasks Completed</span>
+                                <span>5/12</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" style="width: 42%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mood Tracker -->
+                <div class="col-md-6">
+                    <div class="dashboard-widget">
+                        <h5><i class="bi bi-emoji-smile"></i> Mood Tracker</h5>
+                        <div class="text-center my-3">
+                            <div class="mood-indicator bg-success" data-mood="5"></div>
+                            <div class="mood-indicator bg-info" data-mood="4"></div>
+                            <div class="mood-indicator bg-warning" data-mood="3"></div>
+                            <div class="mood-indicator bg-danger" data-mood="2"></div>
+                            <div class="mood-indicator bg-secondary" data-mood="1"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Current Mood</label>
+                            <input type="range" class="form-range" min="1" max="5" step="1" id="moodRange">
+                        </div>
+                        <button class="btn btn-sm btn-primary" id="logMood">Log Mood</button>
+                        <button class="btn btn-sm btn-outline-secondary ms-2" id="breathingExercise">Breathing Exercise</button>
+                    </div>
+                </div>
+
+                <!-- Today's Tasks -->
+                <div class="col-12">
+                    <div class="dashboard-widget">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="mb-0"><i class="bi bi-list-check"></i> Today's Tasks</h5>
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal">
+                                <i class="bi bi-plus"></i> Add Task
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Task</th>
+                                        <th>Category</th>
+                                        <th>Time</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Morning Meditation</td>
+                                        <td><span class="badge bg-purple">Wellness</span></td>
+                                        <td>7:30 AM</td>
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Research Paper Review</td>
+                                        <td><span class="badge bg-blue">Professional</span></td>
+                                        <td>10:00 AM</td>
+                                        <td><span class="badge bg-warning">In Progress</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Self-Defense Practice</td>
+                                        <td><span class="badge bg-green">Fitness</span></td>
+                                        <td>6:00 PM</td>
+                                        <td><span class="badge bg-secondary">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meditation Section -->
+        <section id="meditation" class="mt-5 pt-5">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <h2><i class="bi bi-brightness-high"></i> Meditation Practice</h2>
+                    <p class="text-muted">Daily meditation routines and instant sessions</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Night Mantra Meditation -->
+                <div class="col-md-6">
+                    <div class="card habit-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h5 class="card-title">Night Mantra Meditation</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">10:00 PM - 10:30 PM</h6>
+                                </div>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            <p class="card-text my-3">Evening meditation to reflect on the day and prepare for restful sleep.</p>
+                            
+                            <div class="d-flex justify-content-center my-4">
+                                <div class="meditation-circle" id="nightMeditationTimer">
+                                    <div class="text-center">
+                                        <div class="fs-4">30:00</div>
+                                        <div class="small">minutes</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline-primary" id="startNightMeditation">
+                                    <i class="bi bi-play-fill"></i> Start
+                                </button>
+                                <button class="btn btn-outline-secondary" id="customizeNightMeditation">
+                                    <i class="bi bi-gear"></i> Customize
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instant Meditation -->
+                <div class="col-md-6">
+                    <div class="card habit-card h-100">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h5 class="card-title">Instant Meditation</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">5 sessions (7:30 AM - 10:00 PM)</h6>
+                                </div>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            <p class="card-text my-3">Quick mindfulness breaks throughout the day to maintain focus and balance.</p>
+                            
+                            <div class="my-3">
+                                <label class="form-label">Duration (3-15 mins)</label>
+                                <input type="range" class="form-range" min="3" max="15" value="5" id="instantMeditationDuration">
+                                <div class="text-center" id="durationValue">5 minutes</div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-outline-primary" id="startInstantMeditation">
+                                    <i class="bi bi-lightning-charge"></i> Start Now
+                                </button>
+                                <button class="btn btn-outline-secondary" id="moodCheck">
+                                    <i class="bi bi-heart-pulse"></i> Check Mood First
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meditation Stats -->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Meditation Progress</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>This Week</h6>
+                                    <div class="d-flex align-items-center">
+                                        <div class="me-3" style="width: 100px; height: 100px;">
+                                            <canvas id="weeklyMeditationChart"></canvas>
+                                        </div>
+                                        <div>
+                                            <div class="mb-2">
+                                                <span class="badge bg-primary me-2">Completed</span>
+                                                <span>8/10 sessions</span>
+                                            </div>
+                                            <div class="mb-2">
+                                                <span class="badge bg-secondary me-2">Missed</span>
+                                                <span>2 sessions</span>
+                                            </div>
+                                            <div>
+                                                <span class="badge bg-success me-2">Total Time</span>
+                                                <span>2h 45m</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>History</h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Type</th>
+                                                    <th>Duration</th>
+                                                    <th>Mood After</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Jul 19</td>
+                                                    <td>Night</td>
+                                                    <td>30m</td>
+                                                    <td><span class="mood-indicator bg-success"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jul 19</td>
+                                                    <td>Instant</td>
+                                                    <td>5m</td>
+                                                    <td><span class="mood-indicator bg-info"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Jul 18</td>
+                                                    <td>Night</td>
+                                                    <td>30m</td>
+                                                    <td><span class="mood-indicator bg-success"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Habits Section -->
+        <section id="habits" class="mt-5 pt-5">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <h2><i class="bi bi-check-circle"></i> Habit Tracker</h2>
+                    <p class="text-muted">Daily routines for holistic growth</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#habitModal">
+                        <i class="bi bi-plus"></i> Add Habit
+                    </button>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Body Habits -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card habit-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Body (Buddha)</h5>
+                            <p class="card-subtitle mb-2 text-muted">Physical well-being</p>
+                            
+                            <div class="mt-3">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="waterIntake" checked>
+                                    <label class="form-check-label" for="waterIntake">Water Intake (5 glasses)</label>
+                                    <div class="small text-muted">Alerts at 7:30 AM, 12:30 PM, 4:00 PM, 7:30 PM</div>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="diabeticFood" checked>
+                                    <label class="form-check-label" for="diabeticFood">Diabetic Nutrition</label>
+                                    <div class="small text-muted">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#foodModal">View meal plans</a>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="medicine">
+                                    <label class="form-check-label" for="medicine">Medicine Taken</label>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="selfDefense">
+                                    <label class="form-check-label" for="selfDefense">Self-Defense Practice</label>
+                                </div>
+                                
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="sugarCheck">
+                                    <label class="form-check-label" for="sugarCheck">Sugar/Pressure Check</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Senses Habits -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card habit-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Senses (Concentration)</h5>
+                            <p class="card-subtitle mb-2 text-muted">Sensory awareness</p>
+                            
+                            <div class="mt-3">
+                                <div class="mb-3">
+                                    <label class="form-label">Current Focus</label>
+                                    <select class="form-select">
+                                        <option>Muladhar (Root)</option>
+                                        <option>Heart (Vishnu)</option>
+                                        <option selected>Penile (Maheshwar)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="senseMeditation" checked>
+                                    <label class="form-check-label" for="senseMeditation">10-Sense Awareness</label>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="bodyScan">
+                                    <label class="form-check-label" for="bodyScan">Full Body Scan</label>
+                                </div>
+                                
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="energyFlow">
+                                    <label class="form-check-label" for="energyFlow">Energy Flow Visualization</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mind Habits -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card habit-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Mind (Visuddha)</h5>
+                            <p class="card-subtitle mb-2 text-muted">Mental clarity</p>
+                            
+                            <div class="mt-3">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="visualization" checked>
+                                    <label class="form-check-label" for="visualization">5-4-3-2-1 Visualization</label>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label class="form-label">Mind Control Assessment</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="mindControl" id="mindControlYes">
+                                        <label class="form-check-label" for="mindControlYes">I have control</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="mindControl" id="mindControlNo" checked>
+                                        <label class="form-check-label" for="mindControlNo">Needs work</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="actionBias">
+                                    <label class="form-check-label" for="actionBias">Action Over Debate</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intelligence Habits -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card habit-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Intelligence (Niyamya)</h5>
+                            <p class="card-subtitle mb-2 text-muted">Wisdom and learning</p>
+                            
+                            <div class="mt-3">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="learningSession" checked>
+                                    <label class="form-check-label" for="learningSession">Daily Learning (30 mins)</label>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="dotsConnecting">
+                                    <label class="form-check-label" for="dotsConnecting">Connect Experience Dots</label>
+                                </div>
+                                
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="futurePlanning">
+                                    <label class="form-check-label" for="futurePlanning">Future Roadmap Review</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soul Habits -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card habit-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Soul (Progress)</h5>
+                            <p class="card-subtitle mb-2 text-muted">Purpose and happiness</p>
+                            
+                            <div class="mt-3">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="ikigaiReflection" checked>
+                                    <label class="form-check-label" for="ikigaiReflection">IKIGAI Reflection</label>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="smartGoals">
+                                    <label class="form-check-label" for="smartGoals">SMART Goals Progress</label>
+                                </div>
+                                
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="addictionCheck">
+                                    <label class="form-check-label" for="addictionCheck">Addiction Resistance</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paramatma Habits -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card habit-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Paramatma (Prayer)</h5>
+                            <p class="card-subtitle mb-2 text-muted">Spiritual connection</p>
+                            
+                            <div class="mt-3">
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="morningPrayer" checked>
+                                    <label class="form-check-label" for="morningPrayer">Morning Prayer</label>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="eveningPrayer">
+                                    <label class="form-check-label" for="eveningPrayer">Evening Prayer</label>
+                                </div>
+                                
+                                <div class="form-check form-switch mb-2">
+                                    <input class="form-check-input" type="checkbox" id="socialConsciousness">
+                                    <label class="form-check-label" for="socialConsciousness">Social Consciousness</label>
+                                </div>
+                                
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="powerLadder">
+                                    <label class="form-check-label" for="powerLadder">Power Ladder Review</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Growth Flowchart Section -->
+        <section id="flowchart" class="mt-5 pt-5">
+            <div class="row mb-4">
+                <div class="col-md-8">
+                    <h2><i class="bi bi-diagram-3"></i> Growth Flowchart</h2>
+                    <p class="text-muted">Your holistic development path</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="flowchart-step">
+                        <div class="flowchart-connector"></div>
+                        <h5>Body (Buddha)</h5>
+                        <p>Physical foundation - nutrition, exercise, health monitoring</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-primary">Water Intake</span>
+                            <span class="badge bg-primary">Diabetic Food</span>
+                            <span class="badge bg-primary">Medicine</span>
+                            <span class="badge bg-primary">Self-Defense</span>
+                            <span class="badge bg-primary">Health Checks</span>
+                        </div>
+                    </div>
+
+                    <div class="flowchart-step">
+                        <div class="flowchart-connector"></div>
+                        <h5>Senses (Concentration)</h5>
+                        <p>Sensory awareness - focus on 10 senses, energy centers</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-info">Muladhar</span>
+                            <span class="badge bg-info">Heart</span>
+                            <span class="badge bg-info">Maheshwar</span>
+                            <span class="badge bg-info">Body Scan</span>
+                        </div>
+                    </div>
+
+                    <div class="flowchart-step">
+                        <div class="flowchart-connector"></div>
+                        <h5>Mind (Visuddha)</h5>
+                        <p>Mental clarity - visualization, control assessment, action bias</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-purple">5-4-3-2-1</span>
+                            <span class="badge bg-purple">Control Check</span>
+                            <span class="badge bg-purple">Action Focus</span>
+                        </div>
+                    </div>
+
+                    <div class="flowchart-step">
+                        <div class="flowchart-connector"></div>
+                        <h5>Intelligence (Niyamya)</h5>
+                        <p>Wisdom development - learning, experience connection, future planning</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-warning">Daily Learning</span>
+                            <span class="badge bg-warning">Dots Connecting</span>
+                            <span class="badge bg-warning">Roadmap</span>
+                        </div>
+                    </div>
+
+                    <div class="flowchart-step">
+                        <div class="flowchart-connector"></div>
+                        <h5>Soul (Progress)</h5>
+                        <p>Purpose discovery - IKIGAI, SMART goals, addiction resistance</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-success">IKIGAI</span>
+                            <span class="badge bg-success">Goals</span>
+                            <span class="badge bg-success">Addiction</span>
+                        </div>
+                    </div>
+
+                    <div class="flowchart-step">
+                        <h5>Paramatma (Prayer)</h5>
+                        <p>Spiritual connection - prayers, social consciousness, power awareness</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <span class="badge bg-danger">Prayers</span>
+                            <span class="badge bg-danger">Consciousness</span>
+                            <span class="badge bg-danger">Power Ladder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <!-- Task Modal -->
+    <div class="modal fade" id="taskModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Task Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select class="form-select">
+                            <option>Professional</option>
+                            <option>Wellness</option>
+                            <option>Fitness</option>
+                            <option>Learning</option>
+                            <option>Spiritual</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Time</label>
+                        <input type="time" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Priority</label>
+                        <select class="form-select">
+                            <option>High</option>
+                            <option selected>Medium</option>
+                            <option>Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Task</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Habit Modal -->
+    <div class="modal fade" id="habitModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Habit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Habit Name</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select class="form-select">
+                            <option>Body</option>
+                            <option>Senses</option>
+                            <option>Mind</option>
+                            <option>Intelligence</option>
+                            <option>Soul</option>
+                            <option>Paramatma</option>
+                        </select>
+                                        <div class="mb-3">
+                        <label class="form-label">Frequency</label>
+                        <select class="form-select">
+                            <option>Daily</option>
+                            <option>Weekly</option>
+                            <option>Monthly</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Reminder Time</label>
+                        <input type="time" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add Habit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Food Modal -->
+    <div class="modal fade" id="foodModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Diabetic Nutrition Plan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="foodTabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#breakfast">Breakfast</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#lunch">Lunch</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#dinner">Dinner</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#snacks">Snacks</a>
+                        </li>
+                    </ul>
+                    
+                    <div class="tab-content p-3">
+                        <div class="tab-pane fade show active" id="breakfast">
+                            <h6>7:30 AM Options</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h6>Option 1</h6>
+                                            <ul>
+                                                <li>Oats with nuts and seeds</li>
+                                                <li>Boiled eggs (2)</li>
+                                                <li>Green tea</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h6>Option 2</h6>
+                                            <ul>
+                                                <li>Vegetable besan cheela</li>
+                                                <li>Curd</li>
+                                                <li>Almond milk</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="lunch">
+                            <h6>12:30 PM Options</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h6>Option 1</h6>
+                                            <ul>
+                                                <li>Brown rice (1 cup)</li>
+                                                <li>Dal (1 bowl)</li>
+                                                <li>Green vegetables</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h6>Option 2</h6>
+                                            <ul>
+                                                <li>Roti (2)</li>
+                                                <li>Paneer curry</li>
+                                                <li>Curd</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="dinner">
+                            <h6>7:30 PM Options</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h6>Option 1</h6>
+                                            <ul>
+                                                <li>Millet khichdi</li>
+                                                <li>Vegetable soup</li>
+                                                <li>Salad</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h6>Option 2</h6>
+                                            <ul>
+                                                <li>Grilled fish/chicken</li>
+                                                <li>Steamed vegetables</li>
+                                                <li>Dal</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="snacks">
+                            <h6>4:00 PM Options</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h6>Option 1</h6>
+                                            <ul>
+                                                <li>Handful of nuts</li>
+                                                <li>Green tea</li>
+                                                <li>Fruit (apple/pear)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h6>Option 2</h6>
+                                            <ul>
+                                                <li>Sprouts salad</li>
+                                                <li>Buttermilk</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Preferences</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Routine Section -->
+    <section id="routine" class="mt-5 pt-5">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2><i class="bi bi-calendar-check"></i> Daily Routine</h2>
+                <p class="text-muted">Structured daily schedule for optimal productivity</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Activity</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>5:30 AM</td>
+                                        <td>Wake up, hydration</td>
+                                        <td><span class="badge bg-primary">Wellness</span></td>
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6:00 AM</td>
+                                        <td>Morning meditation & prayer</td>
+                                        <td><span class="badge bg-purple">Spiritual</span></td>
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>7:30 AM</td>
+                                        <td>Breakfast + Medicine</td>
+                                        <td><span class="badge bg-info">Health</span></td>
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>8:30 AM</td>
+                                        <td>Professional work</td>
+                                        <td><span class="badge bg-blue">Career</span></td>
+                                        <td><span class="badge bg-warning">In Progress</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>12:30 PM</td>
+                                        <td>Lunch + Short walk</td>
+                                        <td><span class="badge bg-info">Health</span></td>
+                                        <td><span class="badge bg-secondary">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4:00 PM</td>
+                                        <td>Learning session</td>
+                                        <td><span class="badge bg-warning">Education</span></td>
+                                        <td><span class="badge bg-secondary">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6:00 PM</td>
+                                        <td>Self-defense practice</td>
+                                        <td><span class="badge bg-green">Fitness</span></td>
+                                        <td><span class="badge bg-secondary">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>10:00 PM</td>
+                                        <td>Night meditation</td>
+                                        <td><span class="badge bg-purple">Spiritual</span></td>
+                                        <td><span class="badge bg-secondary">Pending</span></td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-check"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning & Finance Section -->
+    <section id="learning" class="mt-5 pt-5">
+        <div class="row">
+            <!-- Learning Schedule -->
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-journal-bookmark"></i> Learning Schedule</h5>
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6>Current Lesson</h6>
+                                        <p>Advanced Meditation Techniques</p>
+                                        <div class="progress mb-2">
+                                            <div class="progress-bar" style="width: 65%">65%</div>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary">Continue</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6>Revision Schedule</h6>
+                                        <ul class="list-unstyled">
+                                            <li>After 10 minutes: <span class="badge bg-success">Done</span></li>
+                                            <li>After 1 hour: <span class="badge bg-secondary">Pending</span></li>
+                                            <li>After 1 day: <span class="badge bg-secondary">Pending</span></li>
+                                            <li>After 7 days: <span class="badge bg-secondary">Pending</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Quick Research Notes</label>
+                            <textarea class="form-control" rows="3" placeholder="Jot down ideas and insights..."></textarea>
+                        </div>
+                        <button class="btn btn-sm btn-primary">Save Notes</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Finance Tracker -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-cash-stack"></i> Daily Finance</h5>
+                        
+                        <div class="my-3">
+                            <label class="form-label">Today's Earnings</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" class="form-control" value="0">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Today's Expenses</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">₹</span>
+                                <input type="number" class="form-control" value="0">
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            Net Balance: <strong>₹0</strong>
+                        </div>
+                        
+                        <button class="btn btn-sm btn-primary">Add Transaction</button>
+                    </div>
+                </div>
+                
+                <!-- Music Selector -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-music-note-list"></i> Mood Music</h5>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Select Music for Current Mood</label>
+                            <select class="form-select">
+                                <option>Peaceful Instrumental</option>
+                                <option>Focus Enhancer</option>
+                                <option>Energy Booster</option>
+                                <option selected>Traditional Mantras</option>
+                                <option>Nature Sounds</option>
+                            </select>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-play-fill"></i> Play
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary">
+                                <i class="bi bi-plus"></i> Add Custom
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Movies Section -->
+    <section id="movies" class="mt-5 pt-5">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2><i class="bi bi-film"></i> Must-Watch Movies</h2>
+                <p class="text-muted">Inspirational and educational films</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#movieModal">
+                    <i class="bi bi-plus"></i> Add Movie
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Year</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Rating</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>The Pursuit of Happyness</td>
+                                        <td>2006</td>
+                                        <td><span class="badge bg-primary">Inspiration</span></td>
+                                        <td><span class="badge bg-success">Watched</span></td>
+                                        <td>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Peaceful Warrior</td>
+                                        <td>2006</td>
+                                        <td><span class="badge bg-purple">Spiritual</span></td>
+                                        <td><span class="badge bg-success">Watched</span></td>
+                                        <td>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star-fill text-warning"></i>
+                                            <i class="bi bi-star"></i>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>12th Fail</td>
+                                        <td>2023</td>
+                                        <td><span class="badge bg-blue">Motivation</span></td>
+                                        <td><span class="badge bg-secondary">Pending</span></td>
+                                        <td>-</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-pencil"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Footer -->
+    <footer class="bg-dark text-white mt-5 py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Holistic Growth System</h5>
+                    <p>A comprehensive platform for mind, body, and spiritual development.</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <h5>Upgrade to Premium</h5>
+                    <p>Unlock all features and advanced analytics</p>
+                    <button class="btn btn-warning">Subscribe Now</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p class="mb-0">© 2023 Holistic Growth. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Admin mode toggle
+        document.getElementById('adminToggle').addEventListener('click', function() {
+            this.innerHTML = this.innerHTML.includes('On') ? 
+                '<i class="bi bi-unlock"></i> Admin Mode' : 
+                '<i class="bi bi-lock"></i> Admin Mode On';
+            
+            // In a real app, this would enable admin features
+            alert('Admin mode activated. All content unlocked.');
+        });
+
+        // Meditation timer logic
+        let meditationInterval;
+        document.getElementById('startNightMeditation').addEventListener('click', function() {
+            const timerElement = document.getElementById('nightMeditationTimer');
+            let seconds = 30 * 60; // 30 minutes
+            
+            this.disabled = true;
+            timerElement.style.background = 'conic-gradient(var(--secondary) 100%, var(--primary) 0%)';
+            
+            meditationInterval = setInterval(() => {
+                seconds--;
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                
+                timerElement.querySelector('.fs-4').textContent = 
+                    `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+                
+                const percentage = 100 - (seconds / (30 * 60)) * 100;
+                timerElement.style.background = 
+                    `conic-gradient(var(--secondary) ${percentage}%, var(--primary) 0%)`;
+                
+                if (seconds <= 0) {
+                    clearInterval(meditationInterval);
+                    alert('Night meditation completed!');
+                    document.getElementById('startNightMeditation').disabled = false;
+                }
+            }, 1000);
+        });
+
+        // Instant meditation duration slider
+        document.getElementById('instantMeditationDuration').addEventListener('input', function() {
+            document.getElementById('durationValue').textContent = `${this.value} minutes`;
+        });
+
+        // Mood logging
+        document.getElementById('logMood').addEventListener('click', function() {
+            const moodValue = document.getElementById('moodRange').value;
+            alert(`Mood logged: ${moodValue}/5`);
+        });
+
+        // Breathing exercise
+        document.getElementById('breathingExercise').addEventListener('click', function() {
+            alert('Starting 4-7-8 breathing exercise:\n\n1. Inhale for 4 seconds\n2. Hold for 7 seconds\n3. Exhale for 8 seconds\n\nRepeat for 5 cycles.');
+        });
+
+        // Initialize charts
+        document.addEventListener('DOMContentLoaded', function() {
+            // Weekly meditation chart
+            const ctx = document.getElementById('weeklyMeditationChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'Missed'],
+                    datasets: [{
+                        data: [8, 2],
+                        backgroundColor: ['#4B0082', '#9370DB'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
