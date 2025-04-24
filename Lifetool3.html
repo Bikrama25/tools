@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nirvana Tracker - Holistic Habit & Meditation System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #5e35b1;
+            --secondary: #3949ab;
+            --success: #43a047;
+            --info: #039be5;
+            --warning: #fb8c00;
+            --danger: #e53935;
+            --light: #f5f5f5;
+            --dark: #263238;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        .meditation-path {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .path-node {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .path-node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .path-connector {
+            position: absolute;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+        
+        .progress-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 0% 65%, #eee 65% 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        .progress-circle-inner {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .habit-card {
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .habit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .timer-display {
+            font-size: 4rem;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .mood-option {
+            cursor: pointer;
+            transition: all 0.2s;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        
+        .mood-option:hover {
+            transform: scale(1.05);
+            background-color: rgba(94, 53, 177, 0.1);
+        }
+        
+        .mood-option.selected {
+            border: 3px solid var(--primary);
+            background-color: rgba(94, 53, 177, 0.1);
+        }
+        
+        .quote-card {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .success-memory {
+            background-color: rgba(67, 160, 71, 0.1);
+            border-left: 4px solid var(--success);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .timer-display {
+                font-size: 2.5rem;
+            }
+            
+            .path-node {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-lg-2 col-md-3 d-md-block sidebar collapse bg-white p-3 border-end">
+                <div class="logo mb-4 text-center">
+                    <h4><i class="fas fa-om text-primary me-2"></i>Nirvana Tracker</h4>
+                    <small class="text-muted">Holistic Habit System</small>
+                </div>
+                
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item mb-2">
+                        <a class="nav-link active" href="#dashboard" data-bs-toggle="tab">
+                            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link" href="#meditation" data-bs-toggle="tab">
+                            <i class="fas fa-spa me-2"></i>Meditation
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link" href="#habits" data-bs-toggle="tab">
+                            <i class="fas fa-tasks me-2"></i>Habit Tracker
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link" href="#mood" data-bs-toggle="tab">
+                            <i class="fas fa-brain me-2"></i>Mind & Mood
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link" href="#daily" data-bs-toggle="tab">
+                            <i class="fas fa-calendar-day me-2"></i>Daily Routine
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link" href="#ikigai" data-bs-toggle="tab">
+                            <i class="fas fa-bullseye me-2"></i>IKIGAI & Goals
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a class="nav-link" href="#analytics" data-bs-toggle="tab">
+                            <i class="fas fa-chart-line me-2"></i>Analytics
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="mt-4 p-3 bg-light rounded">
+                    <h6>Quick Actions</h6>
+                    <button class="btn btn-sm btn-primary w-100 mb-2" id="quickMeditationBtn">
+                        <i class="fas fa-stopwatch me-1"></i> Instant Meditation
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary w-100 mb-2" id="addTaskBtn">
+                        <i class="fas fa-plus me-1"></i> Add Task
+                    </button>
+                    <button class="btn btn-sm btn-outline-success w-100" id="checkVitalsBtn">
+                        <i class="fas fa-heartbeat me-1"></i> Check Vitals
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-10 col-md-9 ms-sm-auto px-md-4 py-3">
+                <div class="tab-content">
+                    <!-- Dashboard Tab -->
+                    <div class="tab-pane fade show active" id="dashboard">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Dashboard</h1>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group me-2">
+                                    <button class="btn btn-sm btn-outline-secondary">Today</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Week</button>
+                                    <button class="btn btn-sm btn-outline-secondary active">Month</button>
+                                </div>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Daily Quote & Success Memory -->
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card quote-card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-white"><i class="fas fa-quote-left me-2"></i>Daily Inspiration</h5>
+                                        <blockquote class="blockquote text-white mb-0">
+                                            <p id="dailyQuote">"The mind is everything. What you think you become."</p>
+                                            <footer class="blockquote-footer text-white-50">Buddha</footer>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card success-memory h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><i class="fas fa-award text-success me-2"></i>Success Memory</h5>
+                                        <p class="mb-1"><strong>Completed all meditations:</strong> 5 days streak</p>
+                                        <p class="mb-1"><strong>Health metrics optimal:</strong> 7 days streak</p>
+                                        <p><strong>Productivity peak:</strong> Finished project 2 days early</p>
+                                        <button class="btn btn-sm btn-outline-success mt-2">View All</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Progress Summary -->
+                        <div class="row mb-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">Today's Progress</h5>
+                                        <div class="progress-circle mb-3">
+                                            <div class="progress-circle-inner">
+                                                72%
+                                            </div>
+                                        </div>
+                                        <div class="row text-center">
+                                            <div class="col-4">
+                                                <h6 class="text-muted">Habits</h6>
+                                                <h4>6/8</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <h6 class="text-muted">Meditation</h6>
+                                                <h4>3/5</h4>
+                                            </div>
+                                            <div class="col-4">
+                                                <h6 class="text-muted">Tasks</h6>
+                                                <h4>4/7</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Completed Habits -->
+                            <div class="col-md-4 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="card-title mb-0">Today's Habits</h5>
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addHabitModal">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
+                                        </div>
+                                        <div class="list-group list-group-flush">
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                                    Morning Meditation
+                                                </div>
+                                                <span class="badge bg-primary rounded-pill">10 min</span>
+                                            </div>
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                                    Water Intake (2.5L)
+                                                </div>
+                                                <span class="badge bg-primary rounded-pill">Done</span>
+                                            </div>
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                                    Medicine & Checkup
+                                                </div>
+                                                <span class="badge bg-primary rounded-pill">Done</span>
+                                            </div>
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <i class="fas fa-check-circle text-success me-2"></i>
+                                                    Self-Defense Practice
+                                                </div>
+                                                <span class="badge bg-primary rounded-pill">30 min</span>
+                                            </div>
+                                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <i class="fas fa-hourglass-half text-warning me-2"></i>
+                                                    Night Meditation
+                                                </div>
+                                                <span class="badge bg-secondary rounded-pill">Pending</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Due Tasks -->
+                            <div class="col-md-4 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">Due Tasks</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Task</th>
+                                                        <th>Due</th>
+                                                        <th>Priority</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Project Report</td>
+                                                        <td>Today</td>
+                                                        <td><span class="badge bg-danger">High</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Research Paper</td>
+                                                        <td>Tomorrow</td>
+                                                        <td><span class="badge bg-warning">Medium</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Meeting Prep</td>
+                                                        <td>Today</td>
+                                                        <td><span class="badge bg-warning">Medium</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Grocery Shopping</td>
+                                                        <td>Tomorrow</td>
+                                                        <td><span class="badge bg-success">Low</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Lessons & Habit Diary -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">Lessons & Revision</h5>
+                                        <div class="accordion" id="lessonsAccordion">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lesson1">
+                                                        Neuroscience Basics
+                                                    </button>
+                                                </h2>
+                                                <div id="lesson1" class="accordion-collapse collapse" data-bs-parent="#lessonsAccordion">
+                                                    <div class="accordion-body">
+                                                        <p><strong>Next Revision:</strong> Tomorrow at 9:00 AM</p>
+                                                        <p><strong>Schedule:</strong> 
+                                                            <span class="badge bg-light text-dark">10m</span>
+                                                            <span class="badge bg-light text-dark">1h</span>
+                                                            <span class="badge bg-light text-dark">1d</span>
+                                                            <span class="badge bg-primary text-white">7d</span>
+                                                            <span class="badge bg-light text-dark">30d</span>
+                                                        </p>
+                                                        <button class="btn btn-sm btn-outline-primary me-2">Add Note</button>
+                                                        <button class="btn btn-sm btn-primary">Start Revision</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lesson2">
+                                                        Meditation Techniques
+                                                    </button>
+                                                </h2>
+                                                <div id="lesson2" class="accordion-collapse collapse" data-bs-parent="#lessonsAccordion">
+                                                    <div class="accordion-body">
+                                                        <p><strong>Next Revision:</strong> Friday at 4:00 PM</p>
+                                                        <p><strong>Schedule:</strong> 
+                                                            <span class="badge bg-light text-dark">10m</span>
+                                                            <span class="badge bg-light text-dark">1h</span>
+                                                            <span class="badge bg-primary text-white">1d</span>
+                                                            <span class="badge bg-light text-dark">7d</span>
+                                                            <span class="badge bg-light text-dark">30d</span>
+                                                        </p>
+                                                        <button class="btn btn-sm btn-outline-primary me-2">Add Note</button>
+                                                        <button class="btn btn-sm btn-primary">Start Revision</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h5 class="card-title mb-0">Habit Diary</h5>
+                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#diaryEntryModal">
+                                                <i class="fas fa-plus me-1"></i> Add Entry
+                                            </button>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date</th>
+                                                        <th>Summary</th>
+                                                        <th>Mood</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Today</td>
+                                                        <td>Good morning routine, completed 3 meditations</td>
+                                                        <td><span class="badge bg-success">Calm</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Yesterday</td>
+                                                        <td>Missed night meditation but good work productivity</td>
+                                                        <td><span class="badge bg-warning">Neutral</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Meditation Tab -->
+                    <div class="tab-pane fade" id="meditation">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Meditation Practice</h1>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group me-2">
+                                    <button class="btn btn-sm btn-outline-secondary">Today</button>
+                                    <button class="btn btn-sm btn-outline-secondary active">Week</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Month</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <!-- Night Meditation -->
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="fas fa-moon text-primary me-2"></i>Night Mantra Meditation
+                                        </h5>
+                                        <p class="text-muted">Daily at 10:00 PM for 30 minutes</p>
+                                        
+                                        <div class="d-flex align-items-center mb-3">
+                                            <button class="btn btn-primary me-3" id="startNightMeditation">
+                                                <i class="fas fa-play me-1"></i> Start Now
+                                            </button>
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-clock text-muted me-2"></i>
+                                                <h4 class="mb-0" id="nightTimer">30:00</h4>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-check form-switch mb-3">
+                                            <input class="form-check-input" type="checkbox" id="nightReminderSwitch" checked>
+                                            <label class="form-check-label" for="nightReminderSwitch">Enable 10 PM Reminder</label>
+                                        </div>
+                                        
+                                        <div class="alert alert-info">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            This meditation helps in deep relaxation and prepares your mind for restful sleep.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Instant Meditation Progress -->
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <i class="fas fa-bolt text-warning me-2"></i>Instant Meditations
+                                        </h5>
+                                        <p class="text-muted">Daily target: 5 sessions (7:30 AM - 10 PM)</p>
+                                        
+                                        <div class="progress mb-3" style="height: 20px;">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 60%;">3/5</div>
+                                        </div>
+                                        
+                                        <div class="alert alert-warning">
+                                            <i class="fas fa-exclamation-circle me-2"></i>
+                                            Next session recommended in 2 hours (based on your routine)
+                                        </div>
+                                        
+                                        <button class="btn btn-warning w-100" id="startInstantMeditation">
+                                            <i class="fas fa-stopwatch me-1"></i> Start Instant Meditation
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Meditation Flowchart -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4 text-center">Instant Meditation Flow</h5>
+                                
+                                <div class="meditation-path">
+                                    <div class="path-connector" style="width: 85%; left: 7.5%;"></div>
+                                    
+                                    <div class="row text-center">
+                                        <!-- Body (Buddha) -->
+                                        <div class="col-md-2 mb-3">
+                                            <div class="path-node bg-primary" data-step="body" title="Check water intake, diabetic food & medicine, exercise, vital signs">
+                                                <i class="fas fa-body"></i>
+                                            </div>
+                                            <h6>Body</h6>
+                                            <small class="text-muted">Check vitals & physical state</small>
+                                        </div>
+                                        
+                                        <!-- Senses -->
+                                        <div class="col-md-2 mb-3">
+                                            <div class="path-node bg-info" data-step="senses" title="Focus on 10 senses, move through energy centers">
+                                                <i class="fas fa-hands"></i>
+                                            </div>
+                                            <h6>Senses</h6>
+                                            <small class="text-muted">Muladhar to Penile</small>
+                                        </div>
+                                        
+                                        <!-- Mind -->
+                                        <div class="col-md-2 mb-3">
+                                            <div class="path-node bg-success" data-step="mind" title="5-4-3-2-1 visualization technique">
+                                                <i class="fas fa-brain"></i>
+                                            </div>
+                                            <h6>Mind</h6>
+                                            <small class="text-muted">5-4-3-2-1 technique</small>
+                                        </div>
+                                        
+                                        <!-- Intelligence -->
+                                        <div class="col-md-2 mb-3">
+                                            <div class="path-node bg-warning" data-step="intelligence" title="Learn from experiences, plan for future">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </div>
+                                            <h6>Intelligence</h6>
+                                            <small class="text-muted">চোরাবালিতে ফেঁসো না</small>
+                                        </div>
+                                        
+                                        <!-- Soul -->
+                                        <div class="col-md-2 mb-3">
+                                            <div class="path-node bg-danger" data-step="soul" title="Progress roadmap, motivation">
+                                                <i class="fas fa-heart"></i>
+                                            </div>
+                                            <h6>Soul</h6>
+                                            <small class="text-muted">Why & How</small>
+                                        </div>
+                                        
+                                        <!-- Paramatma -->
+                                        <div class="col-md-2 mb-3">
+                                            <div class="path-node bg-purple" data-step="paramatma" title="Prayer, social consciousness, power management">
+                                                <i class="fas fa-pray"></i>
+                                            </div>
+                                            <h6>Paramatma</h6>
+                                            <small class="text-muted">অন্নবস্ত্রবাসস্থান</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center mt-4">
+                                    <button class="btn btn-primary me-2" id="startGuidedFlow">
+                                        <i class="fas fa-play-circle me-1"></i> Start Guided Flow
+                                    </button>
+                                    <button class="btn btn-outline-primary" id="customizeFlow">
+                                        <i class="fas fa-cog me-1"></i> Customize Flow
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Meditation Timer -->
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title mb-3">Meditation Timer</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="text-center">
+                                            <div class="timer-display mb-3">05:00</div>
+                                            <div class="btn-group">
+                                                <button class="btn btn-success" id="startTimerBtn">
+                                                    <i class="fas fa-play"></i>
+                                                </button>
+                                                <button class="btn btn-danger" id="stopTimerBtn" disabled>
+                                                    <i class="fas fa-stop"></i>
+                                                </button>
+                                                <button class="btn btn-secondary" id="resetTimerBtn">
+                                                    <i class="fas fa-redo"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="meditationDuration" class="form-label">Duration (minutes)</label>
+                                            <select class="form-select" id="meditationDuration">
+                                                <option value="3">3</option>
+                                                <option value="5" selected>5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                <option value="30">30</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="meditationType" class="form-label">Meditation Type</label>
+                                            <select class="form-select" id="meditationType">
+                                                <option>Body Awareness</option>
+                                                <option>Senses Focus</option>
+                                                <option>Mind Visualization</option>
+                                                <option>Intelligence</option>
+                                                <option>Soul Connection</option>
+                                                <option>Paramatma</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="enableGong" checked>
+                                            <label class="form-check-label" for="enableGong">
+                                                Start/End with gong sound
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Habit Tracker Tab -->
+                    <div class="tab-pane fade" id="habits">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Habit Tracker</h1>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHabitModal">
+                                <i class="fas fa-plus me-1"></i> Add Habit
+                            </button>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Daily Habits</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Habit</th>
+                                                        <th>Time</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Morning Meditation</td>
+                                                        <td>7:30 AM</td>
+                                                        <td><span class="badge bg-success">Completed</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Water Intake (2L)</td>
+                                                        <td>All day</td>
+                                                        <td><span class="badge bg-success">Completed</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Diabetic Medicine</td>
+                                                        <td>After breakfast</td>
+                                                        <td><span class="badge bg-success">Completed</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Self-Defense Practice</td>
+                                                        <td>6:00 PM</td>
+                                                        <td><span class="badge bg-warning">Pending</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Night Meditation</td>
+                                                        <td>10:00 PM</td>
+                                                        <td><span class="badge bg-secondary">Upcoming</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Health Vitals</h5>
+                                        <div class="row">
+                                            <div class="col-6 mb-3">
+                                                <div class="card bg-light">
+                                                    <div class="card-body text-center">
+                                                        <h6>Blood Sugar</h6>
+                                                        <h3 class="text-primary">98</h3>
+                                                        <small class="text-muted">mg/dL</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <div class="card bg-light">
+                                                    <div class="card-body text-center">
+                                                        <h6>Blood Pressure</h6>
+                                                        <h3 class="text-success">120/80</h3>
+                                                        <small class="text-muted">mmHg</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="card bg-light">
+                                                    <div class="card-body text-center">
+                                                        <h6>Exercise</h6>
+                                                        <h3 class="text-info">45</h3>
+                                                        <small class="text-muted">minutes</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="card bg-light">
+                                                    <div class="card-body text-center">
+                                                        <h6>Water Intake</h6>
+                                                        <h3 class="text-warning">2.5</h3>
+                                                        <small class="text-muted">liters</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-outline-primary w-100 mt-2" id="logVitalsBtn">
+                                            <i class="fas fa-plus me-1"></i> Log Vitals
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card shadow-sm mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Weekly Progress</h5>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card bg-primary text-white">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-spa me-2"></i>Meditation</h6>
+                                                <div class="progress bg-white bg-opacity-25" style="height: 10px;">
+                                                    <div class="progress-bar bg-white" style="width: 75%"></div>
+                                                </div>
+                                                <small>15/20 sessions this week</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card bg-success text-white">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-heartbeat me-2"></i>Health</h6>
+                                                <div class="progress bg-white bg-opacity-25" style="height: 10px;">
+                                                    <div class="progress-bar bg-white" style="width: 90%"></div>
+                                                </div>
+                                                <small>9/10 habits this week</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card bg-info text-white">
+                                            <div class="card-body">
+                                                <h6><i class="fas fa-briefcase me-2"></i>Professional</h6>
+                                                <div class="progress bg-white bg-opacity-25" style="height: 10px;">
+                                                    <div class="progress-bar bg-white" style="width: 60%"></div>
+                                                </div>
+                                                <small>12/20 tasks this week</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mind & Mood Tab -->
+                    <div class="tab-pane fade" id="mood">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Mind & Mood</h1>
+                            <button class="btn btn-primary" id="checkMoodNowBtn">
+                                <i class="fas fa-heartbeat me-1"></i> Check Current Mood
+                            </button>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Today's Mood</h5>
+                                        <div class="text-center my-4">
+                                            <i class="fas fa-smile-beam fa-5x text-success mb-3"></i>
+                                            <h4>Calm and Focused</h4>
+                                            <p class="text-muted">Detected at 9:30 AM</p>
+                                        </div>
+                                        <div class="alert alert-success">
+                                            <i class="fas fa-check-circle me-2"></i>
+                                            Your mood is balanced. Maintain with regular meditation breaks.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                                       <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Breathing Analysis</h5>
+                                        <div class="text-center my-4">
+                                            <div class="breathing-circle mx-auto mb-3" style="width: 150px; height: 150px; border-radius: 50%; background: conic-gradient(#4a8bdf 0% 40%, #6c63ff 40% 70%, #17a2b8 70% 100%);"></div>
+                                            <h4>Balanced Rhythm</h4>
+                                            <p class="text-muted">Inhale: 5s | Hold: 4s | Exhale: 6s</p>
+                                        </div>
+                                        <button class="btn btn-primary w-100" id="adjustBreathingBtn">
+                                            <i class="fas fa-lungs me-1"></i> Adjust Breathing Pattern
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">Mood History</h5>
+                                <div class="chart-container" style="height: 300px;">
+                                    <!-- Mood chart would be rendered here with Chart.js -->
+                                    <canvas id="moodChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Music Recommendations</h5>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-music fa-3x text-info mb-3"></i>
+                                                <h6>Indian Classical</h6>
+                                                <small class="text-muted">Raga Yaman for focus</small>
+                                                <div class="mt-3">
+                                                    <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-play"></i></button>
+                                                    <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-water fa-3x text-primary mb-3"></i>
+                                                <h6>Nature Sounds</h6>
+                                                <small class="text-muted">Forest with river</small>
+                                                <div class="mt-3">
+                                                    <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-play"></i></button>
+                                                    <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card h-100">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-om fa-3x text-warning mb-3"></i>
+                                                <h6>Mantras</h6>
+                                                <small class="text-muted">Gayatri Mantra</small>
+                                                <div class="mt-3">
+                                                    <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-play"></i></button>
+                                                    <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-plus"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Daily Routine Tab -->
+                    <div class="tab-pane fade" id="daily">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Daily Routine</h1>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dailyRoutineModal">
+                                <i class="fas fa-cog me-1"></i> Configure Routine
+                            </button>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Sleep Schedule</h5>
+                                        <div class="text-center my-4">
+                                            <div class="d-flex justify-content-around">
+                                                <div>
+                                                    <i class="fas fa-bed fa-2x text-primary mb-2"></i>
+                                                    <h6>Bedtime</h6>
+                                                    <p>10:30 PM</p>
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-sun fa-2x text-warning mb-2"></i>
+                                                    <h6>Wake-up</h6>
+                                                    <p>6:00 AM</p>
+                                                </div>
+                                            </div>
+                                            <div class="progress mt-3" style="height: 10px;">
+                                                <div class="progress-bar bg-success" style="width: 85%"></div>
+                                            </div>
+                                            <small>7.5 hours of sleep (85% of target)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Task Completion</h5>
+                                        <div class="text-center my-4">
+                                            <div class="d-flex justify-content-around mb-3">
+                                                <div>
+                                                    <h6>Professional</h6>
+                                                    <p>4/7 tasks</p>
+                                                </div>
+                                                <div>
+                                                    <h6>Personal</h6>
+                                                    <p>3/5 tasks</p>
+                                                </div>
+                                            </div>
+                                            <div class="progress mt-2" style="height: 10px;">
+                                                <div class="progress-bar bg-primary" style="width: 65%"></div>
+                                            </div>
+                                            <small>65% of daily tasks completed</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Financial Tracking</h5>
+                                        <div class="text-center my-4">
+                                            <div class="d-flex justify-content-around">
+                                                <div>
+                                                    <i class="fas fa-rupee-sign fa-2x text-success mb-2"></i>
+                                                    <h6>Earnings</h6>
+                                                    <p>₹5,250</p>
+                                                </div>
+                                                <div>
+                                                    <i class="fas fa-shopping-bag fa-2x text-danger mb-2"></i>
+                                                    <h6>Expenses</h6>
+                                                    <p>₹1,890</p>
+                                                </div>
+                                            </div>
+                                            <div class="progress mt-3" style="height: 10px;">
+                                                <div class="progress-bar bg-success" style="width: 65%"></div>
+                                                <div class="progress-bar bg-danger" style="width: 35%"></div>
+                                            </div>
+                                            <small>35% expense ratio (target < 30%)</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Media Watchlist</h5>
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Movie</th>
+                                                        <th>Year</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Pather Panchali</td>
+                                                        <td>1955</td>
+                                                        <td><span class="badge bg-success">Watched</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Guide</td>
+                                                        <td>1965</td>
+                                                        <td><span class="badge bg-success">Watched</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Mughal-e-Azam</td>
+                                                        <td>1960</td>
+                                                        <td><span class="badge bg-warning">Pending</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sholay</td>
+                                                        <td>1975</td>
+                                                        <td><span class="badge bg-warning">Pending</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <button class="btn btn-sm btn-outline-primary w-100 mt-2" data-bs-toggle="modal" data-bs-target="#addMovieModal">
+                                            <i class="fas fa-plus me-1"></i> Add Movie
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Learning Schedule</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Topic</th>
+                                                <th>Next Review</th>
+                                                <th>Revision Schedule</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Neuroscience Basics</td>
+                                                <td>Tomorrow 9AM</td>
+                                                <td>
+                                                    <span class="badge bg-light text-dark">10m</span>
+                                                    <span class="badge bg-light text-dark">1h</span>
+                                                    <span class="badge bg-primary text-white">1d</span>
+                                                    <span class="badge bg-light text-dark">7d</span>
+                                                    <span class="badge bg-light text-dark">30d</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Meditation Techniques</td>
+                                                <td>Today 4PM</td>
+                                                <td>
+                                                    <span class="badge bg-primary text-white">10m</span>
+                                                    <span class="badge bg-light text-dark">1h</span>
+                                                    <span class="badge bg-light text-dark">1d</span>
+                                                    <span class="badge bg-light text-dark">7d</span>
+                                                    <span class="badge bg-light text-dark">30d</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Financial Management</td>
+                                                <td>Sunday 10AM</td>
+                                                <td>
+                                                    <span class="badge bg-light text-dark">10m</span>
+                                                    <span class="badge bg-light text-dark">1h</span>
+                                                    <span class="badge bg-light text-dark">1d</span>
+                                                    <span class="badge bg-primary text-white">7d</span>
+                                                    <span class="badge bg-light text-dark">30d</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" data-bs-toggle="modal" data-bs-target="#addLessonModal">
+                                    <i class="fas fa-plus me-1"></i> Add Learning Topic
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- IKIGAI & Goals Tab -->
+                    <div class="tab-pane fade" id="ikigai">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">IKIGAI & Life Goals</h1>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ikigaiModal">
+                                <i class="fas fa-edit me-1"></i> Edit IKIGAI
+                            </button>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title">My IKIGAI</h5>
+                                        <img src="https://via.placeholder.com/400x300?text=IKIGAI+Diagram" alt="IKIGAI Diagram" class="img-fluid rounded mb-3">
+                                        <p class="text-muted">Your reason for being - the intersection of what you love, what you're good at, what the world needs, and what you can be paid for.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">IKIGAI Elements</h5>
+                                        <div class="ikigai-elements">
+                                            <div class="mb-3 p-3 border rounded">
+                                                <h6><i class="fas fa-heart text-danger me-2"></i>Passion</h6>
+                                                <p>Meditation practice, Teaching spirituality, Helping others achieve mindfulness</p>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-danger" style="width: 75%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 p-3 border rounded">
+                                                <h6><i class="fas fa-globe-asia text-success me-2"></i>Mission</h6>
+                                                <p>Spread mindfulness practices, Create educational content, Build a spiritual community</p>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-success" style="width: 60%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 p-3 border rounded">
+                                                <h6><i class="fas fa-briefcase text-info me-2"></i>Vocation</h6>
+                                                <p>Mindfulness coach, Meditation teacher, Spiritual guide</p>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-info" style="width: 85%"></div>
+                                                </div>
+                                            </div>
+                                            <div class="p-3 border rounded">
+                                                <h6><i class="fas fa-rupee-sign text-warning me-2"></i>Profession</h6>
+                                                <p>Web developer, Meditation app creator, Content writer</p>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-warning" style="width: 90%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">SMART Goals</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Goal</th>
+                                                <th>Category</th>
+                                                <th>Deadline</th>
+                                                <th>Progress</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Complete Meditation App</td>
+                                                <td>Professional</td>
+                                                <td>Dec 2023</td>
+                                                <td>
+                                                    <div class="progress" style="height: 8px;">
+                                                        <div class="progress-bar bg-primary" style="width: 65%"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Daily Meditation Streak</td>
+                                                <td>Personal</td>
+                                                <td>Ongoing</td>
+                                                <td>
+                                                    <div class="progress" style="height: 8px;">
+                                                        <div class="progress-bar bg-success" style="width: 90%"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Publish Research Paper</td>
+                                                <td>Academic</td>
+                                                <td>Mar 2024</td>
+                                                <td>
+                                                    <div class="progress" style="height: 8px;">
+                                                        <div class="progress-bar bg-info" style="width: 30%"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Financial Independence</td>
+                                                <td>Financial</td>
+                                                <td>2025</td>
+                                                <td>
+                                                    <div class="progress" style="height: 8px;">
+                                                        <div class="progress-bar bg-warning" style="width: 45%"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary w-100 mt-2" data-bs-toggle="modal" data-bs-target="#addGoalModal">
+                                    <i class="fas fa-plus me-1"></i> Add Goal
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Analytics Tab -->
+                    <div class="tab-pane fade" id="analytics">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h1 class="h2">Analytics & Insights</h1>
+                            <div class="btn-toolbar mb-2 mb-md-0">
+                                <div class="btn-group me-2">
+                                    <button class="btn btn-sm btn-outline-secondary">Week</button>
+                                    <button class="btn btn-sm btn-outline-secondary active">Month</button>
+                                    <button class="btn btn-sm btn-outline-secondary">Year</button>
+                                </div>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Meditation Consistency</h5>
+                                        <div class="chart-container" style="height: 250px;">
+                                            <!-- Chart would be rendered here -->
+                                            <canvas id="meditationChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Habit Completion Rate</h5>
+                                        <div class="chart-container" style="height: 250px;">
+                                            <!-- Chart would be rendered here -->
+                                            <canvas id="habitChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Mood Correlation</h5>
+                                        <div class="chart-container" style="height: 250px;">
+                                            <!-- Chart would be rendered here -->
+                                            <canvas id="moodCorrelationChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <div class="card shadow-sm h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Productivity vs Meditation</h5>
+                                        <div class="chart-container" style="height: 250px;">
+                                            <!-- Chart would be rendered here -->
+                                            <canvas id="productivityChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Monthly Report</h5>
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <div class="card bg-primary text-white">
+                                            <div class="card-body text-center">
+                                                <h6>Meditation Sessions</h6>
+                                                <h2>87</h2>
+                                                <small>+12% from last month</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <div class="card bg-success text-white">
+                                            <div class="card-body text-center">
+                                                <h6>Habit Completion</h6>
+                                                <h2>92%</h2>
+                                                <small>+5% from last month</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <div class="card bg-info text-white">
+                                            <div class="card-body text-center">
+                                                <h6>Avg. Mood Score</h6>
+                                                <h2>8.2</h2>
+                                                <small>+0.6 from last month</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <div class="card bg-warning text-white">
+                                            <div class="card-body text-center">
+                                                <h6>Sleep Quality</h6>
+                                                <h2>7.5</h2>
+                                                <small>+0.8 from last month</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <!-- Mood Detection Modal -->
+    <div class="modal fade" id="moodDetectionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mood Detection & Breathing Analysis</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>How are you feeling right now?</h6>
+                            <div class="row text-center my-4">
+                                <div class="col-3 mood-option" data-mood="happy">
+                                    <i class="fas fa-laugh-beam fa-3x text-warning mb-2"></i>
+                                    <p>Happy</p>
+                                </div>
+                                <div class="col-3 mood-option" data-mood="calm">
+                                    <i class="fas fa-smile-beam fa-3x text-success mb-2"></i>
+                                    <p>Calm</p>
+                                </div>
+                                <div class="col-3 mood-option" data-mood="neutral">
+                                    <i class="fas fa-meh fa-3x text-info mb-2"></i>
+                                    <p>Neutral</p>
+                                </div>
+                                <div class="col-3 mood-option" data-mood="anxious">
+                                    <i class="fas fa-flushed fa-3x text-danger mb-2"></i>
+                                    <p>Anxious</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Breathing Pattern</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">Inhale</span>
+                                    <select class="form-select" id="inhaleDuration">
+                                        <option value="4">4 seconds</option>
+                                        <option value="5" selected>5 seconds</option>
+                                        <option value="6">6 seconds</option>
+                                    </select>
+                                    <span class="input-group-text">Hold</span>
+                                    <select class="form-select" id="holdDuration">
+                                        <option value="0">0 seconds</option>
+                                        <option value="2">2 seconds</option>
+                                        <option value="4" selected>4 seconds</option>
+                                    </select>
+                                    <span class="input-group-text">Exhale</span>
+                                    <select class="form-select" id="exhaleDuration">
+                                        <option value="4">4 seconds</option>
+                                        <option value="6" selected>6 seconds</option>
+                                        <option value="8">8 seconds</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary w-100" id="startBreathingExercise">
+                                <i class="fas fa-lungs me-1"></i> Start Breathing Exercise
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Recommended Meditation</h6>
+                            <div class="card mt-3">
+                                <div class="card-body">
+                                    <h5 id="recommendedMeditation">Mind Visualization (5-4-3-2-1 Technique)</h5>
+                                    <p class="text-muted">Based on your current mood and breathing pattern, we recommend this meditation to help balance your state of mind.</p>
+                                    <ul class="list-group list-group-flush mb-3">
+                                        <li class="list-group-item">Visualize 5 things you love to see</li>
+                                        <li class="list-group-item">4 things you love to touch</li>
+                                        <li class="list-group-item">3 things you love to listen</li>
+                                        <li class="list-group-item">2 things you love to smell</li>
+                                        <li class="list-group-item">1 thing you love to eat</li>
+                                    </ul>
+                                    <button class="btn btn-success w-100" id="startRecommendedMeditation">
+                                        <i class="fas fa-play-circle me-1"></i> Start Recommended Meditation
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Daily Routine Modal -->
+    <div class="modal fade" id="dailyRoutineModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Daily Routine Setup</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="routineForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Bedtime</label>
+                                <input type="time" class="form-control" value="22:30">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Wake-up Time</label>
+                                <input type="time" class="form-control" value="06:00">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Relaxing Music Preference</label>
+                            <select class="form-select" multiple>
+                                <option selected>Indian Classical</option>
+                                <option selected>Nature Sounds</option>
+                                <option>Mantras</option>
+                                <option>White Noise</option>
+                                <option>Binaural Beats</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Daily Tasks</label>
+                            <div id="taskContainer">
+                                <div class="input-group mb-2">
+                                    <input type="text" class="form-control" placeholder="Task description">
+                                    <select class="form-select" style="max-width: 150px;">
+                                        <option>Professional</option>
+                                        <option>Personal</option>
+                                        <option>Health</option>
+                                        <option>Academic</option>
+                                    </select>
+                                    <button class="btn btn-outline-danger" type="button">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="addTaskField">
+                                <i class="fas fa-plus me-1"></i> Add Task
+                            </button>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Financial Tracking</label>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control" placeholder="Daily Earnings">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control" placeholder="Daily Expenditure">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Must-Watch Movies List</label>
+                            <textarea class="form-control" rows="3" placeholder="Add movies separated by commas"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Routine</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Movie Modal -->
+    <div class="modal fade" id="addMovieModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Movie to Watchlist</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Movie Title</label>
+                            <input type="text" class="form-control" placeholder="Enter movie title">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Year</label>
+                            <input type="number" class="form-control" placeholder="Release year">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Priority</label>
+                            <select class="form-select">
+                                <option>Must Watch</option>
+                                <option>Highly Recommended</option>
+                                <option>Recommended</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add Movie</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Lesson Modal -->
+    <div class="modal fade" id="addLessonModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Learning Topic</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Topic Name</label>
+                            <input type="text" class="form-control" placeholder="Enter topic name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option>Academic</option>
+                                <option>R&D</option>
+                                <option>Professional</option>
+                                <option>Personal Development</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Revision Schedule</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rev10m">
+                                <label class="form-check-label" for="rev10m">After 10 minutes</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rev1h">
+                                <label class="form-check-label" for="rev1h">After 1 hour</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rev1d" checked>
+                                <label class="form-check-label" for="rev1d">After 1 day</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rev7d" checked>
+                                <label class="form-check-label" for="rev7d">After 7 days</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="rev30d" checked>
+                                <label class="form-check-label" for="rev30d">After 30 days</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add Topic</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IKIGAI Configuration Modal -->
+    <div class="modal fade" id="ikigaiModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">IKIGAI Configuration</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Passion (What you love)</label>
+                                <textarea class="form-control" rows="3" placeholder="Things you're passionate about"></textarea>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mission (What the world needs)</label>
+                                <textarea class="form-control" rows="3" placeholder="How you want to contribute"></textarea>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Vocation (What you're good at)</label>
+                                <textarea class="form-control" rows="3" placeholder="Your skills and talents"></textarea>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Profession (What you can be paid for)</label>
+                                <textarea class="form-control" rows="3" placeholder="Your professional skills"></textarea>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">IKIGAI Statement</label>
+                            <textarea class="form-control" rows="2" placeholder="Your personal IKIGAI statement"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Save IKIGAI</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Goal Modal -->
+    <div class="modal fade" id="addGoalModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add SMART Goal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Goal Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your goal">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option>Professional</option>
+                                <option>Personal</option>
+                                <option>Health</option>
+                                <option>Financial</option>
+                                <option>Academic</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Deadline</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Initial Progress</label>
+                            <input type="range" class="form-range" min="0" max="100" value="0">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Key Metrics</label>
+                            <textarea class="form-control" rows="2" placeholder="How will you measure success?"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add Goal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Habit Modal -->
+    <div class="modal fade" id="addHabitModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Habit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Habit Name</label>
+                            <input type="text" class="form-control" placeholder="Enter habit name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select">
+                                <option>Meditation</option>
+                                <option>Health</option>
+                                <option>Professional</option>
+                                <option>Personal</option>
+                                <option>Spiritual</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Daily Target</label>
+                            <input type="text" class="form-control" placeholder="e.g. 30 minutes, 2 liters">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Preferred Time</label>
+                            <input type="time" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Reminder</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="enableReminder">
+                                <label class="form-check-label" for="enableReminder">Enable reminder</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Add Habit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diary Entry Modal -->
+    <div class="modal fade" id="diaryEntryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Diary Entry</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="diaryForm">
+                        <div class="mb-3">
+                            <label class="form-label">Date</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Summary</label>
+                            <textarea class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mood</label>
+                            <select class="form-select" required>
+                                <option value="happy">Happy</option>
+                                <option value="calm">Calm</option>
+                                <option value="neutral">Neutral</option>
+                                <option value="anxious">Anxious</option>
+                                <option value="sad">Sad</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Entry</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Meditation Timer Modal -->
+    <div class="modal fade" id="meditationTimerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="meditationTypeTitle">Meditation Timer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="timer-display mb-4" id="meditationTimer">05:00</div>
+                    <div class="btn-group">
+                        <button class="btn btn-success" id="startTimerBtn">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="btn btn-danger" id="stopTimerBtn" disabled>
+                            <i class="fas fa-stop"></i>
+                        </button>
+                        <button class="btn btn-secondary" id="resetTimerBtn">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <small class="text-muted" id="meditationGuideText">Focus on your breath...</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Timer functionality
+        let timerInterval;
+        let secondsLeft = 300; // 5 minutes default
+        
+        function updateTimerDisplay() {
+            const minutes = Math.floor(secondsLeft / 60);
+            const seconds = secondsLeft % 60;
+            document.getElementById('meditationTimer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Set meditation duration
+        document.getElementById('meditationDuration').addEventListener('change', function() {
+            secondsLeft = parseInt(this.value) * 60;
+            updateTimerDisplay();
+        });
+        
+        // Timer controls
+        document.getElementById('startTimerBtn').addEventListener('click', function() {
+            this.disabled = true;
+            document.getElementById('stopTimerBtn').disabled = false;
+            
+            timerInterval = setInterval(function() {
+                secondsLeft--;
+                updateTimerDisplay();
+                
+                if (secondsLeft <= 0) {
+                    clearInterval(timerInterval);
+                    // Play completion sound if enabled
+                    if (document.getElementById('enableGong').checked) {
+                        // Gong sound would play here
+                        new Audio('https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3').play();
+                    }
+                    // Update completed meditations count
+                    const completed = document.querySelector('.progress-bar.bg-warning');
+                    const current = parseInt(completed.textContent.split('/')[0]);
+                    completed.textContent = `${current + 1}/5`;
+                    completed.style.width = `${(current + 1) * 20}%`;
+                }
+            }, 1000);
+        });
+        
+        document.getElementById('stopTimerBtn').addEventListener('click', function() {
+            clearInterval(timerInterval);
+            this.disabled = true;
+            document.getElementById('startTimerBtn').disabled = false;
+        });
+        
+        document.getElementById('resetTimerBtn').addEventListener('click', function() {
+            clearInterval(timerInterval);
+            secondsLeft = parseInt(document.getElementById('meditationDuration').value) * 60;
+            updateTimerDisplay();
+            document.getElementById('startTimerBtn').disabled = false;
+            document.getElementById('stopTimerBtn').disabled = true;
+        });
+
+        // Mood Detection
+        const moodOptions = document.querySelectorAll('.mood-option');
+        moodOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                moodOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                
+                // Set recommended meditation based on mood
+                const mood = this.dataset.mood;
+                let recommendation = "";
+                let description = "";
+                
+                switch(mood) {
+                    case 'happy':
+                        recommendation = "Paramatma Meditation";
+                        description = "Focus on social consciousness and your connection to others";
+                        break;
+                    case 'calm':
+                        recommendation = "Intelligence Meditation";
+                        description = "Reflect on past experiences and plan for the future";
+                        break;
+                    case 'neutral':
+                        recommendation = "Soul Connection Meditation";
+                        description = "Focus on your personal progress and motivation";
+                        break;
+                    case 'anxious':
+                        recommendation = "Body Awareness Meditation";
+                        description = "Ground yourself by focusing on physical sensations";
+                        break;
+                }
+                
+                document.getElementById('recommendedMeditation').textContent = recommendation;
+                document.querySelector('#moodDetectionModal .card-body p').textContent = 
+                    `Based on your current mood (${mood}), we recommend this meditation to help balance your state of mind.`;
+                
+                // Adjust breathing pattern suggestions based on mood
+                if (mood === 'anxious') {
+                    document.getElementById('inhaleDuration').value = 4;
+                    document.getElementById('holdDuration').value = 0;
+                    document.getElementById('exhaleDuration').value = 8;
+                } else {
+                    document.getElementById('inhaleDuration').value = 5;
+                    document.getElementById('holdDuration').value = 4;
+                    document.getElementById('exhaleDuration').value = 6;
+                }
+            });
+        });
+
+        // Quick Meditation Button
+        document.getElementById('quickMeditationBtn').addEventListener('click', function() {
+            const modal = new bootstrap.Modal(document.getElementById('moodDetectionModal'));
+            modal.show();
+        });
+
+        // Start Recommended Meditation
+        document.getElementById('startRecommendedMeditation').addEventListener('click', function() {
+            const meditationType = document.getElementById('recommendedMeditation').textContent;
+            document.getElementById('meditationType').value = meditationType;
+            
+            const modal = bootstrap.Modal.getInstance(document.getElementById('moodDetectionModal'));
+            modal.hide();
+            
+            // Start the timer automatically
+            secondsLeft = 300; // 5 minutes
+            updateTimerDisplay();
+            document.getElementById('startTimerBtn').click();
+        });
+
+        // Meditation Flow Steps
+        const flowSteps = document.querySelectorAll('.meditation-node');
+        flowSteps.forEach(step => {
+            step.addEventListener('click', function() {
+                const stepType = this.dataset.step;
+                let meditationName = "";
+                let duration = 5; // minutes
+                
+                switch(stepType) {
+                    case 'body':
+                        meditationName = "Body Awareness";
+                        duration = 3;
+                        break;
+                    case 'senses':
+                        meditationName = "Senses Focus";
+                        duration = 5;
+                        break;
+                    case 'mind':
+                        meditationName = "Mind Visualization";
+                        duration = 7;
+                        break;
+                    case 'intelligence':
+                        meditationName = "Intelligence";
+                        duration = 5;
+                        break;
+                    case 'soul':
+                        meditationName = "Soul Connection";
+                        duration = 4;
+                        break;
+                    case 'paramatma':
+                        meditationName = "Paramatma";
+                        duration = 6;
+                        break;
+                }
+                
+                document.getElementById('meditationType').value = meditationName;
+                document.getElementById('meditationDuration').value = duration;
+                secondsLeft = duration * 60;
+                updateTimerDisplay();
+            });
+        });
+
+        // Start Guided Flow
+        document.getElementById('startGuidedFlow').addEventListener('click', function() {
+            // This would initiate a sequence through all meditation steps
+            alert("Guided meditation flow started. The app will guide you through each step automatically.");
+        });
+
+        // Add Task Field Button
+        document.getElementById('addTaskField')?.addEventListener('click', function() {
+            const taskContainer = document.getElementById('taskContainer');
+            const newTaskField = `
+                <div class="input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Task description">
+                    <select class="form-select" style="max-width: 150px;">
+                        <option>Professional</option>
+                        <option>Personal</option>
+                        <option>Health</option>
+                        <option>Academic</option>
+                    </select>
+                    <button class="btn btn-outline-danger" type="button">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            taskContainer.insertAdjacentHTML('beforeend', newTaskField);
+        });
+
+        // Check Mood Now Button
+        document.getElementById('checkMoodNowBtn')?.addEventListener('click', function() {
+            const modal = new bootstrap.Modal(document.getElementById('moodDetectionModal'));
+            modal.show();
+        });
+
+        // Adjust Breathing Button
+        document.getElementById('adjustBreathingBtn')?.addEventListener('click', function() {
+            document.getElementById('inhaleDuration').value = 4;
+            document.getElementById('holdDuration').value = 0;
+            document.getElementById('exhaleDuration').value = 8;
+            alert("Breathing pattern adjusted for relaxation. Focus on longer exhales to calm your nervous system.");
+        });
+
+        // Start Breathing Exercise
+        document.getElementById('startBreathingExercise')?.addEventListener('click', function() {
+            const inhale = parseInt(document.getElementById('inhaleDuration').value);
+            const hold = parseInt(document.getElementById('holdDuration').value);
+            const exhale = parseInt(document.getElementById('exhaleDuration').value);
+            
+            alert(`Starting breathing exercise: Inhale for ${inhale}s, Hold for ${hold}s, Exhale for ${exhale}s`);
+            
+            // In a real app, this would start a visual breathing guide
+            const modal = bootstrap.Modal.getInstance(document.getElementById('moodDetectionModal'));
+            modal.hide();
+        });
+
+        // Initialize Charts
+        function initCharts() {
+            // Mood Chart
+            const moodCtx = document.getElementById('moodChart').getContext('2d');
+            new Chart(moodCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Mood Score',
+                        data: [7, 8, 6, 9, 8, 7, 9],
+                        borderColor: '#5e35b1',
+                        backgroundColor: 'rgba(94, 53, 177, 0.1)',
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 10
+                        }
+                    }
+                }
+            });
+
+            // Meditation Chart
+            const meditationCtx = document.getElementById('meditationChart').getContext('2d');
+            new Chart(meditationCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Completed Sessions',
+                        data: [4, 5, 3, 5, 4, 5, 5],
+                        backgroundColor: '#5e35b1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5
+                        }
+                    }
+                }
+            });
+
+            // Habit Chart
+            const habitCtx = document.getElementById('habitChart').getContext('2d');
+            new Chart(habitCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completed', 'Missed'],
+                    datasets: [{
+                        data: [85, 15],
+                        backgroundColor: ['#43a047', '#e53935']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Productivity Chart
+            const productivityCtx = document.getElementById('productivityChart').getContext('2d');
+            new Chart(productivityCtx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Productivity vs Meditation',
+                        data: [
+                            {x: 3, y: 6},
+                            {x: 4, y: 7},
+                            {x: 2, y: 5},
+                            {x: 5, y: 8},
+                            {x: 4, y: 7},
+                            {x: 5, y: 9},
+                            {x: 3, y: 6}
+                        ],
+                        backgroundColor: '#5e35b1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Meditation Sessions'
+                            },
+                            min: 0,
+                            max: 5
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Productivity Score'
+                            },
+                            min: 0,
+                            max: 10
+                        }
+                    }
+                }
+            });
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTimerDisplay();
+            initCharts();
+            
+            // Set night meditation reminder
+            const now = new Date();
+            const nightMeditationTime = new Date();
+            nightMeditationTime.setHours(22, 0, 0, 0);
+            
+            if (now > nightMeditationTime) {
+                document.getElementById('nightTimer').textContent = "00:00";
+            }
+
+            // Load daily quote
+            const quotes = [
+                {text: "The mind is everything. What you think you become.", author: "Buddha"},
+                {text: "Peace comes from within. Do not seek it without.", author: "Buddha"},
+                {text: "You are the master of your destiny. You can influence, direct and control your own environment.", author: "Swami Vivekananda"},
+                {text: "Arise, awake, and stop not till the goal is reached.", author: "Swami Vivekananda"},
+                {text: "The greatest weapon against stress is our ability to choose one thought over another.", author: "William James"}
+            ];
+            
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('dailyQuote').textContent = randomQuote.text;
+            document.querySelector('#dailyQuote + footer').textContent = randomQuote.author;
+        });
+    </script>
+</body>
+</html>
