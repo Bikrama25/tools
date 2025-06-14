@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serenity Space - Complete Meditation App</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --info: #560bad;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.8;
+            color: var(--dark);
+            background-color: #f5f7ff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .app-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .app-title {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .app-subtitle {
+            color: var(--accent);
+            font-weight: 300;
+        }
+        .technique-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(67, 97, 238, 0.1);
+        }
+        .free-badge {
+            background: linear-gradient(135deg, #4cc9f0, #4895ef);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .premium-badge {
+            background: linear-gradient(135deg, #f72585, #b5179e);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: var(--primary);
+            margin-top: 0;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        .step {
+            margin-bottom: 25px;
+            padding-left: 40px;
+            position: relative;
+        }
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .breathing-instruction {
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent);
+        }
+        .mantra {
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--info);
+            font-weight: bold;
+            margin: 25px 0;
+            line-height: 2;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Times New Roman', serif;
+        }
+        .note {
+            font-style: italic;
+            color: #6c757d;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .warning-note {
+            background-color: #fff0f3;
+            border-left: 4px solid var(--warning);
+            color: var(--warning);
+        }
+        .senses-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .sense-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--accent);
+        }
+        .sense-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .virtues-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .virtues-list li {
+            padding: 12px;
+            margin: 10px 0;
+            background: linear-gradient(to right, #f8f9fa, white);
+            border-radius: 8px;
+            position: relative;
+            padding-left: 40px;
+        }
+        .virtues-list li:before {
+            content: "•";
+            color: var(--primary);
+            font-size: 2rem;
+            position: absolute;
+            left: 15px;
+            top: 0;
+            line-height: 1;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .technique-container {
+                padding: 20px;
+            }
+            .app-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-header">
+        <h1 class="app-title">Serenity Space</h1>
+        <p class="app-subtitle">Meditation for Mind, Body and Soul</p>
+    </div>
+
+    <!-- Free Tier: Mantra Meditation -->
+    <div class="technique-container">
+        <div class="free-badge">Free Tier: Gateway Feature</div>
+        <h2>0. Mantra Meditation (Body-Brahma)</h2>
+        
+        <div class="step">
+            <div class="step-number">1</div>
+            <p>Sit in padmasana (lotus position) or sukhasana (easy pose) in a quiet, dimly lit space.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="breathing-instruction">
+                <p><strong>Alternate Nostril Breathing:</strong></p>
+                <p>Inhale deeply through your left nostril while counting to 22, then exhale through your right nostril while counting to 11.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="breathing-instruction">
+                <p>Now inhale through your right nostril while counting to 22, then exhale through your left nostril while counting to 11.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">4</div>
+            <p>Repeat steps 2 and 3 for five complete cycles.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">5</div>
+            <div class="mantra">
+                Hare Krishna Hare Krishna<br>
+                Krishna Krishna Hare Hare<br>
+                Hare Rama Hare Rama<br>
+                Rama Rama Hare Hare
+            </div>
+            <p>Or chant "Om Namah Shivaya" or any personal deity's name that resonates with you. Chant aloud so you can hear yourself, counting repetitions with your fingers (ideally 108 times or as many as possible).</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">6</div>
+            <p>While chanting, focus your mind on your breath. Visualize your chosen deity residing within your body.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">7</div>
+            <p>Notice any areas of discomfort or pain that may distract you from your chanting. Gently bring your awareness to these areas, then return your focus to your breath.</p>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">8</div>
+            <p>Continue this practice until your mind becomes calm. Then offer gratitude to the divine before leaving your seated position.</p>
+        </div>
+        
+        <div class="note">
+            <strong>Pro Tip:</strong> Practicing regularly at the same time and place yields the best results.
+        </div>
+        
+        <div class="note warning-note">
+            <strong>For Sleep:</strong> When using this technique for sleep, stop here. Continuing further may disrupt sleepiness.
+        </div>
+    </div>
+
+    <!-- Premium Technique 1: Sense Activation -->
+    <div class="technique-container">
+        <div class="premium-badge">Premium Feature ($3.99)</div>
+        <h2>1. Sense Activation Meditation</h2>
+        
+        <div class="note">
+            <strong>Focus:</strong> Concentrate on your pineal gland (third eye area) while maintaining breath awareness.
+        </div>
+        
+        <div class="senses-list">
+            <div class="sense-card">
+                <div class="sense-title">5 Things You Can See</div>
+                <ul>
+                    <li>Golden light</li>
+                    <li>Sacred symbol</li>
+                    <li>Rising sun</li>
+                    <li>Flowing water</li>
+                    <li>Spiritual place</li>
+                </ul>
+            </div>
+            
+            <div class="sense-card">
+                <div class="sense-title">4 Things You Can Touch</div>
+                <ul>
+                    <li>Silk fabric</li>
+                    <li>Cool wind</li>
+                    <li>Warm sand</li>
+                    <li>Prayer hands</li>
+                </ul>
+            </div>
+            
+            <div class="sense-card">
+                <div class="sense-title">3 Things You Can Hear</div>
+                <ul>
+                    <li>Sacred mantras</li>
+                    <li>Nature sounds</li>
+                    <li>Your breath</li>
+                </ul>
+            </div>
+            
+            <div class="sense-card">
+                <div class="sense-title">2 Things You Can Smell</div>
+                <ul>
+                    <li>Fresh flowers</li>
+                    <li>Sacred incense</li>
+                </ul>
+            </div>
+            
+            <div class="sense-card">
+                <div class="sense-title">1 Thing You Can Taste</div>
+                <ul>
+                    <li>Sacred food</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="note">
+            <strong>Activation Method:</strong> Complete 3-5 rotations of this 5-4-3-2-1 sequence while maintaining pineal gland focus to enhance alertness.
+        </div>
+    </div>
+
+    <!-- Premium Technique 2: Mind - Vishnu -->
+    <div class="technique-container">
+        <div class="premium-badge">Premium Feature ($4.99)</div>
+        <h2>2. Mind - Vishnu (Observer Consciousness)</h2>
+        
+        <div class="mantra">
+            "As Krishna remained detached in action, observe your challenges without attachment"
+        </div>
+        
+        <div class="step">
+            <div class="step-number">1</div>
+            <p>Reflect on how Lord Krishna solved problems in the Mahabharata:</p>
+            <ul>
+                <li>His maintenance of dharma in difficult situations</li>
+                <li>Bhagavad Gita's wisdom on detached action</li>
+                <li>Strategic thinking without emotional interference</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <p>Identify and release these six mental obstacles (Ari Shad Varga):</p>
+            <ol class="virtues-list">
+                <li><strong>Kama</strong> (excessive desires)</li>
+                <li><strong>Krodha</strong> (anger)</li>
+                <li><strong>Lobha</strong> (greed)</li>
+                <li><strong>Moha</strong> (attachment)</li>
+                <li><strong>Mada</strong> (pride)</li>
+                <li><strong>Matsarya</strong> (jealousy)</li>
+            </ol>
+        </div>
+        
+        <div class="note">
+            <strong>Practice Benefit:</strong> Daily observation with detachment leads to clearer decision-making aligned with your higher purpose.
+        </div>
+    </div>
+
+    <!-- Premium Technique 3: Soul - Maheshwar -->
+    <div class="technique-container">
+        <div class="premium-badge">Premium Feature ($5.99)</div>
+        <h2>3. Soul - Maheshwar (Pure Consciousness)</h2>
+        
+        <div class="mantra">
+            "Like Shiva in samadhi, become one with your highest purpose"
+        </div>
+        
+        <div class="step">
+            <div class="step-number">1</div>
+            <p>Meditate on these aspects of Shiva:</p>
+            <ul>
+                <li><strong>Determination:</strong> Like drinking the poison to save the world</li>
+                <li><strong>Beyond Gunas:</strong> Transcending sattva, rajas and tamas</li>
+                <li><strong>Indestructibility:</strong> The eternal nature of consciousness</li>
+            </ul>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <p>Activate your Shiva-state:</p>
+            <ol class="virtues-list">
+                <li>Fix goals with unwavering focus (like Shiva's third eye)</li>
+                <li>Act with complete commitment (like Shiva's cosmic dance)</li>
+                <li>Remain undisturbed by outcomes (like Shiva covered in ashes)</li>
+            </ol>
+        </div>
+        
+        <div class="note">
+            <strong>Soul Benefit:</strong> Regular practice connects you to your indomitable spiritual core for transformative action.
+        </div>
+    </div>
+</body>
+</html>
