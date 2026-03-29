@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NSE Market Sentiment Aggregator</title>
+  <meta name="description" content="A lightweight, GitHub Pages–ready tool to aggregate user-input sentiment scores for NSE market prediction." />
+  <style>
+    :root{
+      --bg:#0f172a;          /* slate-900 */
+      --panel:#111827;       /* gray-900 */
+      --muted:#94a3b8;       /* slate-400 */
+      --text:#e5e7eb;        /* gray-200 */
+      --accent:#38bdf8;      /* sky-400 */
+      --border:#1f2937;      /* gray-800 */
+      --up:#16a34a;          /* green-600 */
+      --up-2:#15803d;        /* green-700 */
+      --up-3:#065f46;        /* green-800 */
+      --down:#dc2626;        /* red-600 */
+      --down-2:#b91c1c;      /* red-700 */
+      --down-3:#7f1d1d;      /* red-800 */
+      --sideways:#f59e0b;    /* amber-500 */
+      --uncertain:#64748b;   /* slate-500 */
+      --focus:#f472b6;       /* pink-400 */
+      --chip:#0b1223;        /* darker chip bg */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      background:linear-gradient(180deg,#0b1223, var(--bg));
+      color:var(--text);
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:24px 16px 48px;
+    }
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:16px 0 8px;
+      border-bottom:1px solid var(--border);
+      margin-bottom:16px;
+    }
+    h1{
+      margin:0;
+      font-size:clamp(20px,4vw,28px);
+      line-height:1.2;
+      letter-spacing:.3px;
+    }
+    .tagline{color:var(--muted);font-size:14px;margin-top:4px}
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background:linear-gradient(180deg,var(--panel),#0e152a);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:16px;
+      box-shadow:0 0 0 1px rgba(255,255,255,0.02) inset, 0 12px 28px rgba(0,0,0,0.35);
+    }
+    .section-title{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:.2px;
+      color:#fafafa;
+    }
+    fieldset{
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:12px;
+      margin:0 0 12px 0;
+    }
+    legend{
+      padding:0 8px;
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:.3px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns:1fr 160px;
+      align-items:center;
+      gap:12px;
+      padding:10px 0;
+      border-bottom:1px dashed #1a2238;
+    }
+    .row:last-child{border-bottom:none}
+    label .hint{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      margin-top:2px;
+    }
+    select{
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:var(--chip);
+      color:var(--text);
+      font-size:14px;
+      outline:none;
+      appearance:none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%),
+        linear-gradient(to right, #0000, #0000);
+      background-position:
+        calc(100% - 18px) calc(50% - 4px),
+        calc(100% - 12px) calc(50% - 4px),
+        calc(100% - 2.5em) 0.5em;
+      background-size:6px 6px, 6px 6px, 1px 1.5em;
+      background-repeat:no-repeat;
+      transition:border-color .2s, box-shadow .2s;
+    }
+    select:focus{
+      border-color:var(--focus);
+      box-shadow:0 0 0 3px rgba(244,114,182,.2);
+    }
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+    button{
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:var(--chip);
+      color:var(--text);
+      cursor:pointer;
+      font-weight:600;
+      letter-spacing:.2px;
+      transition:transform .04s ease, background .2s, border-color .2s, box-shadow .2s;
+    }
+    button:hover{
+      background:#0f1a35;
+      border-color:#223055;
+      box-shadow:0 8px 24px rgba(3,27,78,.35) inset;
+    }
+    button:active{transform:translateY(1px)}
+    .result{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .result-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-weight:800;
+      font-size:clamp(16px,3.2vw,22px);
+      padding:12px 14px;
+      border-radius:12px;
+      background:#0c1226;
+      border:1px solid var(--border);
+      letter-spacing:.3px;
+    }
+    .sum-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      font-weight:700;
+      background:#0a1224;
+      border:1px dashed #223055;
+      color:#cbd5e1;
+    }
+    .legend{
+      font-size:12.5px;
+      color:var(--muted);
+      line-height:1.5;
+      background:#0b1328;
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:10px 12px;
+    }
+    .legend code{color:#e2e8f0;background:#0f1a33;padding:1px 6px;border-radius:6px}
+    .last-updated{color:var(--muted);font-size:12px}
+    .sr-only{
+      position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden
+    }
+    /* Sentiment States (colors) */
+    .sentiment-sideways{border-color:#4c3a09;background:#1a1420;color:#fef3c7}
+    .sentiment-up{border-color:var(--up);background:rgba(22,163,74,.12);color:#bbf7d0}
+    .sentiment-surely-up{border-color:var(--up-2);background:rgba(21,128,61,.16);color:#86efac}
+    .sentiment-strongly-up{border-color:var(--up-3);background:rgba(6,95,70,.18);color:#6ee7b7}
+    .sentiment-down{border-color:var(--down);background:rgba(220,38,38,.12);color:#fecaca}
+    .sentiment-surely-down{border-color:var(--down-2);background:rgba(185,28,28,.16);color:#fca5a5}
+    .sentiment-strongly-down{border-color:var(--down-3);background:rgba(127,29,29,.18);color:#fca5a5}
+    .sentiment-uncertain{border-color:var(--uncertain);background:rgba(100,116,139,.18);color:#e2e8f0}
+    footer{
+      margin-top:18px;
+      font-size:12px;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+      padding-top:12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>NSE Market Sentiment Aggregator</h1>
+        <div class="tagline">Assign -1 / 0 / 1 to each indicator. The tool sums scores and predicts likely market bias.</div>
+      </div>
+      <div class="sum-chip" id="total-chip" aria-live="polite" aria-atomic="true" title="Running total of all inputs">
+        <span>Σ Total:</span><strong id="sum-value">0</strong>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Left: Inputs -->
+      <section class="card" aria-labelledby="inputs-title">
+        <h2 id="inputs-title" class="section-title">1) Input Your Sentiments</h2>
+
+        <!-- Macro & News -->
+        <fieldset>
+          <legend>Macro & News</legend>
+
+          <div class="row">
+            <label for="global_news" title="Aggregate feel from global headlines, crude & gold trend.">
+              Global News & Crude Oil, Gold Price
+              <span class="hint">-1 = negative, 0 = neutral, 1 = positive</span>
+            </label>
+            <select id="global_news" name="global_news" data-score>
+              <option value="0" selected>0 — Neutral</option>
+              <option value="1">1 — Positive</option>
+              <option value="-1">-1 — Negative</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="national_news" title="Domestic headlines and policy updates.">
+              National News
+              <span class="hint">-1, 0, or 1</span>
+            </label>
+            <select id="national_news" name="national_news" data-score>
+              <option value="0" selected>0 — Neutral</option>
+              <option value="1">1 — Positive</option>
+              <option value="-1">-1 — Negative</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="impact_events" title="Budget, RBI moves, earnings, geopolitical shocks etc.">
+              Impactful Events
+              <span class="hint">-1, 0, or 1</span>
+            </label>
+            <select id="impact_events" name="impact_events" data-score>
+              <option value="0" selected>0 — Neutral</option>
+              <option value="1">1 — Positive</option>
+              <option value="-1">-1 — Negative</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="global_reaction" title="How US/EU/Asia closed and futures indicate.">
+              Latest Reaction by Other Global Markets
+              <span class="hint">-1, 0, or 1</span>
+            </label>
+            <select id="global_reaction" name="global_reaction" data-score>
+              <option value="0" selected>0 — Neutral</option>
+              <option value="1">1 — Positive</option>
+              <option value="-1">-1 — Negative</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <!-- Technicals -->
+        <fieldset>
+          <legend>Technical Analysis: Daily Chart</legend>
+
+          <div class="row">
+            <label for="y_range" title="Position vs yesterday's high/low; range breakout or inside day.">
+              Yesterday's Range
+              <span class="hint">-1, 0, or 1</span>
+            </label>
+            <select id="y_range" name="y_range" data-score>
+              <option value="0" selected>0 — Neutral</option>
+              <option value="1">1 — Positive</option>
+              <option value="-1">-1 — Negative</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="candle" title="Dominant candlestick pattern bias (e.g., bullish engulfing).">
+              Candle Pattern
+              <span class="hint">-1, 0, or 1</span>
+            </label>
+            <select id="candle" name="candle" data-score>
+              <option value="0" selected>0 — Neutral</option>
+              <option value="1">1 — Positive</option>
+              <option value="-1">-1 — Negative</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <label for="ma" title="Price relation to 21 & 50 DMA crosses.">
+              21 & 50 Day Moving Average
+              <span class="hint">-1, 0, or 1</span>
+            </label>
+            <select id="ma" name="ma" data-score>
+              <option value="0" selected>0 — Neutral</option>
+              <option value="1">1 — Positive</option>
+              <option value="-1">-1 — Negative</option>
+            </select>
+          </div>
+        </fieldset>
+
+        <div class="controls">
+          <button type="button" id="reset-btn" title="Set all scores to 0">Reset to Neutral</button>
+          <button type="button" id="copy-state" title="Copy current selection as a sharable string">Copy State</button>
+          <button type="button" id="paste-state" title="Paste a previously copied state string">Paste State</button>
+        </div>
+      </section>
+
+      <!-- Right: Output -->
+      <section class="card" aria-labelledby="output-title">
+        <h2 id="output-title" class="section-title">2) Aggregated Prediction</h2>
+
+        <div class="result">
+          <div class="result-top">
+            <div id="sentiment-badge" class="badge sentiment-sideways" role="status" aria-live="assertive" aria-atomic="true">
+              <span id="sentiment-icon">↔️</span>
+              <span id="sentiment-text">Sideways</span>
+            </div>
+            <div class="last-updated" id="last-updated" title="Local time">Updated —</div>
+          </div>
+
+          <div class="legend" aria-describedby="rules-caption">
+            <div id="rules-caption" class="sr-only">Prediction rules by total sum</div>
+            <strong>Rules:</strong>
+            <div style="margin-top:6px">
+              <span>Sum = <code>0</code> → <strong>Sideways</strong></span><br/>
+              <span>Sum &gt; <code>1</code> → <strong>Up</strong></span><br/>
+              <span>Sum &gt; <code>2</code> → <strong>Surely Up</strong></span><br/>
+              <span>Sum &gt; <code>3</code> → <strong>Strongly Up</strong></span><br/>
+              <span>Sum &lt; <code>-1</code> → <strong>Down</strong></span><br/>
+              <span>Sum &lt; <code>-2</code> → <strong>Surely Down</strong></span><br/>
+              <span>Sum &lt; <code>-3</code> → <strong>Strongly Down</strong></span>
+            </div>
+            <div style="margin-top:8px;color:#cbd5e1">
+              Note: Sums of <code>1</code> or <code>-1</code> do not meet any strict rule; the tool will show "Uncertain" for those cases.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      Tip: Bookmark this page on GitHub Pages. Your selections auto-save in this browser. For education only — not financial advice.
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      const selects = Array.from(document.querySelectorAll('select[data-score]'));
+      const sumEl = document.getElementById('sum-value');
+      const badge = document.getElementById('sentiment-badge');
+      const textEl = document.getElementById('sentiment-text');
+      const iconEl = document.getElementById('sentiment-icon');
+      const updatedEl = document.getElementById('last-updated');
+      const resetBtn = document.getElementById('reset-btn');
+      const copyBtn = document.getElementById('copy-state');
+      const pasteBtn = document.getElementById('paste-state');
+
+      // LocalStorage keys
+      const LS_KEY = 'nse-sentiment-v1';
+
+      function nowString(){
+        try{
+          return new Date().toLocaleString();
+        }catch(_){ return '—'; }
+      }
+
+      function readScores(){
+        return selects.map(s => parseInt(s.value, 10) || 0);
+      }
+
+      function compute(sum){
+        // Returns {label, className, icon}
+        if (sum === 0) return { label:'Sideways', className:'sentiment-sideways', icon:'↔️' };
+
+        // Up side (check highest threshold first)
+        if (sum > 3) return { label:'Strongly Up', className:'sentiment-strongly-up', icon:'📈' };
+        if (sum > 2) return { label:'Surely Up', className:'sentiment-surely-up', icon:'⬆️' };
+        if (sum > 1) return { label:'Up', className:'sentiment-up', icon:'🔼' };
+
+        // Down side (check lowest threshold first)
+        if (sum < -3) return { label:'Strongly Down', className:'sentiment-strongly-down', icon:'📉' };
+        if (sum < -2) return { label:'Surely Down', className:'sentiment-surely-down', icon:'⬇️' };
+        if (sum < -1) return { label:'Down', className:'sentiment-down', icon:'🔽' };
+
+        // Sums of 1 or -1 fall here (not covered by strict rules)
+        return { label:'Uncertain', className:'sentiment-uncertain', icon:'❓' };
+      }
+
+      function update(){
+        const scores = readScores();
+        const sum = scores.reduce((a,b)=>a+b,0);
+        sumEl.textContent = String(sum);
+
+        // Update badge class
+        badge.classList.remove(
+          'sentiment-sideways',
+          'sentiment-up','sentiment-surely-up','sentiment-strongly-up',
+          'sentiment-down','sentiment-surely-down','sentiment-strongly-down',
+          'sentiment-uncertain'
+        );
+        const verdict = compute(sum);
+        badge.classList.add(verdict.className);
+        textEl.textContent = verdict.label;
+        iconEl.textContent = verdict.icon;
+
+        updatedEl.textContent = 'Updated — ' + nowString();
+
+        // Save state
+        saveState();
+      }
+
+      function saveState(){
+        try{
+          const state = {};
+          selects.forEach(s => state[s.id] = s.value);
+          localStorage.setItem(LS_KEY, JSON.stringify(state));
+        }catch(_){}
+      }
+
+      function loadState(){
+        try{
+          const raw = localStorage.getItem(LS_KEY);
+          if(!raw) return;
+          const state = JSON.parse(raw);
+          selects.forEach(s => {
+            if (state[s.id] !== undefined) s.value = String(state[s.id]);
+          });
+        }catch(_){}
+      }
+
+      function resetAll(){
+        selects.forEach(s => s.value = '0');
+        update();
+      }
+
+      function encodeState(){
+        // Produce a compact share string in a fixed order by select IDs
+        const order = selects.map(s=>s.id);
+        const map = {};
+        selects.forEach(s => map[s.id]=s.value);
+        return btoa(JSON.stringify({o:order, v:map}));
+      }
+
+      function decodeState(str){
+        try{
+          const obj = JSON.parse(atob(str));
+          if (!obj || !obj.o || !obj.v) return false;
+          obj.o.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && obj.v[id] !== undefined) el.value = String(obj.v[id]);
+          });
+          update();
+          return true;
+        }catch(_){
+          return false;
+        }
+      }
+
+      // Wire events
+      selects.forEach(s => s.addEventListener('change', update));
+      resetBtn.addEventListener('click', resetAll);
+
+      copyBtn.addEventListener('click', async () => {
+        const stamp = encodeState();
+        const msg = `NSE Sentiment State (copy into Paste State):\n${stamp}`;
+        try{
+          await navigator.clipboard.writeText(stamp);
+          copyBtn.textContent = 'Copied!';
+          setTimeout(()=>copyBtn.textContent='Copy State', 1000);
+        }catch(_){
+          // Fallback: prompt
+          window.prompt('Copy this code:', stamp);
+        }
+      });
+
+      pasteBtn.addEventListener('click', async () => {
+        let code = '';
+        try{
+          code = await navigator.clipboard.readText();
+        }catch(_){}
+        if (!code) code = window.prompt('Paste state code here:','') || '';
+        if (!code) return;
+
+        const ok = decodeState(code.trim());
+        if (!ok){
+          alert('Invalid state code.');
+        }
+      });
+
+      // Init
+      loadState();
+      update();
+    })();
+  </script>
+</body>
+</html>
